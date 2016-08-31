@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import in.silive.scrolls_16.Fragments.NavigationDrawer;
-import in.silive.scrolls_16.Fragments.One;
+import in.silive.scrolls_16.Fragments.About_Us;
 import in.silive.scrolls_16.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawer.NavigationDrawerListener {
@@ -44,15 +44,15 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
         String title = getString(R.string.app_name);
         switch (position) {
             case 0:
-                fragment = new One();
+                fragment = new About_Us();
                 title = "Scrolls'16";
                 break;
             case 1:
-                fragment = new One();
+                fragment = new About_Us();
                 title = "Scrolls'16";
                 break;
             case 2:
-                fragment = new One();
+                fragment = new About_Us();
                 title = "Scrolls'16";
                 break;
             default:
