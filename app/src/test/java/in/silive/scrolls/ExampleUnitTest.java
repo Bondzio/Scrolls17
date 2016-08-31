@@ -1,4 +1,4 @@
-package in.silive.scrolls_16;
+package in.silive.scrolls;
 
 import org.junit.Test;
 
