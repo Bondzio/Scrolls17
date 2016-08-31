@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +15,7 @@ import android.widget.FrameLayout;
 import in.silive.scrolls.Fragments.NavigationDrawer;
 import in.silive.scrolls.Fragments.ScheduleFragment;
 import in.silive.scrolls.R;
+import in.silive.scrolls_16.Fragments.About_Us;
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawer.NavigationDrawerListener {
     private Toolbar mtoolbar;
@@ -45,11 +48,23 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
     private void setFragment(int position) {
         Fragment newFragment=null;
         switch(position){
-            case 0:
+            case 2:
                 if (!(getSupportFragmentManager().findFragmentById(R.id.container_body) instanceof ScheduleFragment))
                 newFragment = new ScheduleFragment();
                 break;
             case 1: showForgotIdDialog();
+                break;
+            case 0:
+                fragment = new About_Us();
+                title = "Scrolls'16";
+                break;
+            case 1:
+                fragment = new About_Us();
+                title = "Scrolls'16";
+                break;
+            case 3:
+                fragment = new About_Us();
+                title = "Scrolls'16";
                 break;
         }
         if (newFragment!=null ){

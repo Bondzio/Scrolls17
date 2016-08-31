@@ -46,7 +46,7 @@ public class Splash extends AppCompatActivity {
             //   Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
             //no_net_connection.setVisibility(View.VISIBLE);
             Snackbar snackbar = Snackbar
-                    .make(splash, "No internet connection!", Snackbar.LENGTH_LONG)
+                    .make(splash, "No internet connection!", Snackbar.LENGTH_INDEFINITE)
                     .setAction("RETRY", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

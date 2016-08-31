@@ -1,10 +1,18 @@
 <resources>
     <string name="app_name">Scrolls_16</string>
     <string-array name="navigation_drawer_lables">
+        <item>About Scrolls</item>
+        <item>Rules</item>
         <item>Schedule</item>
-        <item>two</item>
-        <item>three</item>
+        <item>Register</item>
+        <item>Upload A Doc</item>
+        <item>Query Us</item>
+        <item>Reach Us</item>
+        <item>Forgot Id</item>
+        <item>About Us</item>
     </string-array>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
 
     <string-array name="schedule_dates">
         <item>28 Aug</item>
@@ -23,4 +31,17 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="Courses">
+        <item>B.Tech</item>
+        <item>MBA</item>
+        <item>MCA</item>
+        <item>M.Tech</item>
+        <item>PGDM</item>
+    </string-array>
+    <string-array name="Year">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
 </resources>
