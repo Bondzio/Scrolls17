@@ -83,7 +83,9 @@ public class NavigationDrawer extends Fragment {
         for (int i = 0; i < titles.length; i++) {
             NavigationDrawerItem navItem = new NavigationDrawerItem();
             navItem.setTitle(titles[i]);
-            navItem.setImage(images[i]);
+            //Todo add images
+           // navItem.setImage(images[i]);
+            navItem.setImage(R.mipmap.ic_launcher);
             data.add(navItem);
         }
         return data;
