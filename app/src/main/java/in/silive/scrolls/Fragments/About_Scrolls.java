@@ -1,4 +1,4 @@
-package in.silive.scrolls_16.Fragments;
+package in.silive.scrolls.Fragments;
 
 
 import android.os.Bundle;
@@ -7,15 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import in.silive.scrolls_16.R;
+import in.silive.scrolls.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Schedule extends Fragment {
+public class About_Scrolls extends Fragment {
 
 
-    public Schedule() {
+    public About_Scrolls() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class Schedule extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schedule, container, false);
+        return inflater.inflate(R.layout.fragment_about_scrolls, container, false);
     }
 
 }

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.0"
 
     defaultConfig {
-        applicationId "in.silive.scrolls_16"
+        applicationId "in.silive.scrolls"
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
@@ -26,4 +26,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:24.1.1'
     compile 'com.android.support:support-v4:24.1.1'
     compile 'com.android.support:design:24.1.1'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
 }

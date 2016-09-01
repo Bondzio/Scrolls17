@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="in.silive.scrolls.Fragments.DialogInvalidMail"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Invalid email"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:padding="3dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ok_query"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="OK"/>
+
+</LinearLayout>

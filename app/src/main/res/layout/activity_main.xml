@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        class="in.silive.scrolls_16.Fragments.NavigationDrawer"
+        class="in.silive.scrolls.Fragments.NavigationDrawer"
         app:layout="@layout/fragment_navigation_drawer"
         tools:layout="@layout/fragment_navigation_drawer" />
 

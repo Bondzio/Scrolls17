@@ -1,4 +1,4 @@
-package in.silive.scrolls_16.Fragments;
+package in.silive.scrolls.Fragments;
 
 
 import android.os.Bundle;
@@ -7,16 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import in.silive.scrolls_16.R;
+import in.silive.scrolls.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Register extends Fragment {
+public class ForgotID extends Fragment {
 
 
-
-    public Register() {
+    public ForgotID() {
         // Required empty public constructor
     }
 
@@ -24,8 +23,8 @@ public class Register extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.form,container,false);
-        return view;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_forgot_id, container, false);
     }
 
 }

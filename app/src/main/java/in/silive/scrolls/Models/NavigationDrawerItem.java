@@ -1,4 +1,4 @@
-package in.silive.scrolls_16.Models;
+package in.silive.scrolls.Models;
 
 /**
  * Created by akriti on 20/8/16.

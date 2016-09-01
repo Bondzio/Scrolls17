@@ -1,4 +1,4 @@
-package in.silive.scrolls_16.Fragments;
+package in.silive.scrolls.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import in.silive.scrolls_16.R;
+import in.silive.scrolls.R;
 
 /**
  * Created by akriti on 26/8/16.

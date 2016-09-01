@@ -1,4 +1,4 @@
-package in.silive.scrolls_16.Adapters;
+package in.silive.scrolls.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,8 +11,8 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
-import in.silive.scrolls_16.Models.NavigationDrawerItem;
-import in.silive.scrolls_16.R;
+import in.silive.scrolls.Models.NavigationDrawerItem;
+import in.silive.scrolls.R;
 
 /**
  * Created by akriti on 20/8/16.

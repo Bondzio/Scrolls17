@@ -1,4 +1,4 @@
-package in.silive.scrolls_16.Activities;
+package in.silive.scrolls.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import in.silive.scrolls_16.R;
+import in.silive.scrolls.R;
 
 /**
  * Created by akriti on 20/8/16.
