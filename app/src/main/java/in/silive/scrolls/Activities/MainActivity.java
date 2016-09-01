@@ -1,144 +1,106 @@
 package in.silive.scrolls.Activities;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-
-import org.json.JSONException;
 
 import in.silive.scrolls.Fragments.About_Scrolls;
 import in.silive.scrolls.Fragments.About_Us;
+import in.silive.scrolls.Fragments.ForgotID;
 import in.silive.scrolls.Fragments.NavigationDrawer;
-import in.silive.scrolls.Fragments.ScheduleFragment;
-import in.silive.scrolls.Listeners.FetchDataListener;
-import in.silive.scrolls.Network.FetchData;
+import in.silive.scrolls.Fragments.QueryUs;
+import in.silive.scrolls.Fragments.ReachUs;
+import in.silive.scrolls.Fragments.Register;
+import in.silive.scrolls.Fragments.Rules;
+import in.silive.scrolls.Fragments.Schedule;
+import in.silive.scrolls.Fragments.UploadDoc;
 import in.silive.scrolls.R;
-import in.silive.scrolls.Util.Config;
-import in.silive.scrolls.Util.Validator;
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawer.NavigationDrawerListener {
+    private Toolbar mtoolbar;
     NavigationDrawer navigationDrawer;
     Context main_act_context;
-    FrameLayout fragmentContainer;
-    private Toolbar mtoolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         main_act_context = getApplicationContext();
-        mtoolbar = (Toolbar) findViewById(R.id.toolbar);
+        mtoolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(mtoolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        fragmentContainer = (FrameLayout) findViewById(R.id.container_body);
         navigationDrawer = (NavigationDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         navigationDrawer.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mtoolbar);
         navigationDrawer.setDrawerListener(new NavigationDrawer.NavigationDrawerListener() {
             @Override
             public void onDrawerItemSelected(View view, int position) {
-                setFragment(position);
+                displayView(position);
+
+
             }
         });
-
-        setFragment(0);
     }
-
-    private void setFragment(int position) {
+    private void displayView(int position) {
         Fragment fragment = null;
+        String title = getString(R.string.app_name);
         switch (position) {
-            case 2:
-                if (!(getSupportFragmentManager().findFragmentById(R.id.container_body) instanceof ScheduleFragment))
-                    fragment = new ScheduleFragment();
-                break;
-            case 5:
-                showForgotIdDialog();
-                break;
             case 0:
                 fragment = new About_Scrolls();
+                title = "Scrolls'16";
                 break;
             case 1:
-                fragment = new About_Us();
+                fragment = new Rules();
+                title = "Scrolls'16";
+                break;
+            case 2:
+                fragment = new Schedule();
+                title = "Scrolls'16";
                 break;
             case 3:
+                fragment = new Register();
+                title = "Scrolls'16";
+                break;
+            case 4:
+                fragment = new UploadDoc();
+                title = "Scrolls'16";
+                break;
+            case 5:
+                fragment = new QueryUs();
+                title = "Scrolls'16";
+                break;
+            case 6:
+                fragment = new ReachUs();
+                title = "Scrolls'16";
+                break;
+            case 7:
+                fragment = new ForgotID();
+                title = "Scrolls'16";
+                break;
+            case 8:
                 fragment = new About_Us();
+                title = "Scrolls'16";
+                break;
+
+            default:
                 break;
         }
+
         if (fragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_body, fragment).addToBackStack("TAG").commit();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_body, fragment);
+            fragmentTransaction.commit();
+
+            // set the toolbar title
+            getSupportActionBar().setTitle(title);
         }
-    }
-
-    private void showForgotIdDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Forgot Scrolls ID");
-        View view = getLayoutInflater().inflate(R.layout.dialog_forgot_id, null);
-        final EditText etEmailId = (EditText) view.findViewById(R.id.etEmailId);
-        builder.setView(view);
-        builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(final DialogInterface dialogInterface, int i) {
-                String email = etEmailId.getText().toString();
-                if (Validator.isValidEmail(email)) {
-                    etEmailId.setError(null);
-                    FetchData fetchData = new FetchData();
-                    fetchData.setArgs(Config.ID_BY_EMAIL, new FetchDataListener() {
-                        @Override
-                        public void preExecute() {
-
-                        }
-
-                        @Override
-                        public void postExecute(String result, int id) throws JSONException {
-                            if (result.equals("0")) {
-                                dialogInterface.dismiss();
-                                android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(MainActivity.this)
-                                        .setTitle("Id")
-                                        .setMessage("Your id is " + "")
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                dialog.dismiss();
-                                            }
-                                        })
-
-                                        .setIcon(android.R.drawable.ic_dialog_alert);
-                                dialog.show();
-
-                            } else {
-                                android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(MainActivity.this)
-                                        .setTitle("Error")
-                                        .setMessage("Your email does not exist in Database")
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                               dialog.dismiss();
-                                            }
-                                        })
-
-                                        .setIcon(android.R.drawable.ic_dialog_alert);
-                                dialog.show();
-                            }
-                        }
-                    });
-
-                } else {
-                    etEmailId.setError("Not valid Email");
-                }
-            }
-        });
-        builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
     }
 
     @Override

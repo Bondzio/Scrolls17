@@ -31,7 +31,7 @@ public class NavigationDrawer extends Fragment {
     private NavigationDrawerAdapter adapter;
     private View containerView;
     private static String[] titles = null;
-    private static Integer[] images = {R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher};
+    private static Integer[] images = {R.drawable.info,R.drawable.rules,R.drawable.dates_icon,R.drawable.register,R.drawable.upload_icon,R.drawable.query,R.drawable.reach_icon,R.drawable.forgot_id,R.drawable.about_us};
     private NavigationDrawerListener drawerListener;
 
 

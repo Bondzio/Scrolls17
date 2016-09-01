@@ -1,4 +1,4 @@
-package in.silive.scrolls_16.Fragments;
+package in.silive.scrolls.Fragments;
 
 
 import android.os.Bundle;

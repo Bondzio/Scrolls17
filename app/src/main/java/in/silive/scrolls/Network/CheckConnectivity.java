@@ -1,4 +1,4 @@
-package in.silive.scrolls_16.Network;
+package in.silive.scrolls.Network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

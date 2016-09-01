@@ -39,12 +39,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="College"
                 android:layout_weight="1"/>
             <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/stud_college"
                 android:layout_weight="1">
@@ -56,12 +56,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Course"
                 android:layout_weight="1"/>
             <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/stud_course"
                 android:layout_weight="1">
@@ -73,13 +73,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Year"
                 android:layout_weight="1"/>
             <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_weight="1"
+                android:entries="@array/Year"
                 android:layout_height="wrap_content"
                 android:id="@+id/stud_year">
             </Spinner>
@@ -115,16 +116,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Year"
+                android:text="Need Accommodation"
                 android:layout_weight="1"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:id="@+id/stud_accomodation">
+                android:id="@+id/stud_accommodation">
             </CheckBox>
 
+
         </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Submit"
+            android:id="@+id/individual_submit"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

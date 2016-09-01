@@ -2,21 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.silive.scrolls.Fragments.UploadDoc"
+    tools:context="in.silive.scrolls.Fragments.DialogEmptyQuery"
     android:orientation="vertical">
 
-
+    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Upload a doc"
+        android:text="Please enter your query"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="20sp"
         android:padding="3dp"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload"
-        android:id="@+id/upload_doc"
+        android:id="@+id/ok_empty_query"
         android:layout_gravity="center"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="OK"/>
+
 
 </LinearLayout>
