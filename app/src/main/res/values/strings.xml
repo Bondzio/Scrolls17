@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Scrolls_16</string>
+    <string name="app_name">Scrolls</string>
     <string-array name="navigation_drawer_lables">
         <item>About Scrolls</item>
         <item>Rules</item>
