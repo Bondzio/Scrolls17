@@ -44,6 +44,7 @@ public class NavigationDrawer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        titles = getActivity().getResources().getStringArray(R.array.navigation_drawer_lables);
         recyclerView = (RecyclerView) view.findViewById(R.id.drawerList);
 
         adapter = new NavigationDrawerAdapter(getActivity(), getData());
@@ -67,7 +68,7 @@ public class NavigationDrawer extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        titles = getActivity().getResources().getStringArray(R.array.navigation_drawer_lables);
+
 
     }
 

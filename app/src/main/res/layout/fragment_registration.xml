@@ -12,21 +12,12 @@
         app:tabBackground="@color/colorPrimary"
         app:tabIndicatorColor="#212121"
         app:tabSelectedTextColor="#fdfdfd">
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Individual"
-            android:id="@+id/tab_individual"/>
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Team"
-            android:id="@+id/tab_team"/>
     </android.support.design.widget.TabLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+
         android:id="@+id/reg_individual">
         <EditText
             android:layout_width="match_parent"
@@ -37,6 +28,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="3dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="match_parent"
@@ -54,6 +46,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="3dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="match_parent"
@@ -71,6 +64,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="3dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="match_parent"
@@ -102,7 +96,7 @@
             android:layout_height="wrap_content"
             android:hint="Enter your phone number"
             android:id="@+id/stud_mob_no"
-            android:inputType="number" />
+            android:inputType="phone" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -112,6 +106,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="3dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"

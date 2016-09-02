@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Scrolls_16</string>
+    <string name="google_maps_key">AIzaSyBDofDBjIoBPX8UY3uH4uVLZ9VcoyKjd_k</string>
+
     <string-array name="navigation_drawer_lables">
         <item>About Scrolls</item>
         <item>Rules</item>
