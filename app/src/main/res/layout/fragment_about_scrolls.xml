@@ -50,13 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="8dp"
-            android:text="Two problems with this.... one is that myEditText needs to be Final. Second is that I have to know which EditText box has the focus. Any solution to this? – Ethan Allen Jul 16 '12 at 4:00
-53
-For anyone else who stumbles here, you can use the activity's (either the activity you are in or the fragments getActivity()) getCurrentFocus().getWindowToken() for the first arg to hideSoftInputFromWindow(). Also, do it in the onPause() and not the onStop() if you are trying to get it to go away when changing activities. – Drake Clarris Mar 21 '13 at 19:17
-2
-This answer, combined with the comment up here, totally solved my problem! – aveschini Oct 3 '13 at 8:26
-3
-What an ugly, ugly approach to dismiss a keyboard. I hope there's a cleaner way in the future to do such a simple thing. – Subby May 20 '15 at 11:01 "
+            android:text="@string/about_scrolls"
             android:textSize="25sp" />
     </android.support.v4.widget.NestedScrollView>
 

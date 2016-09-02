@@ -3,6 +3,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,7 @@ public class NavigationDrawer extends Fragment {
     private DrawerLayout mDrawerLayout;
     private NavigationDrawerAdapter adapter;
     private View containerView;
+    ImageView scrolls;
     private static String[] titles = null;
     private static Integer[] images = {R.drawable.info,R.drawable.rules,R.drawable.dates_icon,R.drawable.register,R.drawable.upload_icon,R.drawable.query,R.drawable.reach_icon,R.drawable.forgot_id,R.drawable.about_us};
     private NavigationDrawerListener drawerListener;
@@ -45,7 +49,18 @@ public class NavigationDrawer extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.drawerList);
-
+        scrolls = (ImageView)view.findViewById(R.id.scrolls);
+        scrolls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //To do -- transition to Scrolls fragment
+                Fragment fragment = new Scrolls();
+                FragmentManager fragmentManager = getChildFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.commit();
+            }
+        });
         adapter = new NavigationDrawerAdapter(getActivity(), getData());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

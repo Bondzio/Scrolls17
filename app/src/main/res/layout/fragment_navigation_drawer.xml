@@ -16,6 +16,7 @@
             android:layout_height="70dp"
             android:src="@mipmap/ic_launcher"
             android:scaleType="fitCenter"
+            android:id="@+id/scrolls"
             android:layout_centerInParent="true" />
 
     </RelativeLayout>
