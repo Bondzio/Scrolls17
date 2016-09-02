@@ -18,9 +18,10 @@ import in.silive.scrolls.Fragments.QueryUs;
 import in.silive.scrolls.Fragments.ReachUs;
 import in.silive.scrolls.Fragments.Register;
 import in.silive.scrolls.Fragments.Rules;
-import in.silive.scrolls.Fragments.Schedule;
+import in.silive.scrolls.Fragments.ScheduleFragment;
 import in.silive.scrolls.Fragments.UploadDoc;
 import in.silive.scrolls.R;
+import in.silive.scrolls.Util.Dialogs;
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawer.NavigationDrawerListener {
     private Toolbar mtoolbar;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                 title = "Scrolls'16";
                 break;
             case 2:
-                fragment = new Schedule();
+                fragment = new ScheduleFragment();
                 title = "Scrolls'16";
                 break;
             case 3:
@@ -80,8 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                 title = "Scrolls'16";
                 break;
             case 7:
-                fragment = new ForgotID();
-                title = "Scrolls'16";
+                Dialogs.showForgotIdDialog(this);
                 break;
             case 8:
                 fragment = new About_Us();

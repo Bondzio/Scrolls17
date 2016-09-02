@@ -42,6 +42,5 @@
 \n6.  The paper to be typed in single space, double column format, using Times New Roman font &amp; font-size 12. Maximum number of pages to be 10 and the page should have no numbers. A margin of 1’’ all around to be left.
 \n7.  First page to include Title, Name(s) of authors, their college name, telephone numbers as well as email addresses. This information to be included with extended abstract also."
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>
+    </ScrollView>

@@ -42,10 +42,10 @@
                     android:hint="Email"
                     android:maxLength="20"
                     android:singleLine="true"
+                    android:inputType="textEmailAddress"
                     app:met_baseColor="@color/colorPrimary"
                     app:met_clearButton="true"
                     app:met_floatingLabel="highlight"
-                    app:met_maxCharacters="20"
                     app:met_primaryColor="?colorAccent" />
             </LinearLayout>
 
@@ -61,11 +61,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:hint="Message"
-                    android:singleLine="true"
+                    android:inputType="textMultiLine"
                     app:met_baseColor="@color/colorPrimary"
                     app:met_clearButton="true"
                     app:met_floatingLabel="highlight"
-                    app:met_maxCharacters="20"
                     app:met_primaryColor="?colorAccent" />
             </LinearLayout>
 

@@ -48,6 +48,7 @@ public class NavigationDrawer extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        titles = getActivity().getResources().getStringArray(R.array.navigation_drawer_lables);
         recyclerView = (RecyclerView) view.findViewById(R.id.drawerList);
         scrolls = (ImageView)view.findViewById(R.id.scrolls);
         scrolls.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +83,7 @@ public class NavigationDrawer extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        titles = getActivity().getResources().getStringArray(R.array.navigation_drawer_lables);
+
 
     }
 
@@ -98,7 +99,9 @@ public class NavigationDrawer extends Fragment {
         for (int i = 0; i < titles.length; i++) {
             NavigationDrawerItem navItem = new NavigationDrawerItem();
             navItem.setTitle(titles[i]);
-            navItem.setImage(images[i]);
+            //Todo add images
+           // navItem.setImage(images[i]);
+            navItem.setImage(R.mipmap.ic_launcher);
             data.add(navItem);
         }
         return data;

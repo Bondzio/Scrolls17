@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Scrolls</string>
+    <string name="google_maps_key">AIzaSyBDofDBjIoBPX8UY3uH4uVLZ9VcoyKjd_k</string>
+
+
     <string-array name="navigation_drawer_lables">
         <item>About Scrolls</item>
         <item>Rules</item>
@@ -13,6 +16,18 @@
     </string-array>
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>
+
+    <string-array name="schedule_dates">
+        <item>28 Aug</item>
+        <item>28 Aug</item>
+        <item>28 Aug</item>
+    </string-array>
+
+    <string-array name="schedule_labels">
+        <item>Registration</item>
+        <item>Registration</item>
+        <item>Registration</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
