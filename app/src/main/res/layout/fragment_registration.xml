@@ -1,146 +1,402 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="8dp">
+
     <android.support.design.widget.TabLayout
+        android:id="@+id/team_individual_tab"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:id="@+id/team_individual_tab"
         app:tabBackground="@color/colorPrimary"
         app:tabIndicatorColor="#212121"
         app:tabSelectedTextColor="#fdfdfd">
+
         <android.support.design.widget.TabItem
+            android:id="@+id/tab_individual"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Individual"
-            android:id="@+id/tab_individual"/>
+            android:text="Individual" />
+
         <android.support.design.widget.TabItem
+            android:id="@+id/tab_team"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Team"
-            android:id="@+id/tab_team"/>
+            android:text="Team" />
     </android.support.design.widget.TabLayout>
+
     <LinearLayout
+        android:id="@+id/reg_individual"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/reg_individual">
+        android:orientation="vertical">
+
         <EditText
+            android:id="@+id/stud_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your name"
-            android:id="@+id/stud_name"
-            android:inputType="textPersonName"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="College"
-                android:layout_weight="1"/>
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/stud_college"
-                android:layout_weight="1">
-            </Spinner>
+            android:inputType="textPersonName" />
 
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Course"
-                android:layout_weight="1"/>
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/stud_course"
-                android:layout_weight="1">
-            </Spinner>
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Year"
-                android:layout_weight="1"/>
-            <Spinner
-                android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:entries="@array/Year"
+                android:text="College" />
+
+            <Spinner
+                android:id="@+id/stud_college"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/stud_year">
+                android:layout_weight="1">
+
             </Spinner>
 
         </LinearLayout>
 
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your college name"
-            android:id="@+id/stud_other_college"/>
-        <EditText
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Course" />
+
+            <Spinner
+                android:id="@+id/stud_course"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            </Spinner>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your student Id"
-            android:id="@+id/stud_id"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Year" />
+
+            <Spinner
+                android:id="@+id/stud_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:entries="@array/Year"></Spinner>
+
+        </LinearLayout>
+
         <EditText
+            android:id="@+id/stud_other_college"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your college name" />
+
+        <EditText
+            android:id="@+id/stud_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your student Id" />
+
+        <EditText
+            android:id="@+id/stud_mob_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your phone number"
-            android:id="@+id/stud_mob_no"
             android:inputType="number" />
+
         <EditText
+            android:id="@+id/stud_mail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your mail address"
-            android:id="@+id/stud_mail"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Need Accommodation"
-                android:layout_weight="1"/>
-            <CheckBox
-                android:layout_width="wrap_content"
                 android:layout_weight="1"
+                android:text="Need Accommodation" />
+
+            <CheckBox
+                android:id="@+id/stud_accommodation"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/stud_accommodation">
-            </CheckBox>
+                android:layout_weight="1"></CheckBox>
 
 
         </LinearLayout>
+
         <Button
+            android:id="@+id/individual_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Submit"
-            android:id="@+id/individual_submit"/>
+            android:text="Submit" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/reg_team"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/team_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="Team name" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/two_members"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2 members" />
+
+                <RadioButton
+                    android:id="@+id/three_members"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3 members" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/member_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Member 1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/member_one_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Scrolls ID" />
+
+                <EditText
+                    android:id="@+id/member_one_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Name" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/member_two"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Member 2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/member_two_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Scrolls ID" />
+
+                <EditText
+                    android:id="@+id/member_two_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Name" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/member_three"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Member 2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/member_three_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Scrolls ID" />
+
+                <EditText
+                    android:id="@+id/member_three_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Name" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Select a team leader" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/leader_member_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Member 1" />
+
+                <RadioButton
+                    android:id="@+id/leader_member_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Member 2" />
+
+                <RadioButton
+                    android:id="@+id/leader_member_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Member 3" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Domain"/>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/team_domain"
+                android:layout_weight="1">
+
+            </Spinner>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Topic"/>
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/team_topic"
+                android:layout_weight="1">
+
+            </Spinner>
+
+
+        </LinearLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Enter password"
+            android:layout_weight="1"
+            android:id="@+id/team_password"
+            android:inputType="textPassword"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Create"
+            android:layout_weight="1"
+            android:id="@+id/submit_team_reg"/>
 
     </LinearLayout>
-
-
-
 </LinearLayout>
+
+
+
