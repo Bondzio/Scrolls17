@@ -69,7 +69,8 @@ public class NavigationDrawer extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 drawerListener.onDrawerItemSelected(view, position);
-                mDrawerLayout.closeDrawer(containerView);
+
+               // mDrawerLayout.closeDrawer(containerView);
             }
 
             @Override

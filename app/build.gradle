@@ -32,4 +32,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-location:9.4.0'
     compile 'com.github.jd-alexander:library:1.1.0'
     compile 'com.droidninja:filepicker:1.0.4'
+    compile ('com.github.ozodrukh:CircularReveal:2.0.1@aar') {
+        transitive = true;
+    }
 }
