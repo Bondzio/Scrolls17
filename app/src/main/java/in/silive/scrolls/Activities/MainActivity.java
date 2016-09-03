@@ -12,7 +12,6 @@ import android.view.View;
 
 import in.silive.scrolls.Fragments.About_Scrolls;
 import in.silive.scrolls.Fragments.About_Us;
-import in.silive.scrolls.Fragments.ForgotID;
 import in.silive.scrolls.Fragments.NavigationDrawer;
 import in.silive.scrolls.Fragments.QueryUs;
 import in.silive.scrolls.Fragments.ReachUs;
@@ -49,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
 
             }
         });
+        displayView(0);
     }
     private void displayView(int position) {
 

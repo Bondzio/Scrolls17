@@ -56,7 +56,7 @@ public class NavigationDrawer extends Fragment {
             public void onClick(View view) {
                 //To do -- transition to Scrolls fragment
                 Fragment fragment = new Scrolls();
-                FragmentManager fragmentManager = getChildFragmentManager();
+                FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_body, fragment);
                 fragmentTransaction.commit();

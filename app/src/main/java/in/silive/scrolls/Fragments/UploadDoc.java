@@ -58,7 +58,7 @@ public class UploadDoc extends Fragment {
             @Override
             public void onClick(View view) {
                 Fragment fragment = new Register();
-                FragmentManager fragmentManager = getChildFragmentManager();
+                FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container_body, fragment);
                 fragmentTransaction.commit();
