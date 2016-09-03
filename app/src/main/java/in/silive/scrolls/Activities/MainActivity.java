@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                     hideDrawer();
             }
         });
+        displayView(0);
     }
 
     private void displayView(int position) {

@@ -4,19 +4,51 @@
     android:layout_height="match_parent"
     tools:context="in.silive.scrolls.Fragments.UploadDoc"
     android:orientation="vertical">
-
-
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Upload a doc"
-        android:padding="3dp"/>
+        android:hint="Scrolls Id"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/login_username"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload"
-        android:id="@+id/upload_doc"
+        android:text="Login"
+        android:id="@+id/user_login"
         android:layout_gravity="center"
         android:gravity="center"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:id="@+id/user_register"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:id="@+id/upload"
+        android:padding="3dp"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload a doc"
+            android:padding="3dp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload"
+            android:id="@+id/upload_doc"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="3dp"/>
+
+
+    </LinearLayout>
 
 </LinearLayout>
