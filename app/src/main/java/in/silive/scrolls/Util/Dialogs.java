@@ -4,13 +4,20 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.TextUtils;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
 import org.json.JSONException;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
 import in.silive.scrolls.Listeners.FetchDataListener;
+import in.silive.scrolls.Listeners.UploaderListener;
 import in.silive.scrolls.Network.FetchData;
 import in.silive.scrolls.R;
 
@@ -99,4 +106,74 @@ public class Dialogs {
                 }
         });
     }
+
+    public static void showUploadDialog(final Context context,String filePath) {
+       final ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.setCancelable(false);
+        progressDialog.setTitle("Uploading Doc");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+     //   progressDialog.setMessage("0%");
+        progressDialog.setProgress(0);
+
+
+
+        final FetchData uploadDoc = new FetchData();
+        File file = new File(filePath);
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            byte[] bytes = new byte[(int) file.length()];
+            fileInputStream.read(bytes);
+            fileInputStream.close();
+            String entity = Base64.encodeToString(bytes, Base64.DEFAULT);
+            uploadDoc.setArgs(Config.UPLOAD_DOC, entity, new UploaderListener() {
+                @Override
+                public void setProgress(int progress) {
+                   // progressDialog.setMessage(progress+"%");
+                    progressDialog.setProgress(progress);
+                }
+
+                @Override
+                public void preExecute() {
+                    progressDialog.show();
+                }
+
+                @Override
+                public void postExecute(String result, int id) throws JSONException {
+                    android.support.v7.app.AlertDialog.Builder notifyDialog = new android.support.v7.app.AlertDialog.Builder(context);
+                    notifyDialog.setTitle("Upload Doc");
+                    if (!TextUtils.isEmpty(result))
+                        notifyDialog.setMessage("File uploaded successfully");
+                    else {
+                        notifyDialog.setMessage("Upload failed");
+                    }
+                    notifyDialog.setPositiveButton( "Dismiss", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            dialogInterface.dismiss();
+                            progressDialog.dismiss();
+                        }
+                    });
+                    notifyDialog.show();
+                }
+            });
+
+            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Dismiss", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    if (!uploadDoc.isCancelled())
+                        uploadDoc.cancel(true);
+                    dialogInterface.dismiss();
+                }
+            });
+            uploadDoc.execute();
+            progressDialog.show();
+
+        } catch (Exception e) {
+            progressDialog.setMessage("Some error occured.");
+
+        }
+
+    }
+
 }
