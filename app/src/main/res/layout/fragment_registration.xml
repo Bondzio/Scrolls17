@@ -166,13 +166,15 @@
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:id="@+id/no_of_team_members">
 
                 <RadioButton
                     android:id="@+id/two_members"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2 members" />
+                    android:text="2 members"
+                    android:checked="true"/>
 
                 <RadioButton
                     android:id="@+id/three_members"
@@ -259,7 +261,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -305,13 +308,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:id="@+id/team_leader"
                 android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/leader_member_one"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Member 1" />
+                    android:text="Member 1"
+                    android:checked="true"/>
 
                 <RadioButton
                     android:id="@+id/leader_member_two"
