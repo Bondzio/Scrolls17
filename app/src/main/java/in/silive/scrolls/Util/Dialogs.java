@@ -9,6 +9,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -18,6 +19,7 @@ import java.io.IOException;
 
 import in.silive.scrolls.Listeners.FetchDataListener;
 import in.silive.scrolls.Listeners.UploaderListener;
+import in.silive.scrolls.Network.CheckConnectivity;
 import in.silive.scrolls.Network.FetchData;
 import in.silive.scrolls.R;
 
@@ -55,51 +57,55 @@ public class Dialogs {
                 String email = etEmailId.getText().toString();
                 if (Validator.isValidEmail(email)) {
                     etEmailId.setError(null);
-                    FetchData fetchData = new FetchData();
-                    fetchData.setArgs(Config.ID_BY_EMAIL, new FetchDataListener() {
-                        ProgressDialog progressDialog;
-                        @Override
-                        public void preExecute() {
-                            progressDialog = new ProgressDialog(context);
-                            progressDialog.setMessage("Loading");
-                            progressDialog.setCancelable(false);
-                            progressDialog.show();
-                        }
+                    if (CheckConnectivity.isNetConnected(context)) {
+                        FetchData fetchData = new FetchData();
+                        fetchData.setArgs(Config.ID_BY_EMAIL, new FetchDataListener() {
+                            ProgressDialog progressDialog;
 
-                        @Override
-                        public void postExecute(String result, int id) throws JSONException {
-                            if (progressDialog.isShowing())
-                                progressDialog.dismiss();
-                            if (result.equals("0")) {
-                                dialog.dismiss();
-                                android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(context)
-                                        .setTitle("Id")
-                                        .setMessage("Your id is " + "")
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                dialog.dismiss();
-                                            }
-                                        })
-
-                                        .setIcon(android.R.drawable.ic_dialog_alert);
-                                dialog.show();
-
-                            } else {
-                                android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(context)
-                                        .setTitle("Error")
-                                        .setMessage("Your email does not exist in Database")
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                dialog.dismiss();
-                                            }
-                                        })
-
-                                        .setIcon(android.R.drawable.ic_dialog_alert);
-                                dialog.show();
+                            @Override
+                            public void preExecute() {
+                                progressDialog = new ProgressDialog(context);
+                                progressDialog.setMessage("Loading");
+                                progressDialog.setCancelable(false);
+                                progressDialog.show();
                             }
-                        }
-                    });
-                    fetchData.execute();
+
+                            @Override
+                            public void postExecute(String result, int id) throws JSONException {
+                                if (progressDialog.isShowing())
+                                    progressDialog.dismiss();
+                                if (result.equals("0")) {
+                                    dialog.dismiss();
+                                    android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(context)
+                                            .setTitle("Id")
+                                            .setMessage("Your id is " + "")
+                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+                                                }
+                                            })
+
+                                            .setIcon(android.R.drawable.ic_dialog_alert);
+                                    dialog.show();
+
+                                } else {
+                                    android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(context)
+                                            .setTitle("Error")
+                                            .setMessage("Your email does not exist in Database")
+                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+                                                }
+                                            })
+
+                                            .setIcon(android.R.drawable.ic_dialog_alert);
+                                    dialog.show();
+                                }
+                            }
+                        });
+                        fetchData.execute();
+                    }else
+                        Toast.makeText(context,"No Internet connection available.",Toast.LENGTH_SHORT).show();
                 } else {
                     etEmailId.setError("Not valid Email");
                 }

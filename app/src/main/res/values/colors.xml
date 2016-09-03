@@ -2,8 +2,10 @@
 <resources>
     <color name="colorPrimary">#fbc94a</color>
     <color name="colorPrimaryDark">#e1b442</color>
-    <color name="colorAccent">#424242</color>
+    <color name="colorAccent">#263238</color>
     <color name="item_schedule_strip">#f7d919</color>
     <color name="white">#ffffff</color>
     <color name="domain_bg">#acffffff</color>
+    <color name="topic_dialog">#f2f222</color>
+    <color name="gray">#b1b1b1</color>
 </resources>

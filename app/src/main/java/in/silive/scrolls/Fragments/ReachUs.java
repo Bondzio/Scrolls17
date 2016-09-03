@@ -114,7 +114,7 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
     @Override
     public void onRoutingFailure(RouteException var1) {
         progressDialog.dismiss();
-        Toast.makeText(getActivity(), "Something went wrong, Try again", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Internet connection not available", Toast.LENGTH_SHORT).show();
     }
 
 

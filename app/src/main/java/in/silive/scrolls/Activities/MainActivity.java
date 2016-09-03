@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.LinearLayout;
 
 import in.silive.scrolls.Fragments.About_Scrolls;
 import in.silive.scrolls.Fragments.About_Us;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
     FragmentManager fragmentManager;
     boolean drawerVisible = false;
     private Toolbar mtoolbar;
+    LinearLayout ll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
         main_act_context = getApplicationContext();
         mtoolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mtoolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         navigationDrawer = (NavigationDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                     hideDrawer();
             }
         });
+        ll = (LinearLayout)findViewById(R.id.ll);
         displayView(0);
     }
 
@@ -69,32 +72,32 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
             case 1:
                 if (!(fragment instanceof Rules))
                     fragment = new Rules();
-                title = "Scrolls'16";
+                title = "Rules";
                 break;
             case 2:
                 if (!(fragment instanceof ScheduleFragment))
                     fragment = new ScheduleFragment();
-                title = "Scrolls'16";
+                title = "Schedule";
                 break;
             case 3:
                 if (!(fragment instanceof Register))
                     fragment = new Register();
-                title = "Scrolls'16";
+                title = "Register";
                 break;
             case 4:
                 if (!(fragment instanceof UploadDoc))
                     fragment = new UploadDoc();
-                title = "Scrolls'16";
+                title = "Upload";
                 break;
             case 5:
                 if (!(fragment instanceof QueryUs))
                     fragment = new QueryUs();
-                title = "Scrolls'16";
+                title = "Query Us";
                 break;
             case 6:
               /*  if(! (fragment instanceof  ReachUs))*/
                 fragment = ReachUs.getInstance();
-                title = "Scrolls'16";
+                title = "Reach Us";
                 break;
             case 7:
                 Dialogs.showForgotIdDialog(this);
@@ -102,13 +105,13 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
             case 8:
                 if (!(fragment instanceof About_Us))
                     fragment = new About_Us();
-                title = "Scrolls'16";
+                title = "About Us";
                 break;
 
             default:
                 break;
         }
-        if (fragment.isAdded()) {
+        if (fragment != null && fragment.isAdded()) {
             fragment = fragmentManager.findFragmentByTag(fragment.getClass().getName());
         }
         if (fragment != null) {
@@ -132,19 +135,18 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
     }
 
     public void hideDrawer() {
-        final View myView = findViewById(R.id.drawerLL);
         // get the center for the clipping circle
         int cx = 0;
         int cy = 0;
 
         // get the final radius for the clipping circle
-        int dx = Math.max(cx, myView.getWidth());
-        int dy = Math.max(cy, myView.getHeight());
+        int dx = Math.max(cx, ll.getWidth());
+        int dy = Math.max(cy, ll.getHeight());
         float initialRadius = (float) Math.hypot(dx, dy);
 
         // Android native animator
         Animator animator =
-                ViewAnimationUtils.createCircularReveal(myView, cx, cy, initialRadius, 0);
+                ViewAnimationUtils.createCircularReveal(ll, cx, cy, initialRadius, 0);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
         animator.setDuration(650);
         animator.addListener(new Animator.AnimatorListener() {
@@ -155,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
 
             @Override
             public void onAnimationEnd(Animator animator) {
-                myView.setVisibility(View.GONE);
+                ll.setVisibility(View.GONE);
                 drawerVisible=false;
             }
 
@@ -174,24 +176,29 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
     }
 
     public void showDrawer() {
-        View myView = findViewById(R.id.drawerLL);
-        // get the center for the clipping circle
-        int cx = 0;
-        int cy = 0;
+        ll.setVisibility(View.INVISIBLE);
+        ll.post(new Runnable() {
+            @Override
+            public void run() {
+                int cx = 0;
+                int cy = 0;
 
-        // get the final radius for the clipping circle
-        int dx = Math.max(cx, myView.getWidth() - cx);
-        int dy = Math.max(cy, myView.getHeight() - cy);
-        float finalRadius = (float) Math.hypot(dx, dy);
+                // get the final radius for the clipping circle
+                int dx = Math.max(cx, ll.getWidth() - cx);
+                int dy = Math.max(cy, ll.getHeight() - cy);
+                float finalRadius = (float) Math.hypot(dx, dy);
 
-        // Android native animator
-        Animator animator =
-                ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius);
-        animator.setInterpolator(new AccelerateDecelerateInterpolator());
-        animator.setDuration(650);
-        myView.setVisibility(View.VISIBLE);
-        animator.start();
-        drawerVisible=true;
+                // Android native animator
+                Animator animator =
+                        ViewAnimationUtils.createCircularReveal(ll, cx, cy, 0, finalRadius);
+                animator.setInterpolator(new AccelerateDecelerateInterpolator());
+                animator.setDuration(650);
+                ll.setVisibility(View.VISIBLE);
+                animator.start();
+                drawerVisible=true;
+            }
+        });
+
     }
 
     @Override

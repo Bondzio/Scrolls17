@@ -8,9 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
-        android:background="#eee"
         android:orientation="vertical">
 
+<!--
 
         <TextView
             android:layout_width="wrap_content"
@@ -20,6 +20,7 @@
             android:textColor="@color/colorPrimary"
             android:textSize="30sp"
             android:textStyle="bold" />
+-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,10 +44,11 @@
                     android:maxLength="20"
                     android:singleLine="true"
                     android:inputType="textEmailAddress"
-                    app:met_baseColor="@color/colorPrimary"
+                    app:met_baseColor="@color/colorAccent"
                     app:met_clearButton="true"
                     app:met_floatingLabel="highlight"
-                    app:met_primaryColor="?colorAccent" />
+                    app:met_textColorHint="@color/gray"
+                    app:met_primaryColor="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
@@ -62,10 +64,11 @@
                     android:layout_height="200dp"
                     android:hint="Message"
                     android:inputType="textMultiLine"
-                    app:met_baseColor="@color/colorPrimary"
+                    app:met_textColorHint="@color/gray"
+                    app:met_baseColor="@color/colorAccent"
                     app:met_clearButton="true"
                     app:met_floatingLabel="highlight"
-                    app:met_primaryColor="?colorAccent" />
+                    app:met_primaryColor="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
@@ -79,6 +82,8 @@
                     android:id="@+id/submit_query"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/white"
                     android:text="Submit" />
             </LinearLayout>
         </LinearLayout>

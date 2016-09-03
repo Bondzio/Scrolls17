@@ -1,6 +1,8 @@
 package in.silive.scrolls.Adapters;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import in.silive.scrolls.Fragments.DialogTopics;
 import in.silive.scrolls.R;
 
 /**
@@ -28,12 +31,33 @@ public class DomainsAdapter extends RecyclerView.Adapter<DomainsAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(DomainsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(DomainsAdapter.ViewHolder holder, final int position) {
             holder.tvDomain.setText(domains[position]);
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                DialogTopics dialogTopics = new DialogTopics();
+                switch (position){
+                    case 0:
+                        dialogTopics.setArgs("Computer Science and Information Technology", context.getResources().getStringArray(R.array.csit));
+                        break;
+                    case 1:
+                        dialogTopics.setArgs("Electronics and Communication", context.getResources().getStringArray(R.array.ec));
+                        break;
+                    case 2:
+                        dialogTopics.setArgs("Electrical and Electronics", context.getResources().getStringArray(R.array.el));
+                        break;
+                    case 3:
+                        dialogTopics.setArgs("Management Science", context.getResources().getStringArray(R.array.ms));
+                        break;
+                    case 4:
+                        dialogTopics.setArgs("Mechanical Engineering", context.getResources().getStringArray(R.array.me));
+                        break;
+                    case 5:
+                        dialogTopics.setArgs("Civil Engineering", context.getResources().getStringArray(R.array.ce));
+                        break;
+                }
+                dialogTopics.show(((AppCompatActivity)context).getSupportFragmentManager(),null);
             }
         });
     }

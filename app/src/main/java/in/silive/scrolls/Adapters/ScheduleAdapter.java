@@ -31,10 +31,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ScheduleAdapter.ViewHolder holder, int position) {
-            if (position == 0)
-                holder.topStrip.setVisibility(View.INVISIBLE);
-             if (position == (getItemCount()-1))
-                holder.bottomStrip.setVisibility(View.INVISIBLE);
+
         holder.tvDate.setText(dates[position]);
         holder.tvTitle.setText(labels[position]);
     }
@@ -45,15 +42,12 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        View topStrip,bottomStrip;
-        TextView tvDate,tvTitle,tvSubtitle;
+
+        TextView tvDate,tvTitle;
         public ViewHolder(View itemView) {
             super(itemView);
-            topStrip = itemView.findViewById(R.id.top_strip);
-            bottomStrip = itemView.findViewById(R.id.bottom_strip);
             tvDate = (TextView)itemView.findViewById(R.id.tvDate);
             tvTitle = (TextView)itemView.findViewById(R.id.tvTitle);
-            tvSubtitle = (TextView)itemView.findViewById(R.id.tvSubTitle);
         }
     }
 }

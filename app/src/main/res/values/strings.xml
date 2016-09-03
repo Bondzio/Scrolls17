@@ -18,15 +18,18 @@
     <string name="drawer_close">Close Drawer</string>
 
     <string-array name="schedule_dates">
-        <item>28 Aug</item>
-        <item>28 Aug</item>
-        <item>28 Aug</item>
+        <item>10 Oct</item>
+        <item>16 Oct</item>
+        <item>19 Oct</item>
+        <item>23 Oct</item>
     </string-array>
 
     <string-array name="schedule_labels">
-        <item>Registration</item>
-        <item>Registration</item>
-        <item>Registration</item>
+        <item>Last Date for Registration &amp; Synopsis Submission</item>
+        <item>Notification of Synopsis Selection</item>
+        <item>Last date for Submission of Final Paper</item>
+        <item>Main Event</item>
+
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -57,51 +60,52 @@
     </string-array>
     <string-array name="csit">
         <item>1. Embedded Systems</item>
-        <item>2.  Augmented Reality</item>
-        <item>3.   Natural Language Processing</item>
-        <item>4.   Genetic Algorithms and Bio-Inspired Computing  </item>
-        <item>5.   Cloud Computing</item>
-        <item>6.   Semantic Web</item>
+        <item>2. Augmented Reality</item>
+        <item>3. Natural Language Processing</item>
+        <item>4. Genetic Algorithms and Bio-Inspired Computing  </item>
+        <item>5. Cloud Computing</item>
+        <item>6. Semantic Web</item>
         <item>7. Mobile Computing and Data Intensive Computing</item>
-        <item>8.   Soft Computing including multi-criteria Analysis</item>
-        <item>9.   Cybernetics</item>
+        <item>8. Soft Computing including multi-criteria Analysis</item>
+        <item>9. Cybernetics</item>
         <item>10. Nano Computing</item>
         <item>11. Quantum Computing</item>
-        <item>12.Big Data Analytics</item>
+        <item>12. Big Data Analytics</item>
     </string-array>
 
     <string-array name="ec">
-        <item> 1. 4G Technology.</item>
+        <item> 1.4G Technology.</item>
         <item> 2.Mobile Satellite Communication.</item>
-        <item>Opto Electronics.</item>
         <item> 3.Nano Technology.</item>
         <item> 4.VLSI.</item>
         <item> 5.Neural Network.</item>
         <item> 6.Electronics Counter Measures in Defense System.</item>
         <item> 7.IFF Technology.</item>
         <item> 8.Speech Processing</item>
+        <item> 9.Opto Electronics.</item>
         <item> 10.Antenna Design and Radar Technology.</item>
+
 
     </string-array>
 
     <string-array name="el">
         <item>1. Intelligence Substation</item>
-        <item>2.   Smart Electrical Energy Metering.</item>
-        <item>3.   User Authentication using Biometrics.</item>
-        <item>4.   MRI Technology</item>
-        <item>5.   Humanoid Robotics </item>
-        <item>6.   Bluetooth Technology</item>
-        <item>7.   Night Vision Technology</item>
-<item>8.   Power Quality Issues with Grid Connected Wind Energy
+        <item>2. Smart Electrical Energy Metering.</item>
+        <item>3. User Authentication using Biometrics.</item>
+        <item>4. MRI Technology</item>
+        <item>5. Humanoid Robotics </item>
+        <item>6. Bluetooth Technology</item>
+        <item>7. Night Vision Technology</item>
+        <item>8. Power Quality Issues with Grid Connected Wind Energy
 Systems</item>
-        <item>9.   Renewable Energy &amp; Environment Protection</item>
+        <item>9. Renewable Energy &amp; Environment Protection</item>
         <item>10. Smart Grid Technology</item>
         <item>11. Super Conducting Rotating Machines</item>
 
     </string-array>
 
     <string-array name="ms">
-        <item>1.BREXIT: Impact on Indian Economy.</item>
+        <item>1.  BREXIT: Impact on Indian Economy.</item>
         <item>2.  Role of Skill Development in winning the war against unemployment.</item>
 <item>3.  Social Networking is the prime catalyst in shaping
 	 the actions of Indian Youths.</item>
@@ -117,39 +121,49 @@ Systems</item>
 
     </string-array>
     <string-array name="me">
-        <item>1.   Power Generation using Nano-carbon tubes</item>
-        <item>2.  Cryogenic Engines</item>
-        <item>3.   Application of CAD software (Catia, ProE) and designing software</item>
-        <item>4.   Automatic Transmission in Automobiles</item>
-        <item>5.  Hydraulic and pneumatic actuators</item>
-        <item>6.   Improvisation during the last two decades in passenger cars</item>
-        <item>7.  Nanotechnology</item>
+        <item>1. Power Generation using Nano-carbon tubes</item>
+        <item>2. Cryogenic Engines</item>
+        <item>3. Application of CAD software (Catia, ProE) and designing software</item>
+        <item>4. Automatic Transmission in Automobiles</item>
+        <item>5. Hydraulic and pneumatic actuators</item>
+        <item>6. Improvisation during the last two decades in passenger cars</item>
+        <item>7. Nanotechnology</item>
         <item>8. Recent trends in Mechanical Engineering</item>
-        <item>9.  Kinematics/dynamics of Robotic Manipulators.</item>
-        <item>10.Robotic Applications: Present &amp; Future</item>
+        <item>9. Kinematics/dynamics of Robotic Manipulators.</item>
+        <item>10. Robotic Applications: Present &amp; Future</item>
         <item>11. Additive Manufacturing</item>
-        <item>12.TQM concepts for zero rejection</item>
+        <item>12. TQM concepts for zero rejection</item>
 
 
     </string-array>
     <string-array name="ce">
-        <item>1.   Indian Railways: Ensuring last mile connectivity</item>
+        <item>1. Indian Railways: Ensuring last mile connectivity</item>
         <item>2. Infrastructure: Key to development of north-east</item>
-        <item>3.   Earthquake Engineering - seismic risk reduction in NCR region</item>
-        <item>4.   Smart housing for smart cities.</item>
-        <item>5.   Sanitation and solid waste management through ICT.</item>
+        <item>3. Earthquake Engineering - seismic risk reduction in NCR region</item>
+        <item>4. Smart housing for smart cities.</item>
+        <item>5. Sanitation and solid waste management through ICT.</item>
 <item>6.   DMIC (Delhi-Mumbai Industrial Corridor) road to
 	  Development  </item>
-        <item>7.   Storage Dams: Need for flood management</item>
-        <item>8.   Water scarcity and public investment in irrigation</item>
-        <item>9.  Creating water abundance through conservation</item>
+        <item>7. Storage Dams: Need for flood management</item>
+        <item>8. Water scarcity and public investment in irrigation</item>
+        <item>9. Creating water abundance through conservation</item>
 <item>10. Cleaning and rejuvenating Ganga and its prospects lying
 ahead</item>
-<item>11.Equity and global climate agreement - A step towards a
+<item>11. Equity and global climate agreement - A step towards a
 clean earth.</item>
         <item>12. Application of remote Sensing and GIS techniques</item>
 
 
     </string-array>
+
+    <string name="rules">
+        1. The competition will be open to all bonafide students of Engineering and Management Colleges
+\n2.  Maximum of 3 and minimum of 2 authors per paper.
+\n3.  Extended Abstract of 500 words maximum to be sent by laid down date. Based on the abstract, an   experts committee will select the papers for inclusion in the final presentation.
+\n4.  For presentation, a time slot of 7 minutes + 3 minutes (for Q &amp; A) will be given to each team.
+\n5.  A soft copy of the final paper is to be sent before the       designated date.
+\n6.  The paper to be typed in single space, double column format, using Times New Roman font &amp; font-size 12. Maximum number of pages to be 10 and the page should have no numbers. A margin of 1’’ all around to be left.
+\n7.  First page to include Title, Name(s) of authors, their college name, telephone numbers as well as email addresses. This information to be included with extended abstract also.
+    </string>
 
 </resources>

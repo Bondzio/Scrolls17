@@ -23,7 +23,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
 
     @Override
     public TopicsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_topic,parent,false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_tv,parent,false));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
         TextView tvTopic;
         public ViewHolder(View itemView) {
             super(itemView);
-            tvTopic = (TextView)itemView.findViewById(R.id.tvTopic);
+            tvTopic = (TextView)itemView.findViewById(R.id.tv);
         }
     }
 }
