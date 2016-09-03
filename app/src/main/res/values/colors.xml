@@ -5,4 +5,5 @@
     <color name="colorAccent">#424242</color>
     <color name="item_schedule_strip">#f7d919</color>
     <color name="white">#ffffff</color>
+    <color name="domain_bg">#acffffff</color>
 </resources>

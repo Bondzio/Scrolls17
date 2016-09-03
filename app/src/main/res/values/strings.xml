@@ -47,4 +47,109 @@
     <string name="about_scrolls">
         A national level technical paper presentation contest that provides a pedestal to unleash the talent of budding technocrats, SCROLLS-2015 deals with the most thriving and progressive fields of technology and management, bringing computing, information technology, mechanical engineering, electrical engineering, and telecommunication technologies along with major developmental leaps in management and leadership in its fold. Here, clarity and knowledge transcends through discussions over vast and diversified topics. So here is a chance to work with imagination, insight and confidence to ensure the onset of the new dawn.
     </string>
+    <string-array name="domain_array">
+    <item>Computer Science and Information Technology</item>
+    <item>Electronics and Communication</item>
+    <item>Electrical and Electronics</item>
+    <item>Management Science</item>
+    <item>Mechanical Engineering</item>
+    <item>Civil Engineering</item>
+    </string-array>
+    <string-array name="csit">
+        <item>1. Embedded Systems</item>
+        <item>2.  Augmented Reality</item>
+        <item>3.   Natural Language Processing</item>
+        <item>4.   Genetic Algorithms and Bio-Inspired Computing  </item>
+        <item>5.   Cloud Computing</item>
+        <item>6.   Semantic Web</item>
+        <item>7. Mobile Computing and Data Intensive Computing</item>
+        <item>8.   Soft Computing including multi-criteria Analysis</item>
+        <item>9.   Cybernetics</item>
+        <item>10. Nano Computing</item>
+        <item>11. Quantum Computing</item>
+        <item>12.Big Data Analytics</item>
+    </string-array>
+
+    <string-array name="ec">
+        <item> 1. 4G Technology.</item>
+        <item> 2.Mobile Satellite Communication.</item>
+        <item>Opto Electronics.</item>
+        <item> 3.Nano Technology.</item>
+        <item> 4.VLSI.</item>
+        <item> 5.Neural Network.</item>
+        <item> 6.Electronics Counter Measures in Defense System.</item>
+        <item> 7.IFF Technology.</item>
+        <item> 8.Speech Processing</item>
+        <item> 10.Antenna Design and Radar Technology.</item>
+
+    </string-array>
+
+    <string-array name="el">
+        <item>1. Intelligence Substation</item>
+        <item>2.   Smart Electrical Energy Metering.</item>
+        <item>3.   User Authentication using Biometrics.</item>
+        <item>4.   MRI Technology</item>
+        <item>5.   Humanoid Robotics </item>
+        <item>6.   Bluetooth Technology</item>
+        <item>7.   Night Vision Technology</item>
+<item>8.   Power Quality Issues with Grid Connected Wind Energy
+Systems</item>
+        <item>9.   Renewable Energy &amp; Environment Protection</item>
+        <item>10. Smart Grid Technology</item>
+        <item>11. Super Conducting Rotating Machines</item>
+
+    </string-array>
+
+    <string-array name="ms">
+        <item>1.BREXIT: Impact on Indian Economy.</item>
+        <item>2.  Role of Skill Development in winning the war against unemployment.</item>
+<item>3.  Social Networking is the prime catalyst in shaping
+	 the actions of Indian Youths.</item>
+        <item>4.  India is the new China: A Distant Dream.</item>
+        <item>5.  The Glass Ceiling: Reality or Myth?</item>
+        <item>6.Poverty in Third World Countries is due to Prosperity in First World Countries.</item>
+<item>7.Steal a Few Lakh and you’re a Criminal; Steal a Few
+	 Hundred Crore and you become an Industrialist.</item>
+        <item>8.  100% FDI in Indian Defense Sector: Boon or Bane.</item>
+<item>9. Rural Development is the right answer to our
+	 unemployment problem.</item>
+        <item>10.Ethics in business: An integral part or a passing fad?</item>
+
+    </string-array>
+    <string-array name="me">
+        <item>1.   Power Generation using Nano-carbon tubes</item>
+        <item>2.  Cryogenic Engines</item>
+        <item>3.   Application of CAD software (Catia, ProE) and designing software</item>
+        <item>4.   Automatic Transmission in Automobiles</item>
+        <item>5.  Hydraulic and pneumatic actuators</item>
+        <item>6.   Improvisation during the last two decades in passenger cars</item>
+        <item>7.  Nanotechnology</item>
+        <item>8. Recent trends in Mechanical Engineering</item>
+        <item>9.  Kinematics/dynamics of Robotic Manipulators.</item>
+        <item>10.Robotic Applications: Present &amp; Future</item>
+        <item>11. Additive Manufacturing</item>
+        <item>12.TQM concepts for zero rejection</item>
+
+
+    </string-array>
+    <string-array name="ce">
+        <item>1.   Indian Railways: Ensuring last mile connectivity</item>
+        <item>2. Infrastructure: Key to development of north-east</item>
+        <item>3.   Earthquake Engineering - seismic risk reduction in NCR region</item>
+        <item>4.   Smart housing for smart cities.</item>
+        <item>5.   Sanitation and solid waste management through ICT.</item>
+<item>6.   DMIC (Delhi-Mumbai Industrial Corridor) road to
+	  Development  </item>
+        <item>7.   Storage Dams: Need for flood management</item>
+        <item>8.   Water scarcity and public investment in irrigation</item>
+        <item>9.  Creating water abundance through conservation</item>
+<item>10. Cleaning and rejuvenating Ganga and its prospects lying
+ahead</item>
+<item>11.Equity and global climate agreement - A step towards a
+clean earth.</item>
+        <item>12. Application of remote Sensing and GIS techniques</item>
+
+
+    </string-array>
+
 </resources>

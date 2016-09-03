@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                 displayView(position);
                 if (drawerVisible)
                     hideDrawer();
-
             }
         });
     }
