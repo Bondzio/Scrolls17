@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -22,15 +23,17 @@
             android:id="@+id/reg_individual"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="3dp">
 
             <EditText
                 android:id="@+id/stud_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="1dp"
                 android:hint="Enter your name"
                 android:inputType="textPersonName"
-                android:padding="3dp"/>
+                android:padding="3dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,14 +102,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter your college name"
-                android:padding="3dp"/>
+                android:padding="3dp" />
 
             <EditText
                 android:id="@+id/stud_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter your student Id"
-                android:padding="3dp"/>
+                android:padding="3dp" />
 
             <EditText
                 android:id="@+id/stud_mob_no"
@@ -114,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Enter your phone number"
                 android:inputType="phone"
-                android:padding="3dp"/>
+                android:padding="3dp" />
 
             <EditText
                 android:id="@+id/stud_mail"
@@ -122,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Enter your mail address"
                 android:inputType="textEmailAddress"
-                android:padding="3dp"/>
+                android:padding="3dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -151,12 +154,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Submit"
-                android:padding="3dp"/>
+                android:padding="3dp"
+                android:text="Submit" />
         </LinearLayout>
-
-
-
 
 
         <LinearLayout
@@ -164,16 +164,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
-            android:padding="3dp">
+            android:padding="3dp"
+            android:visibility="gone">
 
             <EditText
                 android:id="@+id/team_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="3dp"
-                android:hint="Team name" />
+                android:hint="Team name"
+                android:padding="3dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -182,18 +182,18 @@
                 android:padding="3dp">
 
                 <RadioGroup
+                    android:id="@+id/no_of_team_members"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:id="@+id/no_of_team_members"
                     android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/two_members"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2 members"
-                        android:checked="true"/>
+                        android:checked="true"
+                        android:text="2 members" />
 
                     <RadioButton
                         android:id="@+id/three_members"
@@ -211,36 +211,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="3dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="3dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Member 1"
-                    android:padding="3dp"/>
+                    android:padding="3dp"
+                    android:text="Member 1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:padding="3dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="3dp">
 
                     <EditText
                         android:id="@+id/member_one_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Scrolls ID"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:hint="Scrolls ID" />
 
                     <EditText
                         android:id="@+id/member_one_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Name"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:hint="Name" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -251,8 +251,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="3dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="3dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -270,15 +270,15 @@
                         android:id="@+id/member_two_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Scrolls ID"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:hint="Scrolls ID" />
 
                     <EditText
                         android:id="@+id/member_two_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Name"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:hint="Name" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -288,8 +288,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="3dp"
                 android:orientation="vertical"
+                android:padding="3dp"
                 android:visibility="gone">
 
                 <TextView
@@ -308,15 +308,15 @@
                         android:id="@+id/member_three_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Scrolls ID"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:hint="Scrolls ID" />
 
                     <EditText
                         android:id="@+id/member_three_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="Name"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:hint="Name" />
 
 
                 </LinearLayout>
@@ -327,8 +327,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="3dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="3dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -337,18 +337,18 @@
                     android:text="Select a team leader" />
 
                 <RadioGroup
+                    android:id="@+id/team_leader"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:id="@+id/team_leader"
                     android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/leader_member_one"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Member 1"
-                        android:checked="true"/>
+                        android:checked="true"
+                        android:text="Member 1" />
 
                     <RadioButton
                         android:id="@+id/leader_member_two"
@@ -370,8 +370,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="3dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="3dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -394,8 +394,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="3dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="3dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -419,20 +419,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="3dp"
                 android:hint="Enter password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:padding="3dp" />
 
             <Button
                 android:id="@+id/submit_team_reg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Create"
-                android:padding="3dp"/>
+                android:padding="3dp"
+                android:text="Create" />
 
         </LinearLayout>
-
 
 
     </LinearLayout>

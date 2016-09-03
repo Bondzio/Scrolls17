@@ -260,17 +260,17 @@ public class Register extends Fragment {
         JSONObject team_reg_data = new JSONObject();
         try {
             team_reg_data.put("TEAM_NAME", name_of_team);
-            team_reg_data.put("TEAM_MEMBER_ONE_NAME",name_member_one);
-            team_reg_data.put("TEAM_MEMBER_ONE_ID",id_member_one);
-            team_reg_data.put("TEAM_MEMBER_TWO_NAME",name_member_two);
-            team_reg_data.put("TEAM_MEMBER_TWO_ID",id_member_two);
-            team_reg_data.put("TEAM_MEMBER_THREE_NAME",name_member_three);
-            team_reg_data.put("TEAM_MEMBER_THREE_ID",id_member_three);
-            team_reg_data.put("TEAM_NO_OF_MEMBERS",no_of_teammembers);
-            team_reg_data.put("TEAM_LEADER",leader_of_team);
-            team_reg_data.put("TEAM_DOMAIN",domain_of_team);
-            team_reg_data.put("TEAM_TOPIC",topic_of_team);
-            team_reg_data.put("TEAM_PASSWORD",password_team);
+            team_reg_data.put("TEAM_MEMBER_ONE_NAME", name_member_one);
+            team_reg_data.put("TEAM_MEMBER_ONE_ID", id_member_one);
+            team_reg_data.put("TEAM_MEMBER_TWO_NAME", name_member_two);
+            team_reg_data.put("TEAM_MEMBER_TWO_ID", id_member_two);
+            team_reg_data.put("TEAM_MEMBER_THREE_NAME", name_member_three);
+            team_reg_data.put("TEAM_MEMBER_THREE_ID", id_member_three);
+            team_reg_data.put("TEAM_NO_OF_MEMBERS", no_of_teammembers);
+            team_reg_data.put("TEAM_LEADER", leader_of_team);
+            team_reg_data.put("TEAM_DOMAIN", domain_of_team);
+            team_reg_data.put("TEAM_TOPIC", topic_of_team);
+            team_reg_data.put("TEAM_PASSWORD", password_team);
 
         } catch (Exception e) {
 

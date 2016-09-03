@@ -46,13 +46,7 @@ public class Splash extends AppCompatActivity {
             //   Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
             //no_net_connection.setVisibility(View.VISIBLE);
             Snackbar snackbar = Snackbar
-                    .make(splash, "No internet connection!", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("RETRY", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            checkConnection();
-                        }
-                    });
+                    .make(splash, "No internet connection!", Snackbar.LENGTH_INDEFINITE);
 
 // Changing message text color
             snackbar.setActionTextColor(Color.RED);
@@ -62,7 +56,7 @@ public class Splash extends AppCompatActivity {
             TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
             textView.setTextColor(Color.YELLOW);
             snackbar.show();
-        } else {
+        }
 
 
             new Handler().postDelayed(new Runnable() {
@@ -75,6 +69,6 @@ public class Splash extends AppCompatActivity {
             }, 4000);
 
 
-        }
+
 
     }}
