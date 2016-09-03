@@ -7,17 +7,19 @@ import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 import in.silive.scrolls.Listeners.FetchDataListener;
+import in.silive.scrolls.Listeners.UploaderListener;
 import in.silive.scrolls.Util.Config;
 
 /**
  * Created by AKG002 on 09-06-2016.
  */
-public class FetchData extends AsyncTask<Void, Void, String> {
+public class FetchData extends AsyncTask<Void, Integer, String> {
     private FetchDataListener listener;
     private String urlString, entity = null;
     private int id;
@@ -41,13 +43,22 @@ public class FetchData extends AsyncTask<Void, Void, String> {
 //            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 //            connection.setDoInput(true);
 //            connection.setDoOutput(true);
-            if (token != null) {
-                connection.addRequestProperty("QuickBlox-REST-API-Version", "0.1.1");
-                connection.addRequestProperty("QB-Token", token);
-            }
 
             connection.connect();
             if (entity != null) {
+                OutputStream outputStream = connection.getOutputStream();
+                byte[] bytes = entity.getBytes();
+                int bufferLength = 1024;
+                for (int i = 0; i < bytes.length; i += bufferLength) {
+                    int progress = (int)((i / (float) bytes.length) * 100);
+                    publishProgress(progress);
+                    if (bytes.length - i >= bufferLength) {
+                        outputStream.write(bytes, i, bufferLength);
+                    } else {
+                        outputStream.write(bytes, i, bytes.length - i);
+                    }
+                }
+                publishProgress(100);
                 OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
                 writer.write(entity);
                 writer.close();
@@ -109,6 +120,14 @@ public class FetchData extends AsyncTask<Void, Void, String> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        if (listener instanceof UploaderListener)
+        {
+            ((UploaderListener) listener).setProgress(values[0]);
+        }
+        super.onProgressUpdate(values);
     }
 
     public void setArgs(String url, boolean b, String token, FetchDataListener listener) {

@@ -36,6 +36,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import in.silive.scrolls.R;
 
@@ -48,7 +49,7 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
         LocationListener, OnMapReadyCallback {
     private GoogleMap mMap;
     private View rootView;
-    private SupportMapFragment mapFragment;
+    private static SupportMapFragment mapFragment;
     Location lastlocation;
     private LatLng latLngAKGEC = new LatLng(28.676564, 77.500242), startLocation;
     private static final LocationRequest REQUEST = LocationRequest.create()
@@ -57,21 +58,34 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     private ProgressDialog progressDialog;
     private GoogleApiClient mGoogleApiClient;
+    public static ReachUs instance;
+
+    public static ReachUs getInstance(){
+        if (instance == null) {
+            instance = new ReachUs();
+        }
+        return instance;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setRetainInstance(true);
+        if (rootView == null) {
         rootView = inflater.inflate(R.layout.fragment_reach_us, container, false);
-       /* Routing routing = new Routing.Builder()
-                .travelMode(AbstractRouting.TravelMode.WALKING)
-                .withListener(this)
-                .waypoints(start, end)
-                .build();
-        routing.execute();
-       */
-
+        android.support.v4.app.FragmentManager fManager = getChildFragmentManager();
+        mapFragment = (SupportMapFragment) fManager.findFragmentById(R.id.map);
+        if (mapFragment == null) {
+            mapFragment = SupportMapFragment.newInstance();
+            fManager.beginTransaction().replace(R.id.map, mapFragment).commit();
+        }
         setUpGoogleApiClientIfNeeded();
-        mGoogleApiClient.connect();
+
+            mGoogleApiClient.connect();
+        }
+        if (mMap==null){
+            mapFragment.getMapAsync(this);
+        }
         return rootView;
     }
 
@@ -85,28 +99,15 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
         }
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        super.onActivityCreated(savedInstanceState);
-        android.support.v4.app.FragmentManager fManager = getChildFragmentManager();
-        mapFragment = (SupportMapFragment) fManager.findFragmentById(R.id.map);
-        if (mapFragment == null) {
-            mapFragment = SupportMapFragment.newInstance();
-            fManager.beginTransaction().replace(R.id.map, mapFragment).commit();
-        }
 
+    @Override
+    public void onStart() {
+
+        super.onStart();
     }
 
     @Override
     public void onResume() {
-        if (mMap == null) {
-            mapFragment.getMapAsync(this);
-
-       /*     mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(
-                    R.id.map)).getMap();
-       */
-        }
         super.onResume();
     }
 
@@ -114,7 +115,6 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
     public void onRoutingFailure(RouteException var1) {
         progressDialog.dismiss();
         Toast.makeText(getActivity(), "Something went wrong, Try again", Toast.LENGTH_SHORT).show();
-
     }
 
 
@@ -124,31 +124,42 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
     }
 
     @Override
-    public void onRoutingSuccess(ArrayList<Route> arrayList, int i) {
-
-    }
-
-    public void onRoutingSuccessToBeReplaced(PolylineOptions mPolyOptions, Route route) {
+    public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
         progressDialog.dismiss();
+
+        //add route(s) to the map.
+      /*  for (int i = 0; i < route.size(); i++) {
+
+            //In case of more than 5 alternative routes
+            int colorIndex = i % COLORS.length;
+
+            PolylineOptions polyOptions = new PolylineOptions();
+            polyOptions.color(getResources().getColor(COLORS[colorIndex]));
+            polyOptions.width(10 + i * 3);
+            polyOptions.addAll(route.get(i).getPoints());
+            Polyline polyline = map.addPolyline(polyOptions);
+            Toast.makeText(getApplicationContext(), "Route " + (i + 1) + ": distance - " + route.get(i).getDistanceValue() + ": duration - " + route.get(i).getDurationValue(), Toast.LENGTH_SHORT).show();
+        }*/
+
+        //For shortest Path
         PolylineOptions polyOptions = new PolylineOptions();
         polyOptions.color(getResources().getColor(R.color.colorPrimaryDark));
         polyOptions.width(10);
-        polyOptions.addAll(mPolyOptions.getPoints());
+        polyOptions.addAll(route.get(shortestRouteIndex).getPoints());
         Polyline polyline = mMap.addPolyline(polyOptions);
-
         // Start marker
         MarkerOptions options = new MarkerOptions();
         options.position(startLocation);
-        options.icon(BitmapDescriptorFactory.fromResource(R.drawable.start_blue));
+        options.icon(BitmapDescriptorFactory.fromResource(R.drawable.location_pointer));
         mMap.addMarker(options);
 
         // End marker
         options = new MarkerOptions();
         options.position(latLngAKGEC);
-        options.icon(BitmapDescriptorFactory.fromResource(R.drawable.end_green));
+        options.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_akgec));
         mMap.addMarker(options);
-
     }
+
 
     @Override
     public void onRoutingCancelled() {
@@ -185,6 +196,7 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
         lastlocation = LocationServices.FusedLocationApi.getLastLocation(
@@ -201,19 +213,24 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    progressDialog = ProgressDialog.show(getActivity(), "Please wait.",
-                            "Fetching route information.", true);
-                    Routing routing = new Routing.Builder()
-                            .travelMode(AbstractRouting.TravelMode.WALKING)
-                            .withListener(ReachUs.this)
-                            .waypoints(startLocation, latLngAKGEC)
-                            .build();
-                    routing.execute();
+                    try {
+                        progressDialog = ProgressDialog.show(getActivity(), "Please wait.",
+                                "Fetching route information.", true);
+                        Routing routing = new Routing.Builder()
+                                .travelMode(AbstractRouting.TravelMode.WALKING)
+                                .withListener(ReachUs.this)
+                                .waypoints(startLocation, latLngAKGEC)
+                                .build();
+                        routing.execute();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                 }
             }, 4000);
         }
     }
+
 
     @Override
     public void onConnectionSuspended(int i) {
