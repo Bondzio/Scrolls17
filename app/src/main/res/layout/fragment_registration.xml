@@ -1,135 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="8dp">
+
     <android.support.design.widget.TabLayout
+        android:id="@+id/team_individual_tab"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:id="@+id/team_individual_tab"
         app:tabBackground="@color/colorPrimary"
         app:tabIndicatorColor="#212121"
-        app:tabSelectedTextColor="#fdfdfd">
-    </android.support.design.widget.TabLayout>
+        app:tabSelectedTextColor="#fdfdfd"></android.support.design.widget.TabLayout>
+
     <LinearLayout
+        android:id="@+id/reg_individual"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/stud_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your name"
-            android:id="@+id/stud_name"
-            android:inputType="textPersonName"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="3dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="College"
-                android:layout_weight="1"/>
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/stud_college"
-                android:layout_weight="1">
-            </Spinner>
+            android:inputType="textPersonName" />
 
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="3dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Course"
-                android:layout_weight="1"/>
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/stud_course"
-                android:layout_weight="1">
-            </Spinner>
+            android:orientation="horizontal"
+            android:padding="3dp">
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="3dp"
-            android:orientation="horizontal">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Year"
-                android:layout_weight="1"/>
-            <Spinner
-                android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:entries="@array/Year"
+                android:text="College" />
+
+            <Spinner
+                android:id="@+id/stud_college"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/stud_year">
-            </Spinner>
+                android:layout_weight="1"></Spinner>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Course" />
+
+            <Spinner
+                android:id="@+id/stud_course"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"></Spinner>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="3dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Year" />
+
+            <Spinner
+                android:id="@+id/stud_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:entries="@array/Year"></Spinner>
 
         </LinearLayout>
 
         <EditText
+            android:id="@+id/stud_other_college"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your college name"
-            android:id="@+id/stud_other_college"/>
+            android:hint="Enter your college name" />
+
         <EditText
+            android:id="@+id/stud_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your student Id"
-            android:id="@+id/stud_id"/>
+            android:hint="Enter your student Id" />
+
         <EditText
+            android:id="@+id/stud_mob_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your phone number"
-            android:id="@+id/stud_mob_no"
             android:inputType="phone" />
+
         <EditText
+            android:id="@+id/stud_mail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your mail address"
-            android:id="@+id/stud_mail"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="3dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="3dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Need Accommodation"
-                android:layout_weight="1"/>
-            <CheckBox
-                android:layout_width="wrap_content"
                 android:layout_weight="1"
+                android:text="Need Accommodation" />
+
+            <CheckBox
+                android:id="@+id/stud_accommodation"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/stud_accommodation">
-            </CheckBox>
+                android:layout_weight="1"></CheckBox>
 
 
         </LinearLayout>
+
         <Button
+            android:id="@+id/individual_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Submit"
-            android:id="@+id/individual_submit"/>
+            android:text="Submit" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/reg_team"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -312,62 +328,69 @@
             </RadioGroup>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Domain"/>
+                android:text="Domain" />
+
             <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:id="@+id/team_domain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1">
 
             </Spinner>
 
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Topic"/>
+                android:text="Topic" />
+
             <Spinner
+                android:id="@+id/team_topic"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/team_topic"
                 android:layout_weight="1">
 
             </Spinner>
 
 
         </LinearLayout>
+
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Enter password"
-            android:layout_weight="1"
             android:id="@+id/team_password"
-            android:inputType="textPassword"/>
-        <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Create"
             android:layout_weight="1"
-            android:id="@+id/submit_team_reg"/>
+            android:hint="Enter password"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/submit_team_reg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Create" />
 
     </LinearLayout>
-
 
 
 </LinearLayout>
