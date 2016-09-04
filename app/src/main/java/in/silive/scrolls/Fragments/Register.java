@@ -355,9 +355,9 @@ public class Register extends Fragment implements NetworkResponseListener{
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (i == (list_of_colleges.size() - 1)) {
-                        (view.findViewById(R.id.stud_other_college)).setVisibility(View.VISIBLE);
+                        (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.VISIBLE);
                     } else {
-                        (view.findViewById(R.id.stud_other_college)).setVisibility(View.GONE);
+                        (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.GONE);
 
                     }
                 }
