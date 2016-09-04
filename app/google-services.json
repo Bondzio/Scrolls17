@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "24957423969",
+    "project_id": "nodal-unity-106415"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24957423969:android:7d60c992183a46fd",
+        "android_client_info": {
+          "package_name": "in.silive.scrolls"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRMpreoGsjhoaI7gqpcVTQDKkYDowlMqI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
