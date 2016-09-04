@@ -22,5 +22,5 @@ public class Config {
     public static String PREFERENCES = "PREFERENCES";
     public static String individual_id = "individual_id";
     public static String team_id = "team_id";
-    public static String IS_PHONE_NUMBER_REGISTERED = "http://silive.in/testapi/api/Participants/IsPhoneNoAlreadyRegistered?phoneno=";
+    public static String IS_PHONE_NUMBER_REGISTERED = "http://akgec-scrolls.com/rest/api/Participants/IsPhoneNoAlreadyRegistered";
 }

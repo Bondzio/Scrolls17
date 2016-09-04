@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import in.silive.scrolls.Network.CheckConnectivity;
 import in.silive.scrolls.Network.FetchDataForLists;
 import in.silive.scrolls.Network.NetworkResponseListener;
 import in.silive.scrolls.R;
@@ -52,6 +53,7 @@ public class Register extends Fragment implements NetworkResponseListener{
     FetchDataForLists fetchdataforLists;
     JSONObject jsonObject;
     //UI-elements
+    boolean isNetConnectionAvailable;
     View reg_view;
     LinearLayout reg_individual, reg_team, member_three;
     TabLayout team_individual_tab;
@@ -71,7 +73,10 @@ public class Register extends Fragment implements NetworkResponseListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        reg_view = inflater.inflate(R.layout.fragment_registration, container, false);
+
+        isNetConnectionAvailable = CheckConnectivity.isNetConnected(getContext());
+
+            reg_view = inflater.inflate(R.layout.fragment_registration, container, false);
         reg_individual = (LinearLayout) reg_view.findViewById(R.id.reg_individual);
         reg_team = (LinearLayout) reg_view.findViewById(R.id.reg_team);
         stud_name = (EditText) reg_view.findViewById(R.id.stud_name);
@@ -500,6 +505,17 @@ public class Register extends Fragment implements NetworkResponseListener{
         fetchdataforLists.execute();
     }
 
+    public class TeamRegistration implements NetworkResponseListener{
 
+        @Override
+        public void beforeRequest() throws MalformedURLException {
+
+        }
+
+        @Override
+        public void postRequest(Object result) throws MalformedURLException {
+
+        }
+    }
 
 }

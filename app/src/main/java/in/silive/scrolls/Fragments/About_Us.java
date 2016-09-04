@@ -31,7 +31,7 @@ public class About_Us extends Fragment {
         WebSettings webSettings = web_view.getSettings();
         webSettings.setJavaScriptEnabled(true);
         web_view.setWebViewClient(new myWebClient());
-        web_view.loadUrl("file:///android_asset/index.html");
+        web_view.loadUrl("file:///android_asset/about-us.html");
         return view;
     }
 

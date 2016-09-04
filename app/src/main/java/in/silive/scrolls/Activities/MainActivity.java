@@ -14,6 +14,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 
 import in.silive.scrolls.Fragments.About_Scrolls;
 import in.silive.scrolls.Fragments.About_Us;
+import in.silive.scrolls.Fragments.DialogNoNetConnection;
 import in.silive.scrolls.Fragments.NavigationDrawer;
 import in.silive.scrolls.Fragments.QueryUs;
 import in.silive.scrolls.Fragments.ReachUs;
@@ -21,6 +22,7 @@ import in.silive.scrolls.Fragments.Register;
 import in.silive.scrolls.Fragments.Rules;
 import in.silive.scrolls.Fragments.ScheduleFragment;
 import in.silive.scrolls.Fragments.UploadDoc;
+import in.silive.scrolls.Network.CheckConnectivity;
 import in.silive.scrolls.R;
 import in.silive.scrolls.Util.Dialogs;
 import io.codetail.animation.ViewAnimationUtils;
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
     }
 
     private void displayView(int position) {
+        fragment = new About_Scrolls();
 
         String title = getString(R.string.app_name);
         switch (position) {
@@ -78,8 +81,16 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                 break;
             case 3:
                 if (!(fragment instanceof Register))
-                    fragment = new Register();
-                title = "Scrolls'16";
+
+                    if (CheckConnectivity.isNetConnected(MainActivity.this)){
+                        fragment = new Register();
+                        title = "Scrolls'16";
+                    }
+                    else {
+                        DialogNoNetConnection dialogNoNetConnection = new DialogNoNetConnection();
+                        dialogNoNetConnection.show(getSupportFragmentManager(),"No net connection");
+                    }
+
                 break;
             case 4:
                 if (!(fragment instanceof UploadDoc))
