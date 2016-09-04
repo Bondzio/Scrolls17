@@ -312,6 +312,7 @@ public class Register extends Fragment implements NetworkResponseListener{
 
     @Override
     public void beforeRequest() throws MalformedURLException {
+        Log.d("Scrolls","before request called");
         progressBar = new ProgressBar(getContext());
         progressBar.setVisibility(View.VISIBLE);
 
@@ -319,6 +320,7 @@ public class Register extends Fragment implements NetworkResponseListener{
 
     @Override
     public void postRequest(Object result) throws MalformedURLException {
+        Log.d("Scrolls","post request called");
         progressBar.setVisibility(View.GONE);
         final ArrayList<HashMap<String, String>> resultList = (ArrayList<HashMap<String, String>>) result;
         //Toast.makeText(getActivity(), "Length " + resultList.size() + " " + inProgress+" "+resultList.get(0).get(searchlIST.get(0)), Toast.LENGTH_SHORT).show();
