@@ -44,7 +44,6 @@
                     android:inputType="textEmailAddress"
                     android:maxLength="20"
                     android:singleLine="true"
-                    android:inputType="textEmailAddress"
                     app:met_baseColor="@color/colorAccent"
                     app:met_clearButton="true"
                     app:met_floatingLabel="highlight"

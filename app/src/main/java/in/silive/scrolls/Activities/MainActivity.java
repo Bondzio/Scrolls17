@@ -43,8 +43,11 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
         main_act_context = getApplicationContext();
         mtoolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mtoolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+     getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_up_indicator);
+
         navigationDrawer = (NavigationDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         //  navigationDrawer.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mtoolbar);
@@ -61,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
     }
 
     private void displayView(int position) {
-
         String title = getString(R.string.app_name);
         switch (position) {
             case 0:
