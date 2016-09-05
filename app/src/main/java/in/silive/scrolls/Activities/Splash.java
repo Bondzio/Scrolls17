@@ -14,6 +14,9 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.schibsted.spain.parallaxlayerlayout.ParallaxLayerLayout;
+import com.schibsted.spain.parallaxlayerlayout.SensorTranslationUpdater;
+
 import in.silive.scrolls.R;
 
 /**
@@ -25,6 +28,8 @@ public class Splash extends AppCompatActivity {
     RelativeLayout splash;
     //ImageView image;
     TextView text;
+    private ParallaxLayerLayout parallaxLayout;
+    private SensorTranslationUpdater sensorTranslationUpdater;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,9 +39,22 @@ public class Splash extends AppCompatActivity {
         context = getApplicationContext();
         //image = (ImageView) findViewById(R.id.image);
         text = (TextView) findViewById(R.id.text);
+        parallaxLayout = (ParallaxLayerLayout)findViewById(R.id.parallaxLayer);
+        sensorTranslationUpdater = new SensorTranslationUpdater(this);
+        parallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
         checkConnection();
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorTranslationUpdater.unregisterSensorManager();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorTranslationUpdater.registerSensorManager();
     }
 
     public void checkConnection() {
@@ -47,18 +65,14 @@ public class Splash extends AppCompatActivity {
             //no_net_connection.setVisibility(View.VISIBLE);
             Snackbar snackbar = Snackbar
                     .make(splash, "No internet connection!", Snackbar.LENGTH_INDEFINITE);
-
 // Changing message text color
             snackbar.setActionTextColor(Color.RED);
-
 // Changing action button text color
             View sbView = snackbar.getView();
             TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
             textView.setTextColor(Color.YELLOW);
             snackbar.show();
         }
-
-
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

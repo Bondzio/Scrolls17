@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
             case 0:
                 if (!(fragment instanceof About_Scrolls))
                     fragment = new About_Scrolls();
-                title = "";
+                title = "About Scrolls";
                 break;
             case 1:
                 if (!(fragment instanceof Rules))

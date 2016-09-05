@@ -1,6 +1,7 @@
 package in.silive.scrolls.Fragments;
 
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,6 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import in.silive.scrolls.Adapters.DomainsAdapter;
 import in.silive.scrolls.R;
@@ -22,6 +28,7 @@ RecyclerView rvDomains;
     GridLayoutManager layoutManager;
     String[]  domains;
     DomainsAdapter adapter;
+    private WebView web_view;
 
     public About_Scrolls() {
         // Required empty public constructor
@@ -39,7 +46,25 @@ RecyclerView rvDomains;
         adapter = new DomainsAdapter(getContext(),domains);
         rvDomains.setLayoutManager(layoutManager);
         rvDomains.setAdapter(adapter);
+        web_view = (WebView) rootView.findViewById(R.id.about_scrolls_web_view);
+        WebSettings webSettings = web_view.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        web_view.setWebViewClient(new myWebClient());
+        web_view.loadUrl("file:///android_asset/about.html");
         return rootView;
+    }
+
+    public class myWebClient extends WebViewClient {
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            // TODO Auto-generated method stub
+            super.onPageStarted(view, url, favicon);
+        }
+
+        @Override
+        public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+            return super.shouldInterceptRequest(view, request);
+        }
     }
 
 }
