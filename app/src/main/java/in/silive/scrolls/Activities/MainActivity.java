@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
     Fragment fragment = null;
     FragmentManager fragmentManager;
     boolean drawerVisible = false;
-    private Toolbar mtoolbar;
     LinearLayout ll;
+    private Toolbar mtoolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
         mtoolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mtoolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
-     getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-      //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_up_indicator);
+        //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_up_indicator);
 
         navigationDrawer = (NavigationDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                     hideDrawer();
             }
         });
-        ll = (LinearLayout)findViewById(R.id.ll);
+        ll = (LinearLayout) findViewById(R.id.ll);
         displayView(0);
     }
 
@@ -86,13 +86,12 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
             case 3:
                 if (!(fragment instanceof Register))
 
-                    if (CheckConnectivity.isNetConnected(MainActivity.this)){
+                    if (CheckConnectivity.isNetConnected(MainActivity.this)) {
                         fragment = new Register();
                         title = "Register";
-                    }
-                    else {
+                    } else {
                         DialogNoNetConnection dialogNoNetConnection = new DialogNoNetConnection();
-                        dialogNoNetConnection.show(getSupportFragmentManager(),"No net connection");
+                        dialogNoNetConnection.show(getSupportFragmentManager(), "No net connection");
                     }
 
                 break;
@@ -170,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
             @Override
             public void onAnimationEnd(Animator animator) {
                 ll.setVisibility(View.GONE);
-                drawerVisible=false;
+                drawerVisible = false;
             }
 
             @Override
@@ -207,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                 animator.setDuration(650);
                 ll.setVisibility(View.VISIBLE);
                 animator.start();
-                drawerVisible=true;
+                drawerVisible = true;
             }
         });
 
