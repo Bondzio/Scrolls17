@@ -73,14 +73,14 @@ public class Splash extends AppCompatActivity {
             textView.setTextColor(Color.YELLOW);
             snackbar.show();
         }
-         /*   new Handler().postDelayed(new Runnable() {
+            new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     Intent intent = new Intent(Splash.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
-            }, 4000);*/
+            }, 4000);
 
 
 

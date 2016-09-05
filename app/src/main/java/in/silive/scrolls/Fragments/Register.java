@@ -121,7 +121,7 @@ public class Register extends Fragment implements NetworkResponseListener{
         individual_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getStudData();
+                checkNumber();
             }
         });
         submit_team_reg = (Button) reg_view.findViewById(R.id.submit_team_reg);
