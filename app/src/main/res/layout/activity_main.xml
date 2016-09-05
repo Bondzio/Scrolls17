@@ -19,13 +19,28 @@
             local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             local:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
     </android.support.design.widget.AppBarLayout>
+    <android.support.v4.widget.SlidingPaneLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/sliding_pane_layout"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <fragment
+            android:id="@+id/fragment_navigation_drawer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            class="in.silive.scrolls.Fragments.NavigationDrawer"
+            tools:layout="@layout/fragment_navigation_drawer" />
         <FrameLayout
             android:id="@+id/container_body"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
-<io.codetail.widget.RevealFrameLayout
+            />
+
+    </android.support.v4.widget.SlidingPaneLayout>
+
+<!--<io.codetail.widget.RevealFrameLayout
     android:layout_width="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_height="match_parent">
@@ -36,13 +51,8 @@
         android:layout_gravity="start"
         android:background="@color/bg_dark_gray"
         android:layout_height="match_parent">
-        <fragment
-            android:id="@+id/fragment_navigation_drawer"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            class="in.silive.scrolls.Fragments.NavigationDrawer"
-            tools:layout="@layout/fragment_navigation_drawer" />
+
     </LinearLayout>
 
-</io.codetail.widget.RevealFrameLayout>
+</io.codetail.widget.RevealFrameLayout>-->
 </android.support.design.widget.CoordinatorLayout>

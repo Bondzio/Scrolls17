@@ -327,7 +327,7 @@ public class Register extends Fragment implements NetworkResponseListener{
         if (inProgress.equals(Config.CHECK_IS_PHONE_NUMBER_REGISTERED)) {
             if (resultList.size() > 0) {
                 if (resultList.get(0).get(searchList.get(0)).equalsIgnoreCase("false")) {
-                    Toast.makeText(getActivity(), "Mobile Number is Not already Registered.", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getActivity(), "Mobile Number is Not already Registered.", Toast.LENGTH_SHORT).show();
                     checkEmail();
                 } else {
                     Toast.makeText(getActivity(), "Mobile Number is already registered.Please try other.", Toast.LENGTH_SHORT).show();
@@ -427,8 +427,6 @@ public class Register extends Fragment implements NetworkResponseListener{
             fetchdataforLists.setNrl(this);
             fetchdataforLists.setSearchList(searchList);
             fetchdataforLists.execute();
-
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
