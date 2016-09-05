@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -34,12 +35,14 @@ public class DomainsAdapter extends RecyclerView.Adapter<DomainsAdapter.ViewHold
     public void onBindViewHolder(DomainsAdapter.ViewHolder holder, final int position) {
             holder.tvDomain.setText(domains[position]);
         holder.ll.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 DialogTopics dialogTopics = new DialogTopics();
-                switch (position){
+                switch (position) {
                     case 0:
-                        dialogTopics.setArgs("Computer Science and Information Technology", context.getResources().getStringArray(R.array.csit));
+                        dialogTopics.setArgs("Computer Science and Information Technology",
+                                context.getResources().getStringArray(R.array.csit));
                         break;
                     case 1:
                         dialogTopics.setArgs("Electronics and Communication", context.getResources().getStringArray(R.array.ec));
@@ -57,7 +60,7 @@ public class DomainsAdapter extends RecyclerView.Adapter<DomainsAdapter.ViewHold
                         dialogTopics.setArgs("Civil Engineering", context.getResources().getStringArray(R.array.ce));
                         break;
                 }
-                dialogTopics.show(((AppCompatActivity)context).getSupportFragmentManager(),null);
+                dialogTopics.show(((AppCompatActivity) context).getSupportFragmentManager(), null);
             }
         });
     }

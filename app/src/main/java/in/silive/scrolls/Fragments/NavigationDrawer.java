@@ -35,7 +35,7 @@ public class NavigationDrawer extends Fragment {
     private View containerView;
     ImageView scrolls;
     private static String[] titles = null;
-    private static Integer[] images = {R.drawable.info,R.drawable.rules,R.drawable.dates_icon,R.drawable.register,R.drawable.upload_icon,R.drawable.query,R.drawable.reach_icon,R.drawable.forgot_id,R.drawable.about_us};
+    private static Integer[] images = {R.drawable.info,R.drawable.rules,R.drawable.dates_icon,R.drawable.register,R.drawable.upload_icon,R.drawable.reach_icon,R.drawable.about_us};
     private NavigationDrawerListener drawerListener;
 
 
@@ -101,8 +101,8 @@ public class NavigationDrawer extends Fragment {
             NavigationDrawerItem navItem = new NavigationDrawerItem();
             navItem.setTitle(titles[i]);
             //Todo add images
-           // navItem.setImage(images[i]);
-            navItem.setImage(R.mipmap.ic_launcher);
+            navItem.setImage(images[i]);
+           // navItem.setImage(R.mipmap.ic_launcher);
             data.add(navItem);
         }
         return data;

@@ -9,4 +9,5 @@
     <color name="topic_dialog">#f2f222</color>
     <color name="gray">#b1b1b1</color>
     <color name="bg_gray">#424242</color>
+    <color name="bg_dark_gray">#212121</color>
 </resources>

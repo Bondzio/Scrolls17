@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
             case 0:
                 if (!(fragment instanceof About_Scrolls))
                     fragment = new About_Scrolls();
-                title = "Scrolls'16";
+                title = "";
                 break;
             case 1:
                 if (!(fragment instanceof Rules))
@@ -100,20 +100,20 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                     fragment = new UploadDoc();
                 title = "Upload";
                 break;
-            case 5:
+           /* case 5:
                 if (!(fragment instanceof QueryUs))
                     fragment = new QueryUs();
                 title = "Query Us";
-                break;
-            case 6:
+                break;*/
+            case 5:
               /*  if(! (fragment instanceof  ReachUs))*/
                 fragment = ReachUs.getInstance();
                 title = "Reach Us";
                 break;
-            case 7:
+        /*    case 7:
                 Dialogs.showForgotIdDialog(this);
-                break;
-            case 8:
+                break;*/
+            case 6:
                 if (!(fragment instanceof About_Us))
                     fragment = new About_Us();
                 title = "About Us";
