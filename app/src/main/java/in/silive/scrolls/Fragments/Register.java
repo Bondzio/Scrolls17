@@ -43,7 +43,7 @@ import in.silive.scrolls.Util.Config;
 public class Register extends Fragment implements NetworkResponseListener{
     public static String student_name, student_college_name, student_id, student_mob_no, student_mail, student_course, student_year;
     public static boolean student_accommodation = false;
-    public static String name_of_team, name_member_one, name_member_two, name_member_three, id_member_one, id_member_two, id_member_three;
+    public static String name_of_team, name_member_one, name_member_two, name_member_three= "", id_member_one, id_member_two, id_member_three="";
     public static String domain_of_team, topic_of_team, password_team;
     public static int no_of_teammembers, leader_of_team;
     ArrayList<String> list_of_colleges = new ArrayList<>();
@@ -107,6 +107,26 @@ public class Register extends Fragment implements NetworkResponseListener{
         member_three_name = (EditText) reg_view.findViewById(R.id.member_three_name);
         team_name = (EditText) reg_view.findViewById(R.id.team_name);
         stud_accommodation = (CheckBox) reg_view.findViewById(R.id.stud_accommodation);
+
+
+        member_three = (LinearLayout) reg_view.findViewById(R.id.member_three);
+        two_members = (RadioButton) reg_view.findViewById(R.id.two_members);
+        three_members = (RadioButton) reg_view.findViewById(R.id.three_members);
+        no_of_team_members = (RadioGroup) reg_view.findViewById(R.id.no_of_team_members);
+        no_of_team_members.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                if (i == R.id.three_members) {
+                    member_three.setVisibility(View.VISIBLE);
+                    leader_member_three.setVisibility(View.VISIBLE);
+                }
+                else {
+                    member_three.setVisibility(View.GONE);
+                    leader_member_three.setVisibility(View.GONE);
+                }
+            }
+        });
         team_leader = (RadioGroup) reg_view.findViewById(R.id.team_leader);
         leader_member_one = (RadioButton) reg_view.findViewById(R.id.leader_member_one);
         leader_member_two = (RadioButton) reg_view.findViewById(R.id.leader_member_two);
@@ -123,20 +143,6 @@ public class Register extends Fragment implements NetworkResponseListener{
                 }
             }
         });
-        member_three = (LinearLayout) reg_view.findViewById(R.id.member_three);
-
-        no_of_team_members = (RadioGroup) reg_view.findViewById(R.id.no_of_team_members);
-        no_of_team_members.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int id = no_of_team_members.getCheckedRadioButtonId();
-                if (id == 1) {
-                    member_three.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-        two_members = (RadioButton) reg_view.findViewById(R.id.two_members);
-        three_members = (RadioButton) reg_view.findViewById(R.id.three_members);
 
         individual_submit = (Button) reg_view.findViewById(R.id.individual_submit);
         individual_submit.setOnClickListener(new View.OnClickListener() {
@@ -431,6 +437,7 @@ public class Register extends Fragment implements NetworkResponseListener{
         Log.d("Scrolls","before request called");
         progressBar = new ProgressBar(getContext());
         progressBar.setVisibility(View.VISIBLE);
+
 
     }
 
