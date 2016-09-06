@@ -80,7 +80,7 @@ public class Splash extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
-            }, 4000);
+            }, 3000);
 
 
 

@@ -8,14 +8,13 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapse_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-app:contentScrim="@color/colorPrimary"
+            app:contentScrim="@color/colorPrimary"
             app:layout_scrollFlags="scroll|snap"
-           >
+            >
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:background="@color/white"
@@ -25,41 +24,85 @@ app:contentScrim="@color/colorPrimary"
                 <WebView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/about_scrolls_web_view"></WebView>
-            </RelativeLayout>
+                    android:id="@+id/about_scrolls_web_view"
+                    android:isScrollContainer="true"
+                    ></WebView>
+<RelativeLayout
+    android:layout_width="80dp"
+    android:layout_height="50dp"
+    android:id="@+id/rlShowTopics"
+    android:layout_marginTop="38dp"
+    android:background="@drawable/semi_circle_top"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    > <TextView
+    android:id="@+id/tvShowTopics"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_margin="10dp"
+    android:text="Topics"/>
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_keyboard_arrow_up_black"
 
-            <!--   <android.support.v7.widget.Toolbar
-                   android:id="@+id/main_toolbar"
-                   android:layout_width="match_parent"
-                   android:layout_height="?attr/actionBarSize"
-                   app:layout_collapseMode="pin">
+        android:layout_alignParentBottom="false"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
 
-               </android.support.v7.widget.Toolbar>
-   -->
+                </RelativeLayout>
+
         </android.support.design.widget.CollapsingToolbarLayout>
-
     </android.support.design.widget.AppBarLayout>
-<LinearLayout
+
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_dark_gray"
     android:gravity="center"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     >
+
     <android.support.v7.widget.RecyclerView
 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rvDomains"
+        android:padding="10dp"
+        android:foregroundGravity="center_horizontal"
        >
     </android.support.v7.widget.RecyclerView>
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:id="@+id/rlHideTopics"
+        android:background="@drawable/semi_circle_bottom"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        > <TextView
+        android:id="@+id/tvHideTopics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:text="About Us"/>
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_keyboard_arrow_down_black"
+
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</RelativeLayout>
    <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/topicsDialog">
         <include layout="@layout/dialog_topic"/>
     </RelativeLayout>
-
 -->
 </android.support.design.widget.CoordinatorLayout>

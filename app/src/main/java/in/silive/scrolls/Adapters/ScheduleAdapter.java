@@ -1,11 +1,14 @@
 package in.silive.scrolls.Adapters;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import in.silive.scrolls.R;
@@ -17,6 +20,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     String[] dates;
     String[] labels;
     Context context;
+    private int lastPosition;
 
     public ScheduleAdapter(Context context, String[] dates, String[] labels) {
         this.context = context;
@@ -30,10 +34,29 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ScheduleAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final ScheduleAdapter.ViewHolder holder, final int position) {
 
         holder.tvDate.setText(dates[position]);
         holder.tvTitle.setText(labels[position]);
+        holder.itemView.setVisibility(View.INVISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                holder.itemView.setVisibility(View.VISIBLE);
+                setAnimation(holder.itemView,position);
+            }
+        }, (int)(100+100*position));
+
+    }
+
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.push_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
     }
 
     @Override

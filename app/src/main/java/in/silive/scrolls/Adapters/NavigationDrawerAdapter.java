@@ -1,10 +1,13 @@
 package in.silive.scrolls.Adapters;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +24,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     List<NavigationDrawerItem> data = Collections.emptyList();
     private LayoutInflater inflater;
     private Context context;
+    private int lastPosition;
 
     public NavigationDrawerAdapter(Context context, List<NavigationDrawerItem> data) {
         this.context = context;
@@ -50,9 +54,28 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     }
 
     @Override
-    public void onBindViewHolder(NavigationDrawerAdapter.SViewHolder holder, int position) {
+    public void onBindViewHolder(final NavigationDrawerAdapter.SViewHolder holder, final int position) {
         NavigationDrawerItem current = data.get(position);
         holder.label_title.setText(current.getTitle());
         holder.label_image.setImageResource(current.getImage());
+        holder.itemView.setVisibility(View.INVISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                holder.itemView.setVisibility(View.VISIBLE);
+                setAnimation(holder.itemView,position);
+            }
+        }, (int)(100+100*position));
+
+    }
+
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.push_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
     }
 }

@@ -1,23 +1,22 @@
 package in.silive.scrolls.Activities;
 
-import android.animation.Animator;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
 
 import in.silive.scrolls.Fragments.About_Scrolls;
 import in.silive.scrolls.Fragments.About_Us;
 import in.silive.scrolls.Fragments.DialogNoNetConnection;
 import in.silive.scrolls.Fragments.NavigationDrawer;
-import in.silive.scrolls.Fragments.QueryUs;
 import in.silive.scrolls.Fragments.ReachUs;
 import in.silive.scrolls.Fragments.Register;
 import in.silive.scrolls.Fragments.Rules;
@@ -25,8 +24,6 @@ import in.silive.scrolls.Fragments.ScheduleFragment;
 import in.silive.scrolls.Fragments.UploadDoc;
 import in.silive.scrolls.Network.CheckConnectivity;
 import in.silive.scrolls.R;
-import in.silive.scrolls.Util.Dialogs;
-import io.codetail.animation.ViewAnimationUtils;
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawer.NavigationDrawerListener {
     NavigationDrawer navigationDrawer;
@@ -36,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
     boolean drawerVisible = false;
     LinearLayout ll;
     private Toolbar mtoolbar;
+    private SlidingPaneLayout slidingPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_up_indicator);
-
+        slidingPane = (android.support.v4.widget.SlidingPaneLayout) findViewById(R.id.sliding_pane_layout);
+        slidingPane.setParallaxDistance(200);
         navigationDrawer = (NavigationDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         //  navigationDrawer.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mtoolbar);
@@ -57,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
             @Override
             public void onDrawerItemSelected(View view, int position) {
                 displayView(position);
-                if (drawerVisible)
                     hideDrawer();
             }
         });
@@ -65,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
         displayView(0);
     }
 
-    private void displayView(int position) {
+    private void displayView(final int position) {
         String title = getString(R.string.app_name);
         switch (position) {
             case 0:
@@ -126,11 +124,18 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
             fragment = fragmentManager.findFragmentByTag(fragment.getClass().getName());
         }
         if (fragment != null) {
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment).addToBackStack(fragment.getClass().getName());
-            fragmentTransaction.commit();
-            // set the toolbar title
-            getSupportActionBar().setTitle(title);
+            final String finalTitle = title;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    fragmentTransaction.commit();
+                    // set the toolbar title
+                    getSupportActionBar().setTitle(finalTitle);
+                }
+            }, 100);
+
         }
     }
 
@@ -146,7 +151,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
     }
 
     public void hideDrawer() {
-        // get the center for the clipping circle
+        slidingPane.closePane();
+        drawerVisible=false;
+       /* // get the center for the clipping circle
         int cx = 0;
         int cy = 0;
 
@@ -183,11 +190,13 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
             }
         });
 
-        animator.start();
+        animator.start();*/
     }
 
     public void showDrawer() {
-        ll.setVisibility(View.INVISIBLE);
+        slidingPane.openPane();
+        drawerVisible=true;
+      /*  ll.setVisibility(View.INVISIBLE);
         ll.post(new Runnable() {
             @Override
             public void run() {
@@ -208,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                 animator.start();
                 drawerVisible = true;
             }
-        });
+        });*/
 
     }
 
