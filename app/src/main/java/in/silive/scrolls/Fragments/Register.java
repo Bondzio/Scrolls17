@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
-import in.silive.scrolls.Adapters.SpinnerAdapter;
 import in.silive.scrolls.Network.CheckConnectivity;
 import in.silive.scrolls.Network.FetchDataForLists;
 import in.silive.scrolls.Network.NetworkResponseListener;
@@ -62,7 +61,7 @@ public class Register extends Fragment implements NetworkResponseListener{
 
     ArrayList<String> topicsIDList = new ArrayList<>();
     String[] domainArray = new String[5], topicArray = new String[13];
-    SpinnerAdapter topicsAdapter, domainAdapter;
+    in.silive.scrolls.Adapters.SpinnerAdapter topicsAdapter, domainAdapter;
     ArrayList<String> searchList = new ArrayList<>();
     public FetchDataForLists fetchdataforLists;
     JSONObject jsonObject;
@@ -363,8 +362,29 @@ public class Register extends Fragment implements NetworkResponseListener{
         //check scrolls id valid
         no_of_teammembers = no_of_team_members.getCheckedRadioButtonId();
         leader_of_team = team_leader.getCheckedRadioButtonId();
+
         domain_of_team = team_domain.getSelectedItem().toString();
+        if (topicsList.size()>0)
         topic_of_team = team_topic.getSelectedItem().toString();
+        else {
+            Toast.makeText(getContext(),"Please select a topic",Toast.LENGTH_SHORT).show();
+            try {
+                FetchDataForLists  fetchdataforLists= new FetchDataForLists();
+                task=fetch_topics;
+                searchList = new ArrayList<>();
+                searchList.add("TOPICId");
+                searchList.add("TOPICName");
+                fetchdataforLists.setNrl(new TeamRegistration());
+                fetchdataforLists.setURL(Config.GET_TOPICS+id_domain);
+                fetchdataforLists.setSearchForIds(false);
+                fetchdataforLists.setType_of_request(Config.GET);
+                fetchdataforLists.setSearchList(searchList);
+                fetchdataforLists.execute();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
+
         password_team = team_password.getText().toString();
         if (password_team.length()<8){
             tflag =1;
@@ -697,11 +717,12 @@ public class Register extends Fragment implements NetworkResponseListener{
                 }
             } else if (task.equals(fetch_topics)) {
                 try {
-                    inProgress = "GETTOPICS";
+                    FetchDataForLists fetchdataforLists = new FetchDataForLists();
+                    task=fetch_topics;
                     searchList = new ArrayList<>();
                     searchList.add("TOPICId");
                     searchList.add("TOPICName");
-                    fetchdataforLists.setNrl(this);
+                    fetchdataforLists.setNrl(new TeamRegistration());
                     fetchdataforLists.setURL(Config.GET_TOPICS+id_domain);
                     fetchdataforLists.setSearchForIds(false);
                     fetchdataforLists.setType_of_request(Config.GET);
@@ -718,6 +739,11 @@ public class Register extends Fragment implements NetworkResponseListener{
                     topicsIDList.add(resultList.get(i).get(searchList.get(0)));
                     topicsList.add(resultList.get(i).get(searchList.get(1)));
                 }
+                if (topicsList.size()==0){
+                    topicsList.add(0,"No topics fetched");
+                }
+                topicsAdapter = new in.silive.scrolls.Adapters.SpinnerAdapter(getActivity(),topicsList);
+                team_topic.setAdapter(topicsAdapter);
                 topicsAdapter.notifyDataSetChanged();
             }
 
@@ -728,7 +754,7 @@ public class Register extends Fragment implements NetworkResponseListener{
             searchList.add(Config.CHECK_TEAM_NAME_AVAILABLE);
             fetchdataforLists = null;
             fetchdataforLists = new FetchDataForLists();
-            fetchdataforLists.setNrl(this);
+            fetchdataforLists.setNrl(new TeamRegistration());
             fetchdataforLists.setSearchList(searchList);
             fetchdataforLists.setType_of_request(Config.GET);
             fetchdataforLists.setURL(Config.CHECK_TEAM_NAME_AVAILABLE + ((EditText) reg_view.findViewById(R.id.team_name)).getText().toString());
@@ -743,7 +769,7 @@ public class Register extends Fragment implements NetworkResponseListener{
                 searchList.add("IsParticipantAlreadyInATeam");
                 fetchdataforLists = null;
                 fetchdataforLists = new FetchDataForLists();
-                fetchdataforLists.setNrl(this);
+                fetchdataforLists.setNrl(new TeamRegistration());
                 if (inprogress == 0)
                     fetchdataforLists.setURL(Config.ISPERSONALREADYINTEAM + ((EditText) reg_view.findViewById(R.id.member_one_id)).getText().toString());
                 else if (inprogress == 1)
@@ -785,7 +811,7 @@ public class Register extends Fragment implements NetworkResponseListener{
             fetchdataforLists = null;
             fetchdataforLists = new FetchDataForLists();
             fetchdataforLists.setURL(Config.TEAM_REGISTRATION);
-            fetchdataforLists.setNrl(this);
+            fetchdataforLists.setNrl(new TeamRegistration());
             fetchdataforLists.setSearchList(searchList);
             fetchdataforLists.setType_of_request(Config.POST);
             fetchdataforLists.setJson(jsonObject);
