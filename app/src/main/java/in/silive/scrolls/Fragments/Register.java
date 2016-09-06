@@ -54,6 +54,8 @@ public class Register extends Fragment implements NetworkResponseListener{
     int inprogress = 0;
     int maxProgress = 2;
     int leader_number =0;
+    public int id_domain =1;
+    public static int flag =0,tflag=0;
     public static String fetch_topics = "FETCH_TOPICS";
     public static int topics_first_position;
     ArrayList<String> topicsList = new ArrayList<>();
@@ -222,6 +224,17 @@ public class Register extends Fragment implements NetworkResponseListener{
             }
         });
         team_domain = (Spinner) reg_view.findViewById(R.id.team_domain);
+        team_domain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                id_domain = i+1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         team_topic = (Spinner) reg_view.findViewById(R.id.team_topic);
         fetchdataforLists = new FetchDataForLists();
         try {
@@ -238,6 +251,7 @@ public class Register extends Fragment implements NetworkResponseListener{
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+
         /*FetchData fetchData = new FetchData();
         fetchData.setArgs(Config.LIST_OF_COLLEGE, new FetchDataListener() {
             @Override
@@ -268,20 +282,24 @@ public class Register extends Fragment implements NetworkResponseListener{
         Log.d("Scrolls","getData called");
         student_name = stud_name.getText().toString();
         if (student_name.length()==0){
+            flag =1;
             stud_name.setError("Invalid name");
         }
         student_college_name = stud_other_college.getText().toString();
         student_id = stud_id.getText().toString();
         if (student_id.length()==0){
+            flag =1;
             stud_id.setError("Invalid Id");
         }
         student_mail = stud_mail.getText().toString();
         if (!(Pattern.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$", student_mail))) {
+            flag =1;
             stud_mail.setError("Invalid mail");
 
         }
         student_mob_no = stud_mob_no.getText().toString();
         if (student_mob_no.length()!=10){
+            flag =1;
             stud_mob_no.setError("Invalid phone number");
         }
         student_course = stud_course.getSelectedItem().toString();
@@ -289,7 +307,13 @@ public class Register extends Fragment implements NetworkResponseListener{
         if (stud_accommodation.isChecked()) {
             student_accommodation = true;
         }
+        if (flag==0)
         checkNumber();
+        else {
+            DialogInvalidDetails dialogInvalidDetails = new DialogInvalidDetails();
+            dialogInvalidDetails.show(getFragmentManager(),"Invalid details");
+
+        }
         /*JSONObject user_reg_data = new JSONObject();
         try {
             user_reg_data.put("STUD_NAME", student_name);
@@ -313,22 +337,26 @@ public class Register extends Fragment implements NetworkResponseListener{
     public void getTeamData() {
         name_of_team = team_name.getText().toString();
         if(name_of_team.length()<=3){
+            tflag =1;
             team_name.setError("Invalid Team name");
         }
         name_member_one = member_one_name.getText().toString();
         if (name_member_one.length()<=3){
+            tflag =1;
             member_one_name.setError("Invalid name");
         }
         id_member_one = member_one_id.getText().toString();
         //check scrolls id valid
         name_member_two = member_two_name.getText().toString();
         if (name_member_two.length()<=3){
+            tflag =1;
             member_two_name.setError("Invalid name");
         }
         id_member_two = member_two_id.getText().toString();
         //check scrolls id valid
         name_member_three = member_three_name.getText().toString();
         if (name_member_three.length()<=3){
+            tflag =1;
             member_three_name.setError("Invalid name");
         }
         id_member_three = member_three_id.getText().toString();
@@ -339,14 +367,21 @@ public class Register extends Fragment implements NetworkResponseListener{
         topic_of_team = team_topic.getSelectedItem().toString();
         password_team = team_password.getText().toString();
         if (password_team.length()<8){
+            tflag =1;
             team_password.setError("Invalid password");
         }
+        if (tflag==0){
         TeamRegistration teamRegistration = new TeamRegistration();
         try {
             teamRegistration.checkTeamNameAvailable();
         }
         catch (Exception e){
             Log.d("Scrolls","TeamRegistration ecxeption" );
+
+        }}
+        else {
+            DialogInvalidDetails dialogInvalidDetails = new DialogInvalidDetails();
+            dialogInvalidDetails.show(getFragmentManager(),"Invalid details");
 
         }
 
@@ -388,14 +423,15 @@ public class Register extends Fragment implements NetworkResponseListener{
         if (inProgress.equals(Config.CHECK_IS_PHONE_NUMBER_REGISTERED)) {
             if (resultList.size() > 0) {
                 if (resultList.get(0).get(searchList.get(0)).equalsIgnoreCase("false")) {
-                    Toast.makeText(getActivity(), "Mobile Number is Not already Registered.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "Mobile Number is Not already Registered.", Toast.LENGTH_SHORT).show();
                     checkEmail();
                 } else {
-                    Toast.makeText(getActivity(), "Mobile Number is already registered.Please try other.", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getActivity(), "Mobile Number is already registered.Please try other.", Toast.LENGTH_SHORT).show();
                 }
-            } else
-                Toast.makeText(getActivity(), "Phone number already registered", Toast.LENGTH_SHORT).show();
-        } else if (inProgress.equals("CHECK_EMAIL")) {
+            } else{
+                //Toast.makeText(getActivity(), "Phone number already registered", Toast.LENGTH_SHORT).show();
+        }          }
+            else if (inProgress.equals("CHECK_EMAIL")) {
             if (resultList.size() > 0) {
                 if ((resultList.get(0).get(searchList.get(0))).equals("false")) {
                     try {
@@ -569,7 +605,7 @@ public class Register extends Fragment implements NetworkResponseListener{
     }
 
     public class TeamRegistration implements NetworkResponseListener{
-        public FetchDataForLists fetchDataForLists;
+
 
         @Override
         public void beforeRequest() throws MalformedURLException {
@@ -660,6 +696,20 @@ public class Register extends Fragment implements NetworkResponseListener{
 
                 }
             } else if (task.equals(fetch_topics)) {
+                try {
+                    inProgress = "GETTOPICS";
+                    searchList = new ArrayList<>();
+                    searchList.add("TOPICId");
+                    searchList.add("TOPICName");
+                    fetchdataforLists.setNrl(this);
+                    fetchdataforLists.setURL(Config.GET_TOPICS+id_domain);
+                    fetchdataforLists.setSearchForIds(false);
+                    fetchdataforLists.setType_of_request(Config.GET);
+                    fetchdataforLists.setSearchList(searchList);
+                    fetchdataforLists.execute();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
                 if (resultList.size() > 0)
                     topics_first_position = Integer.parseInt(resultList.get(0).get(searchList.get(0)));
 

@@ -15,7 +15,7 @@ public class Config {
     public static String ID_BY_LOGIN = "http://silive.in/testapi/api/Participants/GetScrollsIdByEmail?email=";
     public static String LIST_OF_COLLEGE = "";
     public static String GET_DOMAINS = "http://akgec-scrolls.com/rest/api/Domains/GetDomains";
-    public static String GET_TOPICS = "http://akgec-scrolls.com/rest/api/Domains/GetTopics?domainId=1";
+    public static String GET_TOPICS = "http://akgec-scrolls.com/rest/api/Domains/GetTopics?domainId=";
     public static String CHECK_IS_PHONE_NUMBER_REGISTERED = "isPhoneNoAlreadyRegistered";
     public static String SELF_REGISTRATION = "http://silive.in/testapi/api/Participants/CreateParticipant";
     public static String IS_EMAIL_ALREADY_REGISTERED = "http://silive.in/testapi/api/Participants/IsEmailAlreadyRegistered?email=";
