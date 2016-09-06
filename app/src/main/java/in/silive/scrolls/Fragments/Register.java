@@ -29,6 +29,7 @@ import org.json.JSONObject;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import in.silive.scrolls.Network.CheckConnectivity;
 import in.silive.scrolls.Network.FetchDataForLists;
@@ -121,7 +122,7 @@ public class Register extends Fragment implements NetworkResponseListener{
         individual_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkNumber();
+                getStudData();
             }
         });
         submit_team_reg = (Button) reg_view.findViewById(R.id.submit_team_reg);
@@ -247,16 +248,30 @@ public class Register extends Fragment implements NetworkResponseListener{
     public void getStudData() {
         Log.d("Scrolls","getData called");
         student_name = stud_name.getText().toString();
+        if (student_name.length()==0){
+            stud_name.setError("Invalid name");
+        }
         student_college_name = stud_other_college.getText().toString();
         student_id = stud_id.getText().toString();
+        if (student_id.length()==0){
+            stud_id.setError("Invalid Id");
+        }
         student_mail = stud_mail.getText().toString();
+        if (!(Pattern.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$", student_mail))) {
+            stud_mail.setError("Invalid mail");
+
+        }
         student_mob_no = stud_mob_no.getText().toString();
+        if (student_mob_no.length()!=10){
+            stud_mob_no.setError("Invalid phone number");
+        }
         student_course = stud_course.getSelectedItem().toString();
         student_year = stud_year.getSelectedItem().toString();
         if (stud_accommodation.isChecked()) {
             student_accommodation = true;
         }
-        JSONObject user_reg_data = new JSONObject();
+        checkNumber();
+        /*JSONObject user_reg_data = new JSONObject();
         try {
             user_reg_data.put("STUD_NAME", student_name);
             user_reg_data.put("STUD_ID", student_id);
@@ -271,7 +286,7 @@ public class Register extends Fragment implements NetworkResponseListener{
         } catch (Exception e) {
             Log.d("Scrolls", "Error : getStudData() in Register");
 
-        }
+        }*/
 
 
     }
