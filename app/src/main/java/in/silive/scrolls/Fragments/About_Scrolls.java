@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebResourceRequest;
@@ -56,7 +57,14 @@ appBarLayout =(AppBarLayout)rootView.findViewById(R.id.app_bar_layout);
         WebSettings webSettings = web_view.getSettings();
         webSettings.setJavaScriptEnabled(true);
         web_view.setWebViewClient(new myWebClient());
-        web_view.loadUrl("file:///android_asset/about.html");
+        web_view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                //Blank listener to disable long click text selection
+                return true;
+            }
+        });
+
         rootView.findViewById(R.id.rlShowTopics).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,6 +78,12 @@ appBarLayout =(AppBarLayout)rootView.findViewById(R.id.app_bar_layout);
             }
         });
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        web_view.loadUrl("file:///android_asset/about.html");
     }
 
     public class myWebClient extends WebViewClient {

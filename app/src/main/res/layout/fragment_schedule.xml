@@ -3,10 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="in.silive.scrolls.Fragments.ScheduleFragment">
+
+
 <android.support.v7.widget.RecyclerView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="3dp"
+    android:visibility="visible"
     android:id="@+id/rvSchedule"></android.support.v7.widget.RecyclerView>
 
 </FrameLayout>

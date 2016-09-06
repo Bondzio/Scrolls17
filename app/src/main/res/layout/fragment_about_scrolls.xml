@@ -12,7 +12,7 @@
             android:id="@+id/collapse_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="@color/colorPrimary"
+            app:contentScrim="#a1000000"
             app:layout_scrollFlags="scroll|snap"
             >
             <RelativeLayout
