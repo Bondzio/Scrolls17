@@ -9,9 +9,9 @@
         <item>Schedule</item>
         <item>Register</item>
         <item>Upload A Doc</item>
-<!--        <item>Query Us</item>-->
+        <!--        <item>Query Us</item>-->
         <item>Reach Us</item>
-      <!--  <item>Forgot Id</item>-->
+        <!--  <item>Forgot Id</item>-->
         <item>About Us</item>
     </string-array>
     <string name="drawer_open">Open Drawer</string>
@@ -51,12 +51,12 @@
         A national level technical paper presentation contest that provides a pedestal to unleash the talent of budding technocrats, SCROLLS-2015 deals with the most thriving and progressive fields of technology and management, bringing computing, information technology, mechanical engineering, electrical engineering, and telecommunication technologies along with major developmental leaps in management and leadership in its fold. Here, clarity and knowledge transcends through discussions over vast and diversified topics. So here is a chance to work with imagination, insight and confidence to ensure the onset of the new dawn.
     </string>
     <string-array name="domain_array">
-    <item>Computer Science and Information Technology</item>
-    <item>Electronics and Communication</item>
-    <item>Electrical and Electronics</item>
-    <item>Management Science</item>
-    <item>Mechanical Engineering</item>
-    <item>Civil Engineering</item>
+        <item>Computer Science and Information Technology</item>
+        <item>Electronics and Communication</item>
+        <item>Electrical and Electronics</item>
+        <item>Management Science</item>
+        <item>Mechanical Engineering</item>
+        <item>Civil Engineering</item>
     </string-array>
     <string-array name="csit">
         <item>1. Embedded Systems</item>
@@ -183,5 +183,13 @@ clean earth.</item>
 \n6.  The paper to be typed in single space, double column format, using Times New Roman font &amp; font-size 12. Maximum number of pages to be 10 and the page should have no numbers. A margin of 1’’ all around to be left.
 \n7.  First page to include Title, Name(s) of authors, their college name, telephone numbers as well as email addresses. This information to be included with extended abstract also.
     </string>
+    <string-array name="Domains">
+        <item>Management Science</item>
+        <item>Computer Science and Information Technology</item>
+        <item>Electronics and Communication</item>
+        <item>Electrical and electronics</item>
+        <item>Mechanical Engineering</item>
+        <item>Civil Engineering</item>
+    </string-array>
 
 </resources>

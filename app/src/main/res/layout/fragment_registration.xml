@@ -30,7 +30,7 @@
             android:padding="10dp">
 
 
-            <EditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/stud_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,11 +48,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text="College" />
 
                 <Spinner
                     android:id="@+id/stud_college"
+                    android:textAlignment="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"></Spinner>
@@ -101,21 +102,21 @@
 
             </LinearLayout>
 
-            <EditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/stud_other_college"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter your college name"
                 />
 
-            <EditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/stud_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter your student Id"
                 />
 
-            <EditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/stud_mob_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -123,7 +124,7 @@
                 android:inputType="phone"
                 />
 
-            <EditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/stud_mail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -171,7 +172,7 @@
             android:padding="10dp"
             android:visibility="gone">
 
-            <EditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/team_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -233,14 +234,14 @@
                     android:orientation="horizontal"
                     android:padding="3dp">
 
-                    <EditText
+                    <android.support.design.widget.TextInputEditText
                         android:id="@+id/member_one_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:hint="Scrolls ID" />
 
-                    <EditText
+                    <android.support.design.widget.TextInputEditText
                         android:id="@+id/member_one_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -272,14 +273,14 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <EditText
+                    <android.support.design.widget.TextInputEditText
                         android:id="@+id/member_two_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:hint="Scrolls ID" />
 
-                    <EditText
+                    <android.support.design.widget.TextInputEditText
                         android:id="@+id/member_two_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -302,7 +303,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Member 2" />
+                    android:text="Member 3" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -310,14 +311,14 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <EditText
+                    <android.support.design.widget.TextInputEditText
                         android:id="@+id/member_three_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:hint="Scrolls ID" />
 
-                    <EditText
+                    <android.support.design.widget.TextInputEditText
                         android:id="@+id/member_three_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -367,7 +368,8 @@
                         android:id="@+id/leader_member_three"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Member 3" />
+                        android:text="Member 3"
+                        android:visibility="gone"/>
 
                 </RadioGroup>
 
@@ -389,6 +391,7 @@
 
                 <Spinner
                     android:id="@+id/team_domain"
+                    android:entries="@array/Domains"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -436,7 +439,7 @@
                     android:textStyle="bold"
                     android:text="Password" />
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/team_password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

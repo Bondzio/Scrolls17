@@ -1,6 +1,5 @@
 package in.silive.scrolls.Activities;
 
-import android.animation.Animator;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,14 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
 
 import in.silive.scrolls.Fragments.About_Scrolls;
 import in.silive.scrolls.Fragments.About_Us;
 import in.silive.scrolls.Fragments.DialogNoNetConnection;
 import in.silive.scrolls.Fragments.NavigationDrawer;
-import in.silive.scrolls.Fragments.QueryUs;
 import in.silive.scrolls.Fragments.ReachUs;
 import in.silive.scrolls.Fragments.Register;
 import in.silive.scrolls.Fragments.Rules;
@@ -27,8 +24,6 @@ import in.silive.scrolls.Fragments.ScheduleFragment;
 import in.silive.scrolls.Fragments.UploadDoc;
 import in.silive.scrolls.Network.CheckConnectivity;
 import in.silive.scrolls.R;
-import in.silive.scrolls.Util.Dialogs;
-import io.codetail.animation.ViewAnimationUtils;
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawer.NavigationDrawerListener {
     NavigationDrawer navigationDrawer;

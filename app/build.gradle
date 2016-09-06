@@ -43,6 +43,5 @@ dependencies {
         transitive = true;
     }
     compile 'com.schibsted.spain:parallax-layer-layout:1.0.0'
-    compile 'com.ernestoyaquello.stepperform:vertical-stepper-form:0.9.9'
 }
 
