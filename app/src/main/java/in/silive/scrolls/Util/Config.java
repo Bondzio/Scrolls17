@@ -22,5 +22,11 @@ public class Config {
     public static String PREFERENCES = "PREFERENCES";
     public static String individual_id = "individual_id";
     public static String team_id = "team_id";
+    public static String CHECK_TEAM_NAME_AVAILABLE = "IsTeamNameAvailable";
+    public static String ISPERSONALREADYINTEAM = "http://silive.in/testapi/api/Participants/IsParticipantAlreadyInATeam?scrollsId=";
+    public static String TRUE = "true";
+    public static String FALSE = "false";
+    public static String TEAM_REGISTRATION = "http://silive.in/testapi/api/Teams/CreateTeam";
+
     public static String IS_PHONE_NUMBER_REGISTERED = "http://akgec-scrolls.com/rest/api/Participants/IsPhoneNoAlreadyRegistered?number=";
 }

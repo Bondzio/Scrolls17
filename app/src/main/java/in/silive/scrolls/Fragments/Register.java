@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
+import in.silive.scrolls.Adapters.SpinnerAdapter;
 import in.silive.scrolls.Network.CheckConnectivity;
 import in.silive.scrolls.Network.FetchDataForLists;
 import in.silive.scrolls.Network.NetworkResponseListener;
@@ -49,9 +50,19 @@ public class Register extends Fragment implements NetworkResponseListener{
     ArrayList<String> list_of_colleges = new ArrayList<>();
     ArrayList<String> collegeIDarray = new ArrayList<>();
     in.silive.scrolls.Adapters.SpinnerAdapter collegeListAdapter;
-    String inProgress;
+    String inProgress,task = "CHECK_SCROLLS_ID";
+    int inprogress = 0;
+    int maxProgress = 2;
+    int leader_number =0;
+    public static String fetch_topics = "FETCH_TOPICS";
+    public static int topics_first_position;
+    ArrayList<String> topicsList = new ArrayList<>();
+
+    ArrayList<String> topicsIDList = new ArrayList<>();
+    String[] domainArray = new String[5], topicArray = new String[13];
+    SpinnerAdapter topicsAdapter, domainAdapter;
     ArrayList<String> searchList = new ArrayList<>();
-    FetchDataForLists fetchdataforLists;
+    public FetchDataForLists fetchdataforLists;
     JSONObject jsonObject;
     //UI-elements
     boolean isNetConnectionAvailable;
@@ -96,15 +107,23 @@ public class Register extends Fragment implements NetworkResponseListener{
         team_name = (EditText) reg_view.findViewById(R.id.team_name);
         stud_accommodation = (CheckBox) reg_view.findViewById(R.id.stud_accommodation);
         team_leader = (RadioGroup) reg_view.findViewById(R.id.team_leader);
-        team_leader.setOnClickListener(new View.OnClickListener() {
+        leader_member_one = (RadioButton) reg_view.findViewById(R.id.leader_member_one);
+        leader_member_two = (RadioButton) reg_view.findViewById(R.id.leader_member_two);
+        leader_member_three = (RadioButton) reg_view.findViewById(R.id.leader_member_three);
+        team_leader.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                int leader_id = team_leader.getCheckedRadioButtonId();
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (i == R.id.leader_member_one) {
+                    leader_number = 0;
+                } else if (i == R.id.leader_member_two) {
+                    leader_number = 1;
+                } else if (i == R.id.leader_member_three) {
+                    leader_number = 2;
+                }
             }
         });
         member_three = (LinearLayout) reg_view.findViewById(R.id.member_three);
-        leader_member_one = (RadioButton) reg_view.findViewById(R.id.leader_member_one);
-        leader_member_two = (RadioButton) reg_view.findViewById(R.id.leader_member_two);
+
         no_of_team_members = (RadioGroup) reg_view.findViewById(R.id.no_of_team_members);
         no_of_team_members.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +136,7 @@ public class Register extends Fragment implements NetworkResponseListener{
         });
         two_members = (RadioButton) reg_view.findViewById(R.id.two_members);
         three_members = (RadioButton) reg_view.findViewById(R.id.three_members);
-        leader_member_three = (RadioButton) reg_view.findViewById(R.id.leader_member_three);
+
         individual_submit = (Button) reg_view.findViewById(R.id.individual_submit);
         individual_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -293,19 +312,46 @@ public class Register extends Fragment implements NetworkResponseListener{
 
     public void getTeamData() {
         name_of_team = team_name.getText().toString();
+        if(name_of_team.length()<=3){
+            team_name.setError("Invalid Team name");
+        }
         name_member_one = member_one_name.getText().toString();
+        if (name_member_one.length()<=3){
+            member_one_name.setError("Invalid name");
+        }
         id_member_one = member_one_id.getText().toString();
+        //check scrolls id valid
         name_member_two = member_two_name.getText().toString();
+        if (name_member_two.length()<=3){
+            member_two_name.setError("Invalid name");
+        }
         id_member_two = member_two_id.getText().toString();
+        //check scrolls id valid
         name_member_three = member_three_name.getText().toString();
+        if (name_member_three.length()<=3){
+            member_three_name.setError("Invalid name");
+        }
         id_member_three = member_three_id.getText().toString();
+        //check scrolls id valid
         no_of_teammembers = no_of_team_members.getCheckedRadioButtonId();
         leader_of_team = team_leader.getCheckedRadioButtonId();
         domain_of_team = team_domain.getSelectedItem().toString();
         topic_of_team = team_topic.getSelectedItem().toString();
         password_team = team_password.getText().toString();
+        if (password_team.length()<8){
+            team_password.setError("Invalid password");
+        }
+        TeamRegistration teamRegistration = new TeamRegistration();
+        try {
+            teamRegistration.checkTeamNameAvailable();
+        }
+        catch (Exception e){
+            Log.d("Scrolls","TeamRegistration ecxeption" );
 
-        JSONObject team_reg_data = new JSONObject();
+        }
+
+
+        /*JSONObject team_reg_data = new JSONObject();
         try {
             team_reg_data.put("TEAM_NAME", name_of_team);
             team_reg_data.put("TEAM_MEMBER_ONE_NAME", name_member_one);
@@ -322,7 +368,7 @@ public class Register extends Fragment implements NetworkResponseListener{
 
         } catch (Exception e) {
 
-        }
+        }*/
     }
 
     @Override
@@ -523,14 +569,177 @@ public class Register extends Fragment implements NetworkResponseListener{
     }
 
     public class TeamRegistration implements NetworkResponseListener{
+        public FetchDataForLists fetchDataForLists;
 
         @Override
         public void beforeRequest() throws MalformedURLException {
-
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
         public void postRequest(Object result) throws MalformedURLException {
+            ArrayList<HashMap<String, String>> resultList = (ArrayList<HashMap<String, String>>) result;
+            progressBar.setVisibility(View.GONE);
+            if (task.equals(Config.CHECK_TEAM_NAME_AVAILABLE)) {
+                if (resultList.size() > 0) {
+
+                    if (!((resultList.get(0).get(searchList.get(0))).equalsIgnoreCase(Config.TRUE))) {
+                        AlertDialog.Builder errorDialg = new AlertDialog.Builder(getActivity())
+                                .setTitle("Error")
+                                .setMessage("Sorry team name already exists Please Choose another")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // continue with delete
+
+                                    }
+                                })
+
+                                .setIcon(android.R.drawable.ic_dialog_alert);
+                        errorDialg.show();
+                    } else {
+                        Toast.makeText(getActivity(), "Team name provided" + resultList.get(0).get(searchList.get(0)), Toast.LENGTH_SHORT).show();
+                        task = "CHECK_SCROLLS_ID";
+                        teamregistration();
+                    }
+                }
+            } else if (task.equals("CHECK_SCROLLS_ID")) {
+                if (resultList.size() > 0) {
+                    Toast.makeText(getActivity(), "Result of " + searchList.get(0) + " is " + resultList.get(0).get(searchList.get(0)), Toast.LENGTH_SHORT).show();
+
+                    if (((resultList.get(0)).get(searchList.get(0))).equals(Config.TRUE)) {
+                        Toast.makeText(getActivity(), "Participant " + (inProgress) + " is already in a team.Please choose some other member", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (inprogress < maxProgress) {
+                            Toast.makeText(getActivity(), "Member " + (inProgress) + " not in team", Toast.LENGTH_SHORT).show();
+                            Log.d("InProgress", "" + inProgress);
+                            teamregistration();
+                        } else {
+                            Log.d("InProgress Inside", "" + inProgress);
+                            try {
+                                registerTeam();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "Network Error", Toast.LENGTH_SHORT).show();
+                }
+            } else if (task.equals("REGISTER_TEAM")) {
+                if (resultList.size() > 0) {
+                    final String id = resultList.get(0).get(searchList.get(0));
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("SuccessFull Registration")
+                            .setMessage("Congratulations Your Team has been successful registered. Your team id is " + resultList.get(0).get(searchList.get(0)))
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // continue with delete
+                                    SharedPreferences sharedpreferences = getActivity().getSharedPreferences(Config.PREFERENCES, Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                                    editor.putString(Config.team_id, id);
+                                    editor.commit();
+                                }
+                            })
+
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                } else {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity())
+                            .setTitle("Error")
+                            .setMessage("Error in Registration. This may be due to Invalid credentials or Network Connection. Please Check..")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // continue with delete
+
+                                }
+                            })
+
+                            .setIcon(android.R.drawable.ic_dialog_alert);
+                    dialog.show();
+
+                }
+            } else if (task.equals(fetch_topics)) {
+                if (resultList.size() > 0)
+                    topics_first_position = Integer.parseInt(resultList.get(0).get(searchList.get(0)));
+
+                topicsList.clear();
+                for (int i = 0; i < resultList.size(); i++) {
+                    topicsIDList.add(resultList.get(i).get(searchList.get(0)));
+                    topicsList.add(resultList.get(i).get(searchList.get(1)));
+                }
+                topicsAdapter.notifyDataSetChanged();
+            }
+
+        }
+
+        public void checkTeamNameAvailable() throws MalformedURLException {
+            searchList.clear();
+            searchList.add(Config.CHECK_TEAM_NAME_AVAILABLE);
+            fetchdataforLists = null;
+            fetchdataforLists = new FetchDataForLists();
+            fetchdataforLists.setNrl(this);
+            fetchdataforLists.setSearchList(searchList);
+            fetchdataforLists.setType_of_request(Config.GET);
+            fetchdataforLists.setURL(Config.CHECK_TEAM_NAME_AVAILABLE + ((EditText) reg_view.findViewById(R.id.team_name)).getText().toString());
+            fetchdataforLists.execute();
+
+        }
+
+        public void teamregistration() throws MalformedURLException {
+            if (inprogress < maxProgress) {
+
+                searchList.clear();
+                searchList.add("IsParticipantAlreadyInATeam");
+                fetchdataforLists = null;
+                fetchdataforLists = new FetchDataForLists();
+                fetchdataforLists.setNrl(this);
+                if (inprogress == 0)
+                    fetchdataforLists.setURL(Config.ISPERSONALREADYINTEAM + ((EditText) reg_view.findViewById(R.id.member_one_id)).getText().toString());
+                else if (inprogress == 1)
+                    fetchdataforLists.setURL(Config.ISPERSONALREADYINTEAM + ((EditText) reg_view.findViewById(R.id.member_two_id)).getText().toString());
+                if (inprogress == 2)
+                    fetchdataforLists.setURL(Config.ISPERSONALREADYINTEAM + ((EditText) reg_view.findViewById(R.id.member_three_id)).getText().toString());
+                fetchdataforLists.setSearchList(searchList);
+                fetchdataforLists.setType_of_request(Config.GET);
+                inprogress++;
+                fetchdataforLists.execute();
+            }
+        }
+
+        private void registerTeam() throws MalformedURLException, JSONException {
+
+            task = "REGISTER_TEAM";
+            jsonObject = new JSONObject();
+            jsonObject.put("TeamName", ((EditText) reg_view.findViewById(R.id.team_name)).getText().toString());
+            jsonObject.put("TotalMembers", maxProgress);
+            jsonObject.put("Member1RegId", ((EditText) reg_view.findViewById(R.id.member_one_id)).getText().toString());
+            jsonObject.put("Member2RegId", ((EditText) reg_view.findViewById(R.id.member_two_id)).getText().toString());
+            if (maxProgress == 3)
+                jsonObject.put("Member3RegId", ((EditText) reg_view.findViewById(R.id.member_three_id)).getText().toString());
+            jsonObject.put("DomainId", (Integer.parseInt(((Spinner) reg_view.findViewById(R.id.team_domain)).getSelectedItem().toString()) + 1));
+            jsonObject.put("TopicId", topicsIDList.get(Integer.parseInt(((Spinner) reg_view.findViewById(R.id.team_topic)).getSelectedItem().toString())));
+            jsonObject.put("Password", ((EditText) reg_view.findViewById(R.id.team_password)).getText().toString());
+            if (leader_number == 0)
+                jsonObject.put("TeamLeader", ((EditText) reg_view.findViewById(R.id.member_one_id)).getText().toString());
+            else if (leader_number == 1)
+                jsonObject.put("TeamLeader", ((EditText) reg_view.findViewById(R.id.member_two_id)).getText().toString());
+
+            else if (leader_number == 2)
+                jsonObject.put("TeamLeader", ((EditText) reg_view.findViewById(R.id.member_three_id)).getText().toString());
+            jsonObject.put("SynopsisName", "");
+            Log.d("JSONOBject", jsonObject.toString());
+            jsonObject.put("Source","Android");
+            searchList.clear();
+            searchList.add("TeamId");
+            fetchdataforLists = null;
+            fetchdataforLists = new FetchDataForLists();
+            fetchdataforLists.setURL(Config.TEAM_REGISTRATION);
+            fetchdataforLists.setNrl(this);
+            fetchdataforLists.setSearchList(searchList);
+            fetchdataforLists.setType_of_request(Config.POST);
+            fetchdataforLists.setJson(jsonObject);
+            fetchdataforLists.execute();
 
         }
     }
