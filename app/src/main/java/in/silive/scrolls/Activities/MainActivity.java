@@ -96,8 +96,13 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                 break;
             case 4:
                 if (!(fragment instanceof UploadDoc))
-                    fragment = new UploadDoc();
-                title = "Upload";
+                    if (CheckConnectivity.isNetConnected(MainActivity.this)) {
+                        fragment = new UploadDoc();
+                        title = "Upload a Doc";
+                    } else {
+                        DialogNoNetConnection dialogNoNetConnection = new DialogNoNetConnection();
+                        dialogNoNetConnection.show(getSupportFragmentManager(), "No net connection");
+                    }
                 break;
            /* case 5:
                 if (!(fragment instanceof QueryUs))
