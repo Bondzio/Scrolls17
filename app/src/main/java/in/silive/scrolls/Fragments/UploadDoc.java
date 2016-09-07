@@ -61,7 +61,7 @@ public class UploadDoc extends Fragment {
                 Fragment fragment = new Register();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.replace(R.id.container_body, fragment).addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
