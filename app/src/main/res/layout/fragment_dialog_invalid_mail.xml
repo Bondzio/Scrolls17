@@ -20,6 +20,7 @@
         android:id="@+id/ok_query"
         android:layout_gravity="center"
         android:gravity="center"
+        android:background="#fbc94a"
         android:text="OK"/>
 
 </LinearLayout>
