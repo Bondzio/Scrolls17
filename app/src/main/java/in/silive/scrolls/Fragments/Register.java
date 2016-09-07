@@ -1,6 +1,7 @@
 package in.silive.scrolls.Fragments;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -36,6 +37,7 @@ import in.silive.scrolls.Network.FetchDataForLists;
 import in.silive.scrolls.Network.NetworkResponseListener;
 import in.silive.scrolls.R;
 import in.silive.scrolls.Util.Config;
+import in.silive.scrolls.Util.Validator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,6 +80,8 @@ public class Register extends Fragment implements NetworkResponseListener{
     RadioGroup team_leader, no_of_team_members;
     RadioButton leader_member_one, leader_member_two, leader_member_three, two_members, three_members;
     ProgressBar progressBar;
+    private ProgressDialog progressDialog;
+
     public Register() {
         // Required empty public constructor
     }
@@ -168,6 +172,7 @@ public class Register extends Fragment implements NetworkResponseListener{
                     stud_other_college.setVisibility(View.VISIBLE);
                 }
 
+
             }
 
             @Override
@@ -241,21 +246,7 @@ public class Register extends Fragment implements NetworkResponseListener{
             }
         });
         team_topic = (Spinner) reg_view.findViewById(R.id.team_topic);
-        fetchdataforLists = new FetchDataForLists();
-        try {
-            inProgress = "GETALLCOLLEGES";
-            searchList = new ArrayList<>();
-            searchList.add("CollegeId");
-            searchList.add("CollegeName");
-            fetchdataforLists.setNrl(this);
-            fetchdataforLists.setURL(Config.GET_COLLEGES);
-            fetchdataforLists.setSearchForIds(false);
-            fetchdataforLists.setType_of_request(Config.GET);
-            fetchdataforLists.setSearchList(searchList);
-            fetchdataforLists.execute();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+       loadCollegeList();
 
         /*FetchData fetchData = new FetchData();
         fetchData.setArgs(Config.LIST_OF_COLLEGE, new FetchDataListener() {
@@ -283,8 +274,26 @@ public class Register extends Fragment implements NetworkResponseListener{
         return reg_view;
     }
 
+    public void loadCollegeList(){
+        fetchdataforLists = new FetchDataForLists();
+        try {
+            inProgress = "GETALLCOLLEGES";
+            searchList = new ArrayList<>();
+            searchList.add("CollegeId");
+            searchList.add("CollegeName");
+            fetchdataforLists.setNrl(this);
+            fetchdataforLists.setURL(Config.GET_COLLEGES);
+            fetchdataforLists.setSearchForIds(false);
+            fetchdataforLists.setType_of_request(Config.GET);
+            fetchdataforLists.setSearchList(searchList);
+            fetchdataforLists.execute();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
     public void getStudData() {
         Log.d("Scrolls","getData called");
+        flag =0;
         student_name = stud_name.getText().toString();
         if (student_name.length()==0){
             flag =1;
@@ -292,15 +301,14 @@ public class Register extends Fragment implements NetworkResponseListener{
         }
         student_college_name = stud_other_college.getText().toString();
         student_id = stud_id.getText().toString();
-        if (student_id.length()==0){
+        if (student_id.length()==0 && stud_id.getVisibility() == View.VISIBLE ){
             flag =1;
             stud_id.setError("Invalid Id");
         }
         student_mail = stud_mail.getText().toString();
-        if (!(Pattern.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$", student_mail))) {
+        if (!Validator.isValidEmail(student_mail)) {
             flag =1;
             stud_mail.setError("Invalid mail");
-
         }
         student_mob_no = stud_mob_no.getText().toString();
         if (student_mob_no.length()!=10){
@@ -312,6 +320,8 @@ public class Register extends Fragment implements NetworkResponseListener{
         if (stud_accommodation.isChecked()) {
             student_accommodation = true;
         }
+        else
+        student_accommodation = false;
         if (flag==0)
         checkNumber();
         else {
@@ -435,16 +445,17 @@ public class Register extends Fragment implements NetworkResponseListener{
     @Override
     public void beforeRequest() throws MalformedURLException {
         Log.d("Scrolls","before request called");
-        progressBar = new ProgressBar(getContext());
-        progressBar.setVisibility(View.VISIBLE);
-
-
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
 
     @Override
     public void postRequest(Object result) throws MalformedURLException {
         Log.d("Scrolls","post request called");
-        progressBar.setVisibility(View.GONE);
+        if (progressDialog.isShowing())
+            progressDialog.dismiss();
         final ArrayList<HashMap<String, String>> resultList = (ArrayList<HashMap<String, String>>) result;
         //Toast.makeText(getActivity(), "Length " + resultList.size() + " " + inProgress+" "+resultList.get(0).get(searchlIST.get(0)), Toast.LENGTH_SHORT).show();
         if (inProgress.equals(Config.CHECK_IS_PHONE_NUMBER_REGISTERED)) {
@@ -453,10 +464,10 @@ public class Register extends Fragment implements NetworkResponseListener{
                     //Toast.makeText(getActivity(), "Mobile Number is Not already Registered.", Toast.LENGTH_SHORT).show();
                     checkEmail();
                 } else {
-                   // Toast.makeText(getActivity(), "Mobile Number is already registered.Please try other.", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getActivity(), "Mobile Number is already registered.Please try other.", Toast.LENGTH_SHORT).show();
                 }
             } else{
-                //Toast.makeText(getActivity(), "Phone number already registered", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.could_not_connect, Toast.LENGTH_SHORT).show();
         }          }
             else if (inProgress.equals("CHECK_EMAIL")) {
             if (resultList.size() > 0) {
@@ -472,32 +483,46 @@ public class Register extends Fragment implements NetworkResponseListener{
                 } else {
                     Toast.makeText(getActivity(), "Email already Registered", Toast.LENGTH_SHORT).show();
                 }
+            } else{
+                Toast.makeText(getActivity(), R.string.could_not_connect, Toast.LENGTH_SHORT).show();
             }
         } else if (inProgress.equals("GETALLCOLLEGES")) {
-            for (int i = 0; i < resultList.size(); i++) {
-                Log.d("Adding Colleges", resultList.get(i).get(searchList.get(1)));
-                list_of_colleges.add(resultList.get(i).get(searchList.get(1)));
-                collegeIDarray.add(resultList.get(i).get(searchList.get(0)));
-            }
-            list_of_colleges.add("Others");
-            collegeListAdapter = new in.silive.scrolls.Adapters.SpinnerAdapter(getActivity(),list_of_colleges);
-            stud_college.setAdapter(collegeListAdapter);
-            stud_college.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    if (i == (list_of_colleges.size() - 1)) {
-                        (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.VISIBLE);
-                    } else {
-                        (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.GONE);
+            if(resultList.size()>0) {
+                for (int i = 0; i < resultList.size(); i++) {
+                    Log.d("Adding Colleges", resultList.get(i).get(searchList.get(1)));
+                    list_of_colleges.add(resultList.get(i).get(searchList.get(1)));
+                    collegeIDarray.add(resultList.get(i).get(searchList.get(0)));
+                }
+                list_of_colleges.add("Others");
+                collegeListAdapter = new in.silive.scrolls.Adapters.SpinnerAdapter(getActivity(), list_of_colleges);
+                stud_college.setAdapter(collegeListAdapter);
+                stud_college.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        if (i == (list_of_colleges.size() - 1)) {
+                            (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.VISIBLE);
+                        } else {
+                            (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.GONE);
+
+                        }
+                        if (i == 3) {
+                            (reg_view.findViewById(R.id.stud_id)).setVisibility(View.VISIBLE);
+                        } else {
+                            (reg_view.findViewById(R.id.stud_id)).setVisibility(View.GONE);
+
+                        }
 
                     }
-                }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
 
-                }
-            });
+                    }
+                });
+            } else{
+                Toast.makeText(getActivity(), R.string.could_not_connect, Toast.LENGTH_SHORT).show();
+            }
+
         } else if (inProgress.equals("CREATE_NEW_COLLEGE")) {
             if (resultList.size() > 0) {
                 Toast.makeText(getActivity(), "College Added", Toast.LENGTH_SHORT).show();
@@ -511,6 +536,21 @@ public class Register extends Fragment implements NetworkResponseListener{
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            } else{
+
+                android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(getContext())
+                        .setTitle("Errir")
+                        .setMessage(R.string.could_not_connect)
+                        .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                loadCollegeList();
+                                dialog.dismiss();
+                            }
+                        })
+                        .setCancelable(false)
+                        .setIcon(android.R.drawable.ic_dialog_alert);
+                dialog.show();
+               // Toast.makeText(getActivity(), R.string.could_not_connect, Toast.LENGTH_SHORT).show();
             }
         } else if (inProgress.equals("SELF_REGISTER")) {
             if (resultList.size() > 0) {
@@ -533,7 +573,7 @@ public class Register extends Fragment implements NetworkResponseListener{
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
             } else {
-                Toast.makeText(getActivity(), "Request Unsuccessfu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.could_not_connect, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -636,13 +676,16 @@ public class Register extends Fragment implements NetworkResponseListener{
 
         @Override
         public void beforeRequest() throws MalformedURLException {
-            progressBar.setVisibility(View.VISIBLE);
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Loading");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
         }
 
         @Override
         public void postRequest(Object result) throws MalformedURLException {
             ArrayList<HashMap<String, String>> resultList = (ArrayList<HashMap<String, String>>) result;
-            progressBar.setVisibility(View.GONE);
+            progressDialog.dismiss();
             if (task.equals(Config.CHECK_TEAM_NAME_AVAILABLE)) {
                 if (resultList.size() > 0) {
 

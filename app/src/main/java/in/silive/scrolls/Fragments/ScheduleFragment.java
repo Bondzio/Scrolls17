@@ -11,21 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import ernestoyaquello.com.verticalstepperform.VerticalStepperFormLayout;
-import ernestoyaquello.com.verticalstepperform.interfaces.VerticalStepperForm;
 import in.silive.scrolls.Adapters.ScheduleAdapter;
 import in.silive.scrolls.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ScheduleFragment extends Fragment implements VerticalStepperForm {
+public class ScheduleFragment extends Fragment  {
     public static String TAG = "ScheduleFragment";
     RecyclerView rvSchedule;
     ScheduleAdapter adapter;
     String dates[], labels[];
     LinearLayoutManager linearLayoutManager;
-    private VerticalStepperFormLayout verticalStepperForm;
 
     public ScheduleFragment() {
         // Required empty public constructor
@@ -48,25 +45,6 @@ public class ScheduleFragment extends Fragment implements VerticalStepperForm {
         return view;
     }
 
-    @Override
-    public View createStepContentView(int stepNumber) {
-        LayoutInflater inflater = LayoutInflater.from(getActivity());
-        View view =  inflater.inflate(R.layout.item_schedule, null, false);
-       TextView tvDate = (TextView)view.findViewById(R.id.tvDate);
-        TextView tvTitle = (TextView)view.findViewById(R.id.tvTitle);
-        tvDate.setText(dates[stepNumber]);
-  tvTitle.setText(labels[stepNumber]);
-        return view;
-    }
 
-    @Override
-    public void onStepOpening(int stepNumber) {
-
-    }
-
-    @Override
-    public void sendData() {
-
-    }
 }
 

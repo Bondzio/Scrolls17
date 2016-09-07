@@ -1,5 +1,7 @@
 package in.silive.scrolls.Util;
 
+import android.util.Patterns;
+
 /**
  * Created by AKG002 on 31-08-2016.
  */
@@ -10,5 +12,10 @@ public class Validator {
         } else {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
         }
+    }
+
+    public static boolean isValidPhone(String phoneNum){
+            return Patterns.PHONE.matcher(phoneNum).matches();
+
     }
 }

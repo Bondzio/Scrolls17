@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Scrolls</string>
     <string name="google_maps_key">AIzaSyBDofDBjIoBPX8UY3uH4uVLZ9VcoyKjd_k</string>
-
+<string name="could_not_connect">Could not connect to server.</string>
 
     <string-array name="navigation_drawer_lables">
         <item>About Scrolls</item>

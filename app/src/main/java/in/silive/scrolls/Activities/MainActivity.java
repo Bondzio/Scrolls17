@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black);;
         //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_up_indicator);
         slidingPane = (android.support.v4.widget.SlidingPaneLayout) findViewById(R.id.sliding_pane_layout);
         slidingPane.setParallaxDistance(200);
@@ -116,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                     fragment = new About_Us();
                 title = "About Us";
                 break;
-
             default:
                 break;
         }
@@ -142,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         if (menuItem.getItemId() == android.R.id.home) {
+
             if (drawerVisible)
                 hideDrawer();
             else
