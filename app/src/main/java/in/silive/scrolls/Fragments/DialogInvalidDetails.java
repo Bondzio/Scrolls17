@@ -1,6 +1,7 @@
 package in.silive.scrolls.Fragments;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,9 @@ public class DialogInvalidDetails extends DialogFragment {
         // Inflate the layout for this fragment
         getDialog().setTitle("Invalid details");
         getDialog().setCancelable(false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setStyle(STYLE_NORMAL, android.R.style.Theme_Material_Light_Dialog_Alert);
+        }
        View view = inflater.inflate(R.layout.fragment_dialog_invalid_details, container, false);
         ok_empty_query = (Button)view.findViewById(R.id.ok);
         ok_empty_query.setOnClickListener(new View.OnClickListener() {
