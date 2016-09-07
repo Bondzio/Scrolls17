@@ -12,7 +12,7 @@ public class Config {
     public static String CREATE_COLLEGE = "http://akgec-scrolls.com/rest/api/Colleges/CreateCollege";
     public static String GET_COLLEGES = "http://akgec-scrolls.com/rest/api/Colleges/GetColleges";
     public static String ID_BY_EMAIL = "http://silive.in/testapi/api/Participants/GetScrollsIdByEmail?email=";
-    public static String ID_BY_LOGIN = "http://silive.in/testapi/api/Participants/GetScrollsIdByEmail?email=";
+    public static String ID_BY_LOGIN = "http://akgec-scrolls.com/rest/api/Participants/GetScrollsIdByEmail?email=";
     public static String LIST_OF_COLLEGE = "";
     public static String GET_DOMAINS = "http://akgec-scrolls.com/rest/api/Domains/GetDomains";
     public static String GET_TOPICS = "http://akgec-scrolls.com/rest/api/Domains/GetTopics?domainId=";

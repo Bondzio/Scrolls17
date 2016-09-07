@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import in.silive.scrolls.Listeners.FetchDataListener;
 import in.silive.scrolls.Network.FetchData;
@@ -70,6 +71,20 @@ public class UploadDoc extends Fragment {
     public void getLoginData(){
         username = login_username.getText().toString();
         Log.d("Scrolls",username+" username from upload a doc login");
+        if (username.length()<=3){
+            login_username.setError("Invalid ID");
+            DialogInvalidDetails dialogInvalidDetails = new DialogInvalidDetails();
+            dialogInvalidDetails.show(getFragmentManager(),"Invalid id");
+        }
+        else {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("ScrollsUserId",username);
+        }
+        catch (Exception e){
+
+        }
+
         FetchData fetchData = new FetchData();
         fetchData.setArgs(in.silive.scrolls.Util.Config.ID_BY_LOGIN, new FetchDataListener() {
             ProgressDialog progressDialog;
@@ -106,6 +121,6 @@ public class UploadDoc extends Fragment {
             }
         });
 
-    }
+    }}
 
 }
