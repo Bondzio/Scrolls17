@@ -199,8 +199,26 @@ clean earth.</item>
         </item>
         <item>Prof. I.P. Sharma  HOD,ME,AKGEC</item>
         <item>Prof. R.P. Saw  HOD,IT,AKGEC</item>
-        <item>Prof. B.B. Parashad  HOD,CIVIL,AKGEC</item>
+        <item>Prof. B. Parashad  HOD,CIVIL,AKGEC</item>
         <item>Prof. Bhupul Singh  HOD,EN,AKGEC</item>
+    </string-array>
+    <string-array name="Student_Coordinators">
+        <item>
+        </item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <string-array name="Web_Developers">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <string-array name="App_Developers">
+        <item>        </item>
+        <item>        </item>
+        <item>        </item>
+        <item>        </item>
     </string-array>
 
 </resources>
