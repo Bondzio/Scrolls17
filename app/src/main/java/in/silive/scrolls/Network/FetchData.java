@@ -6,6 +6,7 @@ import android.util.Log;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -37,34 +38,34 @@ public class FetchData extends AsyncTask<Void, Integer, String> {
             if (entity != null) {
                 connection.setRequestMethod("POST");
 //                connection.setDoInput(true);
-//                connection.setDoOutput(true);
-            }
-//            connection.setConnectTimeout(60000);
-//            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//            connection.setDoInput(true);
-//            connection.setDoOutput(true);
-
-            connection.connect();
-            if (entity != null) {
-                OutputStream outputStream = connection.getOutputStream();
-                byte[] bytes = entity.getBytes();
-                int bufferLength = 1024;
-                for (int i = 0; i < bytes.length; i += bufferLength) {
-                    int progress = (int)((i / (float) bytes.length) * 100);
-                    publishProgress(progress);
-                    if (bytes.length - i >= bufferLength) {
-                        outputStream.write(bytes, i, bufferLength);
-                    } else {
-                        outputStream.write(bytes, i, bytes.length - i);
+                connection.setDoOutput(true);
+                connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                if (listener instanceof UploaderListener)
+                {   OutputStream outputStream = connection.getOutputStream();
+                    byte[] bytes = entity.getBytes();
+                    int bufferLength = 1024;
+                    for (int i = 0; i < bytes.length; i += bufferLength) {
+                        int progress = (int)((i / (float) bytes.length) * 100);
+                        publishProgress(progress);
+                        if (bytes.length - i >= bufferLength) {
+                            outputStream.write(bytes, i, bufferLength);
+                        } else {
+                            outputStream.write(bytes, i, bytes.length - i);
+                        }
                     }
+                    publishProgress(100);
+                    outputStream.close();
+                }else {
+                    OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+                    writer.write(entity);
+                    writer.flush();
+                    writer.close();
+                    Log.d(Config.LOG, "Entity " + entity);
                 }
-                publishProgress(100);
-                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-                writer.write(entity);
-                writer.close();
-                Log.d(Config.LOG, "Entity " + entity);
             }
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            connection.connect();
+            InputStream is = connection.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null)

@@ -60,6 +60,12 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                     hideDrawer();
             }
         });
+        findViewById(R.id.container_body).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         ll = (LinearLayout) findViewById(R.id.ll);
         displayView(0);
     }
@@ -132,14 +138,14 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
             final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment).addToBackStack(fragment.getClass().getName());
             final String finalTitle = title;
-            new Handler().postDelayed(new Runnable() {
+            findViewById(R.id.container_body).post(new Runnable() {
                 @Override
                 public void run() {
                     fragmentTransaction.commit();
                     // set the toolbar title
                     getSupportActionBar().setTitle(finalTitle);
                 }
-            }, 100);
+            });
 
         }
     }

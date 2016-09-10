@@ -13,7 +13,7 @@ public class Config {
     public static String CREATE_COLLEGE = BASE_URL +"api/Colleges/CreateCollege";
     public static String GET_COLLEGES = BASE_URL +"api/Colleges/GetColleges";
     public static String ID_BY_EMAIL =  BASE_URL +"api/Participants/GetScrollsIdByEmail?email=";
-    public static String ID_BY_LOGIN =  BASE_URL +"api/Participants/GetScrollsIdByEmail?email=";
+    public static String Team_LOGIN =  BASE_URL +"api/Teams/IsTeamValid";
     public static String GET_DOMAINS = BASE_URL +"api/Domains/GetDomains";
     public static String GET_TOPICS = BASE_URL +"api/Domains/GetTopics?domainId=";
     public static String CHECK_IS_PHONE_NUMBER_REGISTERED = "isPhoneNoAlreadyRegistered";

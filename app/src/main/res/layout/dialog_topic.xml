@@ -34,7 +34,7 @@
                 android:textAppearance="@android:style/TextAppearance.Medium"
                 />
             <ImageView
-                android:layout_width="25dp"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0"
                 android:padding="3dp"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/scrollView"
     android:layout_height="match_parent">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -26,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             android:padding="10dp">
 
 
@@ -77,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:entries="@array/Courses"></Spinner>
+                    android:entries="@array/courses"></Spinner>
 
             </LinearLayout>
 
@@ -121,6 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter your phone number"
+                android:maxLength="10"
                 android:inputType="phone"
                 />
 
@@ -170,7 +172,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/team_name"
@@ -391,7 +393,7 @@
 
                 <Spinner
                     android:id="@+id/team_domain"
-                    android:entries="@array/Domains"
+                    android:entries="@array/domain_array"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">

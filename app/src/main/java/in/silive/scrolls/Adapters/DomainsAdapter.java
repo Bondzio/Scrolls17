@@ -1,11 +1,9 @@
 package in.silive.scrolls.Adapters;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -28,29 +26,29 @@ public class DomainsAdapter extends RecyclerView.Adapter<DomainsAdapter.ViewHold
 
     @Override
     public DomainsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_domain,parent,false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_domain, parent, false));
     }
 
     @Override
     public void onBindViewHolder(DomainsAdapter.ViewHolder holder, final int position) {
-            holder.tvDomain.setText(domains[position]);
+        holder.tvDomain.setText(domains[position]);
         holder.ll.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 DialogTopics dialogTopics = new DialogTopics();
                 switch (position) {
-                    case 0:
+                    case 1:
                         dialogTopics.setArgs("Computer Science and Information Technology",
                                 context.getResources().getStringArray(R.array.csit));
                         break;
-                    case 1:
+                    case 2:
                         dialogTopics.setArgs("Electronics and Communication", context.getResources().getStringArray(R.array.ec));
                         break;
-                    case 2:
+                    case 3:
                         dialogTopics.setArgs("Electrical and Electronics", context.getResources().getStringArray(R.array.el));
                         break;
-                    case 3:
+                    case 0:
                         dialogTopics.setArgs("Management Science", context.getResources().getStringArray(R.array.ms));
                         break;
                     case 4:
@@ -70,13 +68,14 @@ public class DomainsAdapter extends RecyclerView.Adapter<DomainsAdapter.ViewHold
         return domains.length;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvDomain;
         LinearLayout ll;
+
         public ViewHolder(View itemView) {
             super(itemView);
-            ll = (LinearLayout)itemView.findViewById(R.id.ll);
-            tvDomain = (TextView)itemView.findViewById(R.id.tvDomain);
+            ll = (LinearLayout) itemView.findViewById(R.id.ll);
+            tvDomain = (TextView) itemView.findViewById(R.id.tvDomain);
         }
     }
 }

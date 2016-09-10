@@ -29,23 +29,16 @@
                     ></WebView>
 <RelativeLayout
     android:layout_width="80dp"
-    android:layout_height="50dp"
+    android:layout_height="40dp"
     android:id="@+id/rlShowTopics"
     android:layout_marginTop="38dp"
     android:background="@drawable/semi_circle_top"
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
-    > <TextView
-    android:id="@+id/tvShowTopics"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:layout_margin="10dp"
-    android:text="Topics"/>
+    >
     <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:src="@drawable/ic_keyboard_arrow_up_black"
 
         android:layout_alignParentBottom="false"
@@ -76,22 +69,15 @@
     </android.support.v7.widget.RecyclerView>
     <RelativeLayout
         android:layout_width="80dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:id="@+id/rlHideTopics"
         android:background="@drawable/semi_circle_bottom"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        > <TextView
-        android:id="@+id/tvHideTopics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:text="About Us"/>
+        >
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_keyboard_arrow_down_black"
 
             android:layout_alignParentBottom="true"

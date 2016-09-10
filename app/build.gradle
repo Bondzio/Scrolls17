@@ -41,7 +41,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-location:9.0.0'
     compile 'com.google.android.gms:play-services-gcm:9.0.0'
     compile 'com.github.jd-alexander:library:1.1.0'
-    compile 'com.droidninja:filepicker:1.0.4'
+    compile 'com.nononsenseapps:filepicker:3.0.0'
     compile 'com.schibsted.spain:parallax-layer-layout:1.0.0'
 
     compile 'com.ramotion.foldingcell:folding-cell:1.0.1'

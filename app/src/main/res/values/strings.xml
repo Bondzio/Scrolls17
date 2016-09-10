@@ -18,10 +18,10 @@
     <string name="drawer_close">Close Drawer</string>
 
     <string-array name="schedule_dates">
+        <item>4 Oct</item>
         <item>10 Oct</item>
-        <item>16 Oct</item>
-        <item>19 Oct</item>
-        <item>23 Oct</item>
+        <item>18 Oct</item>
+        <item>21 Oct</item>
     </string-array>
 
     <string-array name="schedule_labels">
@@ -34,13 +34,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string-array name="Courses">
+    <string-array name="courses">
         <item>B.Tech</item>
         <item>MBA</item>
         <item>MCA</item>
         <item>M.Tech</item>
         <item>PGDM</item>
     </string-array>
+
     <string-array name="Year">
         <item>1</item>
         <item>2</item>
@@ -51,13 +52,14 @@
         A national level technical paper presentation contest that provides a pedestal to unleash the talent of budding technocrats, SCROLLS-2015 deals with the most thriving and progressive fields of technology and management, bringing computing, information technology, mechanical engineering, electrical engineering, and telecommunication technologies along with major developmental leaps in management and leadership in its fold. Here, clarity and knowledge transcends through discussions over vast and diversified topics. So here is a chance to work with imagination, insight and confidence to ensure the onset of the new dawn.
     </string>
     <string-array name="domain_array">
+        <item>Management Science</item>
         <item>Computer Science and Information Technology</item>
         <item>Electronics and Communication</item>
-        <item>Electrical and Electronics</item>
-        <item>Management Science</item>
+        <item>Electrical and electronics</item>
         <item>Mechanical Engineering</item>
         <item>Civil Engineering</item>
     </string-array>
+
     <string-array name="csit">
         <item>1. Embedded Systems</item>
         <item>2. Augmented Reality</item>
@@ -183,14 +185,7 @@ clean earth.</item>
 \n6.  The paper to be typed in single space, double column format, using Times New Roman font &amp; font-size 12. Maximum number of pages to be 10 and the page should have no numbers. A margin of 1’’ all around to be left.
 \n7.  First page to include Title, Name(s) of authors, their college name, telephone numbers as well as email addresses. This information to be included with extended abstract also.
     </string>
-    <string-array name="Domains">
-        <item>Management Science</item>
-        <item>Computer Science and Information Technology</item>
-        <item>Electronics and Communication</item>
-        <item>Electrical and electronics</item>
-        <item>Mechanical Engineering</item>
-        <item>Civil Engineering</item>
-    </string-array>
+
     <string-array name="Technical_Committee">
         <item>Prof. P.K. Chopra  HOD,EC/EI,AKGEC</item>
         <item>Prof. P.K. Sharda  HOD,AS-H,AKGEC</item>

@@ -113,25 +113,18 @@ public class Dialogs {
         });
     }
 
-    public static void showUploadDialog(final Context context,String filePath) {
+    public static void showUploadDialog(final Context context,String json,String fileName) {
        final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Uploading Doc");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-     //   progressDialog.setMessage("0%");
+        progressDialog.setMessage(fileName);
         progressDialog.setProgress(0);
 
-
-
         final FetchData uploadDoc = new FetchData();
-        File file = new File(filePath);
         try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            byte[] bytes = new byte[(int) file.length()];
-            fileInputStream.read(bytes);
-            fileInputStream.close();
-            String entity = Base64.encodeToString(bytes, Base64.DEFAULT);
-            uploadDoc.setArgs(Config.UPLOAD_DOC, entity, new UploaderListener() {
+
+            uploadDoc.setArgs(Config.UPLOAD_DOC, json, new UploaderListener() {
                 @Override
                 public void setProgress(int progress) {
                    // progressDialog.setMessage(progress+"%");

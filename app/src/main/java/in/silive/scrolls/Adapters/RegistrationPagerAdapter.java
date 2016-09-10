@@ -4,10 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import in.silive.scrolls.Fragments.Register;
-import in.silive.scrolls.Fragments.SingleRegistration;
-import in.silive.scrolls.Fragments.TeamRegistration;
-
 /**
  * Created by AKG002 on 06-09-2016.
  */
