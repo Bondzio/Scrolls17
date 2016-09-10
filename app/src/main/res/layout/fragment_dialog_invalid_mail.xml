@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Invalid email"
+        android:text="Please check your mail address"
         android:layout_gravity="center"
         android:gravity="center"
         android:textSize="20sp"
@@ -20,6 +20,7 @@
         android:id="@+id/ok_query"
         android:layout_gravity="center"
         android:gravity="center"
+        android:background="#fbc94a"
         android:text="OK"/>
 
 </LinearLayout>

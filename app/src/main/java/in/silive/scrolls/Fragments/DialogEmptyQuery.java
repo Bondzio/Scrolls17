@@ -1,12 +1,15 @@
 package in.silive.scrolls.Fragments;
 
 
+import android.app.Dialog;
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import in.silive.scrolls.R;
@@ -21,24 +24,32 @@ public class DialogEmptyQuery extends DialogFragment {
     public DialogEmptyQuery() {
         // Required empty public constructor
     }
-
-
+    @NonNull
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        getDialog().setCancelable(false);
-        getDialog().setTitle("Empty query");
-        View dialogemptyquery_view = inflater.inflate(R.layout.fragment_dialog_empty_query, container, false);
-        ok_empty_query = (Button)dialogemptyquery_view.findViewById(R.id.ok_empty_query);
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog  dialog = new Dialog(getContext());
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setStyle(STYLE_NORMAL, android.R.style.Theme_Material_Light_Dialog_Alert);
+        }
+
+        View view = ((LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.fragment_dialog_empty_query,null,false);
+        dialog.setTitle("Invalid details");
+        dialog.setCancelable(false);
+        ok_empty_query = (Button)view.findViewById(R.id.ok);
         ok_empty_query.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
             }
         });
-
-        return dialogemptyquery_view;
+        dialog.setContentView(view);
+        return dialog;
     }
+
+
+
+
 
 }

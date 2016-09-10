@@ -1,13 +1,15 @@
 package in.silive.scrolls.Fragments;
 
 
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import in.silive.scrolls.R;
@@ -23,17 +25,19 @@ public class DialogInvalidDetails extends DialogFragment {
         // Required empty public constructor
     }
 
-
+    @NonNull
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        getDialog().setTitle("Invalid details");
-        getDialog().setCancelable(false);
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog  dialog = new Dialog(getContext());
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setStyle(STYLE_NORMAL, android.R.style.Theme_Material_Light_Dialog_Alert);
         }
-       View view = inflater.inflate(R.layout.fragment_dialog_invalid_details, container, false);
+
+        View view = ((LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.fragment_dialog_invalid_details,null,false);
+        dialog.setTitle("Invalid details");
+        dialog.setCancelable(false);
         ok_empty_query = (Button)view.findViewById(R.id.ok);
         ok_empty_query.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +45,10 @@ public class DialogInvalidDetails extends DialogFragment {
                 dismiss();
             }
         });
-        return view;
+        dialog.setContentView(view);
+        return dialog;
     }
+
+
 
 }

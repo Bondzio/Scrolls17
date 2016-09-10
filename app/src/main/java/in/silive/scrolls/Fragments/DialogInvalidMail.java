@@ -1,12 +1,15 @@
 package in.silive.scrolls.Fragments;
 
 
+import android.app.Dialog;
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import in.silive.scrolls.R;
@@ -21,24 +24,31 @@ public class DialogInvalidMail extends DialogFragment {
     public DialogInvalidMail() {
         // Required empty public constructor
     }
-
-
+    @NonNull
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        getDialog().setCancelable(false);
-        getDialog().setTitle("My Dialog Title");
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog  dialog = new Dialog(getContext());
 
-        View dialoview = inflater.inflate(R.layout.fragment_dialog_invalid_mail, container, false);
-        ok_query = (Button)dialoview.findViewById(R.id.ok_query);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setStyle(STYLE_NORMAL, android.R.style.Theme_Material_Light_Dialog_Alert);
+        }
+
+        View view = ((LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.fragment_dialog_invalid_mail,null,false);
+        dialog.setTitle("Invalid mail");
+        dialog.setCancelable(false);
+        ok_query = (Button)view.findViewById(R.id.ok);
         ok_query.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
             }
         });
-        return dialoview;
+        dialog.setContentView(view);
+        return dialog;
     }
+
+
+
 
 }

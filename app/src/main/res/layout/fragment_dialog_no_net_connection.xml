@@ -11,7 +11,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="3dp"
-        android:text="No Internet Connection"
+        android:text="Please check your Internet Connection"
         android:textSize="20sp" />
 
     <Button
@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
+        android:background="#fbc94a"
         android:text="OK" />
 
 
