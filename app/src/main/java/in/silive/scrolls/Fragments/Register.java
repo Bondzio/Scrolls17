@@ -24,6 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +38,7 @@ import in.silive.scrolls.Network.CheckConnectivity;
 import in.silive.scrolls.Network.FetchData;
 import in.silive.scrolls.R;
 import in.silive.scrolls.Util.Config;
+import in.silive.scrolls.Util.Keyboard;
 import in.silive.scrolls.Util.Validator;
 
 /**
@@ -154,6 +156,7 @@ public class Register extends Fragment implements  FetchDataListener {
         individual_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Keyboard.close(getContext());
                 getStudData();
             }
         });
@@ -161,6 +164,8 @@ public class Register extends Fragment implements  FetchDataListener {
         submit_team_reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Keyboard.close(getContext());
                 getTeamData();
             }
         });
@@ -255,10 +260,7 @@ public class Register extends Fragment implements  FetchDataListener {
         });
         team_topic = (Spinner) reg_view.findViewById(R.id.team_topic);
         if (collegeIds.size()==0) {
-            if (CheckConnectivity.isNetConnected(getContext()))
                 loadCollegeList();
-            else
-                Snackbar.make(reg_view, "No Internet Connection .", Snackbar.LENGTH_LONG);
         }
 
 
@@ -282,6 +284,10 @@ public class Register extends Fragment implements  FetchDataListener {
         if (student_name.length() == 0) {
             flag = 1;
             stud_name.setError("Invalid name");
+        }
+        if (collegeIds.size() == 0){
+            loadCollegeList();
+            Toast.makeText(getContext(),"Select College",Toast.LENGTH_LONG);
         }
         student_college_name = stud_other_college.getText().toString();
         student_id = stud_id.getText().toString();

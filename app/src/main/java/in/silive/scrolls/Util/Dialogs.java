@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.net.http.HttpResponseCache;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -74,24 +76,41 @@ public class Dialogs {
                             public void postExecute(String result, int id) throws JSONException {
                                 if (progressDialog.isShowing())
                                     progressDialog.dismiss();
-                                if (result.equals("0")) {
-                                    dialog.dismiss();
-                                    android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(context)
-                                            .setTitle("Id")
-                                            .setMessage("Your id is " + "")
-                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    dialog.dismiss();
-                                                }
-                                            })
+                                try {
+                                    JSONObject jsonObject = new JSONObject(result);
+                                    String scrollID = jsonObject.getString("ID");
+                                    if (!scrollID.equals("0")) {
+                                        dialog.dismiss();
+                                        android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(context)
+                                                .setTitle("Scrolls Id")
+                                                .setMessage("Your id is " + scrollID)
+                                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        dialog.dismiss();
+                                                    }
+                                                })
 
-                                            .setIcon(android.R.drawable.ic_dialog_alert);
-                                    dialog.show();
+                                                .setIcon(android.R.drawable.ic_dialog_alert);
+                                        dialog.show();
 
-                                } else {
+                                    } else {
+                                        android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(context)
+                                                .setTitle("Error")
+                                                .setMessage("Your email does not exist in Database")
+                                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        dialog.dismiss();
+                                                    }
+                                                })
+
+                                                .setIcon(android.R.drawable.ic_dialog_alert);
+                                        dialog.show();
+                                    }
+                                }catch (Exception e){
+                                    e.printStackTrace();
                                     android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(context)
                                             .setTitle("Error")
-                                            .setMessage("Your email does not exist in Database")
+                                            .setMessage(R.string.could_not_connect)
                                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     dialog.dismiss();
@@ -101,6 +120,7 @@ public class Dialogs {
                                             .setIcon(android.R.drawable.ic_dialog_alert);
                                     dialog.show();
                                 }
+
                             }
                         });
                         fetchData.execute();
@@ -140,7 +160,7 @@ public class Dialogs {
                 public void postExecute(String result, int id) throws JSONException {
                     android.support.v7.app.AlertDialog.Builder notifyDialog = new android.support.v7.app.AlertDialog.Builder(context);
                     notifyDialog.setTitle("Uploading Doc");
-                    if (!TextUtils.isEmpty(result))
+                    if (result.equalsIgnoreCase("201"))
                         notifyDialog.setMessage("File uploaded successfully");
                     else {
                         notifyDialog.setMessage("Upload failed");

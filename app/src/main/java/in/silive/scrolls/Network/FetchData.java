@@ -1,6 +1,7 @@
 package in.silive.scrolls.Network;
 
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -80,8 +81,9 @@ public class FetchData extends AsyncTask<Void, Integer, String> {
             while ((line = reader.readLine()) != null)
                 sb.append(line);
             String result = sb.toString();
-
-
+            if ( TextUtils.isEmpty(result)){
+                result =""+ connection.getResponseCode();
+            }
             return result;
         } catch (Exception e) {
             e.printStackTrace();

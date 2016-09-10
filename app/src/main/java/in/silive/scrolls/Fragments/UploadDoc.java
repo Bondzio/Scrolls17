@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ import in.silive.scrolls.Network.FetchData;
 import in.silive.scrolls.R;
 import in.silive.scrolls.Util.Config;
 import in.silive.scrolls.Util.Dialogs;
+import in.silive.scrolls.Util.Keyboard;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,6 +79,7 @@ public class UploadDoc extends Fragment {
         user_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Keyboard.close(getContext());
                 getLoginData();
             }
         });
@@ -84,6 +87,7 @@ public class UploadDoc extends Fragment {
         user_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Keyboard.close(getContext());
                 ((MainActivity)getActivity()).displayView(3);
                /* Register fragment = new Register();
                 fragment.setMode("upload");
@@ -103,20 +107,17 @@ public class UploadDoc extends Fragment {
                 i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_FILE);
                 i.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
                 startActivityForResult(i, FILE_CODE);
-
             }
         });
         tvDomain = (TextView)v.findViewById(R.id.tvDomain);
         tvTopic = (TextView)v.findViewById(R.id.tvTopic);
         tvTeamID = (TextView)v.findViewById(R.id.tvTeamId);
-        if (TextUtils.isEmpty(team_id)) {
+        if (TextUtils.isEmpty(domainName)) {
             v.findViewById(R.id.llForm).setVisibility(View.VISIBLE);
             v.findViewById(R.id.llUpload).setVisibility(View.GONE);
-
         } else {
             v.findViewById(R.id.llForm).setVisibility(View.GONE);
             v.findViewById(R.id.llUpload).setVisibility(View.VISIBLE);
-
         }
         return v;
     }
@@ -143,7 +144,7 @@ public class UploadDoc extends Fragment {
                 jsonObject.put("DomainName",domainName);
                 jsonObject.put("TopicName",topicName);
                 jsonObject.put("FileName",file.getName());
-                jsonObject.put("FileArray",bytes);
+                jsonObject.put("FileArray", Base64.encodeToString(bytes,Base64.DEFAULT));
                 if (CheckConnectivity.isNetConnected(getContext()))
                 Dialogs.showUploadDialog(getContext(),jsonObject.toString(),file.getName());
                 else

@@ -37,7 +37,7 @@ public class DialogNoNetConnection extends DialogFragment {
         View view = ((LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.fragment_dialog_no_net_connection,null,false);
         dialog.setTitle("Invalid mail");
         dialog.setCancelable(false);
-        ok_net_connection = (Button)view.findViewById(R.id.ok);
+        ok_net_connection = (Button)view.findViewById(R.id.ok_net_connection);
         ok_net_connection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

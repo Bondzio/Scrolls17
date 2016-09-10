@@ -24,6 +24,7 @@ import in.silive.scrolls.Fragments.ScheduleFragment;
 import in.silive.scrolls.Fragments.UploadDoc;
 import in.silive.scrolls.Network.CheckConnectivity;
 import in.silive.scrolls.R;
+import in.silive.scrolls.Util.Keyboard;
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawer.NavigationDrawerListener {
     NavigationDrawer navigationDrawer;
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
 
     public void displayView(final int position) {
         String title = getString(R.string.app_name);
+        Keyboard.close(this);
         switch (position) {
             case 0:
                 if (!(fragment instanceof About_Scrolls))
@@ -105,24 +107,24 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
             case 3:
                 if (!(fragment instanceof Register))
 
-                    if (CheckConnectivity.isNetConnected(MainActivity.this)) {
+                   // if (CheckConnectivity.isNetConnected(MainActivity.this)) {
                         fragment = new Register();
                         title = "Register";
-                    } else {
+                   /* } else {
                         DialogNoNetConnection dialogNoNetConnection = new DialogNoNetConnection();
                         dialogNoNetConnection.show(getSupportFragmentManager(), "No net connection");
                     }
-
+*/
                 break;
             case 4:
                 if (!(fragment instanceof UploadDoc))
-                    if (CheckConnectivity.isNetConnected(MainActivity.this)) {
+                 //   if (CheckConnectivity.isNetConnected(MainActivity.this)) {
                         fragment = new UploadDoc();
                         title = "Upload a Doc";
-                    } else {
+                   /* } else {
                         DialogNoNetConnection dialogNoNetConnection = new DialogNoNetConnection();
                         dialogNoNetConnection.show(getSupportFragmentManager(), "No net connection");
-                    }
+                    }*/
                 break;
            /* case 5:
                 if (!(fragment instanceof QueryUs))
@@ -169,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         if (menuItem.getItemId() == android.R.id.home) {
-
+Keyboard.close(this);
             if (drawerVisible)
                 hideDrawer();
             else
