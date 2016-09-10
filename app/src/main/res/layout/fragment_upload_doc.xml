@@ -11,13 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/llForm"
-        android:visibility="visible"
+        android:visibility="gone"
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Please login to upload a doc"
             android:textSize="15sp"
+            android:id="@+id/tv"
             android:layout_margin="5dp"
             android:textColor="#000000" />
         <android.support.design.widget.TextInputEditText
@@ -28,7 +29,6 @@
             android:textSize="20sp"
             android:layout_margin="3dp"
             android:id="@+id/login_team_id"
-            android:layout_above="@+id/user_login"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             />
@@ -41,7 +41,6 @@
             android:inputType="textPassword"
             android:layout_margin="3dp"
             android:id="@+id/login_password"
-            android:layout_above="@+id/user_login"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             />
@@ -109,19 +108,86 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/llUpload">
 <ImageView
     android:layout_width="match_parent"
     android:layout_height="160dp"
     android:src="@drawable/ic_cloud_upload_black"
     />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp">
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:textColor="@color/colorPrimary"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:text="Team ID "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:id="@+id/tvTeamId"
+                android:textColor="@color/bg_gray"
+                android:textAppearance="@android:style/TextAppearance.Small"
+                android:text=" ID "/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:textColor="@color/colorPrimary"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:text="Domain "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:id="@+id/tvDomain"
+                android:textColor="@color/bg_gray"
+                android:textAppearance="@android:style/TextAppearance.Small"
+                android:text=" ID "/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:textColor="@color/colorPrimary"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:text="Topic"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:id="@+id/tvTopic"
+                android:textColor="@color/bg_gray"
+                android:textAppearance="@android:style/TextAppearance.Small"
+                android:text=" ID "/>
+        </LinearLayout>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:text="Select PDF"
             android:id="@+id/btnSelect"
+            android:layout_marginTop="15dp"
             android:textColor="@color/white"/>
     </LinearLayout>
 

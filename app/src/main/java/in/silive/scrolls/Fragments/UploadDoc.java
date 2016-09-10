@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.nononsenseapps.filepicker.FilePickerActivity;
 
@@ -29,6 +30,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 
+import in.silive.scrolls.Activities.MainActivity;
 import in.silive.scrolls.Activities.MyPickerActivity;
 import in.silive.scrolls.Listeners.FetchDataListener;
 import in.silive.scrolls.Network.CheckConnectivity;
@@ -42,7 +44,7 @@ import in.silive.scrolls.Util.Dialogs;
  */
 public class UploadDoc extends Fragment {
     private static final int FILE_CODE = 1423;
-    public static String team_id="gg";
+    public static String team_id;
     public static Context context;
     static int domainId;
     static int topicId;
@@ -55,6 +57,7 @@ public class UploadDoc extends Fragment {
     private Button btnSelect;
     private String topicName;
     private String domainName;
+    TextView tvTopic,tvTeamID,tvDomain;
 
     public UploadDoc() {
         // Required empty public constructor
@@ -67,46 +70,53 @@ public class UploadDoc extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_upload_doc, container, false);
         context = getContext();
+        upload = (LinearLayout) v.findViewById(R.id.upload);
+        login_team_id = (EditText) v.findViewById(R.id.login_team_id);
+        login_password = (EditText) v.findViewById(R.id.login_password);
+        user_login = (Button) v.findViewById(R.id.user_login);
+        user_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getLoginData();
+            }
+        });
+        user_register = (Button) v.findViewById(R.id.user_register);
+        user_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).displayView(3);
+               /* Register fragment = new Register();
+                fragment.setMode("upload");
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_body, fragment);
+                fragmentTransaction.commit();*/
+            }
+        });
+        btnSelect = (Button) v.findViewById(R.id.btnSelect);
+        btnSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), MyPickerActivity.class);
+                i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
+                i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false);
+                i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_FILE);
+                i.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
+                startActivityForResult(i, FILE_CODE);
+
+            }
+        });
+        tvDomain = (TextView)v.findViewById(R.id.tvDomain);
+        tvTopic = (TextView)v.findViewById(R.id.tvTopic);
+        tvTeamID = (TextView)v.findViewById(R.id.tvTeamId);
         if (TextUtils.isEmpty(team_id)) {
             v.findViewById(R.id.llForm).setVisibility(View.VISIBLE);
             v.findViewById(R.id.llUpload).setVisibility(View.GONE);
-            upload = (LinearLayout) v.findViewById(R.id.upload);
-            login_team_id = (EditText) v.findViewById(R.id.login_team_id);
-            login_password = (EditText) v.findViewById(R.id.login_password);
-            user_login = (Button) v.findViewById(R.id.user_login);
-            user_login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    getLoginData();
-                }
-            });
-            user_register = (Button) v.findViewById(R.id.user_register);
-            user_register.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Fragment fragment = new Register();
-                    FragmentManager fragmentManager = getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.container_body, fragment);
-                    fragmentTransaction.commit();
-                }
-            });
+
         } else {
             v.findViewById(R.id.llForm).setVisibility(View.GONE);
             v.findViewById(R.id.llUpload).setVisibility(View.VISIBLE);
-            btnSelect = (Button) v.findViewById(R.id.btnSelect);
-            btnSelect.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(getContext(), MyPickerActivity.class);
-                    i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
-                    i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false);
-                    i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_FILE);
-                    i.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
-                    startActivityForResult(i, FILE_CODE);
 
-                }
-            });
         }
         return v;
     }
@@ -134,7 +144,10 @@ public class UploadDoc extends Fragment {
                 jsonObject.put("TopicName",topicName);
                 jsonObject.put("FileName",file.getName());
                 jsonObject.put("FileArray",bytes);
+                if (CheckConnectivity.isNetConnected(getContext()))
                 Dialogs.showUploadDialog(getContext(),jsonObject.toString(),file.getName());
+                else
+                    Snackbar.make(v,"No internet connection.",Snackbar.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();
                 Snackbar.make(v, "Something went wrong.", Snackbar.LENGTH_SHORT).show();
@@ -187,6 +200,9 @@ public class UploadDoc extends Fragment {
                             team_id = team.getString("TeamId");
                             topicName = team.getString("TopicName");
                             domainName = team.getString("DomainName");
+                            tvTeamID.setText(team_id);
+                            tvDomain.setText(domainName);
+                            tvTopic.setText(topicName);
                             v.findViewById(R.id.llForm).setVisibility(View.GONE);
                             v.findViewById(R.id.llUpload).setVisibility(View.VISIBLE);
                         } catch (Exception e) {
@@ -208,6 +224,7 @@ public class UploadDoc extends Fragment {
                         }
                     }
                 });
+                fetchData.execute();
             }
         }
     }

@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
     LinearLayout ll;
     private Toolbar mtoolbar;
     private SlidingPaneLayout slidingPane;
+    private boolean finishing;
+    private FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,19 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
         displayView(0);
     }
 
-    private void displayView(final int position) {
+    @Override
+    protected void onResume() {
+      //  finishing=false;
+        //if (fragmentTransaction!=null && fragmentTransaction.isEmpty())
+        super.onResume();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        finishing = true;
+    }
+
+    public void displayView(final int position) {
         String title = getString(R.string.app_name);
         switch (position) {
             case 0:
@@ -135,15 +149,17 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
             fragment = fragmentManager.findFragmentByTag(fragment.getClass().getName());
         }
         if (fragment != null) {
-            final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment).addToBackStack(fragment.getClass().getName());
             final String finalTitle = title;
             findViewById(R.id.container_body).post(new Runnable() {
                 @Override
                 public void run() {
-                    fragmentTransaction.commit();
-                    // set the toolbar title
-                    getSupportActionBar().setTitle(finalTitle);
+                  //  if (!finishing) {
+                        fragmentTransaction.commitAllowingStateLoss();
+                        // set the toolbar title
+                        getSupportActionBar().setTitle(finalTitle);
+                    //}
                 }
             });
 

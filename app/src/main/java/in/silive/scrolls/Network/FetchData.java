@@ -12,6 +12,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 
 import in.silive.scrolls.Listeners.FetchDataListener;
 import in.silive.scrolls.Listeners.UploaderListener;
@@ -35,18 +36,26 @@ public class FetchData extends AsyncTask<Void, Integer, String> {
         try {
             URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty( "Content-type", "application/json");
+            connection.setRequestProperty( "Accept", "*/*" );
             if (entity != null) {
                 connection.setRequestMethod("POST");
 //                connection.setDoInput(true);
                 connection.setDoOutput(true);
-                connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                if (listener instanceof UploaderListener)
-                {   OutputStream outputStream = connection.getOutputStream();
+//                connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+
+            }
+           // connection.connect();
+            if (entity!=null){
+               /* if (listener instanceof UploaderListener)
+                { */  OutputStream outputStream = connection.getOutputStream();
                     byte[] bytes = entity.getBytes();
                     int bufferLength = 1024;
+                publishProgress(0);
                     for (int i = 0; i < bytes.length; i += bufferLength) {
                         int progress = (int)((i / (float) bytes.length) * 100);
                         publishProgress(progress);
+                        Log.d("SCrolls","Upload"+ progress);
                         if (bytes.length - i >= bufferLength) {
                             outputStream.write(bytes, i, bufferLength);
                         } else {
@@ -54,24 +63,24 @@ public class FetchData extends AsyncTask<Void, Integer, String> {
                         }
                     }
                     publishProgress(100);
-                    outputStream.close();
-                }else {
+                    outputStream.flush();
+              /*  }else {
                     OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
                     writer.write(entity);
                     writer.flush();
-                    writer.close();
-                    Log.d(Config.LOG, "Entity " + entity);
-                }
+
+                }*/
+                Log.d(Config.LOG, "Entity " + entity);
             }
-            connection.connect();
-            InputStream is = connection.getInputStream();
+
+             InputStream is = connection.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null)
                 sb.append(line);
             String result = sb.toString();
-            connection.disconnect();
+
 
             return result;
         } catch (Exception e) {

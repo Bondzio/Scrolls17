@@ -139,7 +139,7 @@ public class Dialogs {
                 @Override
                 public void postExecute(String result, int id) throws JSONException {
                     android.support.v7.app.AlertDialog.Builder notifyDialog = new android.support.v7.app.AlertDialog.Builder(context);
-                    notifyDialog.setTitle("Upload Doc");
+                    notifyDialog.setTitle("Uploading Doc");
                     if (!TextUtils.isEmpty(result))
                         notifyDialog.setMessage("File uploaded successfully");
                     else {

@@ -4,7 +4,6 @@ package in.silive.scrolls.Fragments;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -25,22 +24,17 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import in.silive.scrolls.Adapters.SpinnerAdapter;
 import in.silive.scrolls.Listeners.FetchDataListener;
 import in.silive.scrolls.Network.CheckConnectivity;
 import in.silive.scrolls.Network.FetchData;
-import in.silive.scrolls.Network.FetchDataForLists;
-import in.silive.scrolls.Network.NetworkResponseListener;
 import in.silive.scrolls.R;
 import in.silive.scrolls.Util.Config;
 import in.silive.scrolls.Util.Validator;
@@ -61,17 +55,12 @@ public class Register extends Fragment implements  FetchDataListener {
     public static String domain_of_team, topic_of_team, password_team;
     public static int no_of_teammembers, leader_of_team;
     public static int flag = 0, tflag = 0;
-    public static String fetch_topics = "FETCH_TOPICS";
-    public static int topics_first_position;
     public int id_domain = 1;
-    public FetchDataForLists fetchdataforLists;
 
    static ArrayList<Integer> collegeIds = new ArrayList<>();
     static ArrayList<String> collegeNames = new ArrayList<>();
     in.silive.scrolls.Adapters.SpinnerAdapter collegeListAdapter;
-    String inProgress, task = "CHECK_SCROLLS_ID";
-    int inprogress = 0;
-    int maxProgress = 2;
+    int memberCount = 2;
     int leader_number = 0;
     ArrayList<String> topicsList = new ArrayList<>();
     ArrayList<Integer> topicsIDList = new ArrayList<>();
@@ -95,6 +84,7 @@ public class Register extends Fragment implements  FetchDataListener {
     private ProgressDialog progressDialog;
     private int student_courseId;
     private int topic_id;
+    private String mode="";
 
     public Register() {
         // Required empty public constructor
@@ -136,11 +126,11 @@ public class Register extends Fragment implements  FetchDataListener {
                 if (i == R.id.three_members) {
                     member_three.setVisibility(View.VISIBLE);
                     leader_member_three.setVisibility(View.VISIBLE);
-                    maxProgress = 3;
+                    memberCount = 3;
                 } else {
                     member_three.setVisibility(View.GONE);
                     leader_member_three.setVisibility(View.GONE);
-                    maxProgress = 2;
+                    memberCount = 2;
                 }
             }
         });
@@ -345,6 +335,7 @@ public class Register extends Fragment implements  FetchDataListener {
     }
 
     public void getTeamData() {
+        tflag = 0;
         name_of_team = team_name.getText().toString();
         if (name_of_team.length() <= 3) {
             tflag = 1;
@@ -365,7 +356,7 @@ public class Register extends Fragment implements  FetchDataListener {
         id_member_two = member_two_id.getText().toString();
         //check scrolls id valid
         name_member_three = member_three_name.getText().toString();
-        if (name_member_three.length() <= 3 && maxProgress ==3 ) {
+        if (name_member_three.length() <= 3 && memberCount ==3 ) {
             tflag = 1;
             member_three_name.setError("Invalid name");
         }
@@ -395,18 +386,8 @@ public class Register extends Fragment implements  FetchDataListener {
                 Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
             else
             teamRegister();
-            /*TeamRegistration teamRegistration = new TeamRegistration();
-            try {
-                teamRegistration.checkTeamNameAvailable();
-            } catch (Exception e) {
-                Log.d("Scrolls", "TeamRegistration ecxeption");
-
-            }*/
         } else {
-          /*  DialogInvalidDetails dialogInvalidDetails = new DialogInvalidDetails();
-            dialogInvalidDetails.show(getFragmentManager(), "Invalid details");*/
             Snackbar.make(reg_view,"Incomplete Details.",Snackbar.LENGTH_SHORT).show();
-
         }
     }
 
@@ -417,10 +398,10 @@ public class Register extends Fragment implements  FetchDataListener {
             jsonObject = new JSONObject();
             try {
                 jsonObject.put("TeamName", ((EditText) reg_view.findViewById(R.id.team_name)).getText().toString());
-                jsonObject.put("TotalMembers", maxProgress);
+                jsonObject.put("TotalMembers", memberCount);
                 jsonObject.put("Member1RegId", Integer.parseInt(((EditText) reg_view.findViewById(R.id.member_one_id)).getText().toString()));
                 jsonObject.put("Member2RegId", Integer.parseInt(((EditText) reg_view.findViewById(R.id.member_two_id)).getText().toString()));
-                if (maxProgress == 3)
+                if (memberCount == 3)
                     jsonObject.put("Member3RegId", Integer.parseInt(((EditText) reg_view.findViewById(R.id.member_three_id)).getText().toString()));
                 jsonObject.put("DomainId", id_domain);
                 jsonObject.put("TopicId", topic_id);
@@ -558,8 +539,8 @@ public class Register extends Fragment implements  FetchDataListener {
                             final int regId = jsonObject.getInt("RegId");
                             new AlertDialog.Builder(getActivity())
                                     .setTitle("Registration successful")
-                                    .setMessage("Congratulations " + jsonObject.getString("Name") + " your registration is successful.\n Your" +
-                                            "registration id is " + regId +".\n"+
+                                    .setMessage("Congratulations " + jsonObject.getString("Name") + " your registration is successful.\n" +
+                                            "Your registration id is " + regId +" .\n"+
                                             "To continue click OK")
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
@@ -613,27 +594,35 @@ public class Register extends Fragment implements  FetchDataListener {
                     case TEAM_REGISTER :
                         try {
                             jsonObject = new JSONObject(result);
-                            final int team_id = jsonObject.getInt("TeamId");
-                            new AlertDialog.Builder(getActivity())
-                                    .setTitle("Registration successful")
-                                    .setMessage("Team ID : " +jsonObject.getInt("TeamId") +"\n"+
-                                            "Team name : " + jsonObject.getString("TeamName") +
-                                            "\nMembers : \n " +
-                                            "1. " + jsonObject.getString("Mem1Name") +".\n"+
-                                            "2. " + jsonObject.getString("Mem2Name") +".\n"+
-                                            (jsonObject.has("Mem3Name")? "3. " + jsonObject.getString("Mem3Name"):"")+
-                                            "\nTo continue click OK")
-                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            SharedPreferences sharedpreferences = getActivity().getSharedPreferences(Config.PREFERENCES, Context.MODE_PRIVATE);
-                                            SharedPreferences.Editor editor = sharedpreferences.edit();
-                                            editor.putString(Config.team_id, "" + team_id);
-                                            editor.commit();
-                                        }
-                                    })
-                                    .setCancelable(false)
-                                    //       .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .show();
+                            if (jsonObject.has("TeamId")) {
+                                final int team_id = jsonObject.getInt("TeamId");
+                                new AlertDialog.Builder(getActivity())
+                                        .setTitle("Registration successful")
+                                        .setMessage("Team ID : " + jsonObject.getInt("TeamId") + "\n" +
+                                                "Team name : " + jsonObject.getString("TeamName") +
+                                                "\nMember IDs : \n" +
+                                                "1. " + jsonObject.getString("Member1RegId") + ".\n" +
+                                                "2. " + jsonObject.getString("Member2RegId") + ".\n" +
+                                                ( memberCount==3 ? "3. " + jsonObject.getString("Member3RegId") : "") +
+                                                "\nTo continue click OK")
+                                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                                SharedPreferences sharedpreferences = getActivity().getSharedPreferences(Config.PREFERENCES, Context.MODE_PRIVATE);
+                                                SharedPreferences.Editor editor = sharedpreferences.edit();
+                                                editor.putString(Config.team_id, "" + team_id);
+                                                editor.commit();
+                                                if (mode.equalsIgnoreCase("upload")){
+
+                                                }
+                                            }
+                                        })
+                                        .setCancelable(false)
+                                        //       .setIcon(android.R.drawable.ic_dialog_alert)
+                                        .show();
+                            }else if (jsonObject.has("Message")){
+                                Snackbar.make(reg_view,jsonObject.getString("Message"),Snackbar.LENGTH_LONG).show();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             if (result.contains("Participants are already registered in other team")){
@@ -642,7 +631,6 @@ public class Register extends Fragment implements  FetchDataListener {
                                 else {
                                 Snackbar.make(reg_view, "Something went wrong.", Snackbar.LENGTH_LONG).show();
                             }
-
                         }
                 }
             } catch (Exception e) {
@@ -686,4 +674,7 @@ public class Register extends Fragment implements  FetchDataListener {
     }
 
 
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
 }

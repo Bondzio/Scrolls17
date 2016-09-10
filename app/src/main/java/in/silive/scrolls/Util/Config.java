@@ -5,10 +5,11 @@ package in.silive.scrolls.Util;
  */
 public class Config {
     public static final String LOG = "Scrolls";
-    public static final String UPLOAD_DOC = "sd";
+
     public static String GET = "GET";
     public static String POST = "POST";
     public static String BASE_URL = "http://akgec-scrolls.com/rest/";
+    public static  String UPLOAD_DOC = BASE_URL+"api/Teams/UploadFile";
     public static String GET_COURSES = BASE_URL +"api/Domains/GetCourses";
     public static String CREATE_COLLEGE = BASE_URL +"api/Colleges/CreateCollege";
     public static String GET_COLLEGES = BASE_URL +"api/Colleges/GetColleges";
@@ -26,7 +27,7 @@ public class Config {
     public static String ISPERSONALREADYINTEAM =  BASE_URL +"api/Participants/IsParticipantAlreadyInATeam?scrollsId=";
     public static String TRUE = "true";
     public static String FALSE = "false";
-    public static String TEAM_REGISTRATION =  BASE_URL +"/api/Teams/CreateTeam";
+    public static String TEAM_REGISTRATION =  BASE_URL +"api/Teams/CreateTeam";
 
     public static String IS_PHONE_NUMBER_REGISTERED = BASE_URL +"api/Participants/IsPhoneNoAlreadyRegistered?number=";
 }
