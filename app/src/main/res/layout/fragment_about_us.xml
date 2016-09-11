@@ -21,33 +21,50 @@
                 android:id="@+id/cell_content_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#e1b442"
+                android:background="#fbc94a"
                 android:visibility="gone">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
+                    android:orientation="vertical">
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="match_parent"
+                        android:textColor="#000000"
                         android:layout_gravity="center"
-                        android:layout_weight="1"
                         android:gravity="center"
-                        android:text="R.K.Agarwal"
-                        android:textColor="#ffffff" />
-
-                    <TextView
+                        android:layout_weight="1"
+                        android:background="#e1b442"
+                        android:text="Patron"/>
+                    <LinearLayout
+                        android:layout_weight="1"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="President, GMA"
-                        android:textColor="#ffffff" />
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="R.K.Agarwal"
+                            android:textColor="#ffffff" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="President, GMA"
+                            android:textColor="#ffffff" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
+
+
 
             </FrameLayout>
 
@@ -78,33 +95,49 @@
                 android:id="@+id/cell_content_view_two"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#e1b442"
+                android:background="#fbc94a"
                 android:visibility="gone">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
+                    android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="#000000"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:background="#e1b442"
+                    android:text="Advisory Head"/>
+                    <LinearLayout
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="R.K.Agarwal"
-                        android:textColor="#ffffff" />
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Director, AKGEC"
-                        android:textColor="#ffffff" />
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="R.K.Agarwal"
+                            android:textColor="#ffffff" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Director, AKGEC"
+                            android:textColor="#ffffff" />
+
+                    </LinearLayout>
                 </LinearLayout>
+
+
 
             </FrameLayout>
 
@@ -134,33 +167,50 @@
                 android:id="@+id/cell_content_view_three"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#e1b442"
+                android:background="#fbc94a"
                 android:visibility="gone">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
+                    android:orientation="vertical"
+                    >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="#000000"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:background="#e1b442"
+                    android:text="Organising Head"/>
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="V.K.Parashar"
-                        android:textColor="#ffffff" />
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight="1">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="DSW, AKGEC"
-                        android:textColor="#ffffff" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="V.K.Parashar"
+                            android:textColor="#ffffff" />
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="DSW, AKGEC"
+                            android:textColor="#ffffff" />
+
+                    </LinearLayout>
                 </LinearLayout>
+
+
 
             </FrameLayout>
 
@@ -190,36 +240,53 @@
                 android:id="@+id/cell_content_view_four"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#e1b442"
+                android:background="#fbc94a"
                 android:visibility="gone">
-
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="140dp"
-                        android:layout_gravity="center"
-                        android:layout_margin="2dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="#000000"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:background="#e1b442"
+                    android:text="Technical Committee"/>
+                    <LinearLayout
                         android:layout_weight="1"
-                        android:gravity="start"
-                        android:padding="3dp"
-                        android:text="Prof. P.K. Chopra\nProf. P.K. Sharda\nProf. S.L. Kapoor\nProf. B.M. Kalra\nProf. I.P. Sharma\nProf. R.P. Saw\nProf. B. Parashad\nProf. Bhupul Singh"
-                        android:textColor="#ffffff" />
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="140dp"
-                        android:layout_gravity="start"
-                        android:layout_margin="2dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="3dp"
-                        android:text="HOD,EC/EI,AKGEC\nHOD,AS-H,AKGEC\nHOD,MCA,AKGEC\nHOD,CSE,AKGEC\nHOD,ME,AKGEC\nHOD,IT,AKGEC\nHOD,CIVIL,AKGEC\nHOD,EN,AKGEC"
-                        android:textColor="#ffffff" />
+                        android:layout_height="match_parent">
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="140dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="2dp"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="3dp"
+                            android:text="Prof. P.K. Chopra\nProf. P.K. Sharda\nProf. S.L. Kapoor\nProf. B.M. Kalra\nProf. I.P. Sharma\nProf. R.P. Saw\nProf. B. Parashad\nProf. Bhupul Singh"
+                            android:textColor="#ffffff" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="140dp"
+                            android:layout_gravity="start"
+                            android:layout_margin="2dp"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="3dp"
+                            android:text="HOD,EC/EI,AKGEC\nHOD,AS-H,AKGEC\nHOD,MCA,AKGEC\nHOD,CSE,AKGEC\nHOD,ME,AKGEC\nHOD,IT,AKGEC\nHOD,CIVIL,AKGEC\nHOD,EN,AKGEC"
+                            android:textColor="#ffffff" />
+
+                    </LinearLayout>
                 </LinearLayout>
+
+
 
 
             </FrameLayout>
@@ -250,37 +317,55 @@
                 android:id="@+id/cell_content_view_five"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#e1b442"
+                android:background="#fbc94a"
                 android:visibility="gone">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_gravity="start"
-                        android:layout_margin="2dp"
+                    android:orientation="vertical"
+                    >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="#000000"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:background="#e1b442"
+                    android:text="Student Coordinators"/>
+                    <LinearLayout
                         android:layout_weight="1"
-                        android:gravity="start"
-                        android:padding="3dp"
-                        android:text="SANDEEP GUPTA\nMayank Bahadur\nSuhanee Singh"
-                        android:textColor="#ffffff" />
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_gravity="start"
-                        android:layout_margin="2dp"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:padding="3dp"
-                        android:text="8802119708\n8802119708\n"
-                        android:textColor="#ffffff" />
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        >
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="2dp"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="3dp"
+                            android:text="SANDEEP GUPTA\nMayank Bahadur\nSuhanee Singh"
+                            android:textColor="#ffffff" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="2dp"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:padding="3dp"
+                            android:text="8802119708\n8802119708\n"
+                            android:textColor="#ffffff" />
+
+                    </LinearLayout>
                 </LinearLayout>
+
+
 
             </FrameLayout>
 
@@ -310,17 +395,34 @@
                 android:id="@+id/cell_content_view_six"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#e1b442"
+                android:background="#fbc94a"
                 android:visibility="gone">
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="match_parent"
+                    android:textColor="#000000"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Gaurav Arora\nPranav Chaudhary\nSukankshi Jain\nSiddhant Goral\nKunal Chaudhary\nRajat Sharma\nDeepak Singh\nAkash Kool"
-                    android:textColor="#ffffff" />
+                    android:layout_weight="1"
+                    android:background="#e1b442"
+                    android:text="Web Developers"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Gaurav Arora\nPranav Chaudhary\nSukankshi Jain\nSiddhant Goral\nKunal Chaudhary\nRajat Sharma\nDeepak Singh\nAkash Kool"
+                        android:textColor="#ffffff" />
+                </LinearLayout>
+
+
+
 
 
             </FrameLayout>
@@ -351,17 +453,33 @@
                 android:id="@+id/cell_content_view_seven"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#e1b442"
+                android:background="#fcb94a"
                 android:visibility="gone">
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="match_parent"
+                    android:textColor="#000000"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Shobhit Agarwal\nKartikey Srivastava\nAbishek Kumar Gupta\nAkriti Verma"
-                    android:textColor="#ffffff" />
+                    android:layout_weight="1"
+                    android:background="#e1b442"
+                    android:text="App Developers"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Shobhit Agarwal\nKartikey Srivastava\nAbishek Kumar Gupta\nAkriti Verma"
+                        android:textColor="#ffffff" />
+                </LinearLayout>
+
+
 
 
             </FrameLayout>
