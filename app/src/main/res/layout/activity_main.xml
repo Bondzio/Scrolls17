@@ -1,58 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer_layout"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-   >
-    <android.support.design.widget.AppBarLayout
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:local="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            local:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-    </android.support.design.widget.AppBarLayout>
-    <android.support.v4.widget.SlidingPaneLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/sliding_pane_layout"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <fragment
-            android:id="@+id/fragment_navigation_drawer"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            class="in.silive.scrolls.Fragments.NavigationDrawer"
-            tools:layout="@layout/fragment_navigation_drawer" />
-        <FrameLayout
-            android:id="@+id/container_body"
-
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-
-    </android.support.v4.widget.SlidingPaneLayout>
-
-<!--<io.codetail.widget.RevealFrameLayout
-    android:layout_width="wrap_content"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:id="@+id/ll"
-        android:visibility="gone"
-        android:layout_gravity="start"
-        android:background="@color/bg_dark_gray"
         android:layout_height="match_parent">
 
-    </LinearLayout>
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/container_body"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
 
-</io.codetail.widget.RevealFrameLayout>-->
-</android.support.design.widget.CoordinatorLayout>
+            android:layout_marginBottom="@dimen/tabHeight" />
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            app:elevation="0dp">
+
+            <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/grad"
+                android:minHeight="?attr/actionBarSize"
+                app:titleTextColor="@color/white" />
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tabHeight"
+            android:layout_gravity="bottom"
+            android:background="@color/colorPrimary"
+            app:tabIndicatorHeight="0dp"
+            app:tabSelectedTextColor="@color/bg_gray"
+            app:tabTextAppearance="@style/CustomTabText"
+            app:tabTextColor="@color/white">
+            <!--<android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="xcvxcv"
+                ></android.support.design.widget.TabItem>
+                    <android.support.design.widget.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="xcvxcv"
+                        ></android.support.design.widget.TabItem>-->
+        </android.support.design.widget.TabLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/bg_gray"
+        android:fitsSystemWindows="true"
+        app:itemTextColor="@color/white"
+        android:id="@+id/navigationView"
+        app:menu="@menu/navigation_items">
+
+        <!--  Footer-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/footer_item_1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="5dp"
+                android:gravity="left|center_vertical"
+                android:text="Powered By :"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/footer_item_2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:text="Software Incubator"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </android.support.design.widget.NavigationView>
+</android.support.v4.widget.DrawerLayout>

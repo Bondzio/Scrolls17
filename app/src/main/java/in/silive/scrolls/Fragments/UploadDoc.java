@@ -88,7 +88,7 @@ public class UploadDoc extends Fragment {
             @Override
             public void onClick(View view) {
                 Keyboard.close(getContext());
-                ((MainActivity)getActivity()).displayView(3);
+                ((MainActivity)getActivity()).showFragment(new Register(),"Register");
                /* Register fragment = new Register();
                 fragment.setMode("upload");
                 FragmentManager fragmentManager = getFragmentManager();
@@ -207,9 +207,7 @@ public class UploadDoc extends Fragment {
                             v.findViewById(R.id.llForm).setVisibility(View.GONE);
                             v.findViewById(R.id.llUpload).setVisibility(View.VISIBLE);
                         } catch (Exception e) {
-                            if (result.equalsIgnoreCase("Error has occured")) {
-                                Snackbar.make(v, "Something went wrong.", Snackbar.LENGTH_SHORT).show();
-                            } else {
+                            if (result.equalsIgnoreCase("null")) {
                                 android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(context)
                                         .setTitle("Error")
                                         .setMessage("Invalid Credentials")
@@ -221,6 +219,9 @@ public class UploadDoc extends Fragment {
 
                                         .setIcon(android.R.drawable.ic_dialog_alert);
                                 dialog.show();
+
+                            } else {
+                                Snackbar.make(v, "Something went wrong.", Snackbar.LENGTH_SHORT).show();
                             }
                         }
                     }

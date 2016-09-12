@@ -21,8 +21,17 @@ public class ScheduleFragment extends Fragment  {
     public static String TAG = "ScheduleFragment";
     RecyclerView rvSchedule;
     ScheduleAdapter adapter;
-    String dates[], labels[];
+    String dates[], labels[],days[];
     LinearLayoutManager linearLayoutManager;
+
+
+    static   ScheduleFragment fragment;
+
+    public static ScheduleFragment getInstance(){
+        if (fragment == null)
+            fragment = new ScheduleFragment();
+        return fragment;
+    }
 
     public ScheduleFragment() {
         // Required empty public constructor
@@ -37,11 +46,10 @@ public class ScheduleFragment extends Fragment  {
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         dates = getContext().getResources().getStringArray(R.array.schedule_dates);
         labels = getContext().getResources().getStringArray(R.array.schedule_labels);
-        adapter = new ScheduleAdapter(getContext(), dates, labels);
+        days = getContext().getResources().getStringArray(R.array.schedule_days);
+        adapter = new ScheduleAdapter(getContext(), dates, labels,days);
         rvSchedule.setLayoutManager(linearLayoutManager);
         rvSchedule.setAdapter(adapter);
-
-
         return view;
     }
 

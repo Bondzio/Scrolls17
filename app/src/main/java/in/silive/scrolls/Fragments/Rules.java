@@ -1,7 +1,6 @@
 package in.silive.scrolls.Fragments;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import in.silive.scrolls.Adapters.TopicsAdapter;
+import in.silive.scrolls.Adapters.RulesAdapter;
 import in.silive.scrolls.R;
 
 /**
@@ -18,7 +17,14 @@ import in.silive.scrolls.R;
  */
 public class Rules extends Fragment {
 RecyclerView rv;
-    TopicsAdapter adapter;
+    RulesAdapter adapter;
+  static   Rules fragment;
+
+    public static Rules getInstance(){
+        if (fragment == null)
+            fragment = new Rules();
+        return fragment;
+    }
 
     public Rules() {
         // Required empty public constructor
@@ -32,7 +38,7 @@ RecyclerView rv;
         View view = inflater.inflate(R.layout.fragment_rules, container, false);
         rv = (RecyclerView)view.findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        adapter = new TopicsAdapter(getContext(),getResources().getString(R.string.rules).split("\n"));
+        adapter = new RulesAdapter(getContext(),getResources().getString(R.string.rules).split("\n"));
         rv.setAdapter(adapter);
         return view;
     }

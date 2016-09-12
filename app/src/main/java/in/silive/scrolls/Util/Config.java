@@ -5,6 +5,8 @@ package in.silive.scrolls.Util;
  */
 public class Config {
     public static final String LOG = "Scrolls";
+    public static final String SCROLLS_WEBSITE = "http://www.akgec-scrolls.com";
+    public static final String SILIVE_WEBSITE = "http://www.silive.in";
 
     public static String GET = "GET";
     public static String POST = "POST";

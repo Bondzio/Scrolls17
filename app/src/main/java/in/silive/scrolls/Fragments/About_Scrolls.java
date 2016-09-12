@@ -19,6 +19,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.schibsted.spain.parallaxlayerlayout.ParallaxLayerLayout;
+import com.schibsted.spain.parallaxlayerlayout.SensorTranslationUpdater;
+
 import in.silive.scrolls.Adapters.DomainsAdapter;
 import in.silive.scrolls.R;
 
@@ -34,49 +37,43 @@ RecyclerView rvDomains;
     private WebView web_view;
     CollapsingToolbarLayout collapsingToolbarLayout;
     AppBarLayout appBarLayout;
+    static About_Scrolls fragment;
+    private ParallaxLayerLayout parallaxLayout;
+    private SensorTranslationUpdater sensorTranslationUpdater;
 
     public About_Scrolls() {
         // Required empty public constructor
     }
 
+    public static About_Scrolls newInstance(){
+        if (fragment==null){
+            fragment = new About_Scrolls();
+        }
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView =inflater.inflate(R.layout.fragment_about_scrolls, container, false);
-appBarLayout =(AppBarLayout)rootView.findViewById(R.id.app_bar_layout);
-        rvDomains = (RecyclerView)rootView.findViewById(R.id.rvDomains);
-        collapsingToolbarLayout = (CollapsingToolbarLayout)rootView.findViewById(R.id.collapse_toolbar) ;
-        layoutManager = new GridLayoutManager(getContext(),2);
-        domains = getActivity().getResources().getStringArray(R.array.domain_array);
-        adapter = new DomainsAdapter(getContext(),domains);
-        rvDomains.setLayoutManager(layoutManager);
-        rvDomains.setAdapter(adapter);
-        web_view = (WebView) rootView.findViewById(R.id.about_scrolls_web_view);
-        WebSettings webSettings = web_view.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        web_view.setWebViewClient(new myWebClient());
-        web_view.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                //Blank listener to disable long click text selection
-                return true;
-            }
-        });
+        if (rootView==null) {
+            rootView = inflater.inflate(R.layout.fragment_about_scrolls, container, false);
+            web_view = (WebView) rootView.findViewById(R.id.about_scrolls_web_view);
+            WebSettings webSettings = web_view.getSettings();
+            webSettings.setJavaScriptEnabled(true);
+            web_view.setWebViewClient(new myWebClient());
+            web_view.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    //Blank listener to disable long click text selection
+                    return true;
+                }
+            });
 
-        rootView.findViewById(R.id.rlShowTopics).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               appBarLayout.setExpanded(false,true);
-            }
-        });
-        rootView.findViewById(R.id.rlHideTopics).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                appBarLayout.setExpanded(true,true);
-            }
-        });
+            parallaxLayout = (ParallaxLayerLayout)rootView.findViewById(R.id.parallaxLayer);
+            sensorTranslationUpdater = new SensorTranslationUpdater(getContext());
+            parallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
+        }
         return rootView;
     }
 
@@ -84,6 +81,13 @@ appBarLayout =(AppBarLayout)rootView.findViewById(R.id.app_bar_layout);
     public void onResume() {
         super.onResume();
         web_view.loadUrl("file:///android_asset/about.html");
+        sensorTranslationUpdater.registerSensorManager();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        sensorTranslationUpdater.unregisterSensorManager();
     }
 
     public class myWebClient extends WebViewClient {

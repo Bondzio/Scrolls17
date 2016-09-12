@@ -21,7 +21,8 @@
         android:supportsRtl="true"
 
         android:theme="@style/ScrollsTheme">
-        <activity android:name="in.silive.scrolls.Activities.Splash">
+        <activity android:name="in.silive.scrolls.Activities.Splash"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,10 +30,12 @@
             </intent-filter>
         </activity>
         <activity android:name="in.silive.scrolls.Activities.MainActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
             />
         <activity android:name="in.silive.scrolls.Activities.MyPickerActivity"
             android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
             android:theme="@style/FilePickerTheme"
             />
         <meta-data

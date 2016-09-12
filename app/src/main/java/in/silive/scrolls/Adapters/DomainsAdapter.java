@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import in.silive.scrolls.Fragments.DialogTopics;
@@ -70,11 +71,11 @@ public class DomainsAdapter extends RecyclerView.Adapter<DomainsAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvDomain;
-        LinearLayout ll;
+        RelativeLayout ll;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ll = (LinearLayout) itemView.findViewById(R.id.ll);
+            ll = (RelativeLayout) itemView.findViewById(R.id.ll);
             tvDomain = (TextView) itemView.findViewById(R.id.tvDomain);
         }
     }
