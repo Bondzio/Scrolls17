@@ -13,8 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import in.silive.scrolls.Fragments.AboutUs;
 import in.silive.scrolls.Fragments.About_Scrolls;
-import in.silive.scrolls.Fragments.About_Us;
 import in.silive.scrolls.Fragments.DialogNoNetConnection;
 import in.silive.scrolls.Fragments.NavigationDrawer;
 import in.silive.scrolls.Fragments.ReachUs;
@@ -117,8 +117,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                 Dialogs.showForgotIdDialog(this);
                 break;*/
             case 6:
-                if (!(fragment instanceof About_Us))
-                    fragment = new About_Us();
+                if (!(fragment instanceof AboutUs))
+                    fragment = new AboutUs();
                 title = "About Us";
                 break;
 
