@@ -82,7 +82,7 @@ public class QueryUs extends Fragment {
                 jsonObject.put("Email",usr_mail);
                 jsonObject.put("Body",usr_msg);
                 FetchData fetchData = new FetchData();
-                fetchData.setArgs(Config.QUERY_URL, new FetchDataListener() {
+                fetchData.setArgs(Config.QUERY_URL,jsonObject.toString(), new FetchDataListener() {
                     @Override
                     public void preExecute() {
                         progressDialog = new ProgressDialog(getContext());
