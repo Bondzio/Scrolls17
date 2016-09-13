@@ -1,16 +1,19 @@
 package in.silive.scrolls.Network;
 
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.util.Log;
 
 import org.json.JSONException;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 
 import in.silive.scrolls.Listeners.FetchDataListener;
 import in.silive.scrolls.Listeners.UploaderListener;
@@ -34,44 +37,53 @@ public class FetchData extends AsyncTask<Void, Integer, String> {
         try {
             URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty( "Content-type", "application/json");
+            connection.setRequestProperty( "Accept", "*/*" );
             if (entity != null) {
                 connection.setRequestMethod("POST");
 //                connection.setDoInput(true);
-//                connection.setDoOutput(true);
-            }
-//            connection.setConnectTimeout(60000);
-//            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//            connection.setDoInput(true);
-//            connection.setDoOutput(true);
+                connection.setDoOutput(true);
+//                connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 
-            connection.connect();
-            if (entity != null) {
-                OutputStream outputStream = connection.getOutputStream();
-                byte[] bytes = entity.getBytes();
-                int bufferLength = 1024;
-                for (int i = 0; i < bytes.length; i += bufferLength) {
-                    int progress = (int)((i / (float) bytes.length) * 100);
-                    publishProgress(progress);
-                    if (bytes.length - i >= bufferLength) {
-                        outputStream.write(bytes, i, bufferLength);
-                    } else {
-                        outputStream.write(bytes, i, bytes.length - i);
+            }
+           // connection.connect();
+            if (entity!=null){
+               /* if (listener instanceof UploaderListener)
+                { */  OutputStream outputStream = connection.getOutputStream();
+                    byte[] bytes = entity.getBytes();
+                    int bufferLength = 1024;
+                publishProgress(0);
+                    for (int i = 0; i < bytes.length; i += bufferLength) {
+                        int progress = (int)((i / (float) bytes.length) * 100);
+                        publishProgress(progress);
+                        Log.d("SCrolls","Upload"+ progress);
+                        if (bytes.length - i >= bufferLength) {
+                            outputStream.write(bytes, i, bufferLength);
+                        } else {
+                            outputStream.write(bytes, i, bytes.length - i);
+                        }
                     }
-                }
-                publishProgress(100);
-                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-                writer.write(entity);
-                writer.close();
+                    publishProgress(100);
+                    outputStream.flush();
+              /*  }else {
+                    OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+                    writer.write(entity);
+                    writer.flush();
+
+                }*/
                 Log.d(Config.LOG, "Entity " + entity);
             }
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+             InputStream is = connection.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null)
                 sb.append(line);
             String result = sb.toString();
-            connection.disconnect();
-
+            if ( TextUtils.isEmpty(result)){
+                result =""+ connection.getResponseCode();
+            }
             return result;
         } catch (Exception e) {
             e.printStackTrace();

@@ -3,11 +3,13 @@ package in.silive.scrolls.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import in.silive.scrolls.Adapters.ScheduleAdapter;
 import in.silive.scrolls.R;
@@ -15,7 +17,7 @@ import in.silive.scrolls.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ScheduleFragment extends Fragment {
+public class ScheduleFragment extends Fragment  {
     public static String TAG = "ScheduleFragment";
     RecyclerView rvSchedule;
     ScheduleAdapter adapter;
@@ -38,8 +40,11 @@ public class ScheduleFragment extends Fragment {
         adapter = new ScheduleAdapter(getContext(), dates, labels);
         rvSchedule.setLayoutManager(linearLayoutManager);
         rvSchedule.setAdapter(adapter);
+
+
         return view;
     }
+
 
 }
 

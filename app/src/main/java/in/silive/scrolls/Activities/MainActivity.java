@@ -24,6 +24,7 @@ import in.silive.scrolls.Fragments.ScheduleFragment;
 import in.silive.scrolls.Fragments.UploadDoc;
 import in.silive.scrolls.Network.CheckConnectivity;
 import in.silive.scrolls.R;
+import in.silive.scrolls.Util.Keyboard;
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawer.NavigationDrawerListener {
     NavigationDrawer navigationDrawer;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
     LinearLayout ll;
     private Toolbar mtoolbar;
     private SlidingPaneLayout slidingPane;
+    private boolean finishing;
+    private FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black);;
         //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_up_indicator);
         slidingPane = (android.support.v4.widget.SlidingPaneLayout) findViewById(R.id.sliding_pane_layout);
         slidingPane.setParallaxDistance(200);
@@ -59,12 +63,31 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                     hideDrawer();
             }
         });
+        findViewById(R.id.container_body).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         ll = (LinearLayout) findViewById(R.id.ll);
         displayView(0);
     }
 
-    private void displayView(final int position) {
+    @Override
+    protected void onResume() {
+      //  finishing=false;
+        //if (fragmentTransaction!=null && fragmentTransaction.isEmpty())
+        super.onResume();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        finishing = true;
+    }
+
+    public void displayView(final int position) {
         String title = getString(R.string.app_name);
+        Keyboard.close(this);
         switch (position) {
             case 0:
                 if (!(fragment instanceof About_Scrolls))
@@ -84,24 +107,24 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
             case 3:
                 if (!(fragment instanceof Register))
 
-                    if (CheckConnectivity.isNetConnected(MainActivity.this)) {
+                   // if (CheckConnectivity.isNetConnected(MainActivity.this)) {
                         fragment = new Register();
                         title = "Register";
-                    } else {
+                   /* } else {
                         DialogNoNetConnection dialogNoNetConnection = new DialogNoNetConnection();
                         dialogNoNetConnection.show(getSupportFragmentManager(), "No net connection");
                     }
-
+*/
                 break;
             case 4:
                 if (!(fragment instanceof UploadDoc))
-                    if (CheckConnectivity.isNetConnected(MainActivity.this)) {
+                 //   if (CheckConnectivity.isNetConnected(MainActivity.this)) {
                         fragment = new UploadDoc();
                         title = "Upload a Doc";
-                    } else {
+                   /* } else {
                         DialogNoNetConnection dialogNoNetConnection = new DialogNoNetConnection();
                         dialogNoNetConnection.show(getSupportFragmentManager(), "No net connection");
-                    }
+                    }*/
                 break;
            /* case 5:
                 if (!(fragment instanceof QueryUs))
@@ -121,7 +144,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                     fragment = new AboutUs();
                 title = "About Us";
                 break;
-
             default:
                 break;
         }
@@ -129,17 +151,19 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
             fragment = fragmentManager.findFragmentByTag(fragment.getClass().getName());
         }
         if (fragment != null) {
-            final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment).addToBackStack(fragment.getClass().getName());
             final String finalTitle = title;
-            new Handler().postDelayed(new Runnable() {
+            findViewById(R.id.container_body).post(new Runnable() {
                 @Override
                 public void run() {
-                    fragmentTransaction.commit();
-                    // set the toolbar title
-                    getSupportActionBar().setTitle(finalTitle);
+                  //  if (!finishing) {
+                        fragmentTransaction.commitAllowingStateLoss();
+                        // set the toolbar title
+                        getSupportActionBar().setTitle(finalTitle);
+                    //}
                 }
-            }, 100);
+            });
 
         }
     }
@@ -147,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         if (menuItem.getItemId() == android.R.id.home) {
+Keyboard.close(this);
             if (drawerVisible)
                 hideDrawer();
             else

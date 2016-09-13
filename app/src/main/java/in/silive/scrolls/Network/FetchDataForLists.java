@@ -78,7 +78,7 @@ public class FetchDataForLists extends AsyncTask<String, Void, ArrayList<HashMap
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod(type_of_request);
             urlConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-
+            Log.d("FetchDataForList","URL - "+url);
             if (type_of_request.equals("POST")) {
                 urlConnection.setDoOutput(true);
                 Log.d("FetchData", "inside json"+json);
@@ -120,7 +120,6 @@ public class FetchDataForLists extends AsyncTask<String, Void, ArrayList<HashMap
                 // Expected JSON is an array so if current token is "[" then while
                 // we don't get
                 // "]" we will keep parsing
-                Log.d("FetchData", fetchedData);
                 if (searchList.size() == 0) {
                     return null;
                 }
@@ -171,9 +170,9 @@ public class FetchDataForLists extends AsyncTask<String, Void, ArrayList<HashMap
     @Override
     protected void onPostExecute(ArrayList<HashMap<String, String>> strings) {
         super.onPostExecute(strings);
-        Log.d("Scrolls","" + strings.size());
+        Log.d("Scrolls","Size " + strings.size());
         if (strings == null)
-            Log.d("Scrolls","Scrolls");
+            Log.d("Scrolls","Null String");
         try {
             nrl.postRequest(strings);
         } catch (MalformedURLException e) {

@@ -18,10 +18,10 @@
     <string name="drawer_close">Close Drawer</string>
 
     <string-array name="schedule_dates">
+        <item>4 Oct</item>
         <item>10 Oct</item>
-        <item>16 Oct</item>
-        <item>19 Oct</item>
-        <item>23 Oct</item>
+        <item>18 Oct</item>
+        <item>21 Oct</item>
     </string-array>
 
     <string-array name="schedule_labels">
@@ -197,4 +197,35 @@ clean earth.</item>
     <string name="stud_corr_phn">8802119708\n8802119708\n</string>
     <string name="web_d">Gaurav Arora\nPranav Chaudhary\nSukankshi Jain\nSiddhant Goral\nKunal Chaudhary\nRajat Sharma\nDeepak Singh\nAkash Kool</string>
     <string name="app_dev">Shobhit Agarwal\nKartikey Srivastava\nAbishek Kumar Gupta\nAkriti Verma</string>
+
+    <string-array name="Technical_Committee">
+        <item>Prof. P.K. Chopra  HOD,EC/EI,AKGEC</item>
+        <item>Prof. P.K. Sharda  HOD,AS-H,AKGEC</item>
+        <item>Prof. S.L. Kapoor  HOD,MCA,AKGEC</item>
+        <item>Prof. B.M. Kalra  HOD,CSE,AKGEC
+        </item>
+        <item>Prof. I.P. Sharma  HOD,ME,AKGEC</item>
+        <item>Prof. R.P. Saw  HOD,IT,AKGEC</item>
+        <item>Prof. B. Parashad  HOD,CIVIL,AKGEC</item>
+        <item>Prof. Bhupul Singh  HOD,EN,AKGEC</item>
+    </string-array>
+    <string-array name="Student_Coordinators">
+        <item>
+        </item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <string-array name="Web_Developers">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <string-array name="App_Developers">
+        <item>        </item>
+        <item>        </item>
+        <item>        </item>
+        <item>        </item>
+    </string-array>
+
 </resources>
