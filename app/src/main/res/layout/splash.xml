@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/audi"/>
+            android:src="@mipmap/ic_launcher"/>
         <com.schibsted.spain.parallaxlayerlayout.ParallaxLayerLayout
             android:layout_width="match_parent"
             android:id="@+id/parallaxLayer"
