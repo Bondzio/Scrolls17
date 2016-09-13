@@ -1,61 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:background="#6e000000"
-    android:gravity="center"
-    android:id="@+id/llFullscreen"
-    android:layout_height="match_parent">
-    <io.codetail.widget.RevealLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00000000">
+
     <LinearLayout
+        android:id="@+id/llFullscreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="vertical"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
-        android:layout_margin="10dp"
-        android:id="@+id/ll"
-
-        android:orientation="vertical">
-        <LinearLayout
+        <io.codetail.widget.RevealLinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
 
-            android:background="@color/bg_gray"
-            android:orientation="horizontal">
-            <TextView
+            <LinearLayout
+                android:id="@+id/ll"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Title"
-                android:layout_weight="1"
-                android:id="@+id/tvTitle"
-                android:padding="5dp"
-                android:gravity="center_horizontal"
-                android:textColor="@color/white"
-                android:textAppearance="@android:style/TextAppearance.Medium"
-                />
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0"
-                android:padding="3dp"
-                android:background="@color/colorPrimary"
-                android:id="@+id/ivClose"
-                android:tint="@color/bg_dark_gray"
-                android:src="@android:drawable/ic_menu_close_clear_cancel"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            >
-            <android.support.v7.widget.RecyclerView
-                android:layout_margin="3dp"
-                android:padding="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/rvTopic"></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
 
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:padding="5dp"
+                        android:text="Title"
+                        android:textAppearance="@android:style/TextAppearance.Medium"
+                        android:textColor="@color/colorPrimary" />
+
+                    <ImageView
+                        android:id="@+id/ivClose"
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0"
+                        android:background="@color/colorPrimary"
+                        android:padding="3dp"
+                        android:visibility="gone"
+                        android:src="@android:drawable/ic_menu_close_clear_cancel"
+                        android:tint="@color/bg_dark_gray" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvTopic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:padding="5dp"></android.support.v7.widget.RecyclerView>
+                </LinearLayout>
+
+            </LinearLayout>
+        </io.codetail.widget.RevealLinearLayout>
     </LinearLayout>
-    </io.codetail.widget.RevealLinearLayout>
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

@@ -2,6 +2,7 @@ package in.silive.scrolls.Util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 /**
@@ -9,11 +10,14 @@ import android.view.inputmethod.InputMethodManager;
  */
 public class Keyboard {
     public static void close(Context context){
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        if (imm.isAcceptingText()) {
-            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-        } else {
+        Activity activity = (Activity)context;
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            view = new View(activity);
         }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
     }
 }

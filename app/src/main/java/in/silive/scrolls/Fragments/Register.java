@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -44,23 +45,23 @@ import in.silive.scrolls.Util.Validator;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Register extends Fragment implements  FetchDataListener {
+public class Register extends Fragment implements FetchDataListener {
     private static final int GET_COLLEGE = 11;
     private static final int STUDENT_REG = 12;
     private static final int CREATE_COLLEGE = 13;
     private static final int LOAD_TOPICS = 14;
     private static final int TEAM_REGISTER = 15;
     public static String student_name, student_college_name, student_id, student_mob_no, student_mail, student_course;
-    int student_year,collegeId;
     public static boolean student_accommodation = false;
     public static String name_of_team, name_member_one, name_member_two, name_member_three = "", id_member_one, id_member_two, id_member_three = "";
     public static String domain_of_team, topic_of_team, password_team;
     public static int no_of_teammembers, leader_of_team;
     public static int flag = 0, tflag = 0;
-    public int id_domain = 1;
-
-   static ArrayList<Integer> collegeIds = new ArrayList<>();
+    static ArrayList<Integer> collegeIds = new ArrayList<>();
     static ArrayList<String> collegeNames = new ArrayList<>();
+    static Register fragment;
+    public int id_domain = 1;
+    int student_year, collegeId;
     in.silive.scrolls.Adapters.SpinnerAdapter collegeListAdapter;
     int memberCount = 2;
     int leader_number = 0;
@@ -86,185 +87,212 @@ public class Register extends Fragment implements  FetchDataListener {
     private ProgressDialog progressDialog;
     private int student_courseId;
     private int topic_id;
-    private String mode="";
+    private String mode = "";
 
     public Register() {
         // Required empty public constructor
     }
 
+    public static Register getInstance() {
+        if (fragment == null)
+            fragment = new Register();
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         isNetConnectionAvailable = CheckConnectivity.isNetConnected(getContext());
+        if (reg_view == null) {
+            reg_view = inflater.inflate(R.layout.fragment_registration, null, false);
+            reg_individual = (LinearLayout) reg_view.findViewById(R.id.reg_individual);
+            reg_team = (LinearLayout) reg_view.findViewById(R.id.reg_team);
+            stud_name = (EditText) reg_view.findViewById(R.id.stud_name);
+            stud_other_college = (EditText) reg_view.findViewById(R.id.stud_other_college);
+            stud_other_college.setVisibility(View.GONE);
+            stud_id = (EditText) reg_view.findViewById(R.id.stud_id);
+            stud_mob_no = (EditText) reg_view.findViewById(R.id.stud_mob_no);
+            stud_mail = (EditText) reg_view.findViewById(R.id.stud_mail);
+            team_password = (EditText) reg_view.findViewById(R.id.team_password);
+            member_one_id = (EditText) reg_view.findViewById(R.id.member_one_id);
+            member_one_name = (EditText) reg_view.findViewById(R.id.member_one_name);
+            member_two_id = (EditText) reg_view.findViewById(R.id.member_two_id);
+            member_two_name = (EditText) reg_view.findViewById(R.id.member_two_name);
+            member_three_id = (EditText) reg_view.findViewById(R.id.member_three_id);
+            member_three_name = (EditText) reg_view.findViewById(R.id.member_three_name);
+            team_name = (EditText) reg_view.findViewById(R.id.team_name);
+            stud_accommodation = (CheckBox) reg_view.findViewById(R.id.stud_accommodation);
+            member_three = (LinearLayout) reg_view.findViewById(R.id.member_three);
+            two_members = (RadioButton) reg_view.findViewById(R.id.two_members);
+            three_members = (RadioButton) reg_view.findViewById(R.id.three_members);
+            no_of_team_members = (RadioGroup) reg_view.findViewById(R.id.no_of_team_members);
+            no_of_team_members.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
-        reg_view = inflater.inflate(R.layout.fragment_registration, container, false);
-        reg_individual = (LinearLayout) reg_view.findViewById(R.id.reg_individual);
-        reg_team = (LinearLayout) reg_view.findViewById(R.id.reg_team);
-        stud_name = (EditText) reg_view.findViewById(R.id.stud_name);
-        stud_other_college = (EditText) reg_view.findViewById(R.id.stud_other_college);
-        stud_other_college.setVisibility(View.GONE);
-        stud_id = (EditText) reg_view.findViewById(R.id.stud_id);
-        stud_mob_no = (EditText) reg_view.findViewById(R.id.stud_mob_no);
-        stud_mail = (EditText) reg_view.findViewById(R.id.stud_mail);
-        team_password = (EditText) reg_view.findViewById(R.id.team_password);
-        member_one_id = (EditText) reg_view.findViewById(R.id.member_one_id);
-        member_one_name = (EditText) reg_view.findViewById(R.id.member_one_name);
-        member_two_id = (EditText) reg_view.findViewById(R.id.member_two_id);
-        member_two_name = (EditText) reg_view.findViewById(R.id.member_two_name);
-        member_three_id = (EditText) reg_view.findViewById(R.id.member_three_id);
-        member_three_name = (EditText) reg_view.findViewById(R.id.member_three_name);
-        team_name = (EditText) reg_view.findViewById(R.id.team_name);
-        stud_accommodation = (CheckBox) reg_view.findViewById(R.id.stud_accommodation);
-        member_three = (LinearLayout) reg_view.findViewById(R.id.member_three);
-        two_members = (RadioButton) reg_view.findViewById(R.id.two_members);
-        three_members = (RadioButton) reg_view.findViewById(R.id.three_members);
-        no_of_team_members = (RadioGroup) reg_view.findViewById(R.id.no_of_team_members);
-        no_of_team_members.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-
-                if (i == R.id.three_members) {
-                    member_three.setVisibility(View.VISIBLE);
-                    leader_member_three.setVisibility(View.VISIBLE);
-                    memberCount = 3;
-                } else {
-                    member_three.setVisibility(View.GONE);
-                    leader_member_three.setVisibility(View.GONE);
-                    memberCount = 2;
+                    if (i == R.id.three_members) {
+                        member_three.setVisibility(View.VISIBLE);
+                        leader_member_three.setVisibility(View.VISIBLE);
+                        memberCount = 3;
+                    } else {
+                        member_three.setVisibility(View.GONE);
+                        leader_member_three.setVisibility(View.GONE);
+                        memberCount = 2;
+                    }
                 }
-            }
-        });
-        team_leader = (RadioGroup) reg_view.findViewById(R.id.team_leader);
-        leader_member_one = (RadioButton) reg_view.findViewById(R.id.leader_member_one);
-        leader_member_two = (RadioButton) reg_view.findViewById(R.id.leader_member_two);
-        leader_member_three = (RadioButton) reg_view.findViewById(R.id.leader_member_three);
-        team_leader.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if (i == R.id.leader_member_one) {
-                    leader_number = 0;
-                } else if (i == R.id.leader_member_two) {
-                    leader_number = 1;
-                } else if (i == R.id.leader_member_three) {
-                    leader_number = 2;
+            });
+            team_leader = (RadioGroup) reg_view.findViewById(R.id.team_leader);
+            leader_member_one = (RadioButton) reg_view.findViewById(R.id.leader_member_one);
+            leader_member_two = (RadioButton) reg_view.findViewById(R.id.leader_member_two);
+            leader_member_three = (RadioButton) reg_view.findViewById(R.id.leader_member_three);
+            team_leader.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                    if (i == R.id.leader_member_one) {
+                        leader_number = 0;
+                    } else if (i == R.id.leader_member_two) {
+                        leader_number = 1;
+                    } else if (i == R.id.leader_member_three) {
+                        leader_number = 2;
+                    }
                 }
-            }
-        });
-        individual_submit = (Button) reg_view.findViewById(R.id.individual_submit);
-        individual_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Keyboard.close(getContext());
-                getStudData();
-            }
-        });
-        submit_team_reg = (Button) reg_view.findViewById(R.id.submit_team_reg);
-        submit_team_reg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            });
+            individual_submit = (Button) reg_view.findViewById(R.id.individual_submit);
+            individual_submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Keyboard.close(getContext());
+                    getStudData();
+                }
+            });
+            submit_team_reg = (Button) reg_view.findViewById(R.id.submit_team_reg);
+            submit_team_reg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                Keyboard.close(getContext());
-                getTeamData();
-            }
-        });
-        stud_college = (Spinner) reg_view.findViewById(R.id.stud_college);
-        //collegeListAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, list_of_colleges);
-        //stud_college.setAdapter(collegeListAdapter);
-        stud_college.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (stud_college.getSelectedItem().equals("Other")) {
-                    stud_other_college.setVisibility(View.VISIBLE);
+                    Keyboard.close(getContext());
+                    getTeamData();
+                }
+            });
+            stud_college = (Spinner) reg_view.findViewById(R.id.stud_college);
+            //collegeListAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, list_of_colleges);
+            //stud_college.setAdapter(collegeListAdapter);
+            stud_college.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (stud_college.getSelectedItem().equals("Other")) {
+                        stud_other_college.setVisibility(View.VISIBLE);
+                    }
                 }
 
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        stud_course = (Spinner) reg_view.findViewById(R.id.stud_course);
-        stud_course.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        stud_year = (Spinner) reg_view.findViewById(R.id.stud_year);
-        stud_year.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        team_individual_tab = (TabLayout) reg_view.findViewById(R.id.team_individual_tab);
-        TabLayout.Tab ind = team_individual_tab.newTab().setText("Individual");
-        TabLayout.Tab team = team_individual_tab.newTab().setText("Team");
-        team_individual_tab.addTab(ind, 0);
-        team_individual_tab.addTab(team, 1);
-        team_individual_tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                int i = tab.getPosition();
-                switch (i) {
-                    case 0:
-                        reg_individual.setVisibility(View.VISIBLE);
-                        reg_team.setVisibility(View.GONE);
-                        break;
-                    case 1:
-                        reg_individual.setVisibility(View.GONE);
-                        reg_team.setVisibility(View.VISIBLE);
-                        if (topicsIDList.size()==0)
-                            loadTopics(id_domain);
-                        break;
                 }
-            }
+            });
+       stud_college.setOnTouchListener(new View.OnTouchListener() {
+           @Override
+           public boolean onTouch(View view, MotionEvent motionEvent) {
+               if (collegeIds.size()==0 && motionEvent.getAction() == MotionEvent.ACTION_UP)
+                   loadCollegeList();
+               return false;
+           }
+       });
+            stud_course = (Spinner) reg_view.findViewById(R.id.stud_course);
+            stud_course.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+                }
 
-            }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
+                }
+            });
+            stud_year = (Spinner) reg_view.findViewById(R.id.stud_year);
+            stud_year.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-            }
-        });
-        ind.select();
-        team_domain = (Spinner) reg_view.findViewById(R.id.team_domain);
-        team_domain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                id_domain = i + 1;
-                loadTopics(id_domain);
-            }
+                }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
-        team_topic = (Spinner) reg_view.findViewById(R.id.team_topic);
-        if (collegeIds.size()==0) {
-                loadCollegeList();
+                }
+            });
+            team_individual_tab = (TabLayout) reg_view.findViewById(R.id.team_individual_tab);
+            TabLayout.Tab ind = team_individual_tab.newTab().setText("Individual");
+            TabLayout.Tab team = team_individual_tab.newTab().setText("Team");
+            team_individual_tab.addTab(ind, 0);
+            team_individual_tab.addTab(team, 1);
+            team_individual_tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    int i = tab.getPosition();
+                    switch (i) {
+                        case 0:
+                            reg_individual.setVisibility(View.VISIBLE);
+                            reg_team.setVisibility(View.GONE);
+                            break;
+                        case 1:
+                            reg_individual.setVisibility(View.GONE);
+                            reg_team.setVisibility(View.VISIBLE);
+                            if (topicsIDList.size() == 0)
+                                loadTopics(id_domain);
+                            break;
+                    }
+                }
+
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+
+                }
+
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+
+                }
+            });
+            ind.select();
+            team_domain = (Spinner) reg_view.findViewById(R.id.team_domain);
+            team_domain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    id_domain = i + 1;
+                    loadTopics(id_domain);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+            team_topic = (Spinner) reg_view.findViewById(R.id.team_topic);
+            team_topic.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    if (topicsIDList.size() == 0 && motionEvent.getAction() == MotionEvent.ACTION_UP
+                            && id_domain!=0) {
+                       loadTopics(id_domain);
+                    }
+
+                    return false;
+                }
+            });
+        }
+        return reg_view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (collegeIds.size() == 0) {
+            loadCollegeList();
         }
 
-
-        return reg_view;
     }
 
     public void loadCollegeList() {
@@ -285,9 +313,9 @@ public class Register extends Fragment implements  FetchDataListener {
             flag = 1;
             stud_name.setError("Invalid name");
         }
-        if (collegeIds.size() == 0){
+        if (collegeIds.size() == 0) {
             loadCollegeList();
-            Toast.makeText(getContext(),"Select College",Toast.LENGTH_LONG);
+            Toast.makeText(getContext(), "Select College", Toast.LENGTH_LONG);
         }
         student_college_name = stud_other_college.getText().toString();
         student_id = stud_id.getText().toString();
@@ -305,7 +333,7 @@ public class Register extends Fragment implements  FetchDataListener {
             flag = 1;
             stud_mob_no.setError("Invalid phone number");
         }
-        student_courseId = stud_course.getSelectedItemPosition()+1;
+        student_courseId = stud_course.getSelectedItemPosition() + 1;
         student_year = Integer.parseInt(stud_year.getSelectedItem().toString());
         if (stud_accommodation.isChecked()) {
             student_accommodation = true;
@@ -314,13 +342,13 @@ public class Register extends Fragment implements  FetchDataListener {
         if (flag == 0) {
             if (stud_other_college.getVisibility() != View.VISIBLE) {
                 selfRegister();
-            }else {
+            } else {
                 createOtherCollege();
             }
         } else {
           /*  DialogInvalidDetails dialogInvalidDetails = new DialogInvalidDetails();
             dialogInvalidDetails.show(getFragmentManager(), "Invalid details");*/
-            Snackbar.make(reg_view,"Incomlete Details.",Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(reg_view, "Incomlete Details.", Snackbar.LENGTH_SHORT).show();
         }
     }
 
@@ -362,7 +390,7 @@ public class Register extends Fragment implements  FetchDataListener {
         id_member_two = member_two_id.getText().toString();
         //check scrolls id valid
         name_member_three = member_three_name.getText().toString();
-        if (name_member_three.length() <= 3 && memberCount ==3 ) {
+        if (name_member_three.length() <= 3 && memberCount == 3) {
             tflag = 1;
             member_three_name.setError("Invalid name");
         }
@@ -391,9 +419,9 @@ public class Register extends Fragment implements  FetchDataListener {
             if (!CheckConnectivity.isNetConnected(getContext()))
                 Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
             else
-            teamRegister();
+                teamRegister();
         } else {
-            Snackbar.make(reg_view,"Incomplete Details.",Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(reg_view, "Incomplete Details.", Snackbar.LENGTH_SHORT).show();
         }
     }
 
@@ -435,9 +463,7 @@ public class Register extends Fragment implements  FetchDataListener {
     }
 
 
-
-
-    public void selfRegister(){
+    public void selfRegister() {
         if (!CheckConnectivity.isNetConnected(getContext()))
             Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
         else {
@@ -469,15 +495,15 @@ public class Register extends Fragment implements  FetchDataListener {
         }
     }
 
-    public void loadTopics(int domainId){
+    public void loadTopics(int domainId) {
+        topicsIDList.clear();
+        topicsList.clear();
+        if (topicsAdapter != null)
+            topicsAdapter.notifyDataSetChanged();
         if (!CheckConnectivity.isNetConnected(getContext()))
             Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
         else {
             if (team_individual_tab.getSelectedTabPosition() == 1) {
-                topicsIDList.clear();
-                topicsList.clear();
-                if (topicsAdapter != null)
-                    topicsAdapter.notifyDataSetChanged();
                 FetchData fetchData = new FetchData();
                 fetchData.setArgs(Config.GET_TOPICS + domainId, this, LOAD_TOPICS);
                 fetchData.execute();
@@ -487,7 +513,7 @@ public class Register extends Fragment implements  FetchDataListener {
 
     @Override
     public void preExecute() {
-        if (progressDialog==null) {
+        if (progressDialog == null) {
             progressDialog = new ProgressDialog(getContext());
             progressDialog.setMessage("Loading");
             progressDialog.setCancelable(false);
@@ -513,14 +539,14 @@ public class Register extends Fragment implements  FetchDataListener {
                             collegeIds.add(jsonObject.getInt("CollegeId"));
                             collegeNames.add(jsonObject.getString("CollegeName"));
                         }
-                        collegeIds.add( -1);
+                        collegeIds.add(-1);
                         collegeNames.add("Others");
-                        collegeListAdapter = new SpinnerAdapter(getContext(),collegeNames);
+                        collegeListAdapter = new SpinnerAdapter(getContext(), collegeNames);
                         stud_college.setAdapter(collegeListAdapter);
                         stud_college.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                if (collegeIds.get(i) ==  - 1) {
+                                if (collegeIds.get(i) == -1) {
                                     (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.VISIBLE);
                                 } else {
                                     (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.GONE);
@@ -532,6 +558,7 @@ public class Register extends Fragment implements  FetchDataListener {
                                     (reg_view.findViewById(R.id.stud_id)).setVisibility(View.GONE);
                                 }
                             }
+
                             @Override
                             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -539,14 +566,14 @@ public class Register extends Fragment implements  FetchDataListener {
                         });
                         break;
 
-                    case STUDENT_REG :
+                    case STUDENT_REG:
                         try {
                             jsonObject = new JSONObject(result);
                             final int regId = jsonObject.getInt("RegId");
                             new AlertDialog.Builder(getActivity())
                                     .setTitle("Registration successful")
                                     .setMessage("Congratulations " + jsonObject.getString("Name") + " your registration is successful.\n" +
-                                            "Your registration id is " + regId +" .\n"+
+                                            "Your registration id is " + regId + " .\n" +
                                             "To continue click OK")
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
@@ -559,12 +586,11 @@ public class Register extends Fragment implements  FetchDataListener {
                                     .setCancelable(false)
                                     //       .setIcon(android.R.drawable.ic_dialog_alert)
                                     .show();
-                        }catch (Exception e){
-                            if (result.contains("Participant already registered")){
-                                Snackbar.make(reg_view,result,Snackbar.LENGTH_LONG).show();
-                            }
-                            else {
-                                Snackbar.make(reg_view,"Something went wrong.",Snackbar.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            if (result.contains("Participant already registered")) {
+                                Snackbar.make(reg_view, result, Snackbar.LENGTH_LONG).show();
+                            } else {
+                                Snackbar.make(reg_view, "Something went wrong.", Snackbar.LENGTH_LONG).show();
                             }
                         }
 
@@ -574,16 +600,16 @@ public class Register extends Fragment implements  FetchDataListener {
                         collegeId = jsonObject.getInt("CollegeId");
                         selfRegister();
                         break;
-                    case LOAD_TOPICS :
+                    case LOAD_TOPICS:
                         jsonArray = new JSONArray(result);
                         topicsList.clear();
                         topicsIDList.clear();
-                        for (int i=0;i<jsonArray.length();i++){
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             jsonObject = jsonArray.getJSONObject(i);
                             topicsIDList.add(jsonObject.getInt("TopicId"));
                             topicsList.add(jsonObject.getString("TopicName"));
                         }
-                        topicsAdapter = new SpinnerAdapter(getContext(),topicsList);
+                        topicsAdapter = new SpinnerAdapter(getContext(), topicsList);
                         team_topic.setAdapter(topicsAdapter);
                         team_topic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
@@ -597,7 +623,7 @@ public class Register extends Fragment implements  FetchDataListener {
                             }
                         });
                         break;
-                    case TEAM_REGISTER :
+                    case TEAM_REGISTER:
                         try {
                             jsonObject = new JSONObject(result);
                             if (jsonObject.has("TeamId")) {
@@ -609,7 +635,7 @@ public class Register extends Fragment implements  FetchDataListener {
                                                 "\nMember IDs : \n" +
                                                 "1. " + jsonObject.getString("Member1RegId") + ".\n" +
                                                 "2. " + jsonObject.getString("Member2RegId") + ".\n" +
-                                                ( memberCount==3 ? "3. " + jsonObject.getString("Member3RegId") : "") +
+                                                (memberCount == 3 ? "3. " + jsonObject.getString("Member3RegId") : "") +
                                                 "\nTo continue click OK")
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
@@ -618,7 +644,7 @@ public class Register extends Fragment implements  FetchDataListener {
                                                 SharedPreferences.Editor editor = sharedpreferences.edit();
                                                 editor.putString(Config.team_id, "" + team_id);
                                                 editor.commit();
-                                                if (mode.equalsIgnoreCase("upload")){
+                                                if (mode.equalsIgnoreCase("upload")) {
 
                                                 }
                                             }
@@ -626,15 +652,14 @@ public class Register extends Fragment implements  FetchDataListener {
                                         .setCancelable(false)
                                         //       .setIcon(android.R.drawable.ic_dialog_alert)
                                         .show();
-                            }else if (jsonObject.has("Message")){
-                                Snackbar.make(reg_view,jsonObject.getString("Message"),Snackbar.LENGTH_LONG).show();
+                            } else if (jsonObject.has("Message")) {
+                                Snackbar.make(reg_view, jsonObject.getString("Message"), Snackbar.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            if (result.contains("Participants are already registered in other team")){
-                                    Snackbar.make(reg_view,result,Snackbar.LENGTH_LONG).show();
-                                }
-                                else {
+                            if (result.contains("Participants are already registered in other team")) {
+                                Snackbar.make(reg_view, result, Snackbar.LENGTH_LONG).show();
+                            } else {
                                 Snackbar.make(reg_view, "Something went wrong.", Snackbar.LENGTH_LONG).show();
                             }
                         }
@@ -657,7 +682,7 @@ public class Register extends Fragment implements  FetchDataListener {
                     })
                     .setIcon(android.R.drawable.ic_dialog_alert);
 
-            if (collegeIds.size()==0 && id == GET_COLLEGE) {
+            if (collegeIds.size() == 0 && id == GET_COLLEGE) {
                 dialog.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         loadCollegeList();
@@ -665,8 +690,7 @@ public class Register extends Fragment implements  FetchDataListener {
                     }
                 });
                 dialog.show();
-            }
-            else if (topicsIDList.size()==0 && id == LOAD_TOPICS){
+            } else if (topicsIDList.size() == 0 && id == LOAD_TOPICS) {
                 dialog.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         loadTopics(id_domain);

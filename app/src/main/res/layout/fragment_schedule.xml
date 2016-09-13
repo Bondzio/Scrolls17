@@ -1,9 +1,19 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+<LinearLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.silive.scrolls.Fragments.ScheduleFragment">
+    android:orientation="vertical">
 
+    <com.fmsirvent.ParallaxEverywhere.PEWImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:src="@drawable/pr" />
 
 <android.support.v7.widget.RecyclerView
     android:layout_width="match_parent"
@@ -12,4 +22,5 @@
     android:visibility="visible"
     android:id="@+id/rvSchedule"></android.support.v7.widget.RecyclerView>
 
-</FrameLayout>
+</LinearLayout>
+</ScrollView>

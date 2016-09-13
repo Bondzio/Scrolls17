@@ -2,24 +2,20 @@ package in.silive.scrolls.Fragments;
 
 import android.animation.Animator;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import in.silive.scrolls.Adapters.RulesAdapter;
 import in.silive.scrolls.Adapters.TopicsAdapter;
 import in.silive.scrolls.R;
 import io.codetail.animation.ViewAnimationUtils;
@@ -27,7 +23,7 @@ import io.codetail.animation.ViewAnimationUtils;
 /**
  * Created by AKG002 on 03-09-2016.
  */
-public class DialogTopics extends DialogFragment {
+public class DialogTopics extends BottomSheetDialogFragment {
     RecyclerView rvTopics;
     String[] topics;
     String title;
@@ -42,13 +38,41 @@ TopicsAdapter adapter;
         this.topics = topics;
 
     }
+    private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
 
+        @Override
+        public void onStateChanged(@NonNull View bottomSheet, int newState) {
+            if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                dismiss();
+            }
+
+        }
+
+        @Override
+        public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+        }
+    };
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final Dialog dialog = new Dialog(getActivity());
-        dialog.getWindow().requestFeature(STYLE_NO_FRAME);
+    public void setupDialog(final Dialog dialog, int style) {
+        super.setupDialog(dialog, style);
         View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_topic,null,false);
+        dialog.setContentView(view);
+      /*  CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((CoordinatorLayout) view.findViewById(R.id.coordinatorLayout)).getLayoutParams();
+        CoordinatorLayout.Behavior behavior = params.getBehavior();
+*/
+      /*  BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(((View) view.findViewById(R.id.llFullscreen)));
+        if( behavior != null && behavior instanceof BottomSheetBehavior ) {
+            ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
+        }
+        int peekHeight = view.findViewById(R.id.llFullscreen).getMeasuredHeight();
+
+        View parent = (View)view.getParent();
+       behavior.setPeekHeight(peekHeight);
+        CoordinatorLayout.LayoutParams layoutParams =
+                (CoordinatorLayout.LayoutParams)parent.getLayoutParams();
+        layoutParams.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+*/
         llFullScreen = (LinearLayout)view.findViewById(R.id.llFullscreen);
         rvTopics = (RecyclerView)view.findViewById(R.id.rvTopic);
         tvTitle = (TextView)view.findViewById(R.id.tvTitle);
@@ -64,36 +88,42 @@ TopicsAdapter adapter;
                 animateDialogClose();
             }
         });
-        dialog.setContentView(view);
-        ll.setVisibility(View.INVISIBLE);
+    /*    ll.setVisibility(View.INVISIBLE);
         ll.post(new Runnable() {
             @Override
             public void run() {
                 animateDialogReveal();
             }
         });
-        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+    */    dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 
             @Override
             public boolean onKey(DialogInterface arg0, int keyCode,
                                  KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
-                  animateDialogClose();
+                    animateDialogClose();
                     dialog.setOnKeyListener(null);
                 }
                 return true;
             }
         });
-        llFullScreen.setOnClickListener(new View.OnClickListener() {
+       /* llFullScreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 animateDialogClose();
             }
-        });
+        });*/
+    }
+
+  /*  @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.getWindow().requestFeature(STYLE_NO_FRAME);
+
         dialog.setCancelable(false);
         return dialog;
     }
-
+*/
     private void animateDialogReveal() {
         int cx =ll.getWidth()/2,cy =ll.getHeight()/2;
         int dx = Math.max(cx, ll.getWidth());
@@ -147,12 +177,12 @@ ll.setVisibility(View.VISIBLE);
         animator.start();
     }
 
-    @Override
+  /*  @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getDialog().getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
     }
-
+*/
 }

@@ -3,7 +3,6 @@ package in.silive.scrolls.Adapters;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,41 +13,36 @@ import android.widget.TextView;
 import in.silive.scrolls.R;
 
 /**
- * Created by AKG002 on 29-08-2016.
+ * Created by AKG002
+ * thats all.
  */
-public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder> {
-    String[] dates;
-    String[] labels;
-    String[] days;
+public class RulesAdapter extends RecyclerView.Adapter<RulesAdapter.ViewHolder>{
+    String[] topics;
     Context context;
     private int lastPosition;
 
-    public ScheduleAdapter(Context context, String[] dates, String[] labels,String[] days) {
+    public RulesAdapter(Context context, String[] topics) {
         this.context = context;
-        this.dates = dates;
-        this.labels = labels;
-        this.days = days;
+        this.topics = topics;
     }
 
     @Override
-    public ScheduleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_schedule,parent,false));
+    public RulesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_num_list,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(final ScheduleAdapter.ViewHolder holder, final int position) {
-
-        holder.tvDate.setText(dates[position]);
-        holder.tvTitle.setText(labels[position]);
-        holder.tvDay.setText(days[position]);
+    public void onBindViewHolder(final RulesAdapter.ViewHolder holder, final int position) {
+        holder.tvTopic.setText(topics[position]);
         holder.itemView.setVisibility(View.INVISIBLE);
+        holder.tvNum.setText(""+(position+1));
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 holder.itemView.setVisibility(View.VISIBLE);
                 setAnimation(holder.itemView,position);
             }
-        }, (int)(100+100*position));
+        }, (int)(10+50*position));
 
     }
 
@@ -61,20 +55,18 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
             lastPosition = position;
         }
     }
-
     @Override
     public int getItemCount() {
-        return dates.length;
+        return topics.length;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-
-        TextView tvDate,tvTitle,tvDay;
+        TextView tvTopic;
+        TextView tvNum;
         public ViewHolder(View itemView) {
             super(itemView);
-            tvDate = (TextView)itemView.findViewById(R.id.tvDate);
-            tvTitle = (TextView)itemView.findViewById(R.id.tvTitle);
-            tvDay = (TextView)itemView.findViewById(R.id.tvWeekDay);
+            tvTopic = (TextView)itemView.findViewById(R.id.tv);
+            tvNum = (TextView)itemView.findViewById(R.id.tvNum);
         }
     }
 }

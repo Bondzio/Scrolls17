@@ -13,17 +13,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import in.silive.scrolls.Fragments.AboutUs;
 import in.silive.scrolls.Fragments.About_Scrolls;
 import in.silive.scrolls.Fragments.DialogNoNetConnection;
 import in.silive.scrolls.Fragments.NavigationDrawer;
 import in.silive.scrolls.Fragments.ReachUs;
+import in.silive.scrolls.Fragments.QueryUs;
 import in.silive.scrolls.Fragments.Register;
 import in.silive.scrolls.Fragments.Rules;
 import in.silive.scrolls.Fragments.ScheduleFragment;
 import in.silive.scrolls.Fragments.UploadDoc;
-import in.silive.scrolls.Network.CheckConnectivity;
 import in.silive.scrolls.R;
+import in.silive.scrolls.Util.Keyboard;
+import in.silive.scrolls.Util.Config;
 import in.silive.scrolls.Util.Keyboard;
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawer.NavigationDrawerListener {
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
     private SlidingPaneLayout slidingPane;
     private boolean finishing;
     private FragmentTransaction fragmentTransaction;
+    private FragmentTransaction fragmentTransaction;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black);;
         //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_up_indicator);
         slidingPane = (android.support.v4.widget.SlidingPaneLayout) findViewById(R.id.sliding_pane_layout);
@@ -72,6 +77,13 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
         ll = (LinearLayout) findViewById(R.id.ll);
         displayView(0);
     }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+
+                super.onDrawerOpened(drawerView);
+            }
+        };
 
     @Override
     protected void onResume() {
@@ -150,6 +162,103 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
         if (fragment != null && fragment.isAdded()) {
             fragment = fragmentManager.findFragmentByTag(fragment.getClass().getName());
         }
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        setUpTabs();
+    }
+
+    private void setUpTabs() {
+        TabLayout.Tab first = tabLayout.newTab().setText("Rules").setIcon(R.drawable.rules);
+        tabLayout.addTab(first, 0);
+
+        tabLayout.addTab(tabLayout.newTab().setText("Dates").setIcon(R.drawable.dates_icon), 1);
+        TabLayout.Tab about = tabLayout.newTab().setText("About").setIcon(R.drawable.about_us);
+        tabLayout.addTab(about, 2);
+        tabLayout.addTab(tabLayout.newTab().setText("Topic").setIcon(R.drawable.rules), 3);
+        tabLayout.addTab(tabLayout.newTab().setText("Contact Us").setIcon(R.drawable.query), 4);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+                switch (tab.getPosition()) {
+
+                    case 0:
+                        if (!(fragment instanceof Rules))
+                            fragment = new Rules();
+                        title = "Rules";
+                        break;
+                    case 1:
+                        if (!(fragment instanceof ScheduleFragment))
+                            fragment = new ScheduleFragment();
+                        title = "Important Dates";
+                        break;
+                    case 4:
+                        if (!(fragment instanceof QueryUs))
+                            fragment = new QueryUs();
+                        title = "Contact Us";
+                        break;
+                    case 2:
+                        if (!(fragment instanceof About_Scrolls))
+                            fragment = new About_Scrolls();
+                        title = "About";
+                        break;
+                    case 3:
+                        if (!(fragment instanceof TopicsFragment))
+                            fragment = new TopicsFragment();
+                        title = "Topics";
+                        break;
+                }
+                showFragment(fragment, title);
+
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+
+                    case 0:
+                        if (!(fragment instanceof Rules))
+                            fragment = Rules.getInstance();
+                        title = "Rules";
+                        break;
+                    case 1:
+                        if (!(fragment instanceof ScheduleFragment))
+                            fragment = ScheduleFragment.getInstance();
+                        title = "Important Dates";
+                        break;
+                    case 4:
+                        if (!(fragment instanceof QueryUs))
+                            fragment = new QueryUs();
+                        title = "Contact Us";
+                        break;
+                    case 2:
+                        if (!(fragment instanceof About_Scrolls))
+                            fragment = About_Scrolls.newInstance();
+                        title = "About";
+                        break;
+                    case 3:
+                        if (!(fragment instanceof TopicsFragment))
+                            fragment = TopicsFragment.getInstance();
+                        title = "Topics";
+                        break;
+                }
+                showFragment(fragment, title);
+
+
+            }
+        });
+        about.select();
+
+    }
+
+
+    public void showFragment(Fragment fragment, String title) {
         if (fragment != null) {
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment).addToBackStack(fragment.getClass().getName());
@@ -165,10 +274,18 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
                 }
             });
 
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_body, fragment)/*.addToBackStack(fragment.getClass().getName())*/;
+            fragmentTransaction.commit();
+            getSupportActionBar().setTitle(title);
         }
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         if (menuItem.getItemId() == android.R.id.home) {
 Keyboard.close(this);

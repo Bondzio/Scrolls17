@@ -18,6 +18,11 @@
     <string name="drawer_close">Close Drawer</string>
 
     <string-array name="schedule_dates">
+        <item>4</item>
+        <item>10</item>
+        <item>18</item>
+        <item>21</item>
+        <item>4 Oct</item>
         <item>10 Oct</item>
         <item>18 Oct</item>
         <item>21 Oct</item>
@@ -203,7 +208,6 @@ clean earth.</item>
     <string name="stud_corr_phn">8802119708\n8802119708\n</string>
     <string name="web_d">Gaurav Arora\nPranav Chaudhary\nSukankshi Jain\nSiddhant Goral\nKunal Chaudhary\nRajat Sharma\nDeepak Singh\nAkash Kool</string>
     <string name="app_dev">Shobhit Agarwal\nKartikey Srivastava\nAbishek Kumar Gupta\nAkriti Verma</string>
-
 
     <string-array name="Technical_Committee">
         <item>Prof. P.K. Chopra  HOD,EC/EI,AKGEC</item>
