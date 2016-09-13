@@ -95,7 +95,7 @@ TopicsAdapter adapter;
                 animateDialogReveal();
             }
         });
-    */    dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+    */  /*  dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 
             @Override
             public boolean onKey(DialogInterface arg0, int keyCode,
@@ -106,7 +106,7 @@ TopicsAdapter adapter;
                 }
                 return true;
             }
-        });
+        });*/
        /* llFullScreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

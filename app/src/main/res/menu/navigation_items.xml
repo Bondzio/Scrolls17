@@ -12,6 +12,10 @@
             android:checked="false"
             android:title="Upload Doc" />
         <item
+            android:id="@+id/query"
+            android:checked="false"
+            android:title="Query Us" />
+        <item
             android:id="@+id/download"
             android:checked="false"
             android:title="Download Sample" />

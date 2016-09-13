@@ -3,5 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="schedule_item_height">110dp</dimen>
-    <dimen name="tabHeight">55dp</dimen>
+    <dimen name="tabHeight">60dp</dimen>
 </resources>

@@ -34,13 +34,15 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
     public void onBindViewHolder(final TopicsAdapter.ViewHolder holder, final int position) {
         holder.tvTopic.setText(topics[position]);
         holder.itemView.setVisibility(View.INVISIBLE);
-        new Handler().postDelayed(new Runnable() {
+        holder.itemView.setVisibility(View.VISIBLE);
+        holder.tvNum.setText(""+(position+1));
+       /* new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 holder.itemView.setVisibility(View.VISIBLE);
                 setAnimation(holder.itemView,position);
             }
-        }, (int)(10+50*position));
+        }, (int)(10+50*position));*/
 
     }
 
@@ -59,10 +61,11 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvTopic;
+        TextView tvTopic,tvNum;
         public ViewHolder(View itemView) {
             super(itemView);
             tvTopic = (TextView)itemView.findViewById(R.id.tv);
+            tvNum = (TextView)itemView.findViewById(R.id.tvNum);
         }
     }
 }

@@ -10,6 +10,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,13 +21,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import in.silive.scrolls.Adapters.PagerAdapter;
 import in.silive.scrolls.Fragments.About_Scrolls;
-import in.silive.scrolls.Fragments.QueryUs;
-import in.silive.scrolls.Fragments.Register;
+import in.silive.scrolls.Fragments.ReachUs;
 import in.silive.scrolls.Fragments.Rules;
 import in.silive.scrolls.Fragments.ScheduleFragment;
 import in.silive.scrolls.Fragments.TopicsFragment;
-import in.silive.scrolls.Fragments.UploadDoc;
 import in.silive.scrolls.R;
 import in.silive.scrolls.Util.Config;
 import in.silive.scrolls.Util.Keyboard;
@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentTransaction fragmentTransaction;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    ViewPager viewPager;
+    PagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentManager = getSupportFragmentManager();
         main_act_context = getApplicationContext();
         mtoolbar = (Toolbar) findViewById(R.id.toolbar);
+        viewPager = (ViewPager)findViewById(R.id.viewPager) ;
         setSupportActionBar(mtoolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -78,108 +81,55 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-        setUpTabs();
+
+        setUpViewPager();
     }
 
-    private void setUpTabs() {
-        TabLayout.Tab first = tabLayout.newTab().setText("Rules").setIcon(R.drawable.rules);
-        tabLayout.addTab(first, 0);
-
-        tabLayout.addTab(tabLayout.newTab().setText("Dates").setIcon(R.drawable.dates_icon), 1);
-        TabLayout.Tab about = tabLayout.newTab().setText("About").setIcon(R.drawable.about_us);
-        tabLayout.addTab(about, 2);
-        tabLayout.addTab(tabLayout.newTab().setText("Topic").setIcon(R.drawable.rules), 3);
-        tabLayout.addTab(tabLayout.newTab().setText("Contact Us").setIcon(R.drawable.query), 4);
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+    private void setUpViewPager() {
+        pagerAdapter = new in.silive.scrolls.Adapters.PagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+        viewPager.setOffscreenPageLimit(4);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-                switch (tab.getPosition()) {
-
-                    case 0:
-                        if (!(fragment instanceof Rules))
-                            fragment = new Rules();
-                        title = "Rules";
-                        break;
-                    case 1:
-                        if (!(fragment instanceof ScheduleFragment))
-                            fragment = new ScheduleFragment();
-                        title = "Important Dates";
-                        break;
-                    case 4:
-                        if (!(fragment instanceof QueryUs))
-                            fragment = new QueryUs();
-                        title = "Contact Us";
-                        break;
-                    case 2:
-                        if (!(fragment instanceof About_Scrolls))
-                            fragment = new About_Scrolls();
-                        title = "About";
-                        break;
-                    case 3:
-                        if (!(fragment instanceof TopicsFragment))
-                            fragment = new TopicsFragment();
-                        title = "Topics";
-                        break;
-                }
-                showFragment(fragment, title);
-
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                switch (tab.getPosition()) {
-
+            public void onPageSelected(int position) {
+                String title = " ";
+                switch (position) {
                     case 0:
-                        if (!(fragment instanceof Rules))
-                            fragment = Rules.getInstance();
                         title = "Rules";
                         break;
                     case 1:
-                        if (!(fragment instanceof ScheduleFragment))
-                            fragment = ScheduleFragment.getInstance();
                         title = "Important Dates";
                         break;
-                    case 4:
-                        if (!(fragment instanceof QueryUs))
-                            fragment = new QueryUs();
-                        title = "Contact Us";
-                        break;
                     case 2:
-                        if (!(fragment instanceof About_Scrolls))
-                            fragment = About_Scrolls.newInstance();
-                        title = "About";
+                        title = "About Scrolls";
                         break;
                     case 3:
-                        if (!(fragment instanceof TopicsFragment))
-                            fragment = TopicsFragment.getInstance();
                         title = "Topics";
                         break;
+                    case 4:
+                        title = "Reach Us";
+                        break;
                 }
-                showFragment(fragment, title);
+                getSupportActionBar().setTitle(title);
+            }
 
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
             }
         });
-        about.select();
-
+        pagerAdapter.addIconsToTab(tabLayout);
+        viewPager.setCurrentItem(2,true);
     }
 
 
-    public void showFragment(Fragment fragment, String title) {
-        if (fragment != null) {
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_body, fragment)/*.addToBackStack(fragment.getClass().getName())*/;
-            fragmentTransaction.commit();
-            getSupportActionBar().setTitle(title);
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -193,7 +143,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Keyboard.close(this);
         Intent i = new Intent(Intent.ACTION_VIEW);
         String url;
-
         switch (item.getItemId()) {
             case R.id.website:
                 url = Config.SCROLLS_WEBSITE;
@@ -222,15 +171,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (menuItem.isChecked()) menuItem.setChecked(false);
         else menuItem.setChecked(true);
         drawerLayout.closeDrawers();
+        Intent i = new Intent(this,SecondActivity.class);
         switch (menuItem.getItemId()) {
             case R.id.register:
-                showFragment(Register.getInstance(), "Register");
+               i.putExtra(Config.KEY_FRAGMENT,Config.KEY_REGISTER);
+                startActivity(i);
                 break;
             case R.id.upload:
-                showFragment(new UploadDoc(), "Upload");
+                i.putExtra(Config.KEY_FRAGMENT,Config.KEY_UPLOAD);
+                startActivity(i);
+                break;
+            case R.id.query :
+                i.putExtra(Config.KEY_FRAGMENT,Config.KEY_QUERY);
+                startActivity(i);
+                break;
+            case R.id.download:
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                String url = Config.SAMPLE_DOC_URL;
+                        intent.setData(Uri.parse(url));
+                        startActivity(intent);
                 break;
             default:
         }
+
+
         return true;
     }
 

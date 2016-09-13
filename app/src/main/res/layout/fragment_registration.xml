@@ -12,14 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <com.fmsirvent.ParallaxEverywhere.PEWImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            android:src="@drawable/pr" />
-
         <android.support.design.widget.TabLayout
             android:id="@+id/team_individual_tab"
             android:layout_width="match_parent"

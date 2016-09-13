@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="in.silive.scrolls">
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -16,12 +19,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/fav"
         android:label="@string/app_name"
         android:supportsRtl="true"
-
         android:theme="@style/ScrollsTheme">
-        <activity android:name="in.silive.scrolls.Activities.Splash"
+        <activity
+            android:name=".Activities.Splash"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,24 +32,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="in.silive.scrolls.Activities.MainActivity"
+        <activity
+            android:name=".Activities.MainActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"
-            />
-        <activity android:name="in.silive.scrolls.Activities.MyPickerActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Activities.MyPickerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FilePickerTheme"
-            />
+            android:windowSoftInputMode="adjustPan" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key"/>
+            android:value="@string/google_maps_key" />
 
-        <service android:name=".Services.GCMListener">
-        </service>
-        <service android:name=".Services.InstanceIDListener"/>
-        <service android:name=".Services.RegisterGCM"/>
+        <service android:name=".Services.GCMListener"></service>
+        <service android:name=".Services.InstanceIDListener" />
+        <service android:name=".Services.RegisterGCM" />
+
+        <activity
+            android:name=".Activities.SecondActivity"
+            android:parentActivityName=".Activities.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" ></activity>
     </application>
-
 
 </manifest>

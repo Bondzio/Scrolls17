@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Scrolls</string>
     <string name="google_maps_key">AIzaSyBDofDBjIoBPX8UY3uH4uVLZ9VcoyKjd_k</string>
-<string name="could_not_connect">Could not connect to server.</string>
+    <string name="could_not_connect">Could not connect to server.</string>
 
     <string-array name="navigation_drawer_lables">
         <item>About Scrolls</item>
@@ -18,7 +18,7 @@
     <string name="drawer_close">Close Drawer</string>
 
     <string-array name="schedule_dates">
-        <item>4</item>
+        <item>04</item>
         <item>10</item>
         <item>18</item>
         <item>21</item>
@@ -66,99 +66,99 @@
     </string-array>
 
     <string-array name="csit">
-        <item>1. Embedded Systems</item>
-        <item>2. Augmented Reality</item>
-        <item>3. Natural Language Processing</item>
-        <item>4. Genetic Algorithms and Bio-Inspired Computing  </item>
-        <item>5. Cloud Computing</item>
-        <item>6. Semantic Web</item>
-        <item>7. Mobile Computing and Data Intensive Computing</item>
-        <item>8. Soft Computing including multi-criteria Analysis</item>
-        <item>9. Cybernetics</item>
-        <item>10. Nano Computing</item>
-        <item>11. Quantum Computing</item>
-        <item>12. Big Data Analytics</item>
+        <item>Embedded Systems</item>
+        <item>Augmented Reality</item>
+        <item>Natural Language Processing</item>
+        <item>Genetic Algorithms and Bio-Inspired Computing  </item>
+        <item>Cloud Computing</item>
+        <item>Semantic Web</item>
+        <item>Mobile Computing and Data Intensive Computing</item>
+        <item>Soft Computing including multi-criteria Analysis</item>
+        <item>Cybernetics</item>
+        <item>Nano Computing</item>
+        <item>Quantum Computing</item>
+        <item>Big Data Analytics</item>
     </string-array>
 
     <string-array name="ec">
-        <item> 1.4G Technology.</item>
-        <item> 2.Mobile Satellite Communication.</item>
-        <item> 3.Nano Technology.</item>
-        <item> 4.VLSI.</item>
-        <item> 5.Neural Network.</item>
-        <item> 6.Electronics Counter Measures in Defense System.</item>
-        <item> 7.IFF Technology.</item>
-        <item> 8.Speech Processing</item>
-        <item> 9.Opto Electronics.</item>
-        <item> 10.Antenna Design and Radar Technology.</item>
+        <item>4G Technology.</item>
+        <item>Mobile Satellite Communication.</item>
+        <item>Nano Technology.</item>
+        <item>VLSI.</item>
+        <item>Neural Network.</item>
+        <item>Electronics Counter Measures in Defense System.</item>
+        <item>IFF Technology.</item>
+        <item>Speech Processing</item>
+        <item>Opto Electronics.</item>
+        <item>Antenna Design and Radar Technology.</item>
 
 
     </string-array>
 
     <string-array name="el">
-        <item>1. Intelligence Substation</item>
-        <item>2. Smart Electrical Energy Metering.</item>
-        <item>3. User Authentication using Biometrics.</item>
-        <item>4. MRI Technology</item>
-        <item>5. Humanoid Robotics </item>
-        <item>6. Bluetooth Technology</item>
-        <item>7. Night Vision Technology</item>
-        <item>8. Power Quality Issues with Grid Connected Wind Energy
+        <item>Intelligence Substation</item>
+        <item>Smart Electrical Energy Metering.</item>
+        <item>User Authentication using Biometrics.</item>
+        <item>MRI Technology</item>
+        <item>Humanoid Robotics </item>
+        <item>Bluetooth Technology</item>
+        <item>Night Vision Technology</item>
+        <item>Power Quality Issues with Grid Connected Wind Energy
 Systems</item>
-        <item>9. Renewable Energy &amp; Environment Protection</item>
-        <item>10. Smart Grid Technology</item>
-        <item>11. Super Conducting Rotating Machines</item>
+        <item>Renewable Energy &amp; Environment Protection</item>
+        <item>Smart Grid Technology</item>
+        <item>Super Conducting Rotating Machines</item>
 
     </string-array>
 
     <string-array name="ms">
-        <item>1.  BREXIT: Impact on Indian Economy.</item>
-        <item>2.  Role of Skill Development in winning the war against unemployment.</item>
-<item>3.  Social Networking is the prime catalyst in shaping
+        <item>BREXIT: Impact on Indian Economy.</item>
+        <item>Role of Skill Development in winning the war against unemployment.</item>
+<item>Social Networking is the prime catalyst in shaping
 	 the actions of Indian Youths.</item>
-        <item>4.  India is the new China: A Distant Dream.</item>
-        <item>5.  The Glass Ceiling: Reality or Myth?</item>
-        <item>6.Poverty in Third World Countries is due to Prosperity in First World Countries.</item>
-<item>7.Steal a Few Lakh and you’re a Criminal; Steal a Few
+        <item>India is the new China: A Distant Dream.</item>
+        <item>The Glass Ceiling: Reality or Myth?</item>
+        <item>Poverty in Third World Countries is due to Prosperity in First World Countries.</item>
+<item>Steal a Few Lakh and you’re a Criminal; Steal a Few
 	 Hundred Crore and you become an Industrialist.</item>
-        <item>8.  100% FDI in Indian Defense Sector: Boon or Bane.</item>
-<item>9. Rural Development is the right answer to our
+        <item>100% FDI in Indian Defense Sector: Boon or Bane.</item>
+<item>Rural Development is the right answer to our
 	 unemployment problem.</item>
-        <item>10.Ethics in business: An integral part or a passing fad?</item>
+        <item>Ethics in business: An integral part or a passing fad?</item>
 
     </string-array>
     <string-array name="me">
-        <item>1. Power Generation using Nano-carbon tubes</item>
-        <item>2. Cryogenic Engines</item>
-        <item>3. Application of CAD software (Catia, ProE) and designing software</item>
-        <item>4. Automatic Transmission in Automobiles</item>
-        <item>5. Hydraulic and pneumatic actuators</item>
-        <item>6. Improvisation during the last two decades in passenger cars</item>
-        <item>7. Nanotechnology</item>
-        <item>8. Recent trends in Mechanical Engineering</item>
-        <item>9. Kinematics/dynamics of Robotic Manipulators.</item>
-        <item>10. Robotic Applications: Present &amp; Future</item>
-        <item>11. Additive Manufacturing</item>
-        <item>12. TQM concepts for zero rejection</item>
+        <item>Power Generation using Nano-carbon tubes</item>
+        <item>Cryogenic Engines</item>
+        <item>Application of CAD software (Catia, ProE) and designing software</item>
+        <item>Automatic Transmission in Automobiles</item>
+        <item>Hydraulic and pneumatic actuators</item>
+        <item>Improvisation during the last two decades in passenger cars</item>
+        <item>Nanotechnology</item>
+        <item>Recent trends in Mechanical Engineering</item>
+        <item>Kinematics/dynamics of Robotic Manipulators.</item>
+        <item>Robotic Applications: Present &amp; Future</item>
+        <item>Additive Manufacturing</item>
+        <item>TQM concepts for zero rejection</item>
 
 
     </string-array>
     <string-array name="ce">
-        <item>1. Indian Railways: Ensuring last mile connectivity</item>
-        <item>2. Infrastructure: Key to development of north-east</item>
-        <item>3. Earthquake Engineering - seismic risk reduction in NCR region</item>
-        <item>4. Smart housing for smart cities.</item>
-        <item>5. Sanitation and solid waste management through ICT.</item>
-<item>6.   DMIC (Delhi-Mumbai Industrial Corridor) road to
+        <item>Indian Railways: Ensuring last mile connectivity</item>
+        <item>Infrastructure: Key to development of north-east</item>
+        <item>Earthquake Engineering - seismic risk reduction in NCR region</item>
+        <item>Smart housing for smart cities.</item>
+        <item>Sanitation and solid waste management through ICT.</item>
+<item>DMIC (Delhi-Mumbai Industrial Corridor) road to
 	  Development  </item>
-        <item>7. Storage Dams: Need for flood management</item>
-        <item>8. Water scarcity and public investment in irrigation</item>
-        <item>9. Creating water abundance through conservation</item>
-<item>10. Cleaning and rejuvenating Ganga and its prospects lying
+        <item>Storage Dams: Need for flood management</item>
+        <item>Water scarcity and public investment in irrigation</item>
+        <item>Creating water abundance through conservation</item>
+<item>Cleaning and rejuvenating Ganga and its prospects lying
 ahead</item>
-<item>11. Equity and global climate agreement - A step towards a
+<item>Equity and global climate agreement - A step towards a
 clean earth.</item>
-        <item>12. Application of remote Sensing and GIS techniques</item>
+        <item>Application of remote Sensing and GIS techniques</item>
 
 
     </string-array>

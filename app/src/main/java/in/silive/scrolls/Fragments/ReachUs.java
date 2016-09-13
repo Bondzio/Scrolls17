@@ -10,10 +10,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
@@ -93,7 +93,7 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
         if (mMap == null) {
             mapFragment.getMapAsync(this);
         }
-        if (locationLoaded && !pathLoaded )
+        if (locationLoaded && !pathLoaded)
             loadPath();
         return rootView;
     }
@@ -123,8 +123,8 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
 
     @Override
     public void onRoutingFailure(RouteException var1) {
-        progressDialog.dismiss();
-        Toast.makeText(getActivity(), "Internet connection not available", Toast.LENGTH_SHORT).show();
+        //progressDialog.dismiss();
+        //  Toast.makeText(getActivity(), "Internet connection not available", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -135,34 +135,23 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
 
     @Override
     public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
-        progressDialog.dismiss();
-
-        //add route(s) to the map.
-      /*  for (int i = 0; i < route.size(); i++) {
-
-            //In case of more than 5 alternative routes
-            int colorIndex = i % COLORS.length;
-
-            PolylineOptions polyOptions = new PolylineOptions();
-            polyOptions.color(getResources().getColor(COLORS[colorIndex]));
-            polyOptions.width(10 + i * 3);
-            polyOptions.addAll(route.get(i).getPoints());
-            Polyline polyline = map.addPolyline(polyOptions);
-            Toast.makeText(getApplicationContext(), "Route " + (i + 1) + ": distance - " + route.get(i).getDistanceValue() + ": duration - " + route.get(i).getDurationValue(), Toast.LENGTH_SHORT).show();
-        }*/
-
-        //For shortest Path
-        PolylineOptions polyOptions = new PolylineOptions();
-        polyOptions.color(getResources().getColor(R.color.colorPrimaryDark));
-        polyOptions.width(10);
-        polyOptions.addAll(route.get(shortestRouteIndex).getPoints());
-        Polyline polyline = mMap.addPolyline(polyOptions);
-        // Start marker
-        MarkerOptions options = new MarkerOptions();
-        options.position(startLocation);
-        options.icon(BitmapDescriptorFactory.fromResource(R.drawable.location_pointer));
-        mMap.addMarker(options);
-        pathLoaded = true;
+        try {
+            if (getContext()!=null) {
+                PolylineOptions polyOptions = new PolylineOptions();
+                polyOptions.color(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
+                polyOptions.width(10);
+                polyOptions.addAll(route.get(shortestRouteIndex).getPoints());
+                Polyline polyline = mMap.addPolyline(polyOptions);
+                // Start marker
+                MarkerOptions options = new MarkerOptions();
+                options.position(startLocation);
+                options.icon(BitmapDescriptorFactory.fromResource(R.drawable.location_pointer));
+                mMap.addMarker(options);
+                pathLoaded = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -196,42 +185,41 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
         options.position(latLngAKGEC);
         options.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_akgec));
         mMap.addMarker(options);
+        CameraUpdate center = CameraUpdateFactory.newLatLng(latLngAKGEC);
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+        mMap.moveCamera(center);
+        mMap.animateCamera(zoom, 100, null);
     }
 
     @Override
     public void onConnected(Bundle bundle) {
+if (getContext()!=null) {
+    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        // TODO: Consider calling
+        //    ActivityCompat#requestPermissions
+        // here to request the missing permissions, and then overriding
+        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+        //                                          int[] grantResults)
+        // to handle the case where the user grants the permission. See the documentation
+        // for ActivityCompat#requestPermissions for more details.
 
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-
-            return;
-        }
-        lastlocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-        if (lastlocation == null)
-            Toast.makeText(getActivity(), "Please enable yor GPS", Toast.LENGTH_SHORT).show();
-        else {
-            startLocation = new LatLng(lastlocation.getLatitude(), lastlocation.getLongitude());
-            CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(lastlocation.getLatitude(), lastlocation.getLongitude()));
-            CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
-            mMap.moveCamera(center);
-            mMap.animateCamera(zoom, 3000, null);
-            locationLoaded = true;
-            loadPath();
-        }
+        return;
+    }
+    lastlocation = LocationServices.FusedLocationApi.getLastLocation(
+            mGoogleApiClient);
+    if (lastlocation != null) {
+        startLocation = new LatLng(lastlocation.getLatitude(), lastlocation.getLongitude());
+        locationLoaded = true;
+        loadPath();
+    }
+}
     }
 
     public void loadPath() {
         try {
-            progressDialog = ProgressDialog.show(getActivity(), "Please wait.",
-                    "Fetching route information.", true);
+          /*  progressDialog = ProgressDialog.show(getActivity(), "Please wait.",
+                    "Fetching route information.", true);*/
             Routing routing = new Routing.Builder()
                     .travelMode(AbstractRouting.TravelMode.WALKING)
                     .withListener(ReachUs.this)

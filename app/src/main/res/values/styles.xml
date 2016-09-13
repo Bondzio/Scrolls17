@@ -18,6 +18,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="MainActivityToolbar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="android:textColorSecondary">@color/colorPrimary</item>
+        <!--<item name="android:titleTextColor">@color/colorPrimary</item>-->
+    </style>
 
     <style name="FilePickerTheme" parent="NNF_BaseTheme">
         <!-- Set these to match your theme -->
@@ -37,7 +42,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="CustomTabText" parent="TextAppearance.Design.Tab">
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">9sp</item>
     </style>
 
 </resources>
