@@ -1,107 +1,96 @@
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#fbc94a"
+    android:background="#ffffff"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#000000"
+        android:textColor="#e1b442"
         android:id="@+id/heading"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="1"
-        android:background="#e1b442"
         android:text="Developers Team"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#ffffff"
+        android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="1"
-        android:background="#fbc94a"
         android:text="Gaurav Arora"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#ffffff"
+        android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="1"
-        android:background="#fbc94a"
         android:text="Pranav Chaudhary"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#ffffff"
+        android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="1"
-        android:background="#fbc94a"
         android:text="Sukankshi Jain"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#ffffff"
+        android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="1"
-        android:background="#fbc94a"
         android:text="Siddhant Goral"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#ffffff"
+        android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="1"
-        android:background="#fbc94a"
         android:text="Kunal Chaodhary"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#ffffff"
+        android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="1"
-        android:background="#fbc94a"
         android:text="Rajat Sharma"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#ffffff"
+        android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="1"
-        android:background="#fbc94a"
         android:text="Deepak Singh"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#ffffff"
+        android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="1"
-        android:background="#fbc94a"
         android:text="Akash Kool"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#ffffff"
+        android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="1"
-        android:background="#fbc94a"
         android:text="Abishek Kumar Gupta"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="#ffffff"
+        android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="1"
-        android:background="#fbc94a"
         android:text="Akriti Verma"/>
 
 
