@@ -63,7 +63,7 @@
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-
+        android:layout_gravity="start"
         android:background="@color/bg_gray"
         android:fitsSystemWindows="true"
         app:itemTextColor="@color/white"

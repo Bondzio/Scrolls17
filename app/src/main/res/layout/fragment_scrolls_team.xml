@@ -2,6 +2,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffffff"
+    android:layout_marginTop="8dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView
         android:layout_width="match_parent"
@@ -11,16 +12,27 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="1"
+        android:textSize="18sp"
         android:text="Scrolls Team"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="#e1b442"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textSize="15sp"
+        android:text="Organising Head"/>
     <LinearLayout
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
@@ -29,32 +41,43 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Dean Student Welfare, AKGEC"
+            android:text="DSW, AKGEC"
             android:textColor="@color/bg_dark_gray"  />
 
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="#e1b442"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textSize="15sp"
+        android:text="Student Coordinators"/>
     <LinearLayout
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="start"
+            android:padding="7dp"
             android:text="Sandeep Gupta"
             android:textColor="@color/bg_dark_gray"  />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
@@ -66,20 +89,22 @@
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="start"
+            android:padding="7dp"
             android:text="Mayank Bahadur"
             android:textColor="@color/bg_dark_gray"  />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
@@ -90,21 +115,23 @@
     <LinearLayout
         android:layout_weight="1"
         android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="start"
+            android:padding="7dp"
             android:text="Suhani Singh"
             android:textColor="@color/bg_dark_gray"  />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:id="@+id/text_right"
             android:layout_gravity="center"
             android:layout_weight="1"

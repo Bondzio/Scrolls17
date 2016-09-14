@@ -2,7 +2,6 @@ package in.silive.scrolls.Fragments;
 
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -37,7 +36,7 @@ public class AboutUs extends Fragment {
         heading = (TextView)view.findViewById(R.id.heading);
         text_left = (TextView)view.findViewById(R.id.text_left);
         text_right = (TextView)view.findViewById(R.id.text_right);
-        one = (Button)view.findViewById(R.id.one);
+        /*one = (Button)view.findViewById(R.id.one);
         one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,7 +118,7 @@ public class AboutUs extends Fragment {
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
 
             }
-        });
+        });*/
 
         return view;
     }

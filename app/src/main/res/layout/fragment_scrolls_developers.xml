@@ -2,6 +2,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffffff"
+    android:layout_marginTop="8dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView
         android:layout_width="match_parent"
@@ -11,13 +12,30 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_weight="1"
-        android:text="Developers Team"/>
+        android:textSize="18sp"
+        android:layout_margin="3dp"
+        android:text="Developer's Team"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="#e1b442"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textSize="15sp"
+        android:text="Web Developers"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:padding="3dp"
+        android:background="@color/bg_dark_gray"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:gravity="start"
+        android:padding="7dp"
         android:layout_weight="1"
         android:text="Gaurav Arora"/>
     <TextView
@@ -25,7 +43,8 @@
         android:layout_height="match_parent"
         android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:gravity="start"
+        android:padding="7dp"
         android:layout_weight="1"
         android:text="Pranav Chaudhary"/>
     <TextView
@@ -33,7 +52,8 @@
         android:layout_height="match_parent"
         android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:gravity="start"
+        android:padding="7dp"
         android:layout_weight="1"
         android:text="Sukankshi Jain"/>
     <TextView
@@ -41,7 +61,8 @@
         android:layout_height="match_parent"
         android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:gravity="start"
+        android:padding="7dp"
         android:layout_weight="1"
         android:text="Siddhant Goral"/>
     <TextView
@@ -49,7 +70,8 @@
         android:layout_height="match_parent"
         android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:gravity="start"
+        android:padding="7dp"
         android:layout_weight="1"
         android:text="Kunal Chaodhary"/>
     <TextView
@@ -57,7 +79,8 @@
         android:layout_height="match_parent"
         android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:gravity="start"
+        android:padding="7dp"
         android:layout_weight="1"
         android:text="Rajat Sharma"/>
     <TextView
@@ -65,7 +88,8 @@
         android:layout_height="match_parent"
         android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:gravity="start"
+        android:padding="7dp"
         android:layout_weight="1"
         android:text="Deepak Singh"/>
     <TextView
@@ -73,15 +97,50 @@
         android:layout_height="match_parent"
         android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:gravity="start"
+        android:padding="7dp"
         android:layout_weight="1"
         android:text="Akash Kool"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/bg_dark_gray"
+        android:textColor="#e1b442"
         android:layout_gravity="center"
         android:gravity="center"
+        android:layout_weight="1"
+        android:textSize="15sp"
+        android:layout_margin="3dp"
+        android:text="App Developers"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:padding="3dp"
+        android:background="@color/bg_dark_gray"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/bg_dark_gray"
+        android:layout_gravity="center"
+        android:gravity="start"
+        android:padding="7dp"
+        android:layout_weight="1"
+        android:text="Kartikey Kumar Srivastava"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/bg_dark_gray"
+        android:layout_gravity="center"
+        android:gravity="start"
+        android:padding="7dp"
+        android:layout_weight="1"
+        android:text="Shobhit Agarwal"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/bg_dark_gray"
+        android:layout_gravity="center"
+        android:gravity="start"
+        android:padding="7dp"
         android:layout_weight="1"
         android:text="Abishek Kumar Gupta"/>
     <TextView
@@ -89,7 +148,8 @@
         android:layout_height="match_parent"
         android:textColor="@color/bg_dark_gray"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:padding="7dp"
+        android:gravity="start"
         android:layout_weight="1"
         android:text="Akriti Verma"/>
 
