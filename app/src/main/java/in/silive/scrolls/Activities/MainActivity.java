@@ -1,46 +1,49 @@
 package in.silive.scrolls.Activities;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.SlidingPaneLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import in.silive.scrolls.Fragments.About_Scrolls;
-import in.silive.scrolls.Fragments.DialogNoNetConnection;
-import in.silive.scrolls.Fragments.NavigationDrawer;
-import in.silive.scrolls.Fragments.ReachUs;
-import in.silive.scrolls.Fragments.QueryUs;
-import in.silive.scrolls.Fragments.Register;
-import in.silive.scrolls.Fragments.Rules;
-import in.silive.scrolls.Fragments.ScheduleFragment;
-import in.silive.scrolls.Fragments.UploadDoc;
+import in.silive.scrolls.Adapters.PagerAdapter;
+import in.silive.scrolls.Fragments.ScrollsDevelopers;
+import in.silive.scrolls.Fragments.ScrollsTeam;
 import in.silive.scrolls.R;
-import in.silive.scrolls.Util.Keyboard;
 import in.silive.scrolls.Util.Config;
 import in.silive.scrolls.Util.Keyboard;
 
-public class MainActivity extends AppCompatActivity implements NavigationDrawer.NavigationDrawerListener {
-    NavigationDrawer navigationDrawer;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
     Context main_act_context;
     Fragment fragment = null;
     FragmentManager fragmentManager;
     boolean drawerVisible = false;
     LinearLayout ll;
+    TabLayout tabLayout;
+    String title;
     private Toolbar mtoolbar;
-    private SlidingPaneLayout slidingPane;
-    private boolean finishing;
-    private FragmentTransaction fragmentTransaction;
     private FragmentTransaction fragmentTransaction;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    ViewPager viewPager;
+    PagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,34 +52,23 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
         fragmentManager = getSupportFragmentManager();
         main_act_context = getApplicationContext();
         mtoolbar = (Toolbar) findViewById(R.id.toolbar);
+        viewPager = (ViewPager)findViewById(R.id.viewPager) ;
         setSupportActionBar(mtoolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black);;
         //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_up_indicator);
-        slidingPane = (android.support.v4.widget.SlidingPaneLayout) findViewById(R.id.sliding_pane_layout);
-        slidingPane.setParallaxDistance(200);
-        navigationDrawer = (NavigationDrawer)
-                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        //  navigationDrawer.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mtoolbar);
-        navigationDrawer.setDrawerListener(new NavigationDrawer.NavigationDrawerListener() {
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(this);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        // Initializing Drawer Layout and ActionBarToggle
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mtoolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
-            public void onDrawerItemSelected(View view, int position) {
-                displayView(position);
-                    hideDrawer();
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
             }
-        });
-        findViewById(R.id.container_body).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        ll = (LinearLayout) findViewById(R.id.ll);
-        displayView(0);
-    }
 
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -85,291 +77,127 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawer.
             }
         };
 
-    @Override
-    protected void onResume() {
-      //  finishing=false;
-        //if (fragmentTransaction!=null && fragmentTransaction.isEmpty())
-        super.onResume();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        finishing = true;
-    }
-
-    public void displayView(final int position) {
-        String title = getString(R.string.app_name);
-        Keyboard.close(this);
-        switch (position) {
-            case 0:
-                if (!(fragment instanceof About_Scrolls))
-                    fragment = new About_Scrolls();
-                title = "About Scrolls";
-                break;
-            case 1:
-                if (!(fragment instanceof Rules))
-                    fragment = new Rules();
-                title = "Rules";
-                break;
-            case 2:
-                if (!(fragment instanceof ScheduleFragment))
-                    fragment = new ScheduleFragment();
-                title = "Schedule";
-                break;
-            case 3:
-                if (!(fragment instanceof Register))
-
-                   // if (CheckConnectivity.isNetConnected(MainActivity.this)) {
-                        fragment = new Register();
-                        title = "Register";
-                   /* } else {
-                        DialogNoNetConnection dialogNoNetConnection = new DialogNoNetConnection();
-                        dialogNoNetConnection.show(getSupportFragmentManager(), "No net connection");
-                    }
-*/
-                break;
-            case 4:
-                if (!(fragment instanceof UploadDoc))
-                 //   if (CheckConnectivity.isNetConnected(MainActivity.this)) {
-                        fragment = new UploadDoc();
-                        title = "Upload a Doc";
-                   /* } else {
-                        DialogNoNetConnection dialogNoNetConnection = new DialogNoNetConnection();
-                        dialogNoNetConnection.show(getSupportFragmentManager(), "No net connection");
-                    }*/
-                break;
-           /* case 5:
-                if (!(fragment instanceof QueryUs))
-                    fragment = new QueryUs();
-                title = "Query Us";
-                break;*/
-            case 5:
-              /*  if(! (fragment instanceof  ReachUs))*/
-                fragment = ReachUs.getInstance();
-                title = "Reach Us";
-                break;
-        /*    case 7:
-                Dialogs.showForgotIdDialog(this);
-                break;*/
-            case 6:
-                if (!(fragment instanceof AboutUs))
-                    fragment = new AboutUs();
-                title = "About Us";
-                break;
-            default:
-                break;
-        }
-        if (fragment != null && fragment.isAdded()) {
-            fragment = fragmentManager.findFragmentByTag(fragment.getClass().getName());
-        }
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-        setUpTabs();
+
+        setUpViewPager();
     }
 
-    private void setUpTabs() {
-        TabLayout.Tab first = tabLayout.newTab().setText("Rules").setIcon(R.drawable.rules);
-        tabLayout.addTab(first, 0);
-
-        tabLayout.addTab(tabLayout.newTab().setText("Dates").setIcon(R.drawable.dates_icon), 1);
-        TabLayout.Tab about = tabLayout.newTab().setText("About").setIcon(R.drawable.about_us);
-        tabLayout.addTab(about, 2);
-        tabLayout.addTab(tabLayout.newTab().setText("Topic").setIcon(R.drawable.rules), 3);
-        tabLayout.addTab(tabLayout.newTab().setText("Contact Us").setIcon(R.drawable.query), 4);
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+    private void setUpViewPager() {
+        pagerAdapter = new in.silive.scrolls.Adapters.PagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+        viewPager.setOffscreenPageLimit(4);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-                switch (tab.getPosition()) {
-
-                    case 0:
-                        if (!(fragment instanceof Rules))
-                            fragment = new Rules();
-                        title = "Rules";
-                        break;
-                    case 1:
-                        if (!(fragment instanceof ScheduleFragment))
-                            fragment = new ScheduleFragment();
-                        title = "Important Dates";
-                        break;
-                    case 4:
-                        if (!(fragment instanceof QueryUs))
-                            fragment = new QueryUs();
-                        title = "Contact Us";
-                        break;
-                    case 2:
-                        if (!(fragment instanceof About_Scrolls))
-                            fragment = new About_Scrolls();
-                        title = "About";
-                        break;
-                    case 3:
-                        if (!(fragment instanceof TopicsFragment))
-                            fragment = new TopicsFragment();
-                        title = "Topics";
-                        break;
-                }
-                showFragment(fragment, title);
-
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                switch (tab.getPosition()) {
-
+            public void onPageSelected(int position) {
+                String title = " ";
+                switch (position) {
                     case 0:
-                        if (!(fragment instanceof Rules))
-                            fragment = Rules.getInstance();
                         title = "Rules";
                         break;
                     case 1:
-                        if (!(fragment instanceof ScheduleFragment))
-                            fragment = ScheduleFragment.getInstance();
                         title = "Important Dates";
                         break;
-                    case 4:
-                        if (!(fragment instanceof QueryUs))
-                            fragment = new QueryUs();
-                        title = "Contact Us";
-                        break;
                     case 2:
-                        if (!(fragment instanceof About_Scrolls))
-                            fragment = About_Scrolls.newInstance();
-                        title = "About";
+                        title = "About Scrolls";
                         break;
                     case 3:
-                        if (!(fragment instanceof TopicsFragment))
-                            fragment = TopicsFragment.getInstance();
                         title = "Topics";
                         break;
+                    case 4:
+                        title = "Reach Us";
+                        break;
                 }
-                showFragment(fragment, title);
+                getSupportActionBar().setTitle(title);
+            }
 
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
             }
         });
-        about.select();
-
+        pagerAdapter.addIconsToTab(tabLayout);
+        viewPager.setCurrentItem(2,true);
     }
 
 
-    public void showFragment(Fragment fragment, String title) {
-        if (fragment != null) {
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_body, fragment).addToBackStack(fragment.getClass().getName());
-            final String finalTitle = title;
-            findViewById(R.id.container_body).post(new Runnable() {
-                @Override
-                public void run() {
-                  //  if (!finishing) {
-                        fragmentTransaction.commitAllowingStateLoss();
-                        // set the toolbar title
-                        getSupportActionBar().setTitle(finalTitle);
-                    //}
-                }
-            });
-
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_body, fragment)/*.addToBackStack(fragment.getClass().getName())*/;
-            fragmentTransaction.commit();
-            getSupportActionBar().setTitle(title);
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         return true;
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (menuItem.getItemId() == android.R.id.home) {
-Keyboard.close(this);
-            if (drawerVisible)
-                hideDrawer();
-            else
-                showDrawer();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Keyboard.close(this);
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        String url;
+        switch (item.getItemId()) {
+            case R.id.website:
+                url = Config.SCROLLS_WEBSITE;
+                i.setData(Uri.parse(url));
+                startActivity(i);
+                return true;
+            case R.id.scrollTeam:
+                BottomSheetDialogFragment bottomSheetDialogFragmentTeam = new ScrollsTeam();
+                bottomSheetDialogFragmentTeam.show(fragmentManager,"Developers");
+                return true;
+            case R.id.devTeam:
+                BottomSheetDialogFragment bottomSheetDialogFragment = new ScrollsDevelopers();
+                bottomSheetDialogFragment.show(fragmentManager,"Developers");
+                return true;
+            case R.id.silive:
+                url = Config.SILIVE_WEBSITE;
+                i.setData(Uri.parse(url));
+                startActivity(i);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(menuItem);
-    }
-
-    public void hideDrawer() {
-        slidingPane.closePane();
-        drawerVisible=false;
-       /* // get the center for the clipping circle
-        int cx = 0;
-        int cy = 0;
-
-        // get the final radius for the clipping circle
-        int dx = Math.max(cx, ll.getWidth());
-        int dy = Math.max(cy, ll.getHeight());
-        float initialRadius = (float) Math.hypot(dx, dy);
-
-        // Android native animator
-        Animator animator =
-                ViewAnimationUtils.createCircularReveal(ll, cx, cy, initialRadius, 0);
-        animator.setInterpolator(new AccelerateDecelerateInterpolator());
-        animator.setDuration(650);
-        animator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                ll.setVisibility(View.GONE);
-                drawerVisible = false;
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
-        });
-
-        animator.start();*/
-    }
-
-    public void showDrawer() {
-        slidingPane.openPane();
-        drawerVisible=true;
-      /*  ll.setVisibility(View.INVISIBLE);
-        ll.post(new Runnable() {
-            @Override
-            public void run() {
-                int cx = 0;
-                int cy = 0;
-
-                // get the final radius for the clipping circle
-                int dx = Math.max(cx, ll.getWidth() - cx);
-                int dy = Math.max(cy, ll.getHeight() - cy);
-                float finalRadius = (float) Math.hypot(dx, dy);
-
-                // Android native animator
-                Animator animator =
-                        ViewAnimationUtils.createCircularReveal(ll, cx, cy, 0, finalRadius);
-                animator.setInterpolator(new AccelerateDecelerateInterpolator());
-                animator.setDuration(650);
-                ll.setVisibility(View.VISIBLE);
-                animator.start();
-                drawerVisible = true;
-            }
-        });*/
 
     }
 
     @Override
-    public void onDrawerItemSelected(View view, int position) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        Keyboard.close(this);
 
+        if (menuItem.isChecked()) menuItem.setChecked(false);
+        else menuItem.setChecked(true);
+        drawerLayout.closeDrawers();
+        Intent i = new Intent(this,SecondActivity.class);
+        switch (menuItem.getItemId()) {
+            case R.id.register:
+               i.putExtra(Config.KEY_FRAGMENT,Config.KEY_REGISTER);
+                startActivity(i);
+                break;
+            case R.id.upload:
+                i.putExtra(Config.KEY_FRAGMENT,Config.KEY_UPLOAD);
+                startActivity(i);
+                break;
+            case R.id.query :
+                i.putExtra(Config.KEY_FRAGMENT,Config.KEY_QUERY);
+                startActivity(i);
+                break;
+            case R.id.download:
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                String url = Config.SAMPLE_DOC_URL;
+                        intent.setData(Uri.parse(url));
+                        startActivity(intent);
+                break;
+            default:
+        }
+
+
+        return true;
     }
+
 }

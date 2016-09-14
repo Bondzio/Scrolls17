@@ -50,8 +50,6 @@ public class ScheduleFragment extends Fragment  {
         adapter = new ScheduleAdapter(getContext(), dates, labels,days);
         rvSchedule.setLayoutManager(linearLayoutManager);
         rvSchedule.setAdapter(adapter);
-
-
         return view;
     }
 

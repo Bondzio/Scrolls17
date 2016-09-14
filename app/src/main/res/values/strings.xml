@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Scrolls</string>
     <string name="google_maps_key">AIzaSyBDofDBjIoBPX8UY3uH4uVLZ9VcoyKjd_k</string>
-
+    <string name="could_not_connect">Could not connect to server.</string>
 
     <string-array name="navigation_drawer_lables">
         <item>About Scrolls</item>
@@ -18,16 +18,17 @@
     <string name="drawer_close">Close Drawer</string>
 
     <string-array name="schedule_dates">
-        <item>4</item>
+        <item>04</item>
         <item>10</item>
         <item>18</item>
         <item>21</item>
-        <item>4 Oct</item>
-        <item>10 Oct</item>
-        <item>18 Oct</item>
-        <item>21 Oct</item>
     </string-array>
-
+    <string-array name="schedule_days">
+        <item>Tue</item>
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Fri</item>
+    </string-array>
     <string-array name="schedule_labels">
         <item>Last Date for Registration &amp; Synopsis Submission</item>
         <item>Notification of Synopsis Selection</item>
@@ -38,13 +39,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string-array name="Courses">
+    <string-array name="courses">
         <item>B.Tech</item>
         <item>MBA</item>
         <item>MCA</item>
         <item>M.Tech</item>
         <item>PGDM</item>
     </string-array>
+
     <string-array name="Year">
         <item>1</item>
         <item>2</item>
@@ -55,107 +57,108 @@
         A national level technical paper presentation contest that provides a pedestal to unleash the talent of budding technocrats, SCROLLS-2015 deals with the most thriving and progressive fields of technology and management, bringing computing, information technology, mechanical engineering, electrical engineering, and telecommunication technologies along with major developmental leaps in management and leadership in its fold. Here, clarity and knowledge transcends through discussions over vast and diversified topics. So here is a chance to work with imagination, insight and confidence to ensure the onset of the new dawn.
     </string>
     <string-array name="domain_array">
+        <item>Management Science</item>
         <item>Computer Science and Information Technology</item>
         <item>Electronics and Communication</item>
-        <item>Electrical and Electronics</item>
-        <item>Management Science</item>
+        <item>Electrical and electronics</item>
         <item>Mechanical Engineering</item>
         <item>Civil Engineering</item>
     </string-array>
+
     <string-array name="csit">
-        <item>1. Embedded Systems</item>
-        <item>2. Augmented Reality</item>
-        <item>3. Natural Language Processing</item>
-        <item>4. Genetic Algorithms and Bio-Inspired Computing  </item>
-        <item>5. Cloud Computing</item>
-        <item>6. Semantic Web</item>
-        <item>7. Mobile Computing and Data Intensive Computing</item>
-        <item>8. Soft Computing including multi-criteria Analysis</item>
-        <item>9. Cybernetics</item>
-        <item>10. Nano Computing</item>
-        <item>11. Quantum Computing</item>
-        <item>12. Big Data Analytics</item>
+        <item>Embedded Systems</item>
+        <item>Augmented Reality</item>
+        <item>Natural Language Processing</item>
+        <item>Genetic Algorithms and Bio-Inspired Computing  </item>
+        <item>Cloud Computing</item>
+        <item>Semantic Web</item>
+        <item>Mobile Computing and Data Intensive Computing</item>
+        <item>Soft Computing including multi-criteria Analysis</item>
+        <item>Cybernetics</item>
+        <item>Nano Computing</item>
+        <item>Quantum Computing</item>
+        <item>Big Data Analytics</item>
     </string-array>
 
     <string-array name="ec">
-        <item> 1.4G Technology.</item>
-        <item> 2.Mobile Satellite Communication.</item>
-        <item> 3.Nano Technology.</item>
-        <item> 4.VLSI.</item>
-        <item> 5.Neural Network.</item>
-        <item> 6.Electronics Counter Measures in Defense System.</item>
-        <item> 7.IFF Technology.</item>
-        <item> 8.Speech Processing</item>
-        <item> 9.Opto Electronics.</item>
-        <item> 10.Antenna Design and Radar Technology.</item>
+        <item>4G Technology.</item>
+        <item>Mobile Satellite Communication.</item>
+        <item>Nano Technology.</item>
+        <item>VLSI.</item>
+        <item>Neural Network.</item>
+        <item>Electronics Counter Measures in Defense System.</item>
+        <item>IFF Technology.</item>
+        <item>Speech Processing</item>
+        <item>Opto Electronics.</item>
+        <item>Antenna Design and Radar Technology.</item>
 
 
     </string-array>
 
     <string-array name="el">
-        <item>1. Intelligence Substation</item>
-        <item>2. Smart Electrical Energy Metering.</item>
-        <item>3. User Authentication using Biometrics.</item>
-        <item>4. MRI Technology</item>
-        <item>5. Humanoid Robotics </item>
-        <item>6. Bluetooth Technology</item>
-        <item>7. Night Vision Technology</item>
-        <item>8. Power Quality Issues with Grid Connected Wind Energy
+        <item>Intelligence Substation</item>
+        <item>Smart Electrical Energy Metering.</item>
+        <item>User Authentication using Biometrics.</item>
+        <item>MRI Technology</item>
+        <item>Humanoid Robotics </item>
+        <item>Bluetooth Technology</item>
+        <item>Night Vision Technology</item>
+        <item>Power Quality Issues with Grid Connected Wind Energy
 Systems</item>
-        <item>9. Renewable Energy &amp; Environment Protection</item>
-        <item>10. Smart Grid Technology</item>
-        <item>11. Super Conducting Rotating Machines</item>
+        <item>Renewable Energy &amp; Environment Protection</item>
+        <item>Smart Grid Technology</item>
+        <item>Super Conducting Rotating Machines</item>
 
     </string-array>
 
     <string-array name="ms">
-        <item>1.  BREXIT: Impact on Indian Economy.</item>
-        <item>2.  Role of Skill Development in winning the war against unemployment.</item>
-<item>3.  Social Networking is the prime catalyst in shaping
+        <item>BREXIT: Impact on Indian Economy.</item>
+        <item>Role of Skill Development in winning the war against unemployment.</item>
+<item>Social Networking is the prime catalyst in shaping
 	 the actions of Indian Youths.</item>
-        <item>4.  India is the new China: A Distant Dream.</item>
-        <item>5.  The Glass Ceiling: Reality or Myth?</item>
-        <item>6.Poverty in Third World Countries is due to Prosperity in First World Countries.</item>
-<item>7.Steal a Few Lakh and you’re a Criminal; Steal a Few
+        <item>India is the new China: A Distant Dream.</item>
+        <item>The Glass Ceiling: Reality or Myth?</item>
+        <item>Poverty in Third World Countries is due to Prosperity in First World Countries.</item>
+<item>Steal a Few Lakh and you’re a Criminal; Steal a Few
 	 Hundred Crore and you become an Industrialist.</item>
-        <item>8.  100% FDI in Indian Defense Sector: Boon or Bane.</item>
-<item>9. Rural Development is the right answer to our
+        <item>100% FDI in Indian Defense Sector: Boon or Bane.</item>
+<item>Rural Development is the right answer to our
 	 unemployment problem.</item>
-        <item>10.Ethics in business: An integral part or a passing fad?</item>
+        <item>Ethics in business: An integral part or a passing fad?</item>
 
     </string-array>
     <string-array name="me">
-        <item>1. Power Generation using Nano-carbon tubes</item>
-        <item>2. Cryogenic Engines</item>
-        <item>3. Application of CAD software (Catia, ProE) and designing software</item>
-        <item>4. Automatic Transmission in Automobiles</item>
-        <item>5. Hydraulic and pneumatic actuators</item>
-        <item>6. Improvisation during the last two decades in passenger cars</item>
-        <item>7. Nanotechnology</item>
-        <item>8. Recent trends in Mechanical Engineering</item>
-        <item>9. Kinematics/dynamics of Robotic Manipulators.</item>
-        <item>10. Robotic Applications: Present &amp; Future</item>
-        <item>11. Additive Manufacturing</item>
-        <item>12. TQM concepts for zero rejection</item>
+        <item>Power Generation using Nano-carbon tubes</item>
+        <item>Cryogenic Engines</item>
+        <item>Application of CAD software (Catia, ProE) and designing software</item>
+        <item>Automatic Transmission in Automobiles</item>
+        <item>Hydraulic and pneumatic actuators</item>
+        <item>Improvisation during the last two decades in passenger cars</item>
+        <item>Nanotechnology</item>
+        <item>Recent trends in Mechanical Engineering</item>
+        <item>Kinematics/dynamics of Robotic Manipulators.</item>
+        <item>Robotic Applications: Present &amp; Future</item>
+        <item>Additive Manufacturing</item>
+        <item>TQM concepts for zero rejection</item>
 
 
     </string-array>
     <string-array name="ce">
-        <item>1. Indian Railways: Ensuring last mile connectivity</item>
-        <item>2. Infrastructure: Key to development of north-east</item>
-        <item>3. Earthquake Engineering - seismic risk reduction in NCR region</item>
-        <item>4. Smart housing for smart cities.</item>
-        <item>5. Sanitation and solid waste management through ICT.</item>
-<item>6.   DMIC (Delhi-Mumbai Industrial Corridor) road to
+        <item>Indian Railways: Ensuring last mile connectivity</item>
+        <item>Infrastructure: Key to development of north-east</item>
+        <item>Earthquake Engineering - seismic risk reduction in NCR region</item>
+        <item>Smart housing for smart cities.</item>
+        <item>Sanitation and solid waste management through ICT.</item>
+<item>DMIC (Delhi-Mumbai Industrial Corridor) road to
 	  Development  </item>
-        <item>7. Storage Dams: Need for flood management</item>
-        <item>8. Water scarcity and public investment in irrigation</item>
-        <item>9. Creating water abundance through conservation</item>
-<item>10. Cleaning and rejuvenating Ganga and its prospects lying
+        <item>Storage Dams: Need for flood management</item>
+        <item>Water scarcity and public investment in irrigation</item>
+        <item>Creating water abundance through conservation</item>
+<item>Cleaning and rejuvenating Ganga and its prospects lying
 ahead</item>
-<item>11. Equity and global climate agreement - A step towards a
+<item>Equity and global climate agreement - A step towards a
 clean earth.</item>
-        <item>12. Application of remote Sensing and GIS techniques</item>
+        <item>Application of remote Sensing and GIS techniques</item>
 
 
     </string-array>
@@ -178,36 +181,14 @@ clean earth.</item>
     <string name="options_exit">Exit</string>
     <string name="gcm_DefaultSenderId">10000xyz</string>
 
-    <string name="rules">
-        1. The competition will be open to all bonafide students of Engineering and Management Colleges
-\n2.  Maximum of 3 and minimum of 2 authors per paper.
-\n3.  Extended Abstract of 500 words maximum to be sent by laid down date. Based on the abstract, an   experts committee will select the papers for inclusion in the final presentation.
-\n4.  For presentation, a time slot of 7 minutes + 3 minutes (for Q &amp; A) will be given to each team.
-\n5.  A soft copy of the final paper is to be sent before the       designated date.
-\n6.  The paper to be typed in single space, double column format, using Times New Roman font &amp; font-size 12. Maximum number of pages to be 10 and the page should have no numbers. A margin of 1’’ all around to be left.
-\n7.  First page to include Title, Name(s) of authors, their college name, telephone numbers as well as email addresses. This information to be included with extended abstract also.
+    <string name="rules">The competition will be open to all bonafide students of Engineering and Management Colleges
+\nMaximum of 3 and minimum of 2 authors per paper.
+\nExtended Abstract of 500 words maximum to be sent by laid down date. Based on the abstract, an   experts committee will select the papers for inclusion in the final presentation.
+\nFor presentation, a time slot of 7 minutes + 3 minutes (for Q &amp; A) will be given to each team.
+\nA soft copy of the final paper is to be sent before the       designated date.
+\nThe paper to be typed in single space, double column format, using Times New Roman font &amp; font-size 12. Maximum number of pages to be 10 and the page should have no numbers. A margin of 1’’ all around to be left.
+\nFirst page to include Title, Name(s) of authors, their college name, telephone numbers as well as email addresses. This information to be included with extended abstract also.
     </string>
-    <string-array name="courses">
-        <item>B.Tech</item>
-        <item>M.Tech</item>
-        <item>BCA</item>
-        <item>MCA</item>
-        <item>PGDM</item>
-    </string-array>
-    <string-array name="Domains">
-        <item>Management Science</item>
-        <item>Computer Science and Information Technology</item>
-        <item>Electronics and Communication</item>
-        <item>Electrical and electronics</item>
-        <item>Mechanical Engineering</item>
-        <item>Civil Engineering</item>
-    </string-array>
-    <string name="Tech_committee">Prof. P.K. Chopra\nProf. P.K. Sharda\nProf. S.L. Kapoor\nProf. B.M. Kalra\nProf. I.P. Sharma\nProf. R.P. Saw\nProf. B. Parashad\nProf. Bhupul Singh</string>
-    <string name="tech_comm_desg">HOD,EC/EI,AKGEC\nHOD,AS-H,AKGEC\nHOD,MCA,AKGEC\nHOD,CSE,AKGEC\nHOD,ME,AKGEC\nHOD,IT,AKGEC\nHOD,CIVIL,AKGEC\nHOD,EN,AKGEC</string>
-    <string name="stud_coor">SANDEEP GUPTA\nMayank Bahadur\nSuhanee Singh</string>
-    <string name="stud_corr_phn">8802119708\n8802119708\n</string>
-    <string name="web_d">Gaurav Arora\nPranav Chaudhary\nSukankshi Jain\nSiddhant Goral\nKunal Chaudhary\nRajat Sharma\nDeepak Singh\nAkash Kool</string>
-    <string name="app_dev">Shobhit Agarwal\nKartikey Srivastava\nAbishek Kumar Gupta\nAkriti Verma</string>
 
     <string-array name="Technical_Committee">
         <item>Prof. P.K. Chopra  HOD,EC/EI,AKGEC</item>

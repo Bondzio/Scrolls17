@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -7,27 +11,24 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-
+        android:orientation="vertical">
         <android.support.design.widget.TabLayout
             android:id="@+id/team_individual_tab"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            app:tabMode="fixed"
-            app:tabTextColor="@color/white"
-            app:tabIndicatorHeight="0dp"
             app:tabBackground="@drawable/tab_selector"
-            app:tabSelectedTextColor="@color/colorAccent">
-        </android.support.design.widget.TabLayout>
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextColor="@color/white"></android.support.design.widget.TabLayout>
 
         <LinearLayout
             android:id="@+id/reg_individual"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:visibility="visible">
 
 
             <android.support.design.widget.TextInputEditText
@@ -36,8 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:hint="Enter your name"
-                android:inputType="textPersonName"
-               />
+                android:inputType="textPersonName" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,10 +53,10 @@
 
                 <Spinner
                     android:id="@+id/stud_college"
-                    android:textAlignment="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"></Spinner>
+                    android:layout_weight="1"
+                    android:textAlignment="center"></Spinner>
 
             </LinearLayout>
 
@@ -77,7 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:entries="@array/Courses"></Spinner>
+                    android:entries="@array/courses"></Spinner>
 
             </LinearLayout>
 
@@ -106,15 +106,13 @@
                 android:id="@+id/stud_other_college"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter your college name"
-                />
+                android:hint="Enter your college name" />
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/stud_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter your student Id"
-                />
+                android:hint="Enter your student Id" />
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/stud_mob_no"
@@ -122,15 +120,14 @@
                 android:layout_height="wrap_content"
                 android:hint="Enter your phone number"
                 android:inputType="phone"
-                />
+                android:maxLength="10" />
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/stud_mail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter your mail address"
-                android:inputType="textEmailAddress"
-               />
+                android:inputType="textEmailAddress" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -158,9 +155,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="@color/colorPrimary"
                 android:gravity="center"
                 android:padding="3dp"
-                android:background="@color/colorPrimary"
                 android:text="Submit" />
         </LinearLayout>
 
@@ -177,8 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:hint="Team name"
-                />
+                android:hint="Team name" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -224,8 +220,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:textStyle="bold"
-                    android:text="Member 1" />
+                    android:text="Member 1"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -264,8 +260,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:text="Member 2" />
+                    android:text="Member 2"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -341,8 +337,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:text="Select a team leader" />
+                    android:text="Select a team leader"
+                    android:textStyle="bold" />
 
                 <RadioGroup
                     android:id="@+id/team_leader"
@@ -369,7 +365,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Member 3"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                 </RadioGroup>
 
@@ -386,15 +382,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:text="Domain" />
+                    android:text="Domain"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/team_domain"
-                    android:entries="@array/domain_array"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:entries="@array/domain_array">
 
                 </Spinner>
 
@@ -412,8 +408,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:text="Topic" />
+                    android:text="Topic"
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/team_topic"
@@ -425,6 +421,7 @@
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -436,8 +433,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:text="Password" />
+                    android:text="Password"
+                    android:textStyle="bold" />
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/team_password"
@@ -445,8 +442,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:hint="Enter password"
-                    android:inputType="textPassword"
-                    />
+                    android:inputType="textPassword" />
 
 
             </LinearLayout>
@@ -457,15 +453,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="3dp"
                 android:background="@color/colorPrimary"
+                android:padding="3dp"
                 android:text="Create" />
 
         </LinearLayout>
-
-
     </LinearLayout>
 
 </ScrollView>
 
-
+</RelativeLayout>

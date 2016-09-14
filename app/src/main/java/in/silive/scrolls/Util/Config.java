@@ -5,6 +5,13 @@ package in.silive.scrolls.Util;
  */
 public class Config {
     public static final String LOG = "Scrolls";
+    public static final String KEY_FRAGMENT = "fragment";
+    public static final String KEY_REGISTER = "Register";
+    public static final String KEY_UPLOAD = "Upload Doc";
+    public static final String KEY_QUERY = "Query Us";
+    //// TODO:correct sample doc link on deploy
+    public static final String SAMPLE_DOC_URL = "http://akgec-scrolls.com/test/asset/Synopsis.pdf";
+    public static final String QUERY_URL = "http://akgec-scrolls.com/rest/api/Queries/RegisterQuery";
 
     public static final String SCROLLS_WEBSITE = "http://www.akgec-scrolls.com";
     public static final String SILIVE_WEBSITE = "http://www.silive.in";

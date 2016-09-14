@@ -33,6 +33,7 @@ import java.io.FileInputStream;
 
 import in.silive.scrolls.Activities.MainActivity;
 import in.silive.scrolls.Activities.MyPickerActivity;
+import in.silive.scrolls.Activities.SecondActivity;
 import in.silive.scrolls.Listeners.FetchDataListener;
 import in.silive.scrolls.Network.CheckConnectivity;
 import in.silive.scrolls.Network.FetchData;
@@ -88,13 +89,11 @@ public class UploadDoc extends Fragment {
             @Override
             public void onClick(View view) {
                 Keyboard.close(getContext());
-                ((MainActivity)getActivity()).showFragment(new Register(),"Register");
-               /* Register fragment = new Register();
-                fragment.setMode("upload");
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container_body, fragment);
-                fragmentTransaction.commit();*/
+
+                Intent i = new Intent(getContext(),SecondActivity.class);
+                        i.putExtra(Config.KEY_FRAGMENT,Config.KEY_REGISTER);
+                        startActivity(i);
+
             }
         });
         btnSelect = (Button) v.findViewById(R.id.btnSelect);

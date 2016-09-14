@@ -2,20 +2,17 @@ package in.silive.scrolls.Fragments;
 
 import android.animation.Animator;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import in.silive.scrolls.Adapters.RulesAdapter;
 import in.silive.scrolls.Adapters.TopicsAdapter;
 import in.silive.scrolls.R;
 import io.codetail.animation.ViewAnimationUtils;
@@ -95,7 +92,7 @@ TopicsAdapter adapter;
                 animateDialogReveal();
             }
         });
-    */    dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+    */  /*  dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 
             @Override
             public boolean onKey(DialogInterface arg0, int keyCode,
@@ -106,7 +103,7 @@ TopicsAdapter adapter;
                 }
                 return true;
             }
-        });
+        });*/
        /* llFullScreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
