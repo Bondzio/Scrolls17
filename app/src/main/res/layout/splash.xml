@@ -34,6 +34,26 @@
 
                 />
         </com.schibsted.spain.parallaxlayerlayout.ParallaxLayerLayout>
+            android:src="@mipmap/ic_launcher"/>
+            android:src="@drawable/audi"/>
+        <com.schibsted.spain.parallaxlayerlayout.ParallaxLayerLayout
+            android:layout_width="match_parent"
+            android:id="@+id/parallaxLayer"
+            android:foregroundGravity="bottom"
+            android:layout_marginTop="30dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:foregroundGravity="bottom"
+                android:src="@drawable/podium"
+
+                android:layout_gravity="bottom"
+                app:layout_parallaxZIndex="10"
+
+                />
+        </com.schibsted.spain.parallaxlayerlayout.ParallaxLayerLayout>
 
         <TextView
             android:layout_width="match_parent"

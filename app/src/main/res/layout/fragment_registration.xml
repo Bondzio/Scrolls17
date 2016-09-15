@@ -234,7 +234,7 @@
                         android:id="@+id/member_one_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:hint="Scrolls ID" />
 
                     <android.support.design.widget.TextInputEditText
@@ -273,7 +273,7 @@
                         android:id="@+id/member_two_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:hint="Scrolls ID" />
 
                     <android.support.design.widget.TextInputEditText
@@ -311,7 +311,7 @@
                         android:id="@+id/member_three_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:hint="Scrolls ID" />
 
                     <android.support.design.widget.TextInputEditText

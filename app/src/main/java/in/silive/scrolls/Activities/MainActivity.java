@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -22,11 +23,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import in.silive.scrolls.Adapters.PagerAdapter;
-import in.silive.scrolls.Fragments.About_Scrolls;
-import in.silive.scrolls.Fragments.ReachUs;
-import in.silive.scrolls.Fragments.Rules;
-import in.silive.scrolls.Fragments.ScheduleFragment;
-import in.silive.scrolls.Fragments.TopicsFragment;
+import in.silive.scrolls.Fragments.ScrollsDevelopers;
+import in.silive.scrolls.Fragments.ScrollsTeam;
 import in.silive.scrolls.R;
 import in.silive.scrolls.Util.Config;
 import in.silive.scrolls.Util.Keyboard;
@@ -150,8 +148,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(i);
                 return true;
             case R.id.scrollTeam:
+                BottomSheetDialogFragment bottomSheetDialogFragmentTeam = new ScrollsTeam();
+                bottomSheetDialogFragmentTeam.show(fragmentManager,"Team");
                 return true;
             case R.id.devTeam:
+                BottomSheetDialogFragment bottomSheetDialogFragment = new ScrollsDevelopers();
+                bottomSheetDialogFragment.show(fragmentManager,"Developers");
                 return true;
             case R.id.silive:
                 url = Config.SILIVE_WEBSITE;
