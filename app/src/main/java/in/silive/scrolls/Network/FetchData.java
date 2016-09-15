@@ -41,12 +41,16 @@ public class FetchData extends AsyncTask<Void, Integer, String> {
             connection.setRequestProperty( "Accept", "*/*" );
             if (entity != null) {
                 connection.setRequestMethod("POST");
-//                connection.setDoInput(true);
+                connection.setDoInput(true);
                 connection.setDoOutput(true);
 //                connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 
             }
-           // connection.connect();
+            else{
+                connection.setRequestMethod("GET");
+                connection.setDoInput(true);
+            }
+           connection.connect();
             if (entity!=null){
                /* if (listener instanceof UploaderListener)
                 { */  OutputStream outputStream = connection.getOutputStream();

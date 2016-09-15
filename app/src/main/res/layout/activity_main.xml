@@ -63,7 +63,7 @@
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-android:layout_gravity="start"
+        android:layout_gravity="start"
         android:background="@color/bg_gray"
         android:fitsSystemWindows="true"
         app:itemTextColor="@color/colorPrimary"
@@ -95,7 +95,7 @@ android:layout_gravity="start"
         android:layout_width="50dp"
         android:layout_margin="10dp"
         android:layout_height="50dp"
-        android:src="@drawable/silogo"/>
+        android:src="@drawable/si_text"/>
     <TextView
         android:id="@+id/footer_item_2"
         android:layout_width="match_parent"

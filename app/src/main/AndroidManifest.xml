@@ -16,6 +16,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <permission android:name="in.scrolls.bo.permission.C2D_Message" />
+
+    <uses-permission android:name="in.silive.scrolls.permission.C2D_Message" />
+
 
     <application
         android:allowBackup="true"
@@ -46,9 +50,33 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <service android:name=".Services.GCMListener"></service>
-        <service android:name=".Services.InstanceIDListener" />
+        <service android:name=".Services.GCMListener">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+
+        </service>
+        <service android:name=".Services.InstanceIDListener"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+
+        </service>
         <service android:name=".Services.RegisterGCM" />
+
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="in.silive.scrolls" />
+            </intent-filter>
+        </receiver>
+
+
 
         <activity
             android:name=".Activities.SecondActivity"

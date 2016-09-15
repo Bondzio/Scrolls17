@@ -2,6 +2,7 @@ package in.silive.scrolls.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -19,6 +20,8 @@ import com.schibsted.spain.parallaxlayerlayout.ParallaxLayerLayout;
 import com.schibsted.spain.parallaxlayerlayout.SensorTranslationUpdater;
 
 import in.silive.scrolls.R;
+import in.silive.scrolls.Services.RegisterGCM;
+import in.silive.scrolls.Util.Config;
 import io.fabric.sdk.android.Fabric;
 
 /**
@@ -46,6 +49,15 @@ public class Splash extends AppCompatActivity {
         sensorTranslationUpdater = new SensorTranslationUpdater(this);
         parallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
         checkConnection();
+        checkGCM();
+    }
+
+    private void checkGCM() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Config.SP_KEY,MODE_PRIVATE);
+        if (sharedPreferences.getBoolean(Config.GCM,true)){
+            Intent i = new Intent(this, RegisterGCM.class);
+            startService(i);
+        }
     }
 
     @Override

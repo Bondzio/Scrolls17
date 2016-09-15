@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:hint="Enter your name"
+                android:singleLine="true"
                 android:inputType="textPersonName" />
 
             <LinearLayout
@@ -106,10 +107,12 @@
                 android:id="@+id/stud_other_college"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:hint="Enter your college name" />
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/stud_id"
+                android:singleLine="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter your student Id" />
@@ -120,12 +123,14 @@
                 android:layout_height="wrap_content"
                 android:hint="Enter your phone number"
                 android:inputType="phone"
+                android:singleLine="true"
                 android:maxLength="10" />
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/stud_mail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:hint="Enter your mail address"
                 android:inputType="textEmailAddress" />
 
@@ -174,6 +179,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:singleLine="true"
                 android:hint="Team name" />
 
             <LinearLayout
@@ -234,12 +240,14 @@
                         android:id="@+id/member_one_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:singleLine="true"
                         android:layout_weight="1"
                         android:hint="Scrolls ID" />
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/member_one_name"
                         android:layout_width="match_parent"
+                        android:singleLine="true"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:hint="Name" />
@@ -274,6 +282,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:singleLine="true"
                         android:hint="Scrolls ID" />
 
                     <android.support.design.widget.TextInputEditText
@@ -281,6 +290,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:singleLine="true"
                         android:hint="Name" />
 
                 </LinearLayout>
@@ -309,6 +319,7 @@
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/member_three_id"
+                        android:singleLine="true"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -319,6 +330,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:singleLine="true"
                         android:hint="Name" />
 
 

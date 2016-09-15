@@ -1,12 +1,12 @@
 {
   "project_info": {
-    "project_number": "24957423969",
-    "project_id": "nodal-unity-106415"
+    "project_number": "51560887778",
+    "project_id": "scrolls-1472758131223"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:24957423969:android:7d60c992183a46fd",
+        "mobilesdk_app_id": "1:51560887778:android:c0a5d350196ff20f",
         "android_client_info": {
           "package_name": "in.silive.scrolls"
         }
@@ -14,7 +14,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCRMpreoGsjhoaI7gqpcVTQDKkYDowlMqI"
+          "current_key": "AIzaSyCkDcxnij_QVqgDTHdmS9VerA9Ik8XXmsk"
         }
       ],
       "services": {

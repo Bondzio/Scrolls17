@@ -406,8 +406,10 @@ public class Register extends Fragment implements FetchDataListener {
         else {
             if (!CheckConnectivity.isNetConnected(getContext()))
                 Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
-            else
+            else {
+                Snackbar.make(reg_view, "Select a topic.", Snackbar.LENGTH_SHORT).show();
                 loadTopics(id_domain);
+            }
             return;
         }
 
@@ -526,6 +528,9 @@ public class Register extends Fragment implements FetchDataListener {
     public void postExecute(String result, int id) throws JSONException {
         if (progressDialog.isShowing())
             progressDialog.dismiss();
+        if (!isAdded()){
+            return;
+        }
         if (!TextUtils.isEmpty(result)) {
             try {
                 JSONObject jsonObject;

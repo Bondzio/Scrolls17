@@ -14,6 +14,9 @@ public class Config {
     //// TODO:correct sample doc link on deploy
     public static final String SAMPLE_DOC_URL = "http://akgec-scrolls.com/test/asset/Synopsis.pdf";
     public static final String QUERY_URL = "http://akgec-scrolls.com/rest/api/Queries/RegisterQuery";
+    public static final String SP_KEY = "scrolls";
+    public static final String GCM = "gcm";
+
 
     public static String GET = "GET";
     public static String POST = "POST";
@@ -39,4 +42,6 @@ public class Config {
     public static String TEAM_REGISTRATION =  BASE_URL +"api/Teams/CreateTeam";
 
     public static String IS_PHONE_NUMBER_REGISTERED = BASE_URL +"api/Participants/IsPhoneNoAlreadyRegistered?number=";
+    public static final String GCM_URL = BASE_URL + "api/GCM/StoreGCMId=";
+
 }

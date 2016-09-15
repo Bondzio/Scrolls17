@@ -86,11 +86,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     }
     public int getTabIcon(int pos){
     switch (pos){
-        case 0: return R.drawable.rules;
-        case 1: return R.drawable.dates_icon;
-        case 2: return R.drawable.about_us;
-        case 3: return R.drawable.query;
-        case 4: return R.drawable.reach_icon;
+        case 0: return R.drawable.ic_rules;
+        case 1: return R.drawable.ic_date;
+        case 2: return R.drawable.ic_about;
+        case 3: return R.drawable.ic_topic;
+        case 4: return R.drawable.ic_reach_us;
     }
         return 0;
     }

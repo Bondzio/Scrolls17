@@ -38,8 +38,6 @@ RecyclerView rvDomains;
     CollapsingToolbarLayout collapsingToolbarLayout;
     AppBarLayout appBarLayout;
     static About_Scrolls fragment;
-    private ParallaxLayerLayout parallaxLayout;
-    private SensorTranslationUpdater sensorTranslationUpdater;
 
     public About_Scrolls() {
         // Required empty public constructor
@@ -70,9 +68,6 @@ RecyclerView rvDomains;
                 }
             });
 
-            parallaxLayout = (ParallaxLayerLayout)rootView.findViewById(R.id.parallaxLayer);
-            sensorTranslationUpdater = new SensorTranslationUpdater(getContext());
-            parallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
         }
         return rootView;
     }
@@ -81,13 +76,11 @@ RecyclerView rvDomains;
     public void onResume() {
         super.onResume();
         web_view.loadUrl("file:///android_asset/about.html");
-        sensorTranslationUpdater.registerSensorManager();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        sensorTranslationUpdater.unregisterSensorManager();
     }
 
     public class myWebClient extends WebViewClient {
