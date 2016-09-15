@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return true;
             case R.id.scrollTeam:
                 BottomSheetDialogFragment bottomSheetDialogFragmentTeam = new ScrollsTeam();
-                bottomSheetDialogFragmentTeam.show(fragmentManager,"Developers");
+                bottomSheetDialogFragmentTeam.show(fragmentManager,"Team");
                 return true;
             case R.id.devTeam:
                 BottomSheetDialogFragment bottomSheetDialogFragment = new ScrollsDevelopers();

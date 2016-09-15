@@ -17,19 +17,23 @@ public class AboutUsListAdapter extends BaseAdapter {
     public static String names[];
     public static String designation[];
     public static Integer pic[];
+    public static String head;
     LayoutInflater inflater;
+    Context c;
 
     public AboutUsListAdapter(Context context,String result_names[],String result_designatin[],Integer result_pic[]) {
         names = result_names;
         designation = result_designatin;
         pic = result_pic;
-        inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //head = s;
+        c = context;
+        inflater = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
 
     public class Holder{
         ImageView member_pic;
-        TextView member_name,member_desig;
+        TextView member_name,member_desig,heading;
 
     }
 
@@ -55,9 +59,11 @@ public class AboutUsListAdapter extends BaseAdapter {
         holder.member_pic = (ImageView)sview.findViewById(R.id.member_pic);
         holder.member_name = (TextView)sview.findViewById(R.id.member_name);
         holder.member_desig = (TextView)sview.findViewById(R.id.member_desig);
+       // holder.heading = (TextView)sview.findViewById(R.id.heading);
         holder.member_pic.setImageResource(pic[i]);
         holder.member_name.setText(names[i]);
         holder.member_desig.setText(designation[i]);
+        //holder.heading.setText(head);
         return sview;
     }
 }
