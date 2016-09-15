@@ -35,7 +35,7 @@ public class AboutUsListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return names.length;
     }
 
     @Override
