@@ -42,8 +42,8 @@ public class ScrollsDevelopers extends BottomSheetDialogFragment {
         View contentView = View.inflate(getContext(), R.layout.fragment_scrolls_developers, null);
         dialog.setContentView(contentView);
         scrolls_dev = (ListView)contentView.findViewById(R.id.scrolls_dev);
-        AboutUsListAdapter aboutUsListAdapter = new AboutUsListAdapter(getContext(),namesOfMembers,desigOfMembers,picOfMembers);
-        scrolls_dev.setAdapter(aboutUsListAdapter);
+        //AboutUsListAdapter aboutUsListAdapter = new AboutUsListAdapter(getContext(),namesOfMembers,desigOfMembers,picOfMembers);
+        scrolls_dev.setAdapter(new AboutUsListAdapter(getContext(),namesOfMembers,desigOfMembers,picOfMembers));
 
 
 
