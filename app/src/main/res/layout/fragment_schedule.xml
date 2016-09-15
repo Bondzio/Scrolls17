@@ -8,13 +8,27 @@
     android:layout_height="match_parent"
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <com.fmsirvent.ParallaxEverywhere.PEWImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:scaleType="centerCrop"
         android:src="@drawable/pr" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="October 2016"
+        android:textColor="@color/colorPrimary"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:layout_margin="10dp"
+        />
+</RelativeLayout>
+
 
 <android.support.v7.widget.RecyclerView
     android:layout_width="match_parent"

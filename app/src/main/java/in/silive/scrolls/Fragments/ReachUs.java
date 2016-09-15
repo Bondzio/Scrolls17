@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,6 +83,12 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
             rootView = inflater.inflate(R.layout.fragment_reach_us, container, false);
             android.support.v4.app.FragmentManager fManager = getChildFragmentManager();
             mapFragment = (SupportMapFragment) fManager.findFragmentById(R.id.map);
+            rootView.findViewById(R.id.bottom_sheet).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
             if (mapFragment == null) {
                 mapFragment = SupportMapFragment.newInstance();
                 fManager.beginTransaction().replace(R.id.map, mapFragment).commit();
@@ -136,7 +143,7 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
     @Override
     public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
         try {
-            if (getContext()!=null) {
+
                 PolylineOptions polyOptions = new PolylineOptions();
                 polyOptions.color(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
                 polyOptions.width(10);
@@ -148,7 +155,7 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
                 options.icon(BitmapDescriptorFactory.fromResource(R.drawable.location_pointer));
                 mMap.addMarker(options);
                 pathLoaded = true;
-            }
+            Log.d("Scrolls","Maps - Path loaded");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -166,7 +173,7 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
         mMap = googleMap;
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)));
 
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+      /*  if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -178,7 +185,7 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
             return;
         }
         mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(true);*/
         // End marker
         MarkerOptions options = new MarkerOptions();
         options = new MarkerOptions();
@@ -212,6 +219,7 @@ if (getContext()!=null) {
         startLocation = new LatLng(lastlocation.getLatitude(), lastlocation.getLongitude());
         locationLoaded = true;
         loadPath();
+        Log.d("Scrolls","Maps - Path Req");
     }
 }
     }

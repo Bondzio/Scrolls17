@@ -55,6 +55,9 @@
             android:parentActivityName=".Activities.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" ></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="181e8e36d7a52e78eb8c6d7bd04b600d38fbc9cd" />
     </application>
 
 </manifest>

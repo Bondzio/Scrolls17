@@ -32,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import in.silive.scrolls.Adapters.SpinnerAdapter;
 import in.silive.scrolls.Listeners.FetchDataListener;
@@ -319,7 +320,7 @@ public class Register extends Fragment implements FetchDataListener {
         }
         student_college_name = stud_other_college.getText().toString();
         student_id = stud_id.getText().toString();
-        if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE) {
+        if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE && !Pattern.matches("^\\d{7}[Dd]{0,1}$",student_id)) {
             flag = 1;
             stud_id.setError("Invalid Id");
         }

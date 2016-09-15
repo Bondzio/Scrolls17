@@ -14,10 +14,12 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.schibsted.spain.parallaxlayerlayout.ParallaxLayerLayout;
 import com.schibsted.spain.parallaxlayerlayout.SensorTranslationUpdater;
 
 import in.silive.scrolls.R;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by akriti on 20/8/16.
@@ -34,6 +36,7 @@ public class Splash extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.splash);
         splash = (RelativeLayout) findViewById(R.id.splash);
         context = getApplicationContext();

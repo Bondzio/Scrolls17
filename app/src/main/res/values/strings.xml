@@ -83,13 +83,14 @@
     <string-array name="ec">
         <item>4G Technology.</item>
         <item>Mobile Satellite Communication.</item>
+        <item>Opto Electronics.</item>
         <item>Nano Technology.</item>
         <item>VLSI.</item>
         <item>Neural Network.</item>
         <item>Electronics Counter Measures in Defense System.</item>
         <item>IFF Technology.</item>
         <item>Speech Processing</item>
-        <item>Opto Electronics.</item>
+
         <item>Antenna Design and Radar Technology.</item>
 
 
@@ -182,11 +183,11 @@ clean earth.</item>
     <string name="gcm_DefaultSenderId">10000xyz</string>
 
     <string name="rules">The competition will be open to all bonafide students of Engineering and Management Colleges
-\nMaximum of 3 and minimum of 2 authors per paper.
+        \nMaximum of 3 and minimum of 2 authors per paper.
 \nExtended Abstract of 500 words maximum to be sent by laid down date. Based on the abstract, an   experts committee will select the papers for inclusion in the final presentation.
 \nFor presentation, a time slot of 7 minutes + 3 minutes (for Q &amp; A) will be given to each team.
-\nA soft copy of the final paper is to be sent before the       designated date.
-\nThe paper to be typed in single space, double column format, using Times New Roman font &amp; font-size 12. Maximum number of pages to be 10 and the page should have no numbers. A margin of 1’’ all around to be left.
+\nA soft copy of the final paper is to be sent via email, before the designated date.
+\nThe paper to be typed in single space, double column format, using Times New Roman font &amp; font-size 12. Maximum number of pages to be 10 and the page should have no numbers. A margin of 1’’ all around to be left. A sample synopsis for reference is available on SCROLLS\'16 website.
 \nFirst page to include Title, Name(s) of authors, their college name, telephone numbers as well as email addresses. This information to be included with extended abstract also.
     </string>
 

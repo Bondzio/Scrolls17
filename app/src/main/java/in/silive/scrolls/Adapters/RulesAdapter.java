@@ -35,7 +35,7 @@ public class RulesAdapter extends RecyclerView.Adapter<RulesAdapter.ViewHolder>{
     public void onBindViewHolder(final RulesAdapter.ViewHolder holder, final int position) {
         holder.tvTopic.setText(topics[position]);
         holder.itemView.setVisibility(View.INVISIBLE);
-        holder.tvNum.setText(""+(position+1));
+      //  holder.tvNum.setText(""+(position+1));
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -66,7 +66,7 @@ public class RulesAdapter extends RecyclerView.Adapter<RulesAdapter.ViewHolder>{
         public ViewHolder(View itemView) {
             super(itemView);
             tvTopic = (TextView)itemView.findViewById(R.id.tv);
-            tvNum = (TextView)itemView.findViewById(R.id.tvNum);
+           // tvNum = (TextView)itemView.findViewById(R.id.tvNum);
         }
     }
 }
