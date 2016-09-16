@@ -1,6 +1,11 @@
 package in.silive.scrolls.Adapters;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,19 +26,19 @@ public class AboutUsListAdapter extends BaseAdapter {
     LayoutInflater inflater;
     Context c;
 
-    public AboutUsListAdapter(Context context,String result_names[],String result_designatin[],Integer result_pic[]) {
+    public AboutUsListAdapter(Context context, String result_names[], String result_designatin[], Integer result_pic[]) {
         names = result_names;
         designation = result_designatin;
         pic = result_pic;
         //head = s;
         c = context;
-        inflater = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
 
-    public class Holder{
+    public class Holder {
         ImageView member_pic;
-        TextView member_name,member_desig,heading;
+        TextView member_name, member_desig, heading;
 
     }
 
@@ -53,16 +58,35 @@ public class AboutUsListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        View sview = inflater.inflate(R.layout.about_us_list_adapter,null);
+    public View getView(final int i, View view, ViewGroup viewGroup) {
+        View sview = inflater.inflate(R.layout.about_us_list_adapter, null);
         Holder holder = new Holder();
-        holder.member_pic = (ImageView)sview.findViewById(R.id.member_pic);
-        holder.member_name = (TextView)sview.findViewById(R.id.member_name);
-        holder.member_desig = (TextView)sview.findViewById(R.id.member_desig);
-       // holder.heading = (TextView)sview.findViewById(R.id.heading);
+        holder.member_pic = (ImageView) sview.findViewById(R.id.member_pic);
+        holder.member_name = (TextView) sview.findViewById(R.id.member_name);
+        holder.member_desig = (TextView) sview.findViewById(R.id.member_desig);
+        // holder.heading = (TextView)sview.findViewById(R.id.heading);
         holder.member_pic.setImageResource(pic[i]);
         holder.member_name.setText(names[i]);
         holder.member_desig.setText(designation[i]);
+        if (designation[i].matches("^-?\\d+$")) {
+            holder.member_desig.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + designation[i]));
+                    if (ActivityCompat.checkSelfPermission(c, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
+                    c.startActivity(intent);
+                }
+            });
+        }
         //holder.heading.setText(head);
         return sview;
     }
