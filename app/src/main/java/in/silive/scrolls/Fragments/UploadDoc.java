@@ -145,14 +145,15 @@ public class UploadDoc extends Fragment {
                 jsonObject.put("TopicName",topicName);
                 jsonObject.put("FileName",file.getName());
                 jsonObject.put("FileArray", Base64.encodeToString(bytes,Base64.DEFAULT));
-                if (CheckConnectivity.isNetConnected(getContext()))
-                Dialogs.showUploadDialog(getContext(), jsonObject.toString(), file.getName(), new Dialogs.UploadListener() {
-                    @Override
-                    public void onUploadSuccessful() {
-                        v.findViewById(R.id.tvSynopsis).setVisibility(View.VISIBLE);
-                        v.findViewById(R.id.btnSelect).setVisibility(View.GONE);
-                    }
-                });
+                if (CheckConnectivity.isNetConnected(getContext())) {
+                    Dialogs.showUploadDialog(getContext(), jsonObject.toString(), file.getName(), new Dialogs.UploadListener() {
+                        @Override
+                        public void onUploadSuccessful() {
+                            v.findViewById(R.id.tvSynopsis).setVisibility(View.VISIBLE);
+                            v.findViewById(R.id.btnSelect).setVisibility(View.GONE);
+                        }
+                    });
+                }
                 else
                     Snackbar.make(v,"No internet connection.",Snackbar.LENGTH_SHORT).show();
             } catch (Exception e) {
