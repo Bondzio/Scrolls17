@@ -133,7 +133,11 @@ public class Dialogs {
         });
     }
 
-    public static void showUploadDialog(final Context context,String json,String fileName) {
+    public interface UploadListener{
+        public void onUploadSuccessful();
+    }
+
+    public static void showUploadDialog(final Context context, String json, String fileName, final UploadListener listener) {
        final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Uploading Doc");
@@ -160,8 +164,10 @@ public class Dialogs {
                 public void postExecute(String result, int id) throws JSONException {
                     android.support.v7.app.AlertDialog.Builder notifyDialog = new android.support.v7.app.AlertDialog.Builder(context);
                     notifyDialog.setTitle("Uploading Doc");
-                    if (result.equalsIgnoreCase("201"))
+                    if (result.equalsIgnoreCase("201")) {
                         notifyDialog.setMessage("File uploaded successfully");
+                        listener.onUploadSuccessful();
+                    }
                     else {
                         notifyDialog.setMessage("Upload failed");
                     }

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,10 +20,12 @@ import in.silive.scrolls.R;
 public class DomainsAdapter extends RecyclerView.Adapter<DomainsAdapter.ViewHolder> {
     String[] domains;
     Context context;
+    String[] images;
 
-    public DomainsAdapter(Context context, String[] domains) {
+    public DomainsAdapter(Context context, String[] domains,String[] images) {
         this.context = context;
         this.domains = domains;
+        this.images = images;
     }
 
     @Override
@@ -33,6 +36,7 @@ public class DomainsAdapter extends RecyclerView.Adapter<DomainsAdapter.ViewHold
     @Override
     public void onBindViewHolder(DomainsAdapter.ViewHolder holder, final int position) {
         holder.tvDomain.setText(domains[position]);
+        holder.iv.setImageResource(context.getResources().getIdentifier(images[position],"drawable",context.getPackageName()));
         holder.ll.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -72,11 +76,13 @@ public class DomainsAdapter extends RecyclerView.Adapter<DomainsAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvDomain;
         RelativeLayout ll;
+        ImageView iv;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ll = (RelativeLayout) itemView.findViewById(R.id.ll);
             tvDomain = (TextView) itemView.findViewById(R.id.tvDomain);
+            iv = (ImageView)itemView.findViewById(R.id.iv);
         }
     }
 }

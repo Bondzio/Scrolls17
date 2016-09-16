@@ -3,10 +3,12 @@ package in.silive.scrolls.Fragments;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -51,6 +53,7 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
             .setInterval(5000)         // 5 seconds
             .setFastestInterval(3000)    // 16ms = 60fps
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    private static final int MY_PERMISSIONS_ACCESS_FINE_LOCATION = 345;
     public static ReachUs instance;
     private static SupportMapFragment mapFragment;
     Location lastlocation;
@@ -61,12 +64,30 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
     private GoogleApiClient mGoogleApiClient;
     private boolean locationLoaded;
     private boolean pathLoaded;
+    private boolean connectedToAPI;
 
     public static ReachUs getInstance() {
         if (instance == null) {
             instance = new ReachUs();
         }
         return instance;
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case MY_PERMISSIONS_ACCESS_FINE_LOCATION:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                            getLoc();
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
@@ -86,7 +107,9 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
             rootView.findViewById(R.id.bottom_sheet).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    if (mMap!=null){
+                        addAKGECMarker();
+                    }
                 }
             });
             if (mapFragment == null) {
@@ -173,22 +196,14 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
         mMap = googleMap;
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)));
 
-      /*  if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setZoomControlsEnabled(true);*/
+
+        mMap.getUiSettings().setZoomControlsEnabled(true);
         // End marker
+        addAKGECMarker();
+
+    }
+    public void addAKGECMarker(){
         MarkerOptions options = new MarkerOptions();
-        options = new MarkerOptions();
         options.position(latLngAKGEC);
         options.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_akgec));
         mMap.addMarker(options);
@@ -200,40 +215,59 @@ public class ReachUs extends Fragment implements RoutingListener, GoogleApiClien
 
     @Override
     public void onConnected(Bundle bundle) {
-if (getContext()!=null) {
-    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-        // TODO: Consider calling
-        //    ActivityCompat#requestPermissions
-        // here to request the missing permissions, and then overriding
-        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-        //                                          int[] grantResults)
-        // to handle the case where the user grants the permission. See the documentation
-        // for ActivityCompat#requestPermissions for more details.
+        connectedToAPI = true;
+if (isVisible()) {
 
-        return;
-    }
-    lastlocation = LocationServices.FusedLocationApi.getLastLocation(
-            mGoogleApiClient);
-    if (lastlocation != null) {
-        startLocation = new LatLng(lastlocation.getLatitude(), lastlocation.getLongitude());
-        locationLoaded = true;
-        loadPath();
-        Log.d("Scrolls","Maps - Path Req");
-    }
+    getLoc();
 }
     }
+    @Override
+    public void setUserVisibleHint(boolean visible){
+        super.setUserVisibleHint(visible);
+        if (visible && isResumed()){
+            if (locationLoaded && !pathLoaded && connectedToAPI)
+                loadPath();
+        }
+    }
+
+    public void getLoc(){
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_ACCESS_FINE_LOCATION);
+            return;
+        }
+        lastlocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (lastlocation != null) {
+            startLocation = new LatLng(lastlocation.getLatitude(), lastlocation.getLongitude());
+            locationLoaded = true;
+            loadPath();
+            Log.d("Scrolls","Maps - Path Req");
+        }
+    }
+
 
     public void loadPath() {
         try {
           /*  progressDialog = ProgressDialog.show(getActivity(), "Please wait.",
                     "Fetching route information.", true);*/
-            Routing routing = new Routing.Builder()
-                    .travelMode(AbstractRouting.TravelMode.WALKING)
-                    .withListener(ReachUs.this)
-                    .waypoints(startLocation, latLngAKGEC)
-                    .build();
-            routing.execute();
+            if (startLocation!=null) {
+                Routing routing = new Routing.Builder()
+                        .travelMode(AbstractRouting.TravelMode.WALKING)
+                        .withListener(ReachUs.this)
+                        .waypoints(startLocation, latLngAKGEC)
+                        .build();
+                routing.execute();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

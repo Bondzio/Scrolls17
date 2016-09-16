@@ -18,6 +18,7 @@ public class Config {
     public static final String GCM = "gcm";
 
 
+
     public static String GET = "GET";
     public static String POST = "POST";
     public static String BASE_URL = "http://akgec-scrolls.com/rest/";
@@ -43,5 +44,5 @@ public class Config {
 
     public static String IS_PHONE_NUMBER_REGISTERED = BASE_URL +"api/Participants/IsPhoneNoAlreadyRegistered?number=";
     public static final String GCM_URL = BASE_URL + "api/GCM/StoreGCMId=";
-
+    public static final String GET_TEAM_DETAILS =BASE_URL+ "api/Teams/GetTeam?teamId=";
 }

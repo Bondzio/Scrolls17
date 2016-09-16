@@ -25,6 +25,7 @@ View view;
     private DomainsAdapter adapter;
 
     static   TopicsFragment fragment;
+    private String[] imagesArray;
 
     public static TopicsFragment getInstance(){
         if (fragment == null)
@@ -45,7 +46,8 @@ View view;
         rvDomains = (RecyclerView)view.findViewById(R.id.rvDomains);
         layoutManager = new GridLayoutManager(getContext(),2);
         domains = getActivity().getResources().getStringArray(R.array.domain_array);
-        adapter = new DomainsAdapter(getContext(),domains);
+        imagesArray =  getActivity().getResources().getStringArray(R.array.topic_img_array);
+        adapter = new DomainsAdapter(getContext(),domains,imagesArray);
         rvDomains.setLayoutManager(layoutManager);
         rvDomains.setAdapter(adapter);
         return view;

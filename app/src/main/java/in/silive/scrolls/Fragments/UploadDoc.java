@@ -47,6 +47,7 @@ import in.silive.scrolls.Util.Keyboard;
  */
 public class UploadDoc extends Fragment {
     private static final int FILE_CODE = 1423;
+    private static final int TEAM_DETAILS = 1323;
     public static String team_id;
     public static Context context;
     static int domainId;
@@ -145,7 +146,13 @@ public class UploadDoc extends Fragment {
                 jsonObject.put("FileName",file.getName());
                 jsonObject.put("FileArray", Base64.encodeToString(bytes,Base64.DEFAULT));
                 if (CheckConnectivity.isNetConnected(getContext()))
-                Dialogs.showUploadDialog(getContext(),jsonObject.toString(),file.getName());
+                Dialogs.showUploadDialog(getContext(), jsonObject.toString(), file.getName(), new Dialogs.UploadListener() {
+                    @Override
+                    public void onUploadSuccessful() {
+                        v.findViewById(R.id.tvSynopsis).setVisibility(View.VISIBLE);
+                        v.findViewById(R.id.btnSelect).setVisibility(View.GONE);
+                    }
+                });
                 else
                     Snackbar.make(v,"No internet connection.",Snackbar.LENGTH_SHORT).show();
             } catch (Exception e) {
@@ -203,6 +210,7 @@ public class UploadDoc extends Fragment {
                             tvTeamID.setText(team_id);
                             tvDomain.setText(domainName);
                             tvTopic.setText(topicName);
+                            getSynopsisAvail();
                             v.findViewById(R.id.llForm).setVisibility(View.GONE);
                             v.findViewById(R.id.llUpload).setVisibility(View.VISIBLE);
                         } catch (Exception e) {
@@ -228,6 +236,57 @@ public class UploadDoc extends Fragment {
                 fetchData.execute();
             }
         }
+    }
+
+    private void getSynopsisAvail() {
+        FetchData fetchData = new FetchData();
+        fetchData.setArgs(Config.GET_TEAM_DETAILS + team_id, new FetchDataListener() {
+            ProgressDialog progressDialog;
+            @Override
+            public void preExecute() {
+                progressDialog = new ProgressDialog(context);
+                progressDialog.setMessage("Loading");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+            }
+
+            @Override
+            public void postExecute(String result, int id) throws JSONException {
+                if (progressDialog.isShowing())
+                    progressDialog.dismiss();
+                try {
+                    JSONObject team = new JSONObject(result);
+                        boolean synopsisAvail = team.getBoolean("SynopsisAvailable");
+                    v.findViewById(R.id.llForm).setVisibility(View.GONE);
+                    v.findViewById(R.id.llUpload).setVisibility(View.VISIBLE);
+                  if (!synopsisAvail) {
+                      v.findViewById(R.id.tvSynopsis).setVisibility(View.GONE);
+                      v.findViewById(R.id.btnSelect).setVisibility(View.VISIBLE);
+                  }else {
+                      v.findViewById(R.id.tvSynopsis).setVisibility(View.VISIBLE);
+                      v.findViewById(R.id.btnSelect).setVisibility(View.GONE);
+                  }
+                } catch (Exception e) {
+                    if (result.equalsIgnoreCase("null")) {
+                        android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(context)
+                                .setTitle("Error")
+                                .setMessage("Invalid Credentials")
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+
+                                .setIcon(android.R.drawable.ic_dialog_alert);
+                        dialog.show();
+
+                    } else {
+                        Snackbar.make(v, "Something went wrong.", Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+        fetchData.execute();
     }
 
 }

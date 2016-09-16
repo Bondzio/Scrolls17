@@ -65,6 +65,15 @@
         <item>Civil Engineering</item>
     </string-array>
 
+    <string-array  name="topic_img_array">
+        <item>management</item>
+        <item>cs</item>
+        <item>ec</item>
+        <item>el</item>
+        <item>mech</item>
+        <item>civil</item>
+    </string-array>
+
     <string-array name="csit">
         <item>Embedded Systems</item>
         <item>Augmented Reality</item>
