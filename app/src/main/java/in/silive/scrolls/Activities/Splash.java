@@ -69,8 +69,8 @@ public class Splash extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
         sensorTranslationUpdater.unregisterSensorManager();
     }
 
