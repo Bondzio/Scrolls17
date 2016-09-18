@@ -196,7 +196,8 @@ public class UploadDoc extends Fragment {
                         progressDialog = new ProgressDialog(context);
                         progressDialog.setMessage("Loading");
                         progressDialog.setCancelable(false);
-                        progressDialog.show();
+                        if (!getActivity().isFinishing())
+                            progressDialog.show();
                     }
 
                     @Override

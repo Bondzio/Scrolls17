@@ -95,7 +95,7 @@ public class Register extends Fragment implements FetchDataListener {
     }
 
     public static Register getInstance() {
-        if (fragment == null)
+       // if (fragment == null)
             fragment = new Register();
         return fragment;
     }
@@ -521,6 +521,7 @@ public class Register extends Fragment implements FetchDataListener {
             progressDialog.setMessage("Loading");
             progressDialog.setCancelable(false);
         }
+        if (!getActivity().isFinishing())
         progressDialog.show();
     }
 
