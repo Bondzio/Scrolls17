@@ -48,7 +48,7 @@ public class Splash extends AppCompatActivity {
         parallaxLayout = (ParallaxLayerLayout)findViewById(R.id.parallaxLayer);
         sensorTranslationUpdater = new SensorTranslationUpdater(this);
         parallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
-        checkConnection();
+       // checkConnection();
         checkGCM();
     }
 
@@ -58,6 +58,14 @@ public class Splash extends AppCompatActivity {
             Intent i = new Intent(this, RegisterGCM.class);
             startService(i);
         }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(Splash.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }, 3000);
     }
 
     @Override
@@ -88,16 +96,5 @@ public class Splash extends AppCompatActivity {
             textView.setTextColor(Color.YELLOW);
             snackbar.show();
         }
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(Splash.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }, 3000);
-
-
-
 
     }}

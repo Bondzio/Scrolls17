@@ -12,12 +12,10 @@ public class Config {
     public static final String KEY_UPLOAD = "Upload Doc";
     public static final String KEY_QUERY = "Query Us";
     //// TODO:correct sample doc link on deploy
-    public static final String SAMPLE_DOC_URL = "http://akgec-scrolls.com/test/asset/Synopsis.pdf";
+    public static final String SAMPLE_DOC_URL = "http://akgec-scrolls.com/asset/Synopsis.pdf";
     public static final String QUERY_URL = "http://akgec-scrolls.com/rest/api/Queries/RegisterQuery";
     public static final String SP_KEY = "scrolls";
     public static final String GCM = "gcm";
-
-
 
     public static String GET = "GET";
     public static String POST = "POST";

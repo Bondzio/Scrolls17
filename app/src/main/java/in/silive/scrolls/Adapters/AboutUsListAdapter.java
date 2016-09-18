@@ -1,11 +1,13 @@
 package in.silive.scrolls.Adapters;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +83,9 @@ public class AboutUsListAdapter extends BaseAdapter {
                         //                                          int[] grantResults)
                         // to handle the case where the user grants the permission. See the documentation
                         // for ActivityCompat#requestPermissions for more details.
+                        ActivityCompat.requestPermissions((Activity) c,
+                                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                1234);
                         return;
                     }
                     c.startActivity(intent);

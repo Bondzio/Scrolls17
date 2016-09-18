@@ -1,13 +1,18 @@
 package in.silive.scrolls.Activities;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,6 +26,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import in.silive.scrolls.Adapters.PagerAdapter;
 import in.silive.scrolls.Fragments.ScrollsDevelopers;
@@ -38,12 +46,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     LinearLayout ll;
     TabLayout tabLayout;
     String title;
+    ViewPager viewPager;
+    PagerAdapter pagerAdapter;
     private Toolbar mtoolbar;
     private FragmentTransaction fragmentTransaction;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    ViewPager viewPager;
-    PagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentManager = getSupportFragmentManager();
         main_act_context = getApplicationContext();
         mtoolbar = (Toolbar) findViewById(R.id.toolbar);
-        viewPager = (ViewPager)findViewById(R.id.viewPager) ;
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
         setSupportActionBar(mtoolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -124,9 +132,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         pagerAdapter.addIconsToTab(tabLayout);
-        viewPager.setCurrentItem(2,true);
+        viewPager.setCurrentItem(2, true);
     }
-
 
 
     @Override
@@ -148,12 +155,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(i);
                 return true;
             case R.id.scrollTeam:
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.CALL_PHONE},
+                            1234);
+                }
                 BottomSheetDialogFragment bottomSheetDialogFragmentTeam = new ScrollsTeam();
-                bottomSheetDialogFragmentTeam.show(fragmentManager,"Team");
+                bottomSheetDialogFragmentTeam.show(fragmentManager, "Team");
                 return true;
             case R.id.devTeam:
                 BottomSheetDialogFragment bottomSheetDialogFragment = new ScrollsDevelopers();
-                bottomSheetDialogFragment.show(fragmentManager,"Developers");
+                bottomSheetDialogFragment.show(fragmentManager, "Developers");
                 return true;
             case R.id.silive:
                 url = Config.SILIVE_WEBSITE;
@@ -173,25 +185,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (menuItem.isChecked()) menuItem.setChecked(false);
         else menuItem.setChecked(true);
         drawerLayout.closeDrawers();
-        Intent i = new Intent(this,SecondActivity.class);
+        Intent i = new Intent(this, SecondActivity.class);
+        Calendar calendar = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+
         switch (menuItem.getItemId()) {
             case R.id.register:
-               i.putExtra(Config.KEY_FRAGMENT,Config.KEY_REGISTER);
-                startActivity(i);
+                cal2.set(2016,9,5,0,0);
+                if (cal2.getTimeInMillis() > calendar.getTimeInMillis()) {
+                    i.putExtra(Config.KEY_FRAGMENT, Config.KEY_REGISTER);
+                    startActivity(i);
+                } else showRegOverDialog();
                 break;
             case R.id.upload:
-                i.putExtra(Config.KEY_FRAGMENT,Config.KEY_UPLOAD);
-                startActivity(i);
+                cal2.set(2016,9,5,0,0);
+                if (cal2.getTimeInMillis() > calendar.getTimeInMillis()) {
+                    i.putExtra(Config.KEY_FRAGMENT, Config.KEY_UPLOAD);
+                    startActivity(i);
+                } else showRegOverDialog();
                 break;
-            case R.id.query :
-                i.putExtra(Config.KEY_FRAGMENT,Config.KEY_QUERY);
-                startActivity(i);
+            case R.id.query:
+                cal2.set(2016,9,22,0,0);
+
+                if (cal2.getTimeInMillis() > calendar.getTimeInMillis()) {
+                    i.putExtra(Config.KEY_FRAGMENT, Config.KEY_QUERY);
+                    startActivity(i);
+                }else showQueryOverDialog();
                 break;
             case R.id.download:
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 String url = Config.SAMPLE_DOC_URL;
-                        intent.setData(Uri.parse(url));
-                        startActivity(intent);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
                 break;
             default:
         }
@@ -200,4 +225,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    private void showQueryOverDialog() {
+        android.support.v7.app.AlertDialog.Builder notifyDialog = new android.support.v7.app.AlertDialog.Builder(this);
+        notifyDialog.setTitle("Scrolls 2016");
+
+        notifyDialog.setMessage("Scrolls 2016 has been concluded.\n" +
+                "Meet you next year.");
+        notifyDialog.setPositiveButton( "Dismiss", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        notifyDialog.show();
+    }
+
+    private void showRegOverDialog() {
+        android.support.v7.app.AlertDialog.Builder notifyDialog = new android.support.v7.app.AlertDialog.Builder(this);
+        notifyDialog.setTitle("Scrolls 2016");
+
+            notifyDialog.setMessage("Last date for Registration and Synopsis upload is over");
+        notifyDialog.setPositiveButton( "Dismiss", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        notifyDialog.show();
+    }
+
 }
+

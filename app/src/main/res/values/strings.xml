@@ -2,7 +2,9 @@
     <string name="app_name">Scrolls</string>
     <string name="google_maps_key">AIzaSyBDofDBjIoBPX8UY3uH4uVLZ9VcoyKjd_k</string>
     <string name="could_not_connect">Could not connect to server.</string>
-
+<string name="html"><h4><b>“ </b>Logics will take you from A to B but imagination will take you everywhere.<b>”</b><br/>&#45; Albert Einstein</h4>
+        <p>A national level technical paper presentation contest that provides a pedestal to unleash the talent of budding technocrats, SCROLLS-2016 deals with the most thriving and progressive fields of technology and management, bringing Computing, Information Technology, Mechanical Engineering, Electrical Engineering, Electronics &amp; Communication Technologies and Civil Engineering along with major developmental leaps in management and leadership in its fold.
+        We believe that the real conflux to innovation and creativity is imagination, power to think beyond the stereotype and conventions. Keeping the above in mind, we at AKGEC organize an annual National Level Technical Paper Presentation event called SCROLLS (Student Creative Oratory Learning Skills) which aspires to amplify excellence in the sphere of technology and management to promote the technocrats and entrepreneurs of tomorrow. </p></string>
     <string-array name="navigation_drawer_lables">
         <item>About Scrolls</item>
         <item>Rules</item>

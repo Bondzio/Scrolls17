@@ -57,7 +57,7 @@ RecyclerView rvDomains;
         if (rootView==null) {
             rootView = inflater.inflate(R.layout.fragment_about_scrolls, container, false);
             web_view = (WebView) rootView.findViewById(R.id.about_scrolls_web_view);
-            WebSettings webSettings = web_view.getSettings();
+            final WebSettings webSettings = web_view.getSettings();
             webSettings.setJavaScriptEnabled(true);
             web_view.setWebViewClient(new myWebClient());
             web_view.setOnTouchListener(new View.OnTouchListener() {
@@ -67,7 +67,14 @@ RecyclerView rvDomains;
                     return true;
                 }
             });
+            web_view.setWebViewClient(new WebViewClient() {
 
+                @Override
+                public void onPageFinished(final WebView view, final String url) {
+                    super.onPageFinished(view, url);
+                    web_view.invalidate();
+                }
+            });
         }
         return rootView;
     }

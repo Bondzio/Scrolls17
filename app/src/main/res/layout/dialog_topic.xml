@@ -14,18 +14,11 @@
       android:layout_marginTop="5dp"
         android:orientation="vertical"
         app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
-
-        <io.codetail.widget.RevealLinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
             <LinearLayout
                 android:id="@+id/ll"
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -68,8 +61,6 @@
                         android:layout_margin="3dp"
                         android:padding="5dp"></android.support.v7.widget.RecyclerView>
                 </LinearLayout>
-
             </LinearLayout>
-        </io.codetail.widget.RevealLinearLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
