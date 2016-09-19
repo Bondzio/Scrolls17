@@ -17,9 +17,9 @@ import in.silive.scrolls.R;
  */
 public class ScrollsDevelopers extends BottomSheetDialogFragment {
     ListView scrolls_dev;
-    String namesOfMembers []={"Pranav Chodhary","Gaurav Arora","Sukankshi Jain","Siddhant Goral","Rajat Sharma","Kunal Chaudhary","Deepak Singh","Akash Kool","Abishek Kumar Gupta","Akriti Verma"};
-    String desigOfMembers []={"Web Developer","Web Developer","Web Developer","Web Developer","Web Developer","Web Developer","Web Developer","Web Developer","App Developer","App Developer"};
-    Integer picOfMembers []={R.drawable.dt1,R.drawable.dt2,R.drawable.dt3,R.drawable.dt4,R.drawable.dt5,R.drawable.dt6,R.drawable.dt7,R.drawable.dt8,R.drawable.dt9,R.drawable.dt10};
+    String namesOfMembers []={"Pranav Chodhary","Ankit Yadav","Gaurav Arora","Sukankshi Jain","Siddhant Goral","Rajat Sharma","Kunal Chaudhary","Deepak Singh","Akash Kool","Abishek Kumar Gupta","Akriti Verma"};
+    String desigOfMembers []={"Web Developer","Web Developer","Web Developer","Web Developer","Web Developer","Web Developer","Web Developer","Web Developer","Web Developer","App Developer","App Developer"};
+    Integer picOfMembers []={R.drawable.dt1,R.drawable.dtankit,R.drawable.dt2,R.drawable.dt3,R.drawable.dt4,R.drawable.dt5,R.drawable.dt6,R.drawable.dt7,R.drawable.dt8,R.drawable.dt9,R.drawable.dt10};
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
         @Override
         public void onStateChanged(@NonNull View bottomSheet, int newState) {
