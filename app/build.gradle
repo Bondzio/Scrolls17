@@ -21,7 +21,7 @@ android {
     buildToolsVersion "24.0.0"
 
     defaultConfig {
-        applicationId "in.silive.scrolls15"
+        applicationId "in.silive.scrolls16"
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 3
