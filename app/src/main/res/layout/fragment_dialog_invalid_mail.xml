@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.silive.scrolls.Fragments.DialogInvalidMail"
+    tools:context="in.silive.scrolls15.Fragments.DialogInvalidMail"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->

@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:context="in.silive.scrolls.Fragments.UploadDoc">
+            tools:context="in.silive.scrolls15.Fragments.UploadDoc">
 
             <com.fmsirvent.ParallaxEverywhere.PEWImageView
                 android:layout_width="match_parent"
