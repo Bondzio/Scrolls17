@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ListView;
 
@@ -16,7 +18,7 @@ import in.silive.scrolls16.R;
  * A simple {@link Fragment} subclass.
  */
 public class ScrollsTeam extends BottomSheetDialogFragment {
-    ListView scrolls_team;
+    RecyclerView scrolls_team;
     String teamMembers [] = {"Prof. V.K. Parashar","Sandeep Gupta","Mayank Bahadur","Suhani Singh"};
     String desigOfMembers [] = {"DSW, AKGEC","8802119708","8745982117",""};
     Integer picMembers [] = {R.drawable.t,R.drawable.st1,R.drawable.st2,R.drawable.st3};
@@ -38,8 +40,9 @@ public class ScrollsTeam extends BottomSheetDialogFragment {
         super.setupDialog(dialog, style);
         View contentView = View.inflate(getContext(), R.layout.fragment_scrolls_team, null);
         dialog.setContentView(contentView);
-        scrolls_team = (ListView)contentView.findViewById(R.id.scrolls_team);
+        scrolls_team = (RecyclerView) contentView.findViewById(R.id.scrolls_team);
         AboutUsListAdapter aboutUsListAdapter = new AboutUsListAdapter(getContext(),teamMembers,desigOfMembers,picMembers);
+        scrolls_team.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         scrolls_team.setAdapter(aboutUsListAdapter);
 
 

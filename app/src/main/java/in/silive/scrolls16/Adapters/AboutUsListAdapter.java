@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +20,11 @@ import in.silive.scrolls16.R;
 /**
  * Created by akriti on 14/9/16.
  */
-public class AboutUsListAdapter extends BaseAdapter {
-    public static String names[];
-    public static String designation[];
-    public static Integer pic[];
-    public static String head;
+public class AboutUsListAdapter extends RecyclerView.Adapter<AboutUsListAdapter.Holder> {
+    public  String names[];
+    public  String designation[];
+    public  Integer pic[];
+    public  String head;
     LayoutInflater inflater;
     Context c;
 
@@ -37,35 +38,28 @@ public class AboutUsListAdapter extends BaseAdapter {
     }
 
 
-    public class Holder {
+    public class Holder extends RecyclerView.ViewHolder {
         ImageView member_pic;
         TextView member_name, member_desig, heading;
 
+        public Holder(View sview) {
+            super(sview);
+            member_pic = (ImageView) sview.findViewById(R.id.member_pic);
+            member_name = (TextView) sview.findViewById(R.id.member_name);
+            member_desig = (TextView) sview.findViewById(R.id.member_desig);
+
+        }
+    }
+
+
+
+    @Override
+    public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new Holder( inflater.inflate(R.layout.about_us_list_adapter, null));
     }
 
     @Override
-    public int getCount() {
-        return names.length;
-    }
-
-    @Override
-    public Object getItem(int i) {
-        return i;
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return i;
-    }
-
-    @Override
-    public View getView(final int i, View view, ViewGroup viewGroup) {
-        View sview = inflater.inflate(R.layout.about_us_list_adapter, null);
-        Holder holder = new Holder();
-        holder.member_pic = (ImageView) sview.findViewById(R.id.member_pic);
-        holder.member_name = (TextView) sview.findViewById(R.id.member_name);
-        holder.member_desig = (TextView) sview.findViewById(R.id.member_desig);
-        // holder.heading = (TextView)sview.findViewById(R.id.heading);
+    public void onBindViewHolder(Holder holder, final int i) {
         holder.member_pic.setImageResource(pic[i]);
         holder.member_name.setText(names[i]);
         holder.member_desig.setText(designation[i]);
@@ -73,7 +67,7 @@ public class AboutUsListAdapter extends BaseAdapter {
             holder.member_desig.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + designation[i]));
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:+91" + designation[i]));
                     if (ActivityCompat.checkSelfPermission(c, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         // TODO: Consider calling
                         //    ActivityCompat#requestPermissions
@@ -91,7 +85,16 @@ public class AboutUsListAdapter extends BaseAdapter {
                 }
             });
         }
-        //holder.heading.setText(head);
-        return sview;
     }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
+
+    @Override
+    public int getItemCount() {
+        return names.length;
+    }
+
 }

@@ -83,6 +83,7 @@
         <activity
             android:name="in.silive.scrolls16.Activities.SecondActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/ScrollsTheme.Base"
             android:windowSoftInputMode="adjustPan|stateHidden" ></activity>
         <meta-data
             android:name="io.fabric.ApiKey"

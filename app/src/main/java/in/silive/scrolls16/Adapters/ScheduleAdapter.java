@@ -48,6 +48,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (position ==0){
             ((ParallaxVH)holder).iv.setImageResource(R.drawable.sch_header);
+            ((ParallaxVH)holder).tvMon.setVisibility(View.VISIBLE);
         }
         else {
             ((ScheduleAdapter.ViewHolder)holder).tvDate.setText(dates[position-1]);
@@ -70,13 +71,16 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvDate = (TextView)itemView.findViewById(R.id.tvDate);
             tvTitle = (TextView)itemView.findViewById(R.id.tvTitle);
             tvDay = (TextView)itemView.findViewById(R.id.tvWeekDay);
+
         }
     }
     public class ParallaxVH extends RecyclerView.ViewHolder{
         PEWImageView iv;
+        TextView tvMon;
         public ParallaxVH(View itemView) {
             super(itemView);
             iv = (PEWImageView) itemView.findViewById(R.id.pIVHeader);
+            tvMon= (TextView)itemView.findViewById(R.id.tvMon);
 
         }
     }
