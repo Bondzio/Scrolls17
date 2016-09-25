@@ -10,12 +10,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.fmsirvent.ParallaxEverywhere.PEWImageView;
+
 import in.silive.scrolls16.R;
 
 /**
  * Created by AKG002 on 29-08-2016.
  */
-public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder> {
+public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     String[] dates;
     String[] labels;
     String[] days;
@@ -30,40 +32,34 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     }
 
     @Override
-    public ScheduleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_schedule,parent,false));
+    public int getItemViewType(int position) {
+        return position==0?0:1;
     }
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == 0)
+            return new ScheduleAdapter.ParallaxVH(LayoutInflater.from(context).inflate(R.layout.parallax_header, parent, false));
+        else
+            return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_schedule, parent, false));
+    }
+
 
     @Override
-    public void onBindViewHolder(final ScheduleAdapter.ViewHolder holder, final int position) {
-
-        holder.tvDate.setText(dates[position]);
-        holder.tvTitle.setText(labels[position]);
-        holder.tvDay.setText(days[position]);
-        holder.itemView.setVisibility(View.INVISIBLE);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                holder.itemView.setVisibility(View.VISIBLE);
-                setAnimation(holder.itemView,position);
-            }
-        }, (int)(100+100*position));
-
-    }
-
-    private void setAnimation(View viewToAnimate, int position)
-    {
-        // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition) {
-            Animation animation = AnimationUtils.loadAnimation(context, R.anim.push_left);
-            viewToAnimate.startAnimation(animation);
-            lastPosition = position;
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+        if (position ==0){
+            ((ParallaxVH)holder).iv.setImageResource(R.drawable.sch_header);
+        }
+        else {
+            ((ScheduleAdapter.ViewHolder)holder).tvDate.setText(dates[position-1]);
+            ((ScheduleAdapter.ViewHolder)holder).tvTitle.setText(labels[position-1]);
+            ((ScheduleAdapter.ViewHolder)holder).tvDay.setText(days[position-1]);
         }
     }
 
+
     @Override
     public int getItemCount() {
-        return dates.length;
+        return dates.length+1;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -74,6 +70,14 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
             tvDate = (TextView)itemView.findViewById(R.id.tvDate);
             tvTitle = (TextView)itemView.findViewById(R.id.tvTitle);
             tvDay = (TextView)itemView.findViewById(R.id.tvWeekDay);
+        }
+    }
+    public class ParallaxVH extends RecyclerView.ViewHolder{
+        PEWImageView iv;
+        public ParallaxVH(View itemView) {
+            super(itemView);
+            iv = (PEWImageView) itemView.findViewById(R.id.pIVHeader);
+
         }
     }
 }

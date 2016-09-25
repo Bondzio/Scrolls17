@@ -45,6 +45,12 @@ View view;
         view =  inflater.inflate(R.layout.fragment_topics, container, false);
         rvDomains = (RecyclerView)view.findViewById(R.id.rvDomains);
         layoutManager = new GridLayoutManager(getContext(),2);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return position==0?2:1;
+            }
+        });
         domains = getActivity().getResources().getStringArray(R.array.domain_array);
         imagesArray =  getActivity().getResources().getStringArray(R.array.topic_img_array);
         adapter = new DomainsAdapter(getContext(),domains,imagesArray);

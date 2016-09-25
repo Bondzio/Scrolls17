@@ -95,8 +95,8 @@ public class Register extends Fragment implements FetchDataListener {
     }
 
     public static Register getInstance() {
-       // if (fragment == null)
-            fragment = new Register();
+        // if (fragment == null)
+        fragment = new Register();
         return fragment;
     }
 
@@ -192,41 +192,15 @@ public class Register extends Fragment implements FetchDataListener {
 
                 }
             });
-       stud_college.setOnTouchListener(new View.OnTouchListener() {
-           @Override
-           public boolean onTouch(View view, MotionEvent motionEvent) {
-               if (collegeIds.size()==0 && motionEvent.getAction() == MotionEvent.ACTION_UP)
-                   loadCollegeList();
-               return false;
-           }
-       });
-            if (collegeIds.size() == 0) {
-                loadCollegeList();
-            }else {
-                collegeListAdapter = new SpinnerAdapter(getContext(), collegeNames);
-                stud_college.setAdapter(collegeListAdapter);
-                stud_college.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        if (collegeIds.get(i) == -1) {
-                            (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.VISIBLE);
-                        } else {
-                            (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.GONE);
-                            collegeId = collegeIds.get(i);
-                        }
-                        if (collegeIds.get(i) == 4) {
-                            (reg_view.findViewById(R.id.stud_id)).setVisibility(View.VISIBLE);
-                        } else {
-                            (reg_view.findViewById(R.id.stud_id)).setVisibility(View.GONE);
-                        }
-                    }
+            stud_college.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    if (collegeIds.size() == 0 && motionEvent.getAction() == MotionEvent.ACTION_UP)
+                        loadCollegeList();
+                    return false;
+                }
+            });
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
-            }
             stud_course = (Spinner) reg_view.findViewById(R.id.stud_course);
             stud_course.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -303,8 +277,8 @@ public class Register extends Fragment implements FetchDataListener {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     if (topicsIDList.size() == 0 && motionEvent.getAction() == MotionEvent.ACTION_UP
-                            && id_domain!=0) {
-                       loadTopics(id_domain);
+                            && id_domain != 0) {
+                        loadTopics(id_domain);
                     }
 
                     return false;
@@ -317,7 +291,33 @@ public class Register extends Fragment implements FetchDataListener {
     @Override
     public void onResume() {
         super.onResume();
+        if (collegeIds.size() == 0) {
+            loadCollegeList();
+        }else {
+            collegeListAdapter = new SpinnerAdapter(getContext(), collegeNames);
+            stud_college.setAdapter(collegeListAdapter);
+            stud_college.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (collegeIds.get(i) == -1) {
+                        (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.VISIBLE);
+                    } else {
+                        (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.GONE);
+                        collegeId = collegeIds.get(i);
+                    }
+                    if (collegeIds.get(i) == 4) {
+                        (reg_view.findViewById(R.id.stud_id)).setVisibility(View.VISIBLE);
+                    } else {
+                        (reg_view.findViewById(R.id.stud_id)).setVisibility(View.GONE);
+                    }
+                }
 
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        }
 
     }
 
@@ -345,7 +345,7 @@ public class Register extends Fragment implements FetchDataListener {
         }
         student_college_name = stud_other_college.getText().toString();
         student_id = stud_id.getText().toString();
-        if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE && !Pattern.matches("^\\d{7}[Dd]{0,1}$",student_id)) {
+        if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE && !Pattern.matches("^\\d{7}[Dd]{0,1}$", student_id)) {
             flag = 1;
             stud_id.setError("Invalid Id");
         }
@@ -547,14 +547,14 @@ public class Register extends Fragment implements FetchDataListener {
             progressDialog.setCancelable(false);
         }
         if (!getActivity().isFinishing())
-        progressDialog.show();
+            progressDialog.show();
     }
 
     @Override
     public void postExecute(String result, int id) throws JSONException {
         if (progressDialog.isShowing())
             progressDialog.dismiss();
-        if (!isAdded()){
+        if (!isAdded()) {
             return;
         }
         if (!TextUtils.isEmpty(result)) {

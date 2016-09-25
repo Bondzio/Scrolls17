@@ -10,13 +10,15 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.fmsirvent.ParallaxEverywhere.PEWImageView;
+
 import in.silive.scrolls16.R;
 
 /**
  * Created by AKG002
  * thats all.
  */
-public class RulesAdapter extends RecyclerView.Adapter<RulesAdapter.ViewHolder>{
+public class RulesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     String[] topics;
     Context context;
     private int lastPosition;
@@ -27,23 +29,28 @@ public class RulesAdapter extends RecyclerView.Adapter<RulesAdapter.ViewHolder>{
     }
 
     @Override
-    public RulesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_num_list,parent,false));
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType ==0)
+        return new RulesAdapter.ParallaxVH(LayoutInflater.from(context).inflate(R.layout.parallax_header,parent,false));
+        else
+            return new RulesAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_num_list,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(final RulesAdapter.ViewHolder holder, final int position) {
-        holder.tvTopic.setText(topics[position]);
-        holder.itemView.setVisibility(View.INVISIBLE);
-      //  holder.tvNum.setText(""+(position+1));
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                holder.itemView.setVisibility(View.VISIBLE);
-                setAnimation(holder.itemView,position);
-            }
-        }, (int)(10+50*position));
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+        if (position ==0){
+            ((ParallaxVH)holder).iv.setImageResource(R.drawable.rules_header);
+        }
+        else {
+            ((RulesAdapter.ViewHolder)holder).tvTopic.setText(topics[position-1]);
+          //  ((RulesAdapter.ViewHolder)holder).itemView.setVisibility(View.INVISIBLE);
+        }
 
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position==0?0:1;
     }
 
     private void setAnimation(View viewToAnimate, int position)
@@ -57,7 +64,7 @@ public class RulesAdapter extends RecyclerView.Adapter<RulesAdapter.ViewHolder>{
     }
     @Override
     public int getItemCount() {
-        return topics.length;
+        return topics.length+1;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -67,6 +74,14 @@ public class RulesAdapter extends RecyclerView.Adapter<RulesAdapter.ViewHolder>{
             super(itemView);
             tvTopic = (TextView)itemView.findViewById(R.id.tv);
            // tvNum = (TextView)itemView.findViewById(R.id.tvNum);
+        }
+    }
+    public class ParallaxVH extends RecyclerView.ViewHolder{
+        PEWImageView iv;
+        public ParallaxVH(View itemView) {
+            super(itemView);
+            iv = (PEWImageView) itemView.findViewById(R.id.pIVHeader);
+
         }
     }
 }
