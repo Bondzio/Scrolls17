@@ -32,16 +32,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import in.silive.scrolls16.Adapters.SpinnerAdapter;
 import in.silive.scrolls16.Listeners.FetchDataListener;
+import in.silive.scrolls16.Network.ApiClient;
 import in.silive.scrolls16.Network.CheckConnectivity;
 import in.silive.scrolls16.Network.FetchData;
+import in.silive.scrolls16.Network.RetrofitApiInterface;
 import in.silive.scrolls16.R;
 import in.silive.scrolls16.Util.Config;
 import in.silive.scrolls16.Util.Keyboard;
 import in.silive.scrolls16.Util.Validator;
+import in.silive.scrolls16.models.CollegeModel;
+import in.silive.scrolls16.models.Topics;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,8 +74,8 @@ public class Register extends Fragment implements FetchDataListener {
     in.silive.scrolls16.Adapters.SpinnerAdapter collegeListAdapter;
     int memberCount = 2;
     int leader_number = 0;
-    ArrayList<String> topicsList = new ArrayList<>();
-    ArrayList<Integer> topicsIDList = new ArrayList<>();
+    ArrayList<String> topicsList = new ArrayList<String>();
+    ArrayList<Integer> topicsIDList = new ArrayList<Integer>();
     String[] domainArray = new String[5], topicArray = new String[13];
     in.silive.scrolls16.Adapters.SpinnerAdapter topicsAdapter, domainAdapter;
     ArrayList<String> searchList = new ArrayList<>();
@@ -88,8 +96,10 @@ public class Register extends Fragment implements FetchDataListener {
     private ProgressDialog progressDialog;
     private int student_courseId;
     private int topic_id;
+    Call<List<Topics>> call;
+    Call<List<CollegeModel>> callCollege;
     private String mode = "";
-
+    RetrofitApiInterface apiService;
     public Register() {
         // Required empty public constructor
     }
@@ -284,6 +294,8 @@ public class Register extends Fragment implements FetchDataListener {
                     return false;
                 }
             });
+             apiService =
+                    ApiClient.getClient().create(RetrofitApiInterface.class);
         }
         return reg_view;
     }
@@ -325,9 +337,61 @@ public class Register extends Fragment implements FetchDataListener {
         if (!CheckConnectivity.isNetConnected(getContext()))
             Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
         else {
-            FetchData loadColleges = new FetchData();
+         /*   FetchData loadColleges = new FetchData();
             loadColleges.setArgs(Config.GET_COLLEGES, this, GET_COLLEGE);
-            loadColleges.execute();
+            loadColleges.execute();*/
+         callCollege=apiService.getCollege();
+            callCollege.enqueue(new Callback<List<CollegeModel>>() {
+                @Override
+                public void onResponse(Call<List<CollegeModel>> call, Response<List<CollegeModel>> response) {
+                    List<CollegeModel> college = response.body();
+                    /*case GET_COLLEGE:
+                    jsonArray = new JSONArray(result);
+                    collegeIds.clear();
+                    collegeNames.clear();
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        jsonObject = jsonArray.getJSONObject(i);
+                        collegeIds.add(jsonObject.getInt("CollegeId"));
+                        collegeNames.add(jsonObject.getString("CollegeName"));
+                    }*/
+                    for(int i=0;i<college.size();i++)
+                    {
+                        collegeIds.add(college.get(i).getCollegeId());
+                        collegeNames.add(college.get(i).getCollegeName());
+                    }
+                    collegeIds.add(-1);
+                    collegeNames.add("Others");
+                    collegeListAdapter = new SpinnerAdapter(getContext(), collegeNames);
+                    stud_college.setAdapter(collegeListAdapter);
+                    stud_college.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            if (collegeIds.get(i) == -1) {
+                                (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.VISIBLE);
+                            } else {
+                                (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.GONE);
+                                collegeId = collegeIds.get(i);
+                            }
+                            if (collegeIds.get(i) == 4) {
+                                (reg_view.findViewById(R.id.stud_id)).setVisibility(View.VISIBLE);
+                            } else {
+                                (reg_view.findViewById(R.id.stud_id)).setVisibility(View.GONE);
+                            }
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onFailure(Call<List<CollegeModel>> call, Throwable t) {
+
+                }
+            });
         }
     }
 
@@ -532,9 +596,58 @@ public class Register extends Fragment implements FetchDataListener {
             Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
         else {
             if (team_individual_tab.getSelectedTabPosition() == 1) {
-                FetchData fetchData = new FetchData();
+                /*FetchData fetchData = new FetchData();
                 fetchData.setArgs(Config.GET_TOPICS + domainId, this, LOAD_TOPICS);
-                fetchData.execute();
+                fetchData.execute();*/
+                 call = apiService.getTopics(domainId);
+              //  case LOAD_TOPICS:
+                        /*jsonArray = new JSONArray(result);
+                        topicsList.clear();
+                        topicsIDList.clear();
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            jsonObject = jsonArray.getJSONObject(i);
+                            topicsIDList.add(jsonObject.getInt("TopicId"));
+                            topicsList.add(jsonObject.getString("TopicName"));
+                        }*/
+                    //List<Topics>  topicsList;
+                    final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
+                    call.enqueue(new Callback<List<Topics>>() {
+                        @Override
+                        public void onResponse(Call<List<Topics>> call, Response<List<Topics>> response) {
+                            List<Topics> topicsList1=response.body();
+                            topicsList.clear();
+                            topicsIDList.clear();
+                            for (int i=0;i<topicsList1.size();i++) {
+                                topicsList.add(topicsList1.get(i).getTopicName());
+                                topicsIDList.add(topicsList1.get(i).getTopicId());
+                            }
+                            loading.dismiss();
+
+                            //Log.d("debugg",Integer.toString(topicsList1.size()));
+                            Toast.makeText(getContext(),Integer.toString(topicsList.size()),Toast.LENGTH_LONG).show();
+                            topicsAdapter = new SpinnerAdapter(getContext(), topicsList);
+                            team_topic.setAdapter(topicsAdapter);
+                            team_topic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                    topic_id = topicsIDList.get(i);
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<Topics>> call, Throwable t) {
+
+                        }
+
+
+                    });
+
             }
         }
     }
@@ -562,41 +675,7 @@ public class Register extends Fragment implements FetchDataListener {
                 JSONObject jsonObject;
                 JSONArray jsonArray;
                 switch (id) {
-                    case GET_COLLEGE:
-                        jsonArray = new JSONArray(result);
-                        collegeIds.clear();
-                        collegeNames.clear();
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            jsonObject = jsonArray.getJSONObject(i);
-                            collegeIds.add(jsonObject.getInt("CollegeId"));
-                            collegeNames.add(jsonObject.getString("CollegeName"));
-                        }
-                        collegeIds.add(-1);
-                        collegeNames.add("Others");
-                        collegeListAdapter = new SpinnerAdapter(getContext(), collegeNames);
-                        stud_college.setAdapter(collegeListAdapter);
-                        stud_college.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                if (collegeIds.get(i) == -1) {
-                                    (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.VISIBLE);
-                                } else {
-                                    (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.GONE);
-                                    collegeId = collegeIds.get(i);
-                                }
-                                if (collegeIds.get(i) == 4) {
-                                    (reg_view.findViewById(R.id.stud_id)).setVisibility(View.VISIBLE);
-                                } else {
-                                    (reg_view.findViewById(R.id.stud_id)).setVisibility(View.GONE);
-                                }
-                            }
 
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
-
-                            }
-                        });
-                        break;
 
                     case STUDENT_REG:
                         try {
@@ -632,29 +711,8 @@ public class Register extends Fragment implements FetchDataListener {
                         collegeId = jsonObject.getInt("CollegeId");
                         selfRegister();
                         break;
-                    case LOAD_TOPICS:
-                        jsonArray = new JSONArray(result);
-                        topicsList.clear();
-                        topicsIDList.clear();
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            jsonObject = jsonArray.getJSONObject(i);
-                            topicsIDList.add(jsonObject.getInt("TopicId"));
-                            topicsList.add(jsonObject.getString("TopicName"));
-                        }
-                        topicsAdapter = new SpinnerAdapter(getContext(), topicsList);
-                        team_topic.setAdapter(topicsAdapter);
-                        team_topic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                topic_id = topicsIDList.get(i);
-                            }
 
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
 
-                            }
-                        });
-                        break;
                     case TEAM_REGISTER:
                         try {
                             jsonObject = new JSONObject(result);

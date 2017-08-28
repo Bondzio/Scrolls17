@@ -214,21 +214,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (menuItem.getItemId()) {
             case R.id.register:
-                cal2.set(2016,9,5,0,0);
+                cal2.set(2018,9,5,0,0);
                 if (cal2.getTimeInMillis() > calendar.getTimeInMillis()) {
                     i.putExtra(Config.KEY_FRAGMENT, Config.KEY_REGISTER);
                     startActivity(i);
                 } else showRegOverDialog();
                 break;
             case R.id.upload:
-                cal2.set(2016,9,5,0,0);
+                cal2.set(2018,9,5,0,0);
                 if (cal2.getTimeInMillis() > calendar.getTimeInMillis()) {
                     i.putExtra(Config.KEY_FRAGMENT, Config.KEY_UPLOAD);
                     startActivity(i);
                 } else showRegOverDialog();
                 break;
             case R.id.query:
-                cal2.set(2016,9,22,0,0);
+                cal2.set(2018,9,22,0,0);
 
                 if (cal2.getTimeInMillis() > calendar.getTimeInMillis()) {
                     i.putExtra(Config.KEY_FRAGMENT, Config.KEY_QUERY);
