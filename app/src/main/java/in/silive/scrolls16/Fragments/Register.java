@@ -46,6 +46,7 @@ import in.silive.scrolls16.Util.Config;
 import in.silive.scrolls16.Util.Keyboard;
 import in.silive.scrolls16.Util.Validator;
 import in.silive.scrolls16.models.CollegeModel;
+import in.silive.scrolls16.models.SelfRegister;
 import in.silive.scrolls16.models.Topics;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -100,6 +101,8 @@ public class Register extends Fragment implements FetchDataListener {
     Call<List<CollegeModel>> callCollege;
     private String mode = "";
     RetrofitApiInterface apiService;
+    private Call<SelfRegister> callRegister;
+
     public Register() {
         // Required empty public constructor
     }
@@ -559,7 +562,7 @@ public class Register extends Fragment implements FetchDataListener {
         if (!CheckConnectivity.isNetConnected(getContext()))
             Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
         else {
-            JSONObject user_reg_data = new JSONObject();
+        /*    JSONObject user_reg_data = new JSONObject();
             try {
                 user_reg_data.put("Name", student_name);
                 user_reg_data.put("StudentId", student_id);
@@ -584,6 +587,89 @@ public class Register extends Fragment implements FetchDataListener {
             FetchData regParticipant = new FetchData();
             regParticipant.setArgs(Config.SELF_REGISTRATION, user_reg_data.toString(), this, STUDENT_REG);
             regParticipant.execute();
+        }*/
+            if (((CheckBox) reg_view.findViewById(R.id.stud_accommodation)).isChecked()) {
+                callRegister=apiService.register(student_name, student_id, collegeId, student_mail, student_mob_no, student_courseId, student_year,
+                        "Android", 1);
+            }
+            else
+            {
+             callRegister  =apiService.register(student_name, student_id, collegeId, student_mail, student_mob_no, student_courseId, student_year,
+                        "Android", 0);
+            }
+            final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
+                callRegister.enqueue(new Callback<SelfRegister>() {
+                    @Override
+                    public void onResponse(Call<SelfRegister> call, Response<SelfRegister> response) {
+                        int statusCode = response.code();
+                        if (statusCode == 201) {
+                            final int regId = Integer.parseInt(response.body().toString());
+                            new AlertDialog.Builder(getActivity())
+                                    .setTitle("Registration successful")
+                                    .setMessage("Congratulations " + response.body().getName() + " your registration is successful.\n" +
+                                            "Your registration id is " + regId + " .\n" +
+                                            "To continue click OK")
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            SharedPreferences sharedpreferences = getActivity().getSharedPreferences(Config.PREFERENCES, Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                                            editor.putString(Config.individual_id, "" + regId);
+                                            editor.commit();
+                                        }
+                                    })
+                                    .setCancelable(false)
+                                    //       .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
+                            loading.dismiss();
+                        } else {
+                            loading.dismiss();
+                            Snackbar.make(reg_view, Integer.toString(response.code()), Snackbar.LENGTH_LONG).show();
+                        }
+
+                      /*  if (response.body()!=null && response.body().toString().contains("Participant already registered")) {
+                            Snackbar.make(reg_view,"Participant already registered", Snackbar.LENGTH_LONG).show();
+                        } else {
+                            Snackbar.make(reg_view, "Something went wrong.", Snackbar.LENGTH_LONG).show();
+                        }*/
+
+                    }
+
+                        /*case STUDENT_REG:
+                        try {
+                            jsonObject = new JSONObject(result);
+                            final int regId = jsonObject.getInt("RegId");
+                            new AlertDialog.Builder(getActivity())
+                                    .setTitle("Registration successful")
+                                    .setMessage("Congratulations " + jsonObject.getString("Name") + " your registration is successful.\n" +
+                                            "Your registration id is " + regId + " .\n" +
+                                            "To continue click OK")
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            SharedPreferences sharedpreferences = getActivity().getSharedPreferences(Config.PREFERENCES, Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                                            editor.putString(Config.individual_id, "" + regId);
+                                            editor.commit();
+                                        }
+                                    })
+                                    .setCancelable(false)
+                                    //       .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
+                        } catch (Exception e) {
+                            if (result.contains("Participant already registered")) {
+                                Snackbar.make(reg_view, result, Snackbar.LENGTH_LONG).show();
+                            } else {
+                                Snackbar.make(reg_view, "Something went wrong.", Snackbar.LENGTH_LONG).show();
+                            }
+                        }
+
+                        break;*/
+
+
+                    @Override
+                    public void onFailure(Call<SelfRegister> call, Throwable t) {
+                      loading.dismiss();
+                    }
+                });
         }
     }
 
@@ -677,35 +763,7 @@ public class Register extends Fragment implements FetchDataListener {
                 switch (id) {
 
 
-                    case STUDENT_REG:
-                        try {
-                            jsonObject = new JSONObject(result);
-                            final int regId = jsonObject.getInt("RegId");
-                            new AlertDialog.Builder(getActivity())
-                                    .setTitle("Registration successful")
-                                    .setMessage("Congratulations " + jsonObject.getString("Name") + " your registration is successful.\n" +
-                                            "Your registration id is " + regId + " .\n" +
-                                            "To continue click OK")
-                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            SharedPreferences sharedpreferences = getActivity().getSharedPreferences(Config.PREFERENCES, Context.MODE_PRIVATE);
-                                            SharedPreferences.Editor editor = sharedpreferences.edit();
-                                            editor.putString(Config.individual_id, "" + regId);
-                                            editor.commit();
-                                        }
-                                    })
-                                    .setCancelable(false)
-                                    //       .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .show();
-                        } catch (Exception e) {
-                            if (result.contains("Participant already registered")) {
-                                Snackbar.make(reg_view, result, Snackbar.LENGTH_LONG).show();
-                            } else {
-                                Snackbar.make(reg_view, "Something went wrong.", Snackbar.LENGTH_LONG).show();
-                            }
-                        }
 
-                        break;
                     case CREATE_COLLEGE:
                         jsonObject = new JSONObject(result);
                         collegeId = jsonObject.getInt("CollegeId");
