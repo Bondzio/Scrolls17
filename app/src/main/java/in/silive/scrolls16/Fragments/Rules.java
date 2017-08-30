@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.schibsted.spain.parallaxlayerlayout.ParallaxLayerLayout;
+import com.schibsted.spain.parallaxlayerlayout.SensorTranslationUpdater;
+
 import in.silive.scrolls16.Adapters.RulesAdapter;
 import in.silive.scrolls16.R;
 
@@ -19,6 +22,8 @@ public class Rules extends Fragment {
 RecyclerView rv;
     RulesAdapter adapter;
   static   Rules fragment;
+    private SensorTranslationUpdater sensorTranslationUpdater;
+    private ParallaxLayerLayout parallaxLayout;
 
     public static Rules getInstance(){
         if (fragment == null)
@@ -38,9 +43,25 @@ RecyclerView rv;
         View view = inflater.inflate(R.layout.fragment_rules, container, false);
         rv = (RecyclerView)view.findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        parallaxLayout = (ParallaxLayerLayout)view.findViewById(R.id.parallaxLayer);
+        sensorTranslationUpdater = new SensorTranslationUpdater(getActivity());
+        parallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
         adapter = new RulesAdapter(getContext(),getResources().getString(R.string.rules).split("\n"));
         rv.setAdapter(adapter);
         return view;
     }
+    @Override
+    public void onStop() {
+        super.onStop();
+        sensorTranslationUpdater.unregisterSensorManager();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        sensorTranslationUpdater.registerSensorManager();
+    }
+
+
 
 }

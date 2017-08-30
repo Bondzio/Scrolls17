@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fmsirvent.ParallaxEverywhere.PEWImageView;
 
@@ -30,28 +31,27 @@ public class RulesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType ==0)
-        return new RulesAdapter.ParallaxVH(LayoutInflater.from(context).inflate(R.layout.parallax_header,parent,false));
-        else
+
+
             return new RulesAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_num_list,parent,false));
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        if (position ==0){
-            ((ParallaxVH)holder).iv.setImageResource(R.drawable.rules_header);
-        }
-        else {
-            ((RulesAdapter.ViewHolder)holder).tvTopic.setText(topics[position-1]);
+
+             //Toast.makeText(context,Integer.toString(topics.length),Toast.LENGTH_LONG).show();
+
+            ((RulesAdapter.ViewHolder) holder).tvTopic.setText(topics[position]);
+
           //  ((RulesAdapter.ViewHolder)holder).itemView.setVisibility(View.INVISIBLE);
-        }
+
 
     }
 
-    @Override
+   /* @Override
     public int getItemViewType(int position) {
         return position==0?0:1;
-    }
+    }*/
 
     private void setAnimation(View viewToAnimate, int position)
     {
@@ -64,7 +64,7 @@ public class RulesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     }
     @Override
     public int getItemCount() {
-        return topics.length+1;
+        return topics.length;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -76,12 +76,12 @@ public class RulesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
            // tvNum = (TextView)itemView.findViewById(R.id.tvNum);
         }
     }
-    public class ParallaxVH extends RecyclerView.ViewHolder{
+   /* public class ParallaxVH extends RecyclerView.ViewHolder{
         PEWImageView iv;
         public ParallaxVH(View itemView) {
             super(itemView);
-            iv = (PEWImageView) itemView.findViewById(R.id.pIVHeader);
+          //  iv = (PEWImageView) itemView.findViewById(R.id.pIVHeader);
 
         }
-    }
+    }*/
 }
