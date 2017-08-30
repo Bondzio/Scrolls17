@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import java.util.Calendar;
@@ -62,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mtoolbar = (Toolbar) findViewById(R.id.toolbar);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         setSupportActionBar(mtoolbar);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            //    WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
