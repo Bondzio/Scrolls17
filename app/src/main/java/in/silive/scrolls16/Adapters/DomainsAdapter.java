@@ -2,6 +2,7 @@ package in.silive.scrolls16.Adapters;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,26 +37,22 @@ public class DomainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType ==0)
-            return new DomainsAdapter.ParallaxVH(LayoutInflater.from(context).inflate(R.layout.parallax_header,parent,false));
-        else
-        return new DomainsAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_domain, parent, false));
+
+        return new DomainsAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.topicsrow, parent, false));
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        if (position ==0){
-            ((ParallaxVH)holder).iv.setImageResource(R.drawable.topics_header);
-        }
-        else {
-            ((DomainsAdapter.ViewHolder) holder).tvDomain.setText(domains[position-1]);
-            ((DomainsAdapter.ViewHolder) holder).iv.setImageResource(context.getResources().getIdentifier(images[position-1], "drawable", context.getPackageName()));
+
+
+            ((DomainsAdapter.ViewHolder) holder).tvDomain.setText(domains[position]);
+          //  ((DomainsAdapter.ViewHolder) holder).iv.setImageResource(context.getResources().getIdentifier(images[position], "drawable", context.getPackageName()));
             ((DomainsAdapter.ViewHolder) holder).ll.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View view) {
                     DialogTopics dialogTopics = new DialogTopics();
-                    switch (position - 1) {
+                    switch (position ) {
                         case 1:
                             dialogTopics.setArgs("Computer Science and Information Technology",
                                     context.getResources().getStringArray(R.array.csit));
@@ -80,31 +77,31 @@ public class DomainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             });
         }
-    }
+
 
     @Override
     public int getItemCount() {
-        return domains.length+1;
+        return domains.length;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvDomain;
-        RelativeLayout ll;
+        CardView ll;
         ImageView iv;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ll = (RelativeLayout) itemView.findViewById(R.id.ll);
+            ll = (CardView) itemView.findViewById(R.id.cardview);
             tvDomain = (TextView) itemView.findViewById(R.id.tvDomain);
-            iv = (ImageView)itemView.findViewById(R.id.iv);
+           // iv = (ImageView)itemView.findViewById(R.id.iv);
         }
     }
-    public class ParallaxVH extends RecyclerView.ViewHolder{
+   /* public class ParallaxVH extends RecyclerView.ViewHolder{
         PEWImageView iv;
         public ParallaxVH(View itemView) {
             super(itemView);
             iv = (PEWImageView) itemView.findViewById(R.id.pIVHeader);
 
         }
-    }
+    }*/
 }

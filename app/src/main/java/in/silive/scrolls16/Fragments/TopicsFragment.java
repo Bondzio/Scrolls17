@@ -5,6 +5,7 @@ package in.silive.scrolls16.Fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,19 +43,14 @@ View view;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.fragment_topics, container, false);
-        rvDomains = (RecyclerView)view.findViewById(R.id.rvDomains);
-        layoutManager = new GridLayoutManager(getContext(),2);
-        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                return position==0?2:1;
-            }
-        });
+        view =  inflater.inflate(R.layout.topics, container, false);
+        rvDomains = (RecyclerView)view.findViewById(R.id.rvtopics);
+
         domains = getActivity().getResources().getStringArray(R.array.domain_array);
         imagesArray =  getActivity().getResources().getStringArray(R.array.topic_img_array);
+        rvDomains.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         adapter = new DomainsAdapter(getContext(),domains,imagesArray);
-        rvDomains.setLayoutManager(layoutManager);
+
         rvDomains.setAdapter(adapter);
         return view;
     }

@@ -57,6 +57,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     provided 'org.glassfish:javax.annotation:10.0-b28'
     compile 'com.schibsted.spain:parallax-layer-layout:1.0.0'
+    compile 'com.joooonho:selectableroundedimageview:1.0.1'
     compile 'com.fmsirvent:parallaxeverywhere:1.0.4'
     compile('com.crashlytics.sdk.android:crashlytics:2.6.3@aar') {
         transitive = true;
