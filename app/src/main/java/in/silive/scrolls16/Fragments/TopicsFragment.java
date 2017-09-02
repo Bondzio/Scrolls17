@@ -45,10 +45,14 @@ View view;
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.topics, container, false);
         rvDomains = (RecyclerView)view.findViewById(R.id.rvtopics);
+        rvDomains.setHasFixedSize(true);
 
+        layoutManager = new GridLayoutManager(getContext(),1);
+
+        rvDomains.setLayoutManager(layoutManager);
         domains = getActivity().getResources().getStringArray(R.array.domain_array);
         imagesArray =  getActivity().getResources().getStringArray(R.array.topic_img_array);
-        rvDomains.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+
         adapter = new DomainsAdapter(getContext(),domains,imagesArray);
 
         rvDomains.setAdapter(adapter);

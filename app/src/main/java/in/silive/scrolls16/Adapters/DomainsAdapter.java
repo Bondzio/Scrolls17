@@ -1,6 +1,7 @@
 package in.silive.scrolls16.Adapters;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -45,7 +46,7 @@ public class DomainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
 
-            ((DomainsAdapter.ViewHolder) holder).tvDomain.setText(domains[position]);
+           // ((DomainsAdapter.ViewHolder) holder).tvDomain.setText(domains[position]);
           //  ((DomainsAdapter.ViewHolder) holder).iv.setImageResource(context.getResources().getIdentifier(images[position], "drawable", context.getPackageName()));
             ((DomainsAdapter.ViewHolder) holder).ll.setOnClickListener(new View.OnClickListener() {
 
@@ -86,14 +87,14 @@ public class DomainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvDomain;
-        CardView ll;
+        ConstraintLayout ll;
         ImageView iv;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ll = (CardView) itemView.findViewById(R.id.cardview);
-            tvDomain = (TextView) itemView.findViewById(R.id.tvDomain);
-           // iv = (ImageView)itemView.findViewById(R.id.iv);
+            ll = (ConstraintLayout) itemView.findViewById(R.id.topicsback);
+            //tvDomain = (TextView) itemView.findViewById(R.id.tvDomain);
+            iv = (ImageView)itemView.findViewById(R.id.imgtopics);
         }
     }
    /* public class ParallaxVH extends RecyclerView.ViewHolder{
