@@ -34,9 +34,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="@color/white"
             app:theme="@style/MainActivityToolbar"
-            app:titleTextColor="#1E8BC3" />
+            app:titleTextColor="#000000" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
@@ -68,9 +68,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/bg_gray"
+        android:background="@color/white"
         android:fitsSystemWindows="true"
-        app:itemTextColor="@color/colorPrimary"
+        app:itemTextColor="#000000"
         app:menu="@menu/navigation_items">
 
         <!--  Footer-->

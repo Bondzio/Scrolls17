@@ -31,36 +31,28 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.days = days;
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return position==0?0:1;
-    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == 0)
-            return new ScheduleAdapter.ParallaxVH(LayoutInflater.from(context).inflate(R.layout.parallax_header, parent, false));
-        else
-            return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_schedule, parent, false));
+
+
+            return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.schedulerow, parent, false));
     }
 
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        if (position ==0){
-            ((ParallaxVH)holder).iv.setImageResource(R.drawable.sch_header);
-            ((ParallaxVH)holder).tvMon.setVisibility(View.VISIBLE);
-        }
-        else {
-            ((ScheduleAdapter.ViewHolder)holder).tvDate.setText(dates[position-1]);
-            ((ScheduleAdapter.ViewHolder)holder).tvTitle.setText(labels[position-1]);
-            ((ScheduleAdapter.ViewHolder)holder).tvDay.setText(days[position-1]);
-        }
+
+            ((ScheduleAdapter.ViewHolder)holder).tvDate.setText(dates[position]);
+            ((ScheduleAdapter.ViewHolder)holder).tvTitle.setText(labels[position]);
+            ((ScheduleAdapter.ViewHolder)holder).tvDay.setText(days[position]);
+
     }
 
 
     @Override
     public int getItemCount() {
-        return dates.length+1;
+        return dates.length;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -74,14 +66,5 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         }
     }
-    public class ParallaxVH extends RecyclerView.ViewHolder{
-        PEWImageView iv;
-        TextView tvMon;
-        public ParallaxVH(View itemView) {
-            super(itemView);
-            iv = (PEWImageView) itemView.findViewById(R.id.pIVHeader);
-            tvMon= (TextView)itemView.findViewById(R.id.tvMon);
 
-        }
-    }
 }
