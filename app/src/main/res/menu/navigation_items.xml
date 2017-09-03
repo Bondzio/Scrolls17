@@ -6,7 +6,7 @@
             android:id="@+id/register"
             android:checked="false"
             android:title="Register" >
-            </item>
+       </item>
         <item
             android:id="@+id/upload"
             android:checked="false"
