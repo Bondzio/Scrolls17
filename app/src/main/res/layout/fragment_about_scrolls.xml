@@ -1,90 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-        <android.support.constraint.Guideline
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/guideline10"
-            app:layout_constraintGuide_percent="0.0"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteY="56dp"
-            tools:layout_editor_absoluteX="0dp" />
-
-        <android.support.constraint.Guideline
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/guideline12"
-            app:layout_constraintGuide_percent="1.0"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteY="56dp"
-            tools:layout_editor_absoluteX="384dp" />
-
-        <android.support.constraint.Guideline
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/guideline13"
-            app:layout_constraintGuide_percent="0.0"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteY="56dp"
-            tools:layout_editor_absoluteX="0dp" />
-        <android.support.constraint.Guideline
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/guideline16"
-            app:layout_constraintGuide_percent="0.6"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteY="431dp"
-            tools:layout_editor_absoluteX="0dp" />
-        <android.support.constraint.Guideline
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/guideline17"
-            app:layout_constraintGuide_percent="1.0"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteY="592dp"
-            tools:layout_editor_absoluteX="0dp" />
+        android:descendantFocusability="blocksDescendants"
+        android:layout_marginTop="70dp"
+        android:orientation="vertical">
         <ImageView
-            android:layout_width="368dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/scrollupper"
-            app:layout_constraintLeft_toLeftOf="@+id/guideline10"
-            app:layout_constraintRight_toLeftOf="@+id/guideline12"
-            app:layout_constraintTop_toTopOf="@+id/guideline13"
-            app:layout_constraintBottom_toTopOf="@+id/guideline16"
-            android:adjustViewBounds="true"
-            android:layout_weight="0" />
-
-    <android.support.v7.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:elevation="6dp"
-        android:padding="5dp"
-        app:layout_constraintLeft_toLeftOf="@+id/guideline10"
-        app:layout_constraintRight_toLeftOf="@+id/guideline12"
-        app:layout_constraintTop_toTopOf="@+id/guideline16"
-        app:layout_constraintBottom_toTopOf="@+id/guideline17"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.0">
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_scrolls"
+            android:src="@drawable/scrollupper"
+
+            android:adjustViewBounds="true"
+            android:layout_weight="0"
             />
 
-    </android.support.v7.widget.CardView>
-<!--<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/html"
-    />-->
-    </android.support.constraint.ConstraintLayout>
-
+        <WebView
+            android:id="@+id/about_scrolls_web_view"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_weight="0"
+            android:isScrollContainer="true"
+            android:layout_marginBottom="25dp"
+            />
+        <!--<TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/html"
+            />-->
+    </LinearLayout>
+</ScrollView>
 
