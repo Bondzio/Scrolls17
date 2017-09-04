@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         pagerAdapter = new in.silive.scrolls16.Adapters.PagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        viewPager.setOffscreenPageLimit(4);
+        viewPager.setOffscreenPageLimit(5);
         tabLayout.addOnTabSelectedListener(
                 new TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
 
@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     case 4:
                         title = "Reach Us";
                         break;
+
                 }
                 getSupportActionBar().setTitle(title);
             }
@@ -244,6 +245,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent.setData(Uri.parse(url));
                 startActivity(intent);
                 break;
+            case R.id.scrollTeam:
+                i.putExtra(Config.KEY_FRAGMENT,Config.KEY_SCROLLSTEAM);
+                startActivity(i);
             default:
         }
 

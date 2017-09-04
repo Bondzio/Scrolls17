@@ -9,6 +9,7 @@ public class Config {
     public static final String SILIVE_WEBSITE = "http://www.silive.in";
     public static final String KEY_FRAGMENT = "fragment";
     public static final String KEY_REGISTER = "Register";
+    public static final String KEY_SCROLLSTEAM="ScrollsTeamNew";
     public static final String KEY_UPLOAD = "Upload Doc";
     public static final String KEY_QUERY = "Query Us";
     //// TODO:correct sample doc link on deploy

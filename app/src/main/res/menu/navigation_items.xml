@@ -20,6 +20,10 @@
             android:checked="false"
             android:title="Download Sample" />
         <item
+            android:id="@+id/scrollTeam"
+            android:checked="false"
+            android:title="Scrolls team" />
+        <item
             android:id="@+id/footer_spacer_2"
             android:checkable="false"
             android:enabled="false"

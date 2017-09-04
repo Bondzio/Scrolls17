@@ -52,7 +52,6 @@ public class AboutUsListAdapter extends RecyclerView.Adapter<AboutUsListAdapter.
     }
 
 
-
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new Holder( inflater.inflate(R.layout.about_us_list_adapter, null));

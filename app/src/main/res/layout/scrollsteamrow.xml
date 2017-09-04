@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline19"
+        app:layout_constraintGuide_percent="0"
+        android:orientation="vertical" />
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline20"
+        app:layout_constraintGuide_percent="0.24"
+        android:orientation="vertical" />
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline21"
+        app:layout_constraintGuide_percent="0.77"
+        android:orientation="vertical" />
+
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline23"
+        app:layout_constraintGuide_percent="1"
+        android:orientation="vertical" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline24"
+        app:layout_constraintGuide_percent="0"
+        android:orientation="horizontal" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline25"
+        app:layout_constraintGuide_percent="0.5"
+        android:orientation="horizontal" />
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline28"
+        app:layout_constraintGuide_percent="0.75"
+        android:orientation="horizontal" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline26"
+        app:layout_constraintGuide_percent="1"
+        android:orientation="horizontal" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/st1"
+            android:id="@+id/member_pic"
+            app:layout_constraintLeft_toLeftOf="@id/guideline20"
+            app:layout_constraintRight_toLeftOf="@+id/guideline21"
+            app:layout_constraintTop_toTopOf="@+id/guideline24"
+            app:layout_constraintBottom_toTopOf="@+id/guideline25"
+            />
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Dean"
+        android:id="@+id/member_desig"
+        android:gravity="center_vertical"
+        app:layout_constraintLeft_toLeftOf="@id/guideline20"
+        app:layout_constraintRight_toLeftOf="@+id/guideline21"
+        app:layout_constraintTop_toTopOf="@+id/guideline25"
+        app:layout_constraintBottom_toTopOf="@+id/guideline28"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="VK SHARMA"
+        android:id="@+id/member_name"
+        android:gravity="center_vertical"
+        app:layout_constraintLeft_toLeftOf="@id/guideline20"
+        app:layout_constraintRight_toLeftOf="@+id/guideline21"
+        app:layout_constraintTop_toTopOf="@+id/guideline28"
+        app:layout_constraintBottom_toTopOf="@+id/guideline26"/>
+
+
+
+</android.support.constraint.ConstraintLayout>
