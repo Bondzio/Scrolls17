@@ -2,15 +2,20 @@ package in.silive.scrolls16.Fragments;
 
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 
+import in.silive.scrolls16.Activities.CircularReveal;
 import in.silive.scrolls16.Adapters.AboutUsListAdapter;
 import in.silive.scrolls16.Adapters.AboutUsListAdapterNew;
 import in.silive.scrolls16.Adapters.DomainsAdapter;
@@ -45,6 +50,15 @@ public class ScrollsTeamNew extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.scrollsteam, container, false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+           /* Transition transition = new CircularReveal();
+            transition.setInterpolator(new LinearInterpolator());
+
+            getActivity().getWindow().setSharedElementEnterTransition(transition);*/
+            setSharedElementEnterTransition(TransitionInflater.from(getContext()).inflateTransition(android.R.transition.move));
+        }
+
+
 
 
 

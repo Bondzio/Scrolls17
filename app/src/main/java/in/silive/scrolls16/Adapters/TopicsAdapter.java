@@ -56,7 +56,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
     }
     @Override
     public int getItemCount() {
-        return topics.length;
+        return 10;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
