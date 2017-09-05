@@ -208,6 +208,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         Keyboard.close(this);
+        Intent in = new Intent(Intent.ACTION_VIEW);
+        String url;
 
         if (menuItem.isChecked()) menuItem.setChecked(false);
         else menuItem.setChecked(true);
@@ -217,17 +219,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Calendar cal2 = Calendar.getInstance();
 
         switch (menuItem.getItemId()) {
-            case R.id.register:
+            case R.id.about_scrolls:
                 cal2.set(2018,9,5,0,0);
                 if (cal2.getTimeInMillis() > calendar.getTimeInMillis()) {
-                    i.putExtra(Config.KEY_FRAGMENT, Config.KEY_REGISTER);
+                    i.putExtra(Config.KEY_FRAGMENT, Config.KEY_ABOUTSCROLLS);
                     startActivity(i);
                 } else showRegOverDialog();
                 break;
-            case R.id.upload:
+            case R.id.topics:
                 cal2.set(2018,9,5,0,0);
                 if (cal2.getTimeInMillis() > calendar.getTimeInMillis()) {
-                    i.putExtra(Config.KEY_FRAGMENT, Config.KEY_UPLOAD);
+                    i.putExtra(Config.KEY_FRAGMENT, Config.KEY_Topics);
                     startActivity(i);
                 } else showRegOverDialog();
                 break;
@@ -239,12 +241,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(i);
                 }else showQueryOverDialog();
                 break;
-            case R.id.download:
+            /*case R.id.download:
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 String url = Config.SAMPLE_DOC_URL;
                 intent.setData(Uri.parse(url));
                 startActivity(intent);
                 break;
+                */
+            case R.id.rules:
+                i.putExtra(Config.KEY_FRAGMENT,Config.KEY_SCROLLSRULE);
+                startActivity(i);
+                break;
+            case R.id.reachus:
+                i.putExtra(Config.KEY_FRAGMENT,Config.KEY_REACHUS);
+                startActivity(i);
+                break;
+            case R.id.importantdates:
+                i.putExtra(Config.KEY_FRAGMENT,Config.KEY_ImpDates);
+                startActivity(i);
+                break;
+            case R.id.scrollsweb:
+                url = Config.SCROLLS_WEBSITE;
+                in.setData(Uri.parse(url));
+                startActivity(in);
+                return true;
+            case R.id.scrollssi:
+                url = Config.SILIVE_WEBSITE;
+                in.setData(Uri.parse(url));
+                startActivity(in);
+                return true;
+
+
             case R.id.scrollTeam:
                 i.putExtra(Config.KEY_FRAGMENT,Config.KEY_SCROLLSTEAM);
                 startActivity(i);

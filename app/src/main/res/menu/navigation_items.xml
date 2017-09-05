@@ -3,30 +3,57 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/register"
-            android:checked="false"
-            android:title="Register" >
+            android:id="@+id/about_scrolls"
+            android:icon="@drawable/ic_topic"
+            android:checked="true"
+            android:title="ABOUT SCROLLS" >
        </item>
         <item
-            android:id="@+id/upload"
+            android:id="@+id/topics"
             android:checked="false"
-            android:title="Upload Doc" />
+            android:icon="@drawable/ic_topic"
+            android:title="Topic" />
+
         <item
-            android:id="@+id/query"
+            android:id="@+id/rules"
+            android:icon="@drawable/ic_topic"
             android:checked="false"
-            android:title="Query Us" />
+            android:title="SCROLLS RULES" />
         <item
-            android:id="@+id/download"
+            android:id="@+id/reachus"
+            android:icon="@drawable/ic_topic"
             android:checked="false"
-            android:title="Download Sample" />
+            android:title="REACH US" />
+        <item
+            android:id="@+id/importantdates"
+            android:icon="@drawable/ic_topic"
+            android:checked="false"
+            android:title="IMPORTANT DATES" />
+        <item
+            android:id="@+id/scrollsweb"
+            android:icon="@drawable/ic_topic"
+            android:checked="false"
+            android:title="VISIT SCROLLS WEBSITE" />
         <item
             android:id="@+id/scrollTeam"
+            android:icon="@drawable/ic_topic"
             android:checked="false"
             android:title="Scrolls team" />
         <item
             android:id="@+id/scrollDeveloper"
+            android:icon="@drawable/ic_topic"
             android:checked="false"
             android:title="Scrolls Developer" />
+        <item
+            android:id="@+id/scrollssi"
+            android:icon="@drawable/ic_topic"
+            android:checked="false"
+            android:title="VISIT silive.in" />
+        <item
+            android:id="@+id/query"
+            android:icon="@drawable/ic_topic"
+            android:checked="false"
+            android:title="Query Us" />
         <item
             android:id="@+id/footer_spacer_2"
             android:checkable="false"

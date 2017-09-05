@@ -7,10 +7,15 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import in.silive.scrolls16.Fragments.About_Scrolls;
 import in.silive.scrolls16.Fragments.QueryUs;
+import in.silive.scrolls16.Fragments.ReachUs;
 import in.silive.scrolls16.Fragments.Register;
+import in.silive.scrolls16.Fragments.Rules;
+import in.silive.scrolls16.Fragments.ScheduleFragment;
 import in.silive.scrolls16.Fragments.ScrollsDeveloperNew;
 import in.silive.scrolls16.Fragments.ScrollsTeamNew;
+import in.silive.scrolls16.Fragments.TopicsFragment;
 import in.silive.scrolls16.Fragments.UploadDoc;
 import in.silive.scrolls16.R;
 import in.silive.scrolls16.Util.Config;
@@ -32,15 +37,25 @@ Toolbar toolbar;
             try {
                 title = getIntent().getExtras().getString(Config.KEY_FRAGMENT);
                 switch (title){
-                    case Config.KEY_REGISTER:
-                        showFragment(Register.getInstance(), title);
+                    case Config.KEY_ABOUTSCROLLS:
+                        showFragment(new About_Scrolls(), title);
                         break;
-                    case Config.KEY_UPLOAD:
-                        showFragment(new UploadDoc(), title);
+                    case Config.KEY_Topics:
+                        showFragment(new TopicsFragment(), title);
+                        break;
+                    case Config.KEY_SCROLLSRULE:
+                        showFragment(new Rules(),title);
+                        break;
+                    case Config.KEY_REACHUS:
+                        showFragment(new ReachUs(),title);
+                        break;
+                    case Config.KEY_ImpDates:
+                        showFragment(new ScheduleFragment(),title);
                         break;
                     case Config.KEY_QUERY:
                         showFragment(new QueryUs(),title);
                         break;
+
                     case Config.KEY_SCROLLSTEAM:
                         showFragment(new ScrollsTeamNew(),title);
                         break;

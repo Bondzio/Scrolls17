@@ -18,6 +18,8 @@ public class Config {
     public static final String QUERY_URL = "http://akgec-scrolls.com/rest/api/Queries/RegisterQuery";
     public static final String SP_KEY = "scrolls";
     public static final String GCM = "gcm";
+    public static final String KEY_SCROLLSRULE = "RULES";
+    public static final String KEY_REACHUS ="Reach us" ;
 
     public static String GET = "GET";
     public static String POST = "POST";
@@ -46,4 +48,7 @@ public class Config {
     public static final String GCM_URL = BASE_URL + "api/GCM/StoreGCMId=";
     public static final String GET_TEAM_DETAILS =BASE_URL+ "api/Teams/GetTeam?teamId=";
 
+    public static final String KEY_ABOUTSCROLLS="About Scrolls";
+    public static final String KEY_Topics="Topics";
+    public static final String KEY_ImpDates="Imp Dates";
 }
