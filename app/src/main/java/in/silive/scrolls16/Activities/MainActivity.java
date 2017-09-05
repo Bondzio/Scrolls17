@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_up_indicator);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigationView);
+        View headerView = navigationView.inflateHeaderView(R.layout.parallax_header);
         navigationView.setNavigationItemSelectedListener(this);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         // Initializing Drawer Layout and ActionBarToggle
