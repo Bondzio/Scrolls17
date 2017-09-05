@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
         floatingActionButton3 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
 
-        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+       /*floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
@@ -121,10 +121,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
 
             }
-        });
+        });*/
 
         navigationView.setNavigationItemSelectedListener(this);
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        //tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         // Initializing Drawer Layout and ActionBarToggle
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mtoolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        setUpViewPager();
+        //setUpViewPager();
     }
 
     private void setUpViewPager() {
