@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import in.silive.scrolls16.Fragments.QueryUs;
 import in.silive.scrolls16.Fragments.Register;
+import in.silive.scrolls16.Fragments.ScrollsDeveloperNew;
 import in.silive.scrolls16.Fragments.ScrollsTeamNew;
 import in.silive.scrolls16.Fragments.UploadDoc;
 import in.silive.scrolls16.R;
@@ -43,6 +44,10 @@ Toolbar toolbar;
                     case Config.KEY_SCROLLSTEAM:
                         showFragment(new ScrollsTeamNew(),title);
                         break;
+                    case Config.KEY_SCROLLSDeveloper:
+                        showFragment(new ScrollsDeveloperNew(),title);
+                        break;
+
                 }
                 getSupportActionBar().setTitle(title);
             }catch (Exception e){

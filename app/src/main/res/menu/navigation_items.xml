@@ -24,6 +24,10 @@
             android:checked="false"
             android:title="Scrolls team" />
         <item
+            android:id="@+id/scrollDeveloper"
+            android:checked="false"
+            android:title="Scrolls Developer" />
+        <item
             android:id="@+id/footer_spacer_2"
             android:checkable="false"
             android:enabled="false"

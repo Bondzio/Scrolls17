@@ -248,6 +248,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.scrollTeam:
                 i.putExtra(Config.KEY_FRAGMENT,Config.KEY_SCROLLSTEAM);
                 startActivity(i);
+                break;
+            case R.id.scrollDeveloper:
+                i.putExtra(Config.KEY_FRAGMENT,Config.KEY_SCROLLSDeveloper);
+                startActivity(i);
+
             default:
         }
 

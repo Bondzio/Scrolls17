@@ -12,6 +12,7 @@ public class Config {
     public static final String KEY_SCROLLSTEAM="ScrollsTeamNew";
     public static final String KEY_UPLOAD = "Upload Doc";
     public static final String KEY_QUERY = "Query Us";
+    public static final String KEY_SCROLLSDeveloper="Developer";
     //// TODO:correct sample doc link on deploy
     public static final String SAMPLE_DOC_URL = "http://akgec-scrolls.com/asset/Synopsis.pdf";
     public static final String QUERY_URL = "http://akgec-scrolls.com/rest/api/Queries/RegisterQuery";
@@ -44,4 +45,5 @@ public class Config {
     public static String IS_PHONE_NUMBER_REGISTERED = BASE_URL +"api/Participants/IsPhoneNoAlreadyRegistered?number=";
     public static final String GCM_URL = BASE_URL + "api/GCM/StoreGCMId=";
     public static final String GET_TEAM_DETAILS =BASE_URL+ "api/Teams/GetTeam?teamId=";
+
 }
