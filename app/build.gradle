@@ -52,6 +52,7 @@ dependencies {
     compile 'com.github.jd-alexander:library:1.1.0'
     compile 'com.nononsenseapps:filepicker:3.0.0'
     compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.github.clans:fab:1.6.2'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0'

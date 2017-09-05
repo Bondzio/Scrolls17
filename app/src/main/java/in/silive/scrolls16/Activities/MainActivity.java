@@ -29,11 +29,16 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
+
 import java.util.Calendar;
 
 import in.silive.scrolls16.Adapters.PagerAdapter;
+import in.silive.scrolls16.Fragments.Register;
 import in.silive.scrolls16.Fragments.ScrollsDevelopers;
 import in.silive.scrolls16.Fragments.ScrollsTeam;
+import in.silive.scrolls16.Fragments.UploadDoc;
 import in.silive.scrolls16.R;
 import in.silive.scrolls16.Util.Config;
 import in.silive.scrolls16.Util.Keyboard;
@@ -53,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentTransaction fragmentTransaction;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    FloatingActionMenu materialDesignFAM;
+    FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,16 +70,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mtoolbar = (Toolbar) findViewById(R.id.toolbar);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         setSupportActionBar(mtoolbar);
+
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
             //    WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black);
         //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_up_indicator);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         View headerView = navigationView.inflateHeaderView(R.layout.parallax_header);
+        materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
+        floatingActionButton1 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
+        floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
+        floatingActionButton3 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
+
+        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragment = new Register();
+                fragmentTransaction.replace(R.id.fragment_container, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+
+            }
+        });
+        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragment = new UploadDoc();
+                fragmentTransaction.replace(R.id.fragment_container, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+
+            }
+        });
+        floatingActionButton3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                String url = Config.SAMPLE_DOC_URL;
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+
+            }
+        });
+
         navigationView.setNavigationItemSelectedListener(this);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         // Initializing Drawer Layout and ActionBarToggle
