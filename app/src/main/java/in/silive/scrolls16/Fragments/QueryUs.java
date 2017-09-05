@@ -55,7 +55,7 @@ public class QueryUs extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        query_view = inflater.inflate(R.layout.fragment_query_us, container, false);
+        query_view = inflater.inflate(R.layout.queryus, container, false);
         email_query = (EditText) query_view.findViewById(R.id.email_query);
         message_query = (EditText) query_view.findViewById(R.id.message_query);
         submit_query = (Button) query_view.findViewById(R.id.submit_query);
