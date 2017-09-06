@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
 
         android:descendantFocusability="blocksDescendants"
-        android:layout_marginTop="70dp"
+
         android:orientation="vertical">
         <ImageView
             android:layout_width="match_parent"

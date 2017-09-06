@@ -35,6 +35,7 @@ import com.github.clans.fab.FloatingActionMenu;
 import java.util.Calendar;
 
 import in.silive.scrolls16.Adapters.PagerAdapter;
+import in.silive.scrolls16.Fragments.About_Scrolls;
 import in.silive.scrolls16.Fragments.Register;
 import in.silive.scrolls16.Fragments.ScrollsDevelopers;
 import in.silive.scrolls16.Fragments.ScrollsTeam;
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
         floatingActionButton3 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
 
-        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
+       floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
@@ -124,7 +125,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         navigationView.setNavigationItemSelectedListener(this);
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragment = new About_Scrolls();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+        //tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         // Initializing Drawer Layout and ActionBarToggle
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mtoolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
@@ -142,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        setUpViewPager();
+        //setUpViewPager();
     }
 
     private void setUpViewPager() {
@@ -218,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
-        return true;
+        return false;
     }
 
     @Override
@@ -270,13 +278,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Calendar cal2 = Calendar.getInstance();
 
         switch (menuItem.getItemId()) {
-            case R.id.about_scrolls:
-                cal2.set(2018,9,5,0,0);
-                if (cal2.getTimeInMillis() > calendar.getTimeInMillis()) {
-                    i.putExtra(Config.KEY_FRAGMENT, Config.KEY_ABOUTSCROLLS);
-                    startActivity(i);
-                } else showRegOverDialog();
-                break;
+
             case R.id.topics:
                 cal2.set(2018,9,5,0,0);
                 if (cal2.getTimeInMillis() > calendar.getTimeInMillis()) {
