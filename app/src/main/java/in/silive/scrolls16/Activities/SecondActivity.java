@@ -37,9 +37,7 @@ Toolbar toolbar;
             try {
                 title = getIntent().getExtras().getString(Config.KEY_FRAGMENT);
                 switch (title){
-                    case Config.KEY_ABOUTSCROLLS:
-                        showFragment(new About_Scrolls(), title);
-                        break;
+
                     case Config.KEY_Topics:
                         showFragment(new TopicsFragment(), title);
                         break;
