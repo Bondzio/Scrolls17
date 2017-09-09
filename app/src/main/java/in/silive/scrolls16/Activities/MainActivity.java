@@ -130,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         fragment = new About_Scrolls();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
         //tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         // Initializing Drawer Layout and ActionBarToggle
