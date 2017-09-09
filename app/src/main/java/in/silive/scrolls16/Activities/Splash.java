@@ -51,7 +51,7 @@ public class Splash extends AppCompatActivity {
         mWebView = (WebView) findViewById(R.id.web_view);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
-        mWebView.loadUrl("file:///android_asset/test.html");
+        mWebView.loadUrl("file:///android_asset/test.svg");
      //   parallaxLayout = (ParallaxLayerLayout)findViewById(R.id.parallaxLayer);
        // sensorTranslationUpdater = new SensorTranslationUpdater(this);
         //parallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
