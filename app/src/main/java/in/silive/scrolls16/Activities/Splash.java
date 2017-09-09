@@ -12,6 +12,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -40,14 +42,19 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
-        setContentView(R.layout.splash);
+        setContentView(R.layout.splashnew);
         splash = (RelativeLayout) findViewById(R.id.splash);
         context = getApplicationContext();
         //image = (ImageView) findViewById(R.id.image);
         text = (TextView) findViewById(R.id.text);
-        parallaxLayout = (ParallaxLayerLayout)findViewById(R.id.parallaxLayer);
-        sensorTranslationUpdater = new SensorTranslationUpdater(this);
-        parallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
+        WebView mWebView = null;
+        mWebView = (WebView) findViewById(R.id.web_view);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
+        mWebView.loadUrl("file:///android_asset/test.html");
+     //   parallaxLayout = (ParallaxLayerLayout)findViewById(R.id.parallaxLayer);
+       // sensorTranslationUpdater = new SensorTranslationUpdater(this);
+        //parallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
        // checkConnection();
         checkGCM();
     }
@@ -71,13 +78,13 @@ public class Splash extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        sensorTranslationUpdater.unregisterSensorManager();
+        //sensorTranslationUpdater.unregisterSensorManager();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        sensorTranslationUpdater.registerSensorManager();
+        //sensorTranslationUpdater.registerSensorManager();
     }
 
     public void checkConnection() {
