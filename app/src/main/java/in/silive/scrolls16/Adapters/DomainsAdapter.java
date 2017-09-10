@@ -2,6 +2,7 @@ package in.silive.scrolls16.Adapters;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +15,9 @@ import android.widget.TextView;
 
 import com.fmsirvent.ParallaxEverywhere.PEWImageView;
 
+import in.silive.scrolls16.Activities.SecondActivity;
 import in.silive.scrolls16.Fragments.DialogTopics;
+import in.silive.scrolls16.Fragments.TopicsFragment;
 import in.silive.scrolls16.R;
 
 /**
@@ -25,7 +28,7 @@ public class DomainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     Context context;
     String[] images;
 
-    public DomainsAdapter(Context context, String[] domains,String[] images) {
+    public DomainsAdapter(Context context, String[] domains, String[] images, SecondActivity Activity) {
         this.context = context;
         this.domains = domains;
         this.images = images;
@@ -55,6 +58,9 @@ public class DomainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     DialogTopics dialogTopics = new DialogTopics();
                     switch (position ) {
                         case 1:
+                            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.container, new TopicsFragment())/*.addToBackStack(fragment.getClass().getName())*/;
+                            fragmentTransaction.commit();
                             dialogTopics.setArgs("Computer Science and Information Technology",
                                     context.getResources().getStringArray(R.array.csit));
                             break;
