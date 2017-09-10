@@ -17,7 +17,7 @@
             android:id="@+id/tvNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/circle_primary"
+             android:textColor="#000000"
             android:gravity="center"
             android:text="1" />
     </LinearLayout>

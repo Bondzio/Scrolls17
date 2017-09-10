@@ -34,7 +34,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
         holder.tvTopic.setText(topics[position]);
         holder.itemView.setVisibility(View.INVISIBLE);
         holder.itemView.setVisibility(View.VISIBLE);
-        holder.tvNum.setText(""+(position+1));
+        holder.tvNum.setText(""+(position+1)+".");
        /* new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
