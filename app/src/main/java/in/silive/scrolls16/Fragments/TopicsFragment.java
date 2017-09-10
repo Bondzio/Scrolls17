@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import in.silive.scrolls16.Activities.SecondActivity;
 import in.silive.scrolls16.Adapters.DomainsAdapter;
 import in.silive.scrolls16.R;
 
@@ -53,7 +54,7 @@ View view;
         domains = getActivity().getResources().getStringArray(R.array.domain_array);
         imagesArray =  getActivity().getResources().getStringArray(R.array.topic_img_array);
 
-        adapter = new DomainsAdapter(getContext(),domains,imagesArray);
+        adapter = new DomainsAdapter(getContext(),domains,imagesArray, (SecondActivity)getActivity());
 
         rvDomains.setAdapter(adapter);
         return view;
