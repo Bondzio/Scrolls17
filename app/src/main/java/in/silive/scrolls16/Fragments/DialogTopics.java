@@ -1,9 +1,12 @@
 package in.silive.scrolls16.Fragments;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.SharedElementCallback;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -38,6 +41,7 @@ TopicsAdapter adapter;
         public void onStateChanged(@NonNull View bottomSheet, int newState) {
             if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                 dismiss();
+
             }
 
         }
@@ -46,6 +50,8 @@ TopicsAdapter adapter;
         public void onSlide(@NonNull View bottomSheet, float slideOffset) {
         }
     };
+
+
 
     @Override
     public void setupDialog(final Dialog dialog, int style) {
@@ -62,7 +68,30 @@ TopicsAdapter adapter;
         rvTopics.setAdapter(adapter);
         ll = (LinearLayout) view.findViewById(R.id.ll);
         ivClose = (ImageView) view.findViewById(R.id.ivClose);
+
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDialog().setOnKeyListener(new DialogInterface.OnKeyListener()
+        {
+            @Override
+            public boolean onKey(android.content.DialogInterface dialog,
+                                 int keyCode,android.view.KeyEvent event)
+            {
+                if ((keyCode ==  android.view.KeyEvent.KEYCODE_BACK))
+                {
+                    // To dismiss the fragment when the back-button is pressed.
+                    dismiss();
+                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.container, new TopicsFragment())/*.addToBackStack(fragment.getClass().getName())*/;
+                    fragmentTransaction.commit();
+                    return true;
+                }
+                // Otherwise, do nothing else
+                else return false;
+            }
+        });
+    }
 }
