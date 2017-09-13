@@ -110,46 +110,19 @@
             android:id="@+id/guideline141"
             app:layout_constraintGuide_percent="1"
             android:orientation="horizontal" />
-        <ImageView
+
+        <WebView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/r"
-            app:layout_constraintLeft_toLeftOf="@+id/guideline102"
-            app:layout_constraintRight_toLeftOf="@+id/guideline103"
-            app:layout_constraintTop_toTopOf="@+id/guideline161"
-            app:layout_constraintBottom_toTopOf="@+id/guideline141"/>
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/yellowbar"
-            app:layout_constraintLeft_toLeftOf="@+id/guideline162"
-            app:layout_constraintRight_toLeftOf="@+id/guideline163"
-            app:layout_constraintTop_toTopOf="@+id/guideline169"
+            android:id="@+id/web_view"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline101"
+            app:layout_constraintRight_toLeftOf="@+id/guideline121"
+            app:layout_constraintTop_toTopOf="@+id/guideline131"
             app:layout_constraintBottom_toTopOf="@+id/guideline141"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintVertical_bias="0.0">
 
-        </android.support.constraint.ConstraintLayout>
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:src="@drawable/r"
-            app:layout_constraintLeft_toLeftOf="@+id/guideline102"
-            app:layout_constraintRight_toLeftOf="@+id/guideline103"
-            app:layout_constraintTop_toTopOf="@+id/guideline161"
-            app:layout_constraintBottom_toTopOf="@+id/guideline141"/>
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/rarf"
-            app:layout_constraintLeft_toLeftOf="@+id/guideline162"
-            app:layout_constraintRight_toLeftOf="@+id/guideline163"
-            app:layout_constraintTop_toTopOf="@+id/guideline169"
-            app:layout_constraintBottom_toTopOf="@+id/guideline141"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.0">
-
-        </android.support.constraint.ConstraintLayout>
+        </WebView>
 
 </android.support.constraint.ConstraintLayout>
     <android.support.v7.widget.CardView

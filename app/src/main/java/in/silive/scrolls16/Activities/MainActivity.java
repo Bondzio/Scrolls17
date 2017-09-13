@@ -90,13 +90,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                fragmentManager = getSupportFragmentManager();
+              /*  fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
 
                 fragment = new Register();
                 fragmentTransaction.replace(R.id.fragment_container, fragment);
                 fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
+              Intent i=new Intent(getApplicationContext(),RegisterActivity.class);
+                startActivity(i);
 
 
             }

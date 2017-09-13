@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 import in.silive.scrolls16.Adapters.AboutUsListAdapter;
 import in.silive.scrolls16.Adapters.AboutUsListAdapterNew;
@@ -33,7 +35,7 @@ public class ScrollsTeamNew extends Fragment implements View.OnClickListener {
     String desigOfMembers [] = {"DSW, AKGEC","8802119708","8745982117","8908767865"};
     Integer picMembers [] = {R.drawable.t,R.drawable.st1,R.drawable.st2,R.drawable.st3};
     private RecyclerView scrolls_team;
-
+    WebView webView;
 
     public ScrollsTeamNew() {
         // Required empty public constructor
@@ -45,7 +47,10 @@ public class ScrollsTeamNew extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.scrollsteam, container, false);
-
+        webView = (WebView) view.findViewById(R.id.web_view);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setPluginState(WebSettings.PluginState.ON);
+        webView.loadUrl("file:///android_asset/letters.html");
 
 
         //rvDomains.setLayoutManager(layoutManager);
