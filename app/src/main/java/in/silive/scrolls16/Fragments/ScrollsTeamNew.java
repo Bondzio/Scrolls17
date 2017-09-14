@@ -50,7 +50,7 @@ public class ScrollsTeamNew extends Fragment implements View.OnClickListener {
         webView = (WebView) view.findViewById(R.id.web_view);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setPluginState(WebSettings.PluginState.ON);
-        webView.loadUrl("file:///android_asset/letters.html");
+        webView.loadUrl("file:///android_asset/lett.html");
 
 
         //rvDomains.setLayoutManager(layoutManager);
