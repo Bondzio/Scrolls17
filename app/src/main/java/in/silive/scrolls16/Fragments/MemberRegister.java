@@ -22,7 +22,7 @@ import in.silive.scrolls16.R;
 public class MemberRegister extends Fragment implements BlockingStep {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_registration, container, false);
+        View v = inflater.inflate(R.layout.memreg, container, false);
 
         //initialize your UI
 
