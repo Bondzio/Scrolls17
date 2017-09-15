@@ -10,9 +10,6 @@ import java.io.InputStream;
 
 
 
-/**
- * Created by shobhit on 28/2/17.
- */
 
 public class BitmapUtils {
     private final Context context;
@@ -22,8 +19,8 @@ public class BitmapUtils {
         
     }
 
-    public static Bitmap getBitmapFromAssets(String filepath) {
-        AssetManager assetManager = null;
+    public  Bitmap getBitmapFromAssets(String filepath) {
+        AssetManager assetManager = context.getAssets();
         InputStream istr = null;
         Bitmap bitmap = null;
 
@@ -44,14 +41,14 @@ public class BitmapUtils {
         return bitmap;
     }
 
-    public static Bitmap[] getBitmapsFromSprite(Bitmap bitmap, int NB_FRAMES, int COUNT_X, int COUNT_Y, int FRAME_H, int FRAME_W) {
+    public  Bitmap[] getBitmapsFromSprite(Bitmap bitmap, int NB_FRAMES, int COUNT_X, int COUNT_Y, int FRAME_H, int FRAME_W) {
         int currentFrame = 0;
         Bitmap[] bitmaps = new Bitmap[NB_FRAMES];
-
+        int k=0;
         for (int i = 0; i < COUNT_Y; i++) {
             for (int j = 0; j < COUNT_X; j++) {
                 bitmaps[currentFrame] = Bitmap.createBitmap(bitmap, FRAME_W
-                        * j, FRAME_H * i, FRAME_W, FRAME_H);
+                        * j, FRAME_H *i, FRAME_W, FRAME_H);
 
 
                 if (++currentFrame >= NB_FRAMES) {

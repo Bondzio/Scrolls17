@@ -4,8 +4,10 @@ import java.util.List;
 
 import in.silive.scrolls16.Util.Config;
 import in.silive.scrolls16.models.CollegeModel;
+import in.silive.scrolls16.models.DomainModel;
 import in.silive.scrolls16.models.QueryModel;
 import in.silive.scrolls16.models.SelfRegister;
+import in.silive.scrolls16.models.TopicModel;
 import in.silive.scrolls16.models.Topics;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,6 +16,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -21,8 +24,10 @@ import retrofit2.http.Query;
  */
 
 public interface RetrofitApiInterface {
-    @GET("api/Domains/GetTopics")
-    Call<List<Topics>> getTopics(@Query("domainId") int id);
+@GET("api/getdomains")
+Call<DomainModel> getDomians();
+    @GET("api/getdomains/{id}/gettopics")
+    Call<TopicModel> getTopics(@Path("id") String id);
     @GET("api/Colleges/GetColleges")
     Call<List<CollegeModel>> getCollege();
     @FormUrlEncoded

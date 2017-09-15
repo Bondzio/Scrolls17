@@ -1,12 +1,14 @@
 package in.silive.scrolls16.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,6 +24,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.stepstone.stepper.BlockingStep;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
@@ -34,10 +37,15 @@ import in.silive.scrolls16.Network.ApiClient;
 import in.silive.scrolls16.Network.CheckConnectivity;
 import in.silive.scrolls16.Network.RetrofitApiInterface;
 import in.silive.scrolls16.R;
+import in.silive.scrolls16.Util.Config;
 import in.silive.scrolls16.Util.Keyboard;
+import in.silive.scrolls16.application.*;
+import in.silive.scrolls16.application.Scrolls;
 import in.silive.scrolls16.models.CollegeModel;
+import in.silive.scrolls16.models.Datum;
+import in.silive.scrolls16.models.DomainModel;
 import in.silive.scrolls16.models.SelfRegister;
-import in.silive.scrolls16.models.Topics;
+import in.silive.scrolls16.models.TopicModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -65,20 +73,37 @@ public class TeamRegister extends Fragment implements BlockingStep {
     RadioGroup team_leader, no_of_team_members;
     RadioButton leader_member_one, leader_member_two, leader_member_three, two_members, three_members;
     ProgressBar progressBar;
+    int student_year, collegeId;
+    ArrayList<String> topicsList = new ArrayList<String>();
+    ArrayList<String> domainList = new ArrayList<String>();
+    //ArrayList<Integer> topicsIDList = new ArrayList<Integer>();
+    String[] domainArray = new String[5], topicArray = new String[13];
+    in.silive.scrolls16.Adapters.SpinnerAdapter topicsAdapter, domainAdapter;
+    ArrayList<String> searchList = new ArrayList<>();
     private ProgressDialog progressDialog;
     private int student_courseId;
     private int topic_id;
-    Call<List<Topics>> call;
+    public int id_domain = 1;
+    Call<TopicModel> call;
+    ArrayList<Integer> topicsIDList = new ArrayList<Integer>();
+    ArrayList<Integer> domainsIDList = new ArrayList<Integer>();
     Call<List<CollegeModel>> callCollege;
     private String mode = "";
     RetrofitApiInterface apiService;
     private Call<SelfRegister> callRegister;
     View reg_view;
+    List<Datum> domainlist;
+    private Call<DomainModel> callDomain;
+    private SharedPreferences sharedpreferences;
+    private SharedPreferences.Editor editor;
+    String noOfMembers;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         reg_view = inflater.inflate(R.layout.team_reg, container, false);
         reg_individual = (LinearLayout) reg_view.findViewById(R.id.reg_individual);
+
+        sharedpreferences = Scrolls.getInstance().sharedPrefs;
         reg_team = (LinearLayout) reg_view.findViewById(R.id.reg_team);
         team_password = (EditText) reg_view.findViewById(R.id.team_password);
         team_name = (EditText) reg_view.findViewById(R.id.team_name);
@@ -88,12 +113,21 @@ public class TeamRegister extends Fragment implements BlockingStep {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
                 if (i == R.id.three_members) {
-                    member_three.setVisibility(View.VISIBLE);
-                    leader_member_three.setVisibility(View.VISIBLE);
+                    noOfMembers="3";
+                    editor = sharedpreferences.edit();
+                    editor.putString(Config.NO_OF_MEMBERS, "3");
+                    editor.commit();
+                 //   member_three.setVisibility(View.VISIBLE);
+                  //  leader_member_three.setVisibility(View.VISIBLE);
                     // memberCount = 3;
                 } else {
-                    member_three.setVisibility(View.GONE);
-                    leader_member_three.setVisibility(View.GONE);
+                    noOfMembers="2";
+                    editor = sharedpreferences.edit();
+                    editor.putString(Config.NO_OF_MEMBERS, "2");
+                    editor.commit();
+
+                    //member_three.setVisibility(View.GONE);
+                    //leader_member_three.setVisibility(View.GONE);
                     //memberCount = 2;
                 }
             }
@@ -107,83 +141,82 @@ public class TeamRegister extends Fragment implements BlockingStep {
                 //getTeamData();
             }
         });
+        apiService =
+                ApiClient.getClient().create(RetrofitApiInterface.class);
         team_domain = (Spinner) reg_view.findViewById(R.id.team_domain);
-        team_domain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        loadDomainList();
+        team_domain.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                id_domain = i + 1;
-                loadTopics(id_domain);
-            }
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (domainsIDList.size() == 0 && motionEvent.getAction() == MotionEvent.ACTION_UP
+                        ) {
+                    loadDomainList();
+                }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+                return false;
             }
         });
+
         team_topic = (Spinner) reg_view.findViewById(R.id.team_topic);
         team_topic.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (topicsIDList.size() == 0 && motionEvent.getAction() == MotionEvent.ACTION_UP
                         && id_domain != 0) {
-                    loadTopics(id_domain);
+                  loadTopics(id_domain);
                 }
 
                 return false;
             }
         });
-        apiService =
-                ApiClient.getClient().create(RetrofitApiInterface.class);
+
     
     //initialize your UI
 
         return reg_view;
     }
+    public void storeTeamData()
+    {
+        String teamName=team_name.getText().toString();
+        String  domain_id=Integer.toString(id_domain);
+        String  topicid=Integer.toString(topic_id);
+        String password=team_password.getText().toString();
+        String no_of_member=noOfMembers;
+        editor = sharedpreferences.edit();
+        editor.putString(Config.TEAMNAME,teamName);
+        editor.putString(Config.domain_id,domain_id);
+        editor.putString(Config.topicid,topicid);
+        editor.putString(Config.password,password);
+        editor.commit();
 
-    public void loadCollegeList() {
+    }
+
+    private void loadDomainList() {
         if (!CheckConnectivity.isNetConnected(getContext()))
             Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
         else {
-         /*   FetchData loadColleges = new FetchData();
-            loadColleges.setArgs(Config.GET_COLLEGES, this, GET_COLLEGE);
-            loadColleges.execute();*/
-            callCollege=apiService.getCollege();
-            callCollege.enqueue(new Callback<List<CollegeModel>>() {
+            callDomain = apiService.getDomians();
+            final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
+            callDomain.enqueue(new Callback<DomainModel>() {
                 @Override
-                public void onResponse(Call<List<CollegeModel>> call, Response<List<CollegeModel>> response) {
-                    List<CollegeModel> college = response.body();
-                    /*case GET_COLLEGE:
-                    jsonArray = new JSONArray(result);
-                    collegeIds.clear();
-                    collegeNames.clear();
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        jsonObject = jsonArray.getJSONObject(i);
-                        collegeIds.add(jsonObject.getInt("CollegeId"));
-                        collegeNames.add(jsonObject.getString("CollegeName"));
-                    }*/
-                    for(int i=0;i<college.size();i++)
-                    {
-                        collegeIds.add(college.get(i).getCollegeId());
-                        collegeNames.add(college.get(i).getCollegeName());
+                public void onResponse(Call<DomainModel> call, Response<DomainModel> response) {
+                    DomainModel domain = response.body();
+                     domainlist = domain.getData();
+//                   Toast.makeText(getActivity(),domainlist.size(),Toast.LENGTH_LONG).show();
+                    for (int i = 0; i<domainlist.size(); i++) {
+                        domainList.add(domainlist.get(i).getDomainName());
+                        domainsIDList.add(domainlist.get(i).getId());
                     }
-                    collegeIds.add(-1);
-                    collegeNames.add("Others");
-                    SpinnerAdapter collegeListAdapter = new SpinnerAdapter(getContext(), collegeNames);
-                    stud_college.setAdapter(collegeListAdapter);
-                    stud_college.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                    loading.dismiss();
+                    domainAdapter = new SpinnerAdapter(getContext(), domainList);
+                    team_domain.setAdapter(domainAdapter);
+                    team_domain.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if (collegeIds.get(i) == -1) {
-                                (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.VISIBLE);
-                            } else {
-                                (reg_view.findViewById(R.id.stud_other_college)).setVisibility(View.GONE);
-                                collegeId = collegeIds.get(i);
-                            }
-                            if (collegeIds.get(i) == 4) {
-                                (reg_view.findViewById(R.id.stud_id)).setVisibility(View.VISIBLE);
-                            } else {
-                                (reg_view.findViewById(R.id.stud_id)).setVisibility(View.GONE);
-                            }
+                            id_domain= domainsIDList.get(i);
+                            loadTopics(id_domain);
+                            Toast.makeText(getActivity(), Integer.toString(id_domain), Toast.LENGTH_LONG).show();
                         }
 
                         @Override
@@ -191,22 +224,37 @@ public class TeamRegister extends Fragment implements BlockingStep {
 
                         }
                     });
-
                 }
-                public void loadTopics(int domainId) {
-                    topicsIDList.clear();
-                    topicsList.clear();
-                    if (topicsAdapter != null)
-                        topicsAdapter.notifyDataSetChanged();
-                    if (!CheckConnectivity.isNetConnected(getContext()))
-                        Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
-                    else {
-                        if (team_individual_tab.getSelectedTabPosition() == 1) {
+
+
+
+
+
+                @Override
+                public void onFailure(Call<DomainModel> call, Throwable t) {
+                    Log.d("debugg", t.toString());
+                    Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_LONG).show();
+                    loading.dismiss();
+                }
+            });
+        }
+    }
+
+
+    public void loadTopics(int domainId) {
+        topicsIDList.clear();
+        topicsList.clear();
+        if (topicsAdapter != null)
+            topicsAdapter.notifyDataSetChanged();
+        if (!CheckConnectivity.isNetConnected(getContext()))
+            Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
+        else {
+
                 /*FetchData fetchData = new FetchData();
                 fetchData.setArgs(Config.GET_TOPICS + domainId, this, LOAD_TOPICS);
                 fetchData.execute();*/
-                            call = apiService.getTopics(domainId);
-                            //  case LOAD_TOPICS:
+                call = apiService.getTopics(Integer.toString(domainId));
+                //  case LOAD_TOPICS:
                         /*jsonArray = new JSONArray(result);
                         topicsList.clear();
                         topicsIDList.clear();
@@ -215,59 +263,63 @@ public class TeamRegister extends Fragment implements BlockingStep {
                             topicsIDList.add(jsonObject.getInt("TopicId"));
                             topicsList.add(jsonObject.getString("TopicName"));
                         }*/
-                            //List<Topics>  topicsList;
-                            final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
-                            call.enqueue(new Callback<List<Topics>>() {
+                //List<Topics>  topicsList;
+                final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
+                call.enqueue(new Callback<TopicModel>() {
+                    @Override
+                    public void onResponse(Call<TopicModel> call, Response<TopicModel> response) {
+                        if(response.isSuccessful()) {
+                            TopicModel topic = response.body();
+                            Log.d("Success", Integer.toString(response.code()));
+                            Log.d("Success", new Gson().toJson(response.body()));
+//                            Log.d("Success", response.body().getTopicdata().toString());
+                            List<in.silive.scrolls16.Models.Datum> topicsList1 = topic.getData();
+                            // Toast.makeText(getActivity(),topicsList1.get(0).getTopicName(),Toast.LENGTH_LONG).show();
+                            topicsList.clear();
+                            topicsIDList.clear();
+                            for (int i = 0; i < topicsList1.size(); i++) {
+                                topicsList.add(topicsList1.get(i).getTopicName());
+                                topicsIDList.add(topicsList1.get(i).getId());
+                            }
+                            loading.dismiss();
+
+                            //Log.d("debugg",Integer.toString(topicsList1.size()));
+                            Toast.makeText(getContext(), Integer.toString(topicsList.size()), Toast.LENGTH_LONG).show();
+                            topicsAdapter = new SpinnerAdapter(getContext(), topicsList);
+                            team_topic.setAdapter(topicsAdapter);
+                            team_topic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
-                                public void onResponse(Call<List<Topics>> call, Response<List<Topics>> response) {
-                                    List<Topics> topicsList1=response.body();
-                                    topicsList.clear();
-                                    topicsIDList.clear();
-                                    for (int i=0;i<topicsList1.size();i++) {
-                                        topicsList.add(topicsList1.get(i).getTopicName());
-                                        topicsIDList.add(topicsList1.get(i).getTopicId());
-                                    }
-                                    loading.dismiss();
-
-                                    //Log.d("debugg",Integer.toString(topicsList1.size()));
-                                    Toast.makeText(getContext(),Integer.toString(topicsList.size()),Toast.LENGTH_LONG).show();
-                                    topicsAdapter = new SpinnerAdapter(getContext(), topicsList);
-                                    team_topic.setAdapter(topicsAdapter);
-                                    team_topic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                        @Override
-                                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                            topic_id = topicsIDList.get(i);
-                                        }
-
-                                        @Override
-                                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                        }
-                                    });
+                                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                    topic_id = topicsIDList.get(i);
                                 }
 
                                 @Override
-                                public void onFailure(Call<List<Topics>> call, Throwable t) {
+                                public void onNothingSelected(AdapterView<?> adapterView) {
 
                                 }
-
-
                             });
-
+                        }
+                        else
+                        {
+                            Log.d("unSuccess", new Gson().toJson(response.errorBody()));
                         }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<List<CollegeModel>> call, Throwable t) {
+                    @Override
+                    public void onFailure(Call<TopicModel> call, Throwable t) {
+                    loading.dismiss();
+                    }
 
-                }
-            });
+
+                });
+
+            }
         }
-    }
+
 
         @Override
     public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
+            storeTeamData();
         callback.goToNextStep();
     }
 

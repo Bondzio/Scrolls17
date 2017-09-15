@@ -20,10 +20,13 @@ public class Config {
     public static final String GCM = "gcm";
     public static final String KEY_SCROLLSRULE = "RULES";
     public static final String KEY_REACHUS ="Reach us" ;
+    public static final String SHARED_PREFS = "scrolls";
+    public static final String NO_OF_MEMBERS = "no_of_members";
+    public static final String TEAMNAME ="teamname" ;
 
     public static String GET = "GET";
     public static String POST = "POST";
-    public static String BASE_URL = "http://akgec-scrolls.com/rest/";
+    public static String BASE_URL = "http://www.akgec-scrolls.com/api/public/";
     public static  String UPLOAD_DOC = BASE_URL+"api/Teams/UploadFile";
     public static String GET_COURSES = BASE_URL +"api/Domains/GetCourses";
     public static String CREATE_COLLEGE = BASE_URL +"api/Colleges/CreateCollege";
@@ -51,4 +54,7 @@ public class Config {
     public static final String KEY_ABOUTSCROLLS="About Scrolls";
     public static final String KEY_Topics="Topics";
     public static final String KEY_ImpDates="Imp Dates";
+    public static String domain_id="domainid";
+    public static String topicid="topicid";
+    public static String password="password";
 }

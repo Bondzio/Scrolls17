@@ -109,27 +109,5 @@ public class Splash extends AppCompatActivity {
         }
 
     }
-   /* private void startWaterAnimation() {
 
-        Bitmap waterbmp = BitmapUtils.getBitmapFromAssets("splashh.png");
-        if (waterbmp != null) {
-            Bitmap[] bitmaps = BitmapUtils.getBitmapsFromSprite(waterbmp, NB_FRAMES, COUNT_X, COUNT_Y, FRAME_H, FRAME_W);
-            final AnimationDrawable animation = new AnimationDrawable();
-            animation.setOneShot(false); // repeat animation
-
-            for (int i = 0; i < NB_FRAMES; i++) {
-                animation.addFrame(new BitmapDrawable(getResources(), bitmaps[i]),
-                        FRAME_DURATION);
-            }
-            rl.setBackground(animation);
-            rl.post(new Runnable() {
-
-                @Override
-                public void run() {
-                    animation.start();
-                }
-
-            });
-        }
-    }*/
 }

@@ -14,14 +14,13 @@
         android:descendantFocusability="blocksDescendants"
 
         android:orientation="vertical">
-        <ImageView
+        <LinearLayout
+            android:id="@+id/sprite"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/scrollupper"
+            android:layout_height="300dp"
 
-            android:adjustViewBounds="true"
             android:layout_weight="0"
-            />
+            android:orientation="vertical" />
 
         <WebView
             android:id="@+id/about_scrolls_web_view"

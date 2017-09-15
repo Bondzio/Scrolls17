@@ -2,6 +2,8 @@ package in.silive.scrolls16.Fragments;
 
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -17,9 +19,11 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 
 import in.silive.scrolls16.Adapters.DomainsAdapter;
 import in.silive.scrolls16.R;
+import in.silive.scrolls16.Util.BitmapUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,9 +35,16 @@ RecyclerView rvDomains;
     String[]  domains;
     DomainsAdapter adapter;
     private WebView web_view;
+    LinearLayout rl;
     CollapsingToolbarLayout collapsingToolbarLayout;
     AppBarLayout appBarLayout;
     static About_Scrolls fragment;
+    private static final int FRAME_W = 250;
+    private static final int FRAME_H = 250;
+    private static final int NB_FRAMES = 16;
+    private static final int COUNT_X = 4;
+    private static final int COUNT_Y = 4;
+    private static final int FRAME_DURATION = 400;
 
     public About_Scrolls() {
         // Required empty public constructor
@@ -53,6 +64,7 @@ RecyclerView rvDomains;
         if (rootView==null) {
             rootView = inflater.inflate(R.layout.fragment_about_scrolls, container, false);
             web_view = (WebView) rootView.findViewById(R.id.about_scrolls_web_view);
+            rl=(LinearLayout)rootView.findViewById(R.id.sprite);
             final WebSettings webSettings = web_view.getSettings();
             webSettings.setJavaScriptEnabled(true);
             web_view.setWebViewClient(new myWebClient());
@@ -71,10 +83,34 @@ RecyclerView rvDomains;
                     web_view.invalidate();
                 }
             });
+            startWaterAnimation();
         }
         return rootView;
     }
+     private void startWaterAnimation() {
+         BitmapUtils bitmapUtils=new BitmapUtils(getActivity());
 
+            Bitmap waterbmp =bitmapUtils.getBitmapFromAssets("sprites.png");
+            if (waterbmp != null) {
+                Bitmap[] bitmaps = bitmapUtils.getBitmapsFromSprite(waterbmp, NB_FRAMES, COUNT_X, COUNT_Y, FRAME_H, FRAME_W);
+                final AnimationDrawable animation = new AnimationDrawable();
+                animation.setOneShot(false); // repeat animation
+
+                for (int i = 0; i < NB_FRAMES; i++) {
+                    animation.addFrame(new BitmapDrawable(getResources(), bitmaps[i]),
+                            FRAME_DURATION);
+                }
+                rl.setBackground(animation);
+                rl.post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        animation.start();
+                    }
+
+                });
+            }
+        }
     @Override
     public void onResume() {
         super.onResume();

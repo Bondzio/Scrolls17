@@ -685,7 +685,7 @@ public class Register extends Fragment implements FetchDataListener {
                 /*FetchData fetchData = new FetchData();
                 fetchData.setArgs(Config.GET_TOPICS + domainId, this, LOAD_TOPICS);
                 fetchData.execute();*/
-                 call = apiService.getTopics(domainId);
+                // call = apiService.getTopics(domainId);
               //  case LOAD_TOPICS:
                         /*jsonArray = new JSONArray(result);
                         topicsList.clear();
