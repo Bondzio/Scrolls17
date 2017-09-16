@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
 
+import in.silive.scrolls16.Fragments.MemberRegTwo;
 import in.silive.scrolls16.Fragments.MemberRegister;
 import in.silive.scrolls16.Fragments.TeamRegister;
 
@@ -31,16 +32,15 @@ public class MyStepperAdapter extends AbstractFragmentStepAdapter {
             break;
             case 1:fragment= new MemberRegister();
             break;
-            case 2:fragment= new MemberRegister();
+            case 2:fragment= new MemberRegTwo();
             break;
-            case 3:fragment= new MemberRegister();
-                break;
+
         }
         return (Step) fragment;
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
 }

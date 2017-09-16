@@ -1,5 +1,45 @@
 package in.silive.scrolls16.Fragments;
 
+/**
+ * Created by root on 16/9/17.
+ */
+
+import android.app.ProgressDialog;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.ResponseBody;
+import com.stepstone.stepper.BlockingStep;
+import com.stepstone.stepper.StepperLayout;
+import com.stepstone.stepper.VerificationError;
+
+import java.util.regex.Pattern;
+
+import in.silive.scrolls16.Network.ApiClient;
+import in.silive.scrolls16.Network.RetrofitApiInterface;
+import in.silive.scrolls16.R;
+import in.silive.scrolls16.Util.Config;
+import in.silive.scrolls16.Util.Validator;
+import in.silive.scrolls16.application.*;
+
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,6 +66,10 @@ import com.stepstone.stepper.BlockingStep;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.regex.Pattern;
 
 import in.silive.scrolls16.R;
@@ -33,12 +77,16 @@ import in.silive.scrolls16.Util.Config;
 import in.silive.scrolls16.Util.Validator;
 import in.silive.scrolls16.application.*;
 import in.silive.scrolls16.application.Scrolls;
+import in.silive.scrolls16.models.RegisterModel;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by root on 12/9/17.
  */
 
-public class MemberRegister extends Fragment implements BlockingStep {
+public class MemberRegTwo extends Fragment implements BlockingStep {
 
     public static String student_name, student_college_name, student_id, student_mob_no, student_mail, student_course;
     public static boolean student_accommodation = false;
@@ -58,13 +106,14 @@ public class MemberRegister extends Fragment implements BlockingStep {
     SharedPreferences.Editor editor;
     private String flagacc;
     private String stud_collegevalue,stud_coursevalue,stud_yearvalue;
+    private RetrofitApiInterface apiService;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         reg_view = inflater.inflate(R.layout.memreg, container, false);
         stud_name = (EditText) reg_view.findViewById(R.id.stud_name);
         //initialize your UI
-        sharedPreferences= Scrolls.getInstance().sharedPrefs;
+        sharedPreferences= in.silive.scrolls16.application.Scrolls.getInstance().sharedPrefs;
         stud_other_college = (EditText) reg_view.findViewById(R.id.stud_other_college);
         stud_other_college.setVisibility(View.GONE);
         stud_id = (EditText) reg_view.findViewById(R.id.stud_id);
@@ -80,7 +129,7 @@ public class MemberRegister extends Fragment implements BlockingStep {
 
 
                 } else {
-                   flagacc="0";
+                    flagacc="0";
 
                 }
             }
@@ -136,6 +185,8 @@ public class MemberRegister extends Fragment implements BlockingStep {
         });
         stud_coursevalue=stud_course.getSelectedItem().toString();
         stud_yearvalue=stud_year.getSelectedItem().toString();
+        apiService =
+                ApiClient.getClient().create(RetrofitApiInterface.class);
         return reg_view;
     }
 
@@ -143,15 +194,99 @@ public class MemberRegister extends Fragment implements BlockingStep {
 
     @Override
     public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
-        saveData();
-        callback.goToNextStep();
+
 
     }
 
     @Override
     public void onCompleteClicked(StepperLayout.OnCompleteClickedCallback callback) {
-        Toast.makeText(getActivity(),"Congratulations You are Successfully registered",Toast.LENGTH_LONG).show();
+        saveData();
+        apiCall();
 
+    }
+
+    private void apiCall() {
+        try {
+            JSONObject paramObject = new JSONObject();
+            paramObject.put("team_name", "testingfff");
+
+            paramObject.put("domain_id", "2");
+            paramObject.put("topic_id","1");
+            paramObject.put("password","sims");
+            paramObject.put("noofmembers","2");
+            JSONObject Member1 = new JSONObject();
+            try {
+                Member1.put("name","Natio");
+                Member1.put("email", "mayur.patkks152@gmail.com");
+                Member1.put("course","btech");
+                Member1.put("year", "1");
+                Member1.put("college_name","akgec");
+                Member1.put("student_no", "1413568");
+                Member1.put("contact_no","9569696969");
+                Member1.put( "accomodation", "1");
+                Member1.put( "teamlead","1");
+
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            JSONObject Member2 = new JSONObject();
+            try {
+                Member2.put("name","Nationn");
+                Member2.put("email", "mayurrr.pat3r3k152@gmail.com");
+                Member2.put("course","btech");
+                Member2.put("year", "1");
+                Member2.put("college_name","akgec");
+                Member2.put("student_no", "1411458");
+                Member2.put("contact_no","9569696969");
+                Member2.put("accomodation", "1");
+                Member2.put("teamlead","0");
+
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+
+            JSONArray jsonArray = new JSONArray();
+
+            jsonArray.put(Member1);
+            jsonArray.put(Member2);
+
+
+            paramObject.put("members", jsonArray);
+
+
+           Log.d("debugg",paramObject.toString());
+            final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
+            Call<RegisterModel> userCall = apiService.register(paramObject);
+           userCall.enqueue(new Callback<RegisterModel>() {
+               @Override
+               public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
+                   if(response.code()==200)
+                   {
+                       Toast.makeText(getActivity(),"Successfull",Toast.LENGTH_LONG).show();
+                   }
+                   else
+                   {
+                    Log.d("debugg",Integer.toString(response.code())+ new Gson().toJson(response.errorBody()));
+                   }
+                   loading.dismiss();
+
+               }
+
+               @Override
+               public void onFailure(Call<RegisterModel> call, Throwable t) {
+                  Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
+                   loading.dismiss();
+               }
+           });
+        }
+        catch (JSONException e)
+        {
+
+        }
     }
 
     @Override
@@ -215,18 +350,18 @@ public class MemberRegister extends Fragment implements BlockingStep {
         getStudData();
         editor=sharedPreferences.edit();
 
-        editor.putString(Config.ACCOMODATION1, flagacc);
+        editor.putString(Config.ACCOMODATION2, flagacc);
 
-       editor.putString(Config.Member1Name,student_name);
-        editor.putString(Config.STUDENTMAIL,student_mail);
-        editor.putString(Config.STUDENTMOBNO,student_mob_no);
-        editor.putString(Config.COURSE, stud_coursevalue);
-        editor.putString(Config.StudentYear,  stud_yearvalue);
-        editor.putString(Config.CoLLEGENAME,stud_collegevalue);
-         if(student_id!=null)
-         {
-             editor.putString(Config.STUDENTID,student_id);
-         }
+        editor.putString(Config.Member2Name,student_name);
+        editor.putString(Config.STUDENTMAIL2,student_mail);
+        editor.putString(Config.STUDENTMOBNO2,student_mob_no);
+        editor.putString(Config.COURSE2, stud_coursevalue);
+        editor.putString(Config.StudentYear2,  stud_yearvalue);
+        editor.putString(Config.CoLLEGENAME2,stud_collegevalue);
+        if(student_id!=null)
+        {
+            editor.putString(Config.STUDENTID2,student_id);
+        }
         editor.commit();
 
     }

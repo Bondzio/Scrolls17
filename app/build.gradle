@@ -55,6 +55,7 @@ dependencies {
     compile 'com.github.clans:fab:1.6.2'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.3.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     provided 'org.glassfish:javax.annotation:10.0-b28'
     compile 'com.schibsted.spain:parallax-layer-layout:1.0.0'
