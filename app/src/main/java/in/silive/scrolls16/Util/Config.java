@@ -14,7 +14,7 @@ public class Config {
     public static final String KEY_QUERY = "Query Us";
     public static final String KEY_SCROLLSDeveloper="Developer";
     //// TODO:correct sample doc link on deploy
-    public static final String SAMPLE_DOC_URL = "http://akgec-scrolls.com/asset/Synopsis.pdf";
+    public static final String SAMPLE_DOC_URL = "http://www.akgec-scrolls.com/api/public/api/downloadsynopsis";
     public static final String QUERY_URL = "http://akgec-scrolls.com/rest/api/Queries/RegisterQuery";
     public static final String SP_KEY = "scrolls";
     public static final String GCM = "gcm";
