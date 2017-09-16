@@ -50,5 +50,5 @@ Call<DomainModel> getDomians();
     "AccomodationRequired") int AccomodationRequired);
     @Headers("Content-Type: application/json")
     @POST("api/register")
-    Call<RegisterSucess> register(@Body RegisterModel body);
+    Call<RegisterSucess> register(@Body JSONObject body);
 }

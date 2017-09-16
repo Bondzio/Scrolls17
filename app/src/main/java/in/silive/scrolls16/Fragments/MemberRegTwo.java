@@ -273,7 +273,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
 
            Log.d("debugg",paramObject.toString());
             final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
-            Call<RegisterSucess> userCall = apiService.register(new RegisterModel("tester","2","1","Sims","2",members));
+            Call<RegisterSucess> userCall = apiService.register(paramObject);
            userCall.enqueue(new Callback<RegisterSucess>() {
                @Override
                public void onResponse(Call<RegisterSucess> call, Response<RegisterSucess> response) {
