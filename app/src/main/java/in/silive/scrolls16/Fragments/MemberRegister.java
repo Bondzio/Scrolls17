@@ -1,32 +1,65 @@
 package in.silive.scrolls16.Fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.stepstone.stepper.BlockingStep;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
+import java.util.regex.Pattern;
+
 import in.silive.scrolls16.R;
+import in.silive.scrolls16.Util.Validator;
 
 /**
  * Created by root on 12/9/17.
  */
 
 public class MemberRegister extends Fragment implements BlockingStep {
+
+    public static String student_name, student_college_name, student_id, student_mob_no, student_mail, student_course;
+    public static boolean student_accommodation = false;
+
+    private ProgressDialog progressDialog;
+    private int student_courseId;
+    EditText stud_name, stud_other_college, stud_id, stud_mob_no, stud_mail, team_password;
+    EditText team_name, member_one_id, member_one_name, member_two_id, member_two_name, member_three_id, member_three_name;
+    Button individual_submit, submit_team_reg;
+    Spinner stud_college, stud_course, stud_year, team_domain, team_topic;
+    CheckBox stud_accommodation;
+    RadioGroup team_leader, no_of_team_members;
+    RadioButton leader_member_one, leader_member_two, leader_member_three, two_members, three_members;
+    ProgressBar progressBar;
+    View reg_view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.memreg, container, false);
-
+        reg_view = inflater.inflate(R.layout.memreg, container, false);
+        stud_name = (EditText) reg_view.findViewById(R.id.stud_name);
         //initialize your UI
-
-        return v;
+        stud_other_college = (EditText) reg_view.findViewById(R.id.stud_other_college);
+        stud_other_college.setVisibility(View.GONE);
+        stud_id = (EditText) reg_view.findViewById(R.id.stud_id);
+        stud_mob_no = (EditText) reg_view.findViewById(R.id.stud_mob_no);
+        stud_mail = (EditText) reg_view.findViewById(R.id.stud_mail);
+        stud_accommodation = (CheckBox) reg_view.findViewById(R.id.stud_accommodation);
+        return reg_view;
     }
 
 
@@ -64,4 +97,54 @@ public class MemberRegister extends Fragment implements BlockingStep {
     public void onError(@NonNull VerificationError error) {
 
     }
+    int flag;
+    int student_year, collegeId;
+    public void getStudData() {
+        Log.d("Scrolls", "getData called");
+        flag = 0;
+        student_name = stud_name.getText().toString();
+        if (student_name.length() == 0) {
+            flag = 1;
+            stud_name.setError("Invalid name");
+        }
+
+        student_college_name = stud_other_college.getText().toString();
+        student_id = stud_id.getText().toString();
+        if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE && !Pattern.matches("^\\d{7}[Dd]{0,1}$", student_id)) {
+            flag = 1;
+            stud_id.setError("Invalid Id");
+        }
+        student_mail = stud_mail.getText().toString();
+        if (!Validator.isValidEmail(student_mail)) {
+            flag = 1;
+            stud_mail.setError("Invalid mail");
+        }
+        student_mob_no = stud_mob_no.getText().toString();
+        if (student_mob_no.length() != 10) {
+            flag = 1;
+            stud_mob_no.setError("Invalid phone number");
+        }
+        student_courseId = stud_course.getSelectedItemPosition() + 1;
+        student_year = Integer.parseInt(stud_year.getSelectedItem().toString());
+        if (stud_accommodation.isChecked()) {
+            student_accommodation = true;
+        } else
+            student_accommodation = false;
+        if (flag == 0) {
+            if (stud_other_college.getVisibility() != View.VISIBLE) {
+                saveData();
+            } else {
+              //  createOtherCollege();
+            }
+        } else {
+          /*  DialogInvalidDetails dialogInvalidDetails = new DialogInvalidDetails();
+            dialogInvalidDetails.show(getFragmentManager(), "Invalid details");*/
+            Snackbar.make(reg_view, "Incomlete Details.", Snackbar.LENGTH_SHORT).show();
+        }
+    }
+
+    private void saveData() {
+
+    }
+
 }

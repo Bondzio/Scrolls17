@@ -416,7 +416,8 @@ public class Register extends Fragment implements FetchDataListener {
             flag = 1;
             stud_id.setError("Invalid Id");
         }
-        student_mail = stud_mail.getText().toString();
+        student_mail
+                = stud_mail.getText().toString();
         if (!Validator.isValidEmail(student_mail)) {
             flag = 1;
             stud_mail.setError("Invalid mail");

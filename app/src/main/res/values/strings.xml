@@ -90,6 +90,11 @@
         <item>Quantum Computing</item>
         <item>Big Data Analytics</item>
     </string-array>
+    <string-array name="college">
+        <item>Ajay Kumar GARG ENGINEERING COLLEGE</item>
+        <item>OTHERS PLEASE SPECIFY</item>
+
+    </string-array>
 
     <string-array name="ec">
         <item>4G Technology.</item>
