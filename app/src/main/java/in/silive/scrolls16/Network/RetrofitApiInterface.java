@@ -12,6 +12,7 @@ import in.silive.scrolls16.models.CollegeModel;
 import in.silive.scrolls16.models.DomainModel;
 import in.silive.scrolls16.models.QueryModel;
 import in.silive.scrolls16.models.RegisterModel;
+import in.silive.scrolls16.models.RegisterSucess;
 import in.silive.scrolls16.models.SelfRegister;
 import in.silive.scrolls16.models.TopicModel;
 import in.silive.scrolls16.models.Topics;
@@ -49,5 +50,5 @@ Call<DomainModel> getDomians();
     "AccomodationRequired") int AccomodationRequired);
     @Headers("Content-Type: application/json")
     @POST("api/register")
-    Call<RegisterModel> register(@Body JSONObject requestBody);
+    Call<RegisterSucess> register(@Body RegisterModel body);
 }

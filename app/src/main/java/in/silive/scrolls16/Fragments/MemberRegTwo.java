@@ -31,6 +31,11 @@ import com.stepstone.stepper.BlockingStep;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.regex.Pattern;
 
 import in.silive.scrolls16.Network.ApiClient;
@@ -77,7 +82,9 @@ import in.silive.scrolls16.Util.Config;
 import in.silive.scrolls16.Util.Validator;
 import in.silive.scrolls16.application.*;
 import in.silive.scrolls16.application.Scrolls;
+import in.silive.scrolls16.models.Member;
 import in.silive.scrolls16.models.RegisterModel;
+import in.silive.scrolls16.models.RegisterSucess;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -256,14 +263,20 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
 
 
             paramObject.put("members", jsonArray);
+            Member m=new Member("Sims","simsss@gmail.com","btech","2","akgec","1567256","8090631320","1","1");
+            Member m1=new Member("Sissms","simssssss@gmail.com","btech","2","akgec","1576256","8090631320","1","0");
 
+            List<Member> members=new ArrayList<>();
+
+            members.add(m);
+            members.add(m1);
 
            Log.d("debugg",paramObject.toString());
             final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
-            Call<RegisterModel> userCall = apiService.register(paramObject);
-           userCall.enqueue(new Callback<RegisterModel>() {
+            Call<RegisterSucess> userCall = apiService.register(new RegisterModel("tester","2","1","Sims","2",members));
+           userCall.enqueue(new Callback<RegisterSucess>() {
                @Override
-               public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
+               public void onResponse(Call<RegisterSucess> call, Response<RegisterSucess> response) {
                    if(response.code()==200)
                    {
                        Toast.makeText(getActivity(),"Successfull",Toast.LENGTH_LONG).show();
@@ -277,7 +290,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
                }
 
                @Override
-               public void onFailure(Call<RegisterModel> call, Throwable t) {
+               public void onFailure(Call<RegisterSucess> call, Throwable t) {
                   Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
                    loading.dismiss();
                }
