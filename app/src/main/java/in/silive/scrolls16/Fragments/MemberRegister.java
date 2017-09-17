@@ -181,7 +181,7 @@ public class MemberRegister extends Fragment implements BlockingStep {
         Log.d("Scrolls", "getData called");
         flag = 0;
         student_name = stud_name.getText().toString();
-        if (student_name.length() == 0) {
+        if (student_name.length() == 0&& !Pattern.matches("/^[A-Z][a-z]$/",student_name)) {
             flag = 1;
             stud_name.setError("Invalid name");
         }
@@ -231,7 +231,36 @@ public class MemberRegister extends Fragment implements BlockingStep {
 
     }
     public boolean checkValidation()
-    {
+    {flags=true;
+        student_name = stud_name.getText().toString();
+        if (student_name.length() == 0&& !Pattern.matches("/^[A-Z][a-z]$/",student_name)) {
+
+        stud_name.setError("Invalid name");
+        flags=false;
+    }
+        if(stud_id.getVisibility()==View.VISIBLE) {
+            student_id = stud_id.getText().toString();
+
+            if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE && !Pattern.matches("^\\d{7}[Dd]{0,1}$", student_id)) {
+
+                stud_id.setError("Invalid Id");
+                flags=false;
+            }
+
+        }
+        student_mail = stud_mail.getText().toString();
+        if (!Validator.isValidEmail(student_mail)) {
+
+            stud_mail.setError("Invalid mail");
+            flags=false;
+        }
+        student_mob_no = stud_mob_no.getText().toString();
+        if (student_mob_no.length() != 10) {
+
+            stud_mob_no.setError("Invalid phone number");
+            flags=false;
+        }
+
         return flags;
     }
 
