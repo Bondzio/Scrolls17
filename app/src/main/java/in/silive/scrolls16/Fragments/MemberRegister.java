@@ -58,7 +58,7 @@ public class MemberRegister extends Fragment implements BlockingStep {
     SharedPreferences.Editor editor;
     private String flagacc;
     private String stud_collegevalue,stud_coursevalue,stud_yearvalue;
-
+    boolean flags;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         reg_view = inflater.inflate(R.layout.memreg, container, false);
@@ -229,6 +229,10 @@ public class MemberRegister extends Fragment implements BlockingStep {
          }
         editor.commit();
 
+    }
+    public boolean checkValidation()
+    {
+        return flags;
     }
 
 }

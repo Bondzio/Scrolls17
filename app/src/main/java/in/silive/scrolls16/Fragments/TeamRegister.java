@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -54,20 +56,21 @@ import retrofit2.Response;
  * Created by root on 12/9/17.
  */
 
-public class TeamRegister extends Fragment implements BlockingStep {
-    public static String student_name, student_college_name, student_id, student_mob_no, student_mail, student_course;
-    public static boolean student_accommodation = false;
-    public static String name_of_team, name_member_one, name_member_two, name_member_three = "", id_member_one, id_member_two, id_member_three = "";
-    public static String domain_of_team, topic_of_team, password_team;
-    public static int no_of_teammembers, leader_of_team;
-    public static int flag = 0, tflag = 0;
-    static ArrayList<Integer> collegeIds = new ArrayList<>();
-    static ArrayList<String> collegeNames = new ArrayList<>();
+public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
+    //public static String student_name, student_college_name, student_id, student_mob_no, student_mail, student_course;
+    //public static boolean student_accommodation = false;
+    //public static String name_of_team, name_member_one, name_member_two, name_member_three = "", id_member_one, id_member_two, id_member_three = "";
+    //public static String domain_of_team, topic_of_team, password_team;
+   // public static int no_of_teammembers, leader_of_team;
+   // public static int flag = 0, tflag = 0;
+   // static ArrayList<Integer> collegeIds = new ArrayList<>();
+    //static ArrayList<String> collegeNames = new ArrayList<>();
     LinearLayout reg_individual, reg_team, member_three;
     TabLayout team_individual_tab;
     EditText stud_name, stud_other_college, stud_id, stud_mob_no, stud_mail, team_password;
     EditText team_name, member_one_id, member_one_name, member_two_id, member_two_name, member_three_id, member_three_name;
     Button individual_submit, submit_team_reg;
+
     Spinner stud_college, stud_course, stud_year, team_domain, team_topic;
     CheckBox stud_accommodation;
     RadioGroup team_leader, no_of_team_members;
@@ -97,6 +100,8 @@ public class TeamRegister extends Fragment implements BlockingStep {
     private SharedPreferences sharedpreferences;
     private SharedPreferences.Editor editor;
     String noOfMembers;
+    private EditText team_confirmPassword;
+    private boolean flag;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -106,6 +111,7 @@ public class TeamRegister extends Fragment implements BlockingStep {
         sharedpreferences = Scrolls.getInstance().sharedPrefs;
         reg_team = (LinearLayout) reg_view.findViewById(R.id.reg_team);
         team_password = (EditText) reg_view.findViewById(R.id.team_password);
+        team_confirmPassword=(EditText)reg_view.findViewById(R.id.team_password_confirm);
         team_name = (EditText) reg_view.findViewById(R.id.team_name);
         no_of_team_members = (RadioGroup) reg_view.findViewById(R.id.no_of_team_members);
         no_of_team_members.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -170,7 +176,46 @@ public class TeamRegister extends Fragment implements BlockingStep {
             }
         });
 
-    
+    team_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if(!hasFocus)
+            {
+                if(team_password.getText().toString().length()==0)
+                {
+                    team_password.setError("Fill password");
+
+                }
+            }
+        }
+    });
+        team_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus)
+                {
+                    if(team_name.getText().toString().length()==0)
+                    {
+                        team_name.setError("TeamName is Compulsory");
+
+                    }
+                }
+            }
+        });
+        team_confirmPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus)
+                {
+                    if(team_confirmPassword.getText().toString().length()==0)
+                    {
+                        team_confirmPassword.setError("Fill confirm password");
+
+                    }
+                }
+
+            }
+        });
     //initialize your UI
 
         return reg_view;
@@ -320,7 +365,14 @@ public class TeamRegister extends Fragment implements BlockingStep {
         @Override
     public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
             storeTeamData();
-        callback.goToNextStep();
+            if(checkValidation()) {
+                callback.goToNextStep();
+            }
+            else
+            {
+                 Snackbar.make(reg_view,"Please Fill the Details Corectly",Snackbar.LENGTH_SHORT).show();
+            }
+
     }
 
     @Override
@@ -346,6 +398,55 @@ public class TeamRegister extends Fragment implements BlockingStep {
 
     @Override
     public void onError(@NonNull VerificationError error) {
+
+    }
+    public boolean checkValidation()
+    {flag=true;
+     if(team_name.getText().toString().length()==0)
+     {
+         team_name.setError("TeamName is Compulsory");
+         flag=false;
+     }
+     if(!team_password.getText().toString().equals(team_confirmPassword.getText().toString()))
+     {
+         team_confirmPassword.setError("Password Do not match");
+         flag=false;
+     }
+     if(team_password.getText().toString().length()==0)
+     {
+         team_password.setError("Fill password");
+         flag=false;
+     }
+     return flag;
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        if(team_name.getText().toString().length()==0)
+        {
+            team_name.setError("TeamName is Compulsory");
+
+        }
+        if(!team_password.getText().toString().equals(team_confirmPassword.getText().toString()))
+        {
+            team_confirmPassword.setError("Password Do not match");
+
+        }
+        if(team_password.getText().toString().length()==0)
+        {
+            team_password.setError("Fill password");
+
+        }
 
     }
 }
