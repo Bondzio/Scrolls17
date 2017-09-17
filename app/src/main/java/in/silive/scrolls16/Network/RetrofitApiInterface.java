@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import in.silive.scrolls16.Util.Config;
+import in.silive.scrolls16.models.CheckStudentNoExsist;
 import in.silive.scrolls16.models.CollegeModel;
 import in.silive.scrolls16.models.DomainModel;
 import in.silive.scrolls16.models.QueryModel;
@@ -52,5 +53,10 @@ Call<DomainModel> getDomians();
     @POST("api/register")
 
     Call<RegisterSucess> register(@Body RegisterModel object);
-
+    @FormUrlEncoded
+    @POST("api/checkstudentalreadyexist")
+Call<CheckStudentNoExsist>  checkStudentNo(@Field(value = "student_no") String Student);
+    @FormUrlEncoded
+    @POST("api/checkstudentalreadyexist")
+    Call<CheckStudentNoExsist>  checkEamilId(@Field(value = "email") String Email);
 }

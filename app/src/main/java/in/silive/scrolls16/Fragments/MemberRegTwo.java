@@ -263,8 +263,8 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
 
 
             paramObject.put("members", jsonArray);
-            Member m=new Member("Sims","simf2sd3432gfsdfs12sffsss@gmail.com","btech","2","akgec","1497657","8090631320","1","1");
-            Member m1=new Member("Sissms","sim2451298sf225421sfs8ge6@gmail.com","btech","2","akgec","1486169","8090631320","1","0");
+            Member m=new Member("Sims","simf2sd3432gfsdf@gmail.com","btech","2","akgec","1489627","8090631320","1","1");
+            Member m1=new Member("Sissms","sim2452542871sfs8ge6@gmail.com","btech","2","akgec","1480169","8090631320","1","0");
 
             List<Member> members=new ArrayList<>();
 

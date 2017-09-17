@@ -66,7 +66,7 @@ Toolbar toolbar;
                         break;
 
                 }
-                getSupportActionBar().setTitle(title);
+                getSupportActionBar().setTitle("");
             }catch (Exception e){
                 e.printStackTrace();
             }

@@ -19,14 +19,23 @@
         app:titleTextColor="#FFFFFF"
        >
 
-
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/rarff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+           android:layout_marginBottom="10dp"
+           android:foregroundGravity="right"
+            android:layout_gravity="right|end"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/aboutscrolls"
             >
 
         </ImageView>
+         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 </android.support.design.widget.AppBarLayout>
     <android.support.design.widget.CoordinatorLayout
