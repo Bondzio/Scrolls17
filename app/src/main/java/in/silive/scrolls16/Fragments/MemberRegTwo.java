@@ -270,13 +270,17 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
 
             members.add(m);
             members.add(m1);
-
+            RegisterModel registerModel=new RegisterModel("tester","2","1","Sims","2",members);
            Log.d("debugg",paramObject.toString());
             final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
-            Call<RegisterSucess> userCall = apiService.register(paramObject);
-           userCall.enqueue(new Callback<RegisterSucess>() {
+
+
+            Call<ResponseBody> userCall = apiService.register(registerModel);
+            Log.d("debugg",members.get(0).getName());
+           userCall.enqueue(new Callback<ResponseBody>() {
+
                @Override
-               public void onResponse(Call<RegisterSucess> call, Response<RegisterSucess> response) {
+               public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                    if(response.code()==200)
                    {
                        Toast.makeText(getActivity(),"Successfull",Toast.LENGTH_LONG).show();
@@ -290,7 +294,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
                }
 
                @Override
-               public void onFailure(Call<RegisterSucess> call, Throwable t) {
+               public void onFailure(Call<ResponseBody> call, Throwable t) {
                   Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
                    loading.dismiss();
                }

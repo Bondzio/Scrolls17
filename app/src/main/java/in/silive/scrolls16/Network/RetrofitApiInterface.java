@@ -48,7 +48,9 @@ Call<DomainModel> getDomians();
                                 @Field(value = "MobileNo") String MobileNo,@Field(value = "CourseId") int CourseId,
                                 @Field(value = "Year") int Year,@Field(value = "Source") String Source,@Field(value =
     "AccomodationRequired") int AccomodationRequired);
-    @Headers("Content-Type: application/json")
+ @Headers({"Content-Type: application/json", "Accept: application/json; charset=UTF-8" })
     @POST("api/register")
-    Call<RegisterSucess> register(@Body JSONObject body);
+
+    Call<ResponseBody> register(@Body RegisterModel object);
+
 }
