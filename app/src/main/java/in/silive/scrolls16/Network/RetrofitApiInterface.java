@@ -51,6 +51,6 @@ Call<DomainModel> getDomians();
  @Headers({"Content-Type: application/json", "Accept: application/json; charset=UTF-8" })
     @POST("api/register")
 
-    Call<ResponseBody> register(@Body RegisterModel object);
+    Call<RegisterSucess> register(@Body RegisterModel object);
 
 }

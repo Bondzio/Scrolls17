@@ -219,16 +219,16 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
 
             paramObject.put("domain_id", "2");
             paramObject.put("topic_id","1");
-            paramObject.put("password","sims");
+            paramObject.put("password","simsdgdfg");
             paramObject.put("noofmembers","2");
             JSONObject Member1 = new JSONObject();
             try {
                 Member1.put("name","Natio");
-                Member1.put("email", "mayur.patkks152@gmail.com");
+                Member1.put("email", "mayur.pgdfatkkdssfs152@gmail.com");
                 Member1.put("course","btech");
                 Member1.put("year", "1");
                 Member1.put("college_name","akgec");
-                Member1.put("student_no", "1413568");
+                Member1.put("student_no", "1334568");
                 Member1.put("contact_no","9569696969");
                 Member1.put( "accomodation", "1");
                 Member1.put( "teamlead","1");
@@ -241,11 +241,11 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
             JSONObject Member2 = new JSONObject();
             try {
                 Member2.put("name","Nationn");
-                Member2.put("email", "mayurrr.pat3r3k152@gmail.com");
+                Member2.put("email", "mayurrr.sfffpat3r3sfk152@gmail.com");
                 Member2.put("course","btech");
                 Member2.put("year", "1");
                 Member2.put("college_name","akgec");
-                Member2.put("student_no", "1411458");
+                Member2.put("student_no", "1347458");
                 Member2.put("contact_no","9569696969");
                 Member2.put("accomodation", "1");
                 Member2.put("teamlead","0");
@@ -263,39 +263,41 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
 
 
             paramObject.put("members", jsonArray);
-            Member m=new Member("Sims","simsss@gmail.com","btech","2","akgec","1567256","8090631320","1","1");
-            Member m1=new Member("Sissms","simssssss@gmail.com","btech","2","akgec","1576256","8090631320","1","0");
+            Member m=new Member("Sims","simf2sd3432gfsdfs12sffsss@gmail.com","btech","2","akgec","1497657","8090631320","1","1");
+            Member m1=new Member("Sissms","sim2451298sf225421sfs8ge6@gmail.com","btech","2","akgec","1486169","8090631320","1","0");
 
             List<Member> members=new ArrayList<>();
 
             members.add(m);
             members.add(m1);
-            RegisterModel registerModel=new RegisterModel("tester","2","1","Sims","2",members);
+            RegisterModel registerModel=new RegisterModel("tester","2","1","Simsdtete","2",members);
            Log.d("debugg",paramObject.toString());
             final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
 
 
-            Call<ResponseBody> userCall = apiService.register(registerModel);
+            Call<RegisterSucess> userCall = apiService.register(registerModel);
             Log.d("debugg",members.get(0).getName());
-           userCall.enqueue(new Callback<ResponseBody>() {
+           userCall.enqueue(new Callback<RegisterSucess>() {
 
                @Override
-               public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+               public void onResponse(Call<RegisterSucess> call, Response<RegisterSucess> response) {
                    if(response.code()==200)
                    {
                        Toast.makeText(getActivity(),"Successfull",Toast.LENGTH_LONG).show();
                    }
                    else
                    {
-                    Log.d("debugg",Integer.toString(response.code())+ new Gson().toJson(response.errorBody()));
+                 Log.d("debugg",response.toString());
+                       Log.d("debugg",call.request().body().toString());
                    }
                    loading.dismiss();
 
                }
 
                @Override
-               public void onFailure(Call<ResponseBody> call, Throwable t) {
+               public void onFailure(Call<RegisterSucess> call, Throwable t) {
                   Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
+                  Log.d("debugg",t.toString());
                    loading.dismiss();
                }
            });

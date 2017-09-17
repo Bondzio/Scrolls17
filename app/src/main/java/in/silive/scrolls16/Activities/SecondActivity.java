@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 import in.silive.scrolls16.Fragments.About_Scrolls;
 import in.silive.scrolls16.Fragments.QueryUs;
@@ -24,6 +26,7 @@ public class SecondActivity extends AppCompatActivity {
 Toolbar toolbar;
     Bundle bundle;
     String title;
+    WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,7 @@ Toolbar toolbar;
         setContentView(R.layout.activity_second);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         if (getIntent().getExtras()!=null){
