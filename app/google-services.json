@@ -1,72 +1,27 @@
 {
   "project_info": {
-    "project_number": "51560887778",
-    "project_id": "scrolls-1472758131223"
+    "project_number": "838403822171",
+    "firebase_url": "https://scrolls-d2dca.firebaseio.com",
+    "project_id": "scrolls-d2dca",
+    "storage_bucket": "scrolls-d2dca.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:51560887778:android:c0a5d350196ff20f",
-        "android_client_info": {
-          "package_name": "in.silive.scrolls"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCkDcxnij_QVqgDTHdmS9VerA9Ik8XXmsk"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 1
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:51560887778:android:74c2e00bd5345552",
-        "android_client_info": {
-          "package_name": "in.silive.scrolls15"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCkDcxnij_QVqgDTHdmS9VerA9Ik8XXmsk"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 1
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:51560887778:android:460403fbb270f7af",
+        "mobilesdk_app_id": "1:838403822171:android:460403fbb270f7af",
         "android_client_info": {
           "package_name": "in.silive.scrolls16"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "838403822171-8ldf2ffs4b8598khm14nilp5q5489ln7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCkDcxnij_QVqgDTHdmS9VerA9Ik8XXmsk"
+          "current_key": "AIzaSyDtu2aoJc6288FlkaVwCkESDbOgmyZ-b0Q"
         }
       ],
       "services": {
@@ -78,7 +33,7 @@
           "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

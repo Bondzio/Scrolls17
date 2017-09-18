@@ -12,6 +12,7 @@ public class Config {
     public static final String KEY_SCROLLSTEAM = "ScrollsTeamNew";
     public static final String KEY_UPLOAD = "Upload Doc";
     public static final String KEY_QUERY = "Query Us";
+    public static final String TOPIC_GLOBAL = "global";
     public static final String KEY_SCROLLSDeveloper = "Developer";
     //// TODO:correct sample doc link on deploy
     public static final String SAMPLE_DOC_URL = "http://www.akgec-scrolls.com/api/public/api/downloadsynopsis";
@@ -38,7 +39,11 @@ public class Config {
     public static final String STUDENTMOBNO11 = "mobileno11";
     public static final String COURSE11 = "stud1course11";
     public static final String STUDENTID11 = "Student1id11";
-
+    public static final String REGISTRATION_COMPLETE = "registrationfcm";
+    public static final int NOTIFICATION_ID = 100;
+    public static final int NOTIFICATION_ID_BIG_IMAGE = 101;
+    public static final String FIREBASE_ID_SENT = "FirebaseIdSendToServer";
+    public static final String PUSH_NOTIFICATION = "pushNotification";
 
     public static String GET = "GET";
     public static String POST = "POST";

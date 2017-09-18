@@ -63,4 +63,7 @@ Call<CheckStudentNoExsist>  checkStudentNo(@Field(value = "student_no") String S
     @FormUrlEncoded
     @POST("api/login")
     Call<LoginSucess>  Login(@Field(value = "teamid") String teamid,@Field(value = "password") String password);
+    @FormUrlEncoded
+    @POST("api/fcmregister")
+    Call<LoginSucess>  Fcm(@Field(value = "fcmtoken") String token);
 }

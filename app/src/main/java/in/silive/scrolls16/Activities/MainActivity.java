@@ -1,9 +1,12 @@
 package in.silive.scrolls16.Activities;
 
 import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Color;
@@ -32,14 +35,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Calendar;
 
 import in.silive.scrolls16.Adapters.PagerAdapter;
@@ -48,15 +55,24 @@ import in.silive.scrolls16.Fragments.Register;
 import in.silive.scrolls16.Fragments.ScrollsDevelopers;
 import in.silive.scrolls16.Fragments.ScrollsTeam;
 import in.silive.scrolls16.Fragments.UploadDoc;
+import in.silive.scrolls16.Network.ApiClient;
+import in.silive.scrolls16.Network.CheckConnectivity;
+import in.silive.scrolls16.Network.RetrofitApiInterface;
 import in.silive.scrolls16.R;
 import in.silive.scrolls16.Util.Config;
 import in.silive.scrolls16.Util.Keyboard;
+import in.silive.scrolls16.application.Scrolls;
+import in.silive.scrolls16.models.LoginSucess;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     Context main_act_context;
     Fragment fragment = null;
     FragmentManager fragmentManager;
+    BroadcastReceiver mRegistrationBroadcastReceiver;
     boolean drawerVisible = false;
     LinearLayout ll;
     TabLayout tabLayout;
@@ -70,6 +86,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     FloatingActionMenu materialDesignFAM;
     FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3;
+    private SharedPreferences sharedpreferences;
+    private RetrofitApiInterface apiService;
+    private Call<LoginSucess> call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +106,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        sharedpreferences = Scrolls.getInstance().sharedPrefs;
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black);
         //  getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_up_indicator);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         View headerView = navigationView.inflateHeaderView(R.layout.parallax_header);
+        
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
         floatingActionButton1 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
@@ -150,6 +170,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
+        apiService =
+                ApiClient.getClient().create(RetrofitApiInterface.class);
 
         navigationView.setNavigationItemSelectedListener(this);
         fragmentManager = getSupportFragmentManager();
@@ -172,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 super.onDrawerOpened(drawerView);
             }
         };
-
+     //checkFcm();
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
@@ -254,7 +276,57 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         inflater.inflate(R.menu.main_menu, menu);
         return false;
     }
+  public void checkFcm()
+  { String firebase_id_send_to_server_or_not = sharedpreferences.getString(Config.FIREBASE_ID_SENT, "");
+      if(firebase_id_send_to_server_or_not.equals("0"))
+      {  String Firebase_token = sharedpreferences.getString("regId", "");
+      call = apiService.Fcm(Firebase_token);
+      if (CheckConnectivity.isNetConnected(getApplicationContext())) {
+          final ProgressDialog loading = ProgressDialog.show(getApplicationContext(), "Fetching Data", "Please wait...", false, false);
+          call.enqueue(new Callback<LoginSucess>() {
+              @Override
+              public void onResponse(Call<LoginSucess> call, Response<LoginSucess> response) {
+                  if (response.isSuccessful()) {
 
+
+                      SharedPreferences.Editor editor = sharedpreferences.edit();
+                      editor.putString("FirebaseIdSendToServer", "1");//1 means firebase id is registered
+                      editor.apply();
+
+                      loading.dismiss();
+
+                      //Log.d("debugg",Integer.toString(topicsList1.size()));
+
+
+                  }
+              }
+
+              @Override
+              public void onFailure(Call<LoginSucess> call, Throwable t) {
+                  loading.dismiss();
+              }
+
+
+          });
+      }
+      }
+
+      mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+          @Override
+          public void onReceive(Context context, Intent intent) {
+              // checking for type intent filter
+              if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
+                  // fcm successfully registered
+                  // now subscribe to `global` topic to receive app wide notifications
+                  FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
+              } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
+                  // new push notification is received
+                  String message = intent.getStringExtra("message");
+                  Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+              }
+          }
+      };
+  }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Keyboard.close(this);
