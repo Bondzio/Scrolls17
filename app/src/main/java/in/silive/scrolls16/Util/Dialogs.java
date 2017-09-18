@@ -130,7 +130,7 @@ public class Dialogs {
         public void onUploadSuccessful();
     }
 
-    public static void showUploadDialog(final Context context, String json, String fileName, final UploadListener listener) {
+    public static void showUploadDialog(final Context context, String json, String fileName,String token, final UploadListener listener) {
        final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Uploading Doc");
@@ -141,7 +141,7 @@ public class Dialogs {
         final FetchData uploadDoc = new FetchData();
         try {
 
-            uploadDoc.setArgs(Config.UPLOAD_DOC, json, new UploaderListener() {
+            uploadDoc.setArgs(Config.UPLOAD_DOC+"?token="+token, json, new UploaderListener() {
                 @Override
                 public void setProgress(int progress) {
                    // progressDialog.setMessage(progress+"%");

@@ -11,6 +11,7 @@ import in.silive.scrolls16.Util.Config;
 import in.silive.scrolls16.models.CheckStudentNoExsist;
 import in.silive.scrolls16.models.CollegeModel;
 import in.silive.scrolls16.models.DomainModel;
+import in.silive.scrolls16.models.LoginSucess;
 import in.silive.scrolls16.models.QueryModel;
 import in.silive.scrolls16.models.RegisterModel;
 import in.silive.scrolls16.models.RegisterSucess;
@@ -59,4 +60,7 @@ Call<CheckStudentNoExsist>  checkStudentNo(@Field(value = "student_no") String S
     @FormUrlEncoded
     @POST("api/checkstudentalreadyexist")
     Call<CheckStudentNoExsist>  checkEamilId(@Field(value = "email") String Email);
+    @FormUrlEncoded
+    @POST("api/login")
+    Call<LoginSucess>  Login(@Field(value = "teamid") String teamid,@Field(value = "password") String password);
 }

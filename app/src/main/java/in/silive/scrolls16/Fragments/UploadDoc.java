@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.Snackbar;
@@ -32,12 +33,19 @@ import java.io.FileInputStream;
 import in.silive.scrolls16.Activities.MyPickerActivity;
 import in.silive.scrolls16.Activities.SecondActivity;
 import in.silive.scrolls16.Listeners.FetchDataListener;
+import in.silive.scrolls16.Network.ApiClient;
 import in.silive.scrolls16.Network.CheckConnectivity;
 import in.silive.scrolls16.Network.FetchData;
+import in.silive.scrolls16.Network.RetrofitApiInterface;
 import in.silive.scrolls16.R;
 import in.silive.scrolls16.Util.Config;
 import in.silive.scrolls16.Util.Dialogs;
 import in.silive.scrolls16.Util.Keyboard;
+import in.silive.scrolls16.models.CheckStudentNoExsist;
+import in.silive.scrolls16.models.LoginSucess;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +67,10 @@ public class UploadDoc extends Fragment {
     private String topicName;
     private String domainName;
     TextView tvTopic,tvTeamID,tvDomain;
+    private RetrofitApiInterface apiService;
+    private SharedPreferences sharedPreferences ;
+    SharedPreferences.Editor editor;
+    private String token;
 
     public UploadDoc() {
         // Required empty public constructor
@@ -75,6 +87,9 @@ public class UploadDoc extends Fragment {
         login_team_id = (EditText) v.findViewById(R.id.login_team_id);
         login_password = (EditText) v.findViewById(R.id.login_password);
         user_login = (Button) v.findViewById(R.id.user_login);
+        sharedPreferences = in.silive.scrolls16.application.Scrolls.getInstance().sharedPrefs;
+        apiService =
+                ApiClient.getClient().create(RetrofitApiInterface.class);
         user_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,13 +152,10 @@ public class UploadDoc extends Fragment {
                     Snackbar.make(v,"Login first.",Snackbar.LENGTH_SHORT).show();
                     return;
                 }
-                jsonObject.put("TeamId",Integer.parseInt(team_id));
-                jsonObject.put("DomainName",domainName);
-                jsonObject.put("TopicName",topicName);
-                jsonObject.put("FileName",file.getName());
-                jsonObject.put("FileArray", Base64.encodeToString(bytes,Base64.DEFAULT));
+
+                jsonObject.put("uploadfile", Base64.encodeToString(bytes,Base64.DEFAULT));
                 if (CheckConnectivity.isNetConnected(getContext())) {
-                    Dialogs.showUploadDialog(getContext(), jsonObject.toString(), file.getName(), new Dialogs.UploadListener() {
+                    Dialogs.showUploadDialog(getContext(), jsonObject.toString(), file.getName(),token, new Dialogs.UploadListener() {
                         @Override
                         public void onUploadSuccessful() {
                             v.findViewById(R.id.tvSynopsis).setVisibility(View.VISIBLE);
@@ -176,65 +188,49 @@ public class UploadDoc extends Fragment {
             if (!CheckConnectivity.isNetConnected(getContext()))
                 Snackbar.make(v, "No internet connection.", Snackbar.LENGTH_SHORT).show();
             else {
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("TeamId", team_id);
-                    jsonObject.put("Password", login_password.getText().toString());
-                } catch (Exception e) {
-
-                }
-
-                FetchData fetchData = new FetchData();
-                fetchData.setArgs(Config.Team_LOGIN, jsonObject.toString(), new FetchDataListener() {
-                    ProgressDialog progressDialog;
-
+                Call<LoginSucess> call = apiService.Login(login_team_id.getText().toString(), login_password.getText().toString());
+                final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
+                call.enqueue(new Callback<LoginSucess>() {
                     @Override
-                    public void preExecute() {
-                        progressDialog = new ProgressDialog(context);
-                        progressDialog.setMessage("Loading");
-                        progressDialog.setCancelable(false);
-                        if (!getActivity().isFinishing())
-                            progressDialog.show();
-                    }
+                    public void onResponse(Call<LoginSucess> call, Response<LoginSucess> response) {
+                        if (response.code() == 401) {
 
-                    @Override
-                    public void postExecute(String result, int id) throws JSONException {
-                        if (progressDialog.isShowing())
-                            progressDialog.dismiss();
-                        try {
-                            JSONObject team = new JSONObject(result);
-                            team_id = team.getString("TeamId");
-                            topicName = team.getString("TopicName");
-                            domainName = team.getString("DomainName");
-                            tvTeamID.setText(team_id);
-                            tvDomain.setText(domainName);
-                            tvTopic.setText(topicName);
+                            android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(context)
+                                    .setTitle("Error")
+                                    .setMessage("Invalid Credentials")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    })
+
+                                    .setIcon(android.R.drawable.ic_dialog_alert);
+                            dialog.show();
+                        } else if (response.code() == 200) {
+                             tvTeamID.setText(team_id);
+                             token = response.body().getData().getToken();
+                            Log.d("debugg",token);
+                            editor = sharedPreferences.edit();
+                            editor.putString(Config.Token, token);
                             getSynopsisAvail();
                             v.findViewById(R.id.llForm).setVisibility(View.GONE);
                             v.findViewById(R.id.llUpload).setVisibility(View.VISIBLE);
-                        } catch (Exception e) {
-                            if (result.equalsIgnoreCase("null")) {
-                                android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(context)
-                                        .setTitle("Error")
-                                        .setMessage("Invalid Credentials")
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                dialog.dismiss();
-                                            }
-                                        })
 
-                                        .setIcon(android.R.drawable.ic_dialog_alert);
-                                dialog.show();
-
-                            } else {
-                                Snackbar.make(v, "Something went wrong.", Snackbar.LENGTH_SHORT).show();
-                            }
                         }
+                        loading.dismiss();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginSucess> call, Throwable t) {
+                        loading.dismiss();
                     }
                 });
-                fetchData.execute();
+
+
             }
         }
+
     }
 
     private void getSynopsisAvail() {

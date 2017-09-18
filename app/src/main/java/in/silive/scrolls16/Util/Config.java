@@ -33,6 +33,12 @@ public class Config {
     public static final String COURSE2 = "stud1course2";
     public static final String STUDENTID = "Student1id";
     public static final String STUDENTID2 = "Student1id2";
+    public static final String ACCOMODATION11 = "ACOMODATION11";
+    public static final String STUDENTMAIL11 = "EmailStudent11";
+    public static final String STUDENTMOBNO11 = "mobileno11";
+    public static final String COURSE11 = "stud1course11";
+    public static final String STUDENTID11 = "Student1id11";
+
 
     public static String GET = "GET";
     public static String POST = "POST";
@@ -70,7 +76,11 @@ public class Config {
     public static String Member1Name = "Member1name";
     public static String StudentYear = "student1year";
     public static String CoLLEGENAME = "college1Name";
+    public static String Member11Name = "Member11name";
+    public static String StudentYear11 = "student11year";
+    public static String CoLLEGENAME11 = "college11Name";
     public static String Member2Name = "Member2name";
     public static String StudentYear2 = "student2year";
     public static String CoLLEGENAME2 = "college2Name";
+    public static String Token="token";
 }
