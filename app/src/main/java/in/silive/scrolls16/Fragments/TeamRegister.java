@@ -107,7 +107,7 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         reg_view = inflater.inflate(R.layout.team_reg, container, false);
         reg_individual = (LinearLayout) reg_view.findViewById(R.id.reg_individual);
-
+         setRetainInstance(true);
         sharedpreferences = Scrolls.getInstance().sharedPrefs;
         reg_team = (LinearLayout) reg_view.findViewById(R.id.reg_team);
         team_password = (EditText) reg_view.findViewById(R.id.team_password);
@@ -419,6 +419,13 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
      }
      return flag;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setRetainInstance(true);
+    }
+
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {

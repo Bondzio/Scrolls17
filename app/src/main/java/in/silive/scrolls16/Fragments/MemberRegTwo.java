@@ -213,56 +213,9 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
     }
 
     private void apiCall() {
-        try {
-            JSONObject paramObject = new JSONObject();
-            paramObject.put("team_name", "testingfff");
+        String name1=sharedPreferences.getString(Config.Member1Name,"");
+        String email1=sharedPreferences.getString(Config.STUDENTMAIL,"");
 
-            paramObject.put("domain_id", "2");
-            paramObject.put("topic_id","1");
-            paramObject.put("password","simsdgdfg");
-            paramObject.put("noofmembers","2");
-            JSONObject Member1 = new JSONObject();
-            try {
-                Member1.put("name","Natio");
-                Member1.put("email", "mayur.pgdfatkkdssfs152@gmail.com");
-                Member1.put("course","btech");
-                Member1.put("year", "1");
-                Member1.put("college_name","akgec");
-                Member1.put("student_no", "1334568");
-                Member1.put("contact_no","9569696969");
-                Member1.put( "accomodation", "1");
-                Member1.put( "teamlead","1");
-
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-            JSONObject Member2 = new JSONObject();
-            try {
-                Member2.put("name","Nationn");
-                Member2.put("email", "mayurrr.sfffpat3r3sfk152@gmail.com");
-                Member2.put("course","btech");
-                Member2.put("year", "1");
-                Member2.put("college_name","akgec");
-                Member2.put("student_no", "1347458");
-                Member2.put("contact_no","9569696969");
-                Member2.put("accomodation", "1");
-                Member2.put("teamlead","0");
-
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-
-            JSONArray jsonArray = new JSONArray();
-
-            jsonArray.put(Member1);
-            jsonArray.put(Member2);
-
-
-            paramObject.put("members", jsonArray);
             Member m=new Member("Sims","simf2sd3432gfsdf@gmail.com","btech","2","akgec","1489627","8090631320","1","1");
             Member m1=new Member("Sissms","sim2452542871sfs8ge6@gmail.com","btech","2","akgec","1480169","8090631320","1","0");
 
@@ -271,7 +224,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
             members.add(m);
             members.add(m1);
             RegisterModel registerModel=new RegisterModel("tester","2","1","Simsdtete","2",members);
-           Log.d("debugg",paramObject.toString());
+
             final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
 
 
@@ -302,11 +255,8 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
                }
            });
         }
-        catch (JSONException e)
-        {
 
-        }
-    }
+
 
     @Override
     public void onBackClicked(StepperLayout.OnBackClickedCallback callback) {

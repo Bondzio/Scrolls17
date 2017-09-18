@@ -3,10 +3,12 @@ package in.silive.scrolls16.Fragments;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewGroupCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -66,6 +68,7 @@ public class MemberRegister extends Fragment implements BlockingStep {
     private String flagacc;
     private String stud_collegevalue, stud_coursevalue, stud_yearvalue;
     boolean flags;
+
     private RetrofitApiInterface apiService;
     private boolean fladss;
 
@@ -74,6 +77,7 @@ public class MemberRegister extends Fragment implements BlockingStep {
         reg_view = inflater.inflate(R.layout.memreg, container, false);
         stud_name = (EditText) reg_view.findViewById(R.id.stud_name);
         //initialize your UI
+        setRetainInstance(true);
         sharedPreferences = Scrolls.getInstance().sharedPrefs;
         stud_other_college = (EditText) reg_view.findViewById(R.id.stud_other_college);
         stud_other_college.setVisibility(View.GONE);
@@ -147,17 +151,48 @@ public class MemberRegister extends Fragment implements BlockingStep {
         stud_yearvalue = stud_year.getSelectedItem().toString();
         apiService =
                 ApiClient.getClient().create(RetrofitApiInterface.class);
+        if(stud_id.getVisibility()==View.VISIBLE)
+        {
+            stud_id.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if(!hasFocus) {
+                     boolean studentNo= CheckStudentNo();
+                    }
+                }
+            });
+        }
+        stud_mail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus)
+                {
+                  boolean email=CheckEmailId();
+                }
+            }
+        });
         return reg_view;
     }
 
 
     @Override
-    public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
+    public void onNextClicked(final StepperLayout.OnNextClickedCallback callback) {
         saveData();
-        if (checkValidation()&&CheckStudentNo()&&CheckEmailId()) {
+
+        boolean validation = checkValidation();
+
+        if (!validation) {
+            Snackbar.make(reg_view,"Check Details",Snackbar.LENGTH_SHORT).show();
+          return;
+        }
+        else {
             callback.goToNextStep();
         }
     }
+
+
+
+
 
 
     @Override
@@ -175,6 +210,7 @@ public class MemberRegister extends Fragment implements BlockingStep {
     @Nullable
     @Override
     public VerificationError verifyStep() {
+
         return null;
     }
 
@@ -268,6 +304,14 @@ public class MemberRegister extends Fragment implements BlockingStep {
             stud_mail.setError("Invalid mail");
             flags = false;
         }
+        if(stud_mail.getError()!=null)
+        {
+            flags=false;
+        }
+        if(stud_id.getError()!=null)
+        {
+            flags=false;
+        }
         student_mob_no = stud_mob_no.getText().toString();
         if (!Pattern.matches("^([0]|\\+91)?\\d{10}", student_mob_no)) {
 
@@ -278,9 +322,9 @@ public class MemberRegister extends Fragment implements BlockingStep {
         return flags;
 
     }
-    boolean flads=true;
+    boolean flads;
     public boolean CheckStudentNo() {
-
+        flads=true;
         if (stud_id.getVisibility() == View.VISIBLE) {
             student_id=stud_id.getText().toString();
             call = apiService.checkStudentNo(student_id);
@@ -306,11 +350,16 @@ public class MemberRegister extends Fragment implements BlockingStep {
                 }
             });
         }
+        else
+
+        {
+            flads=true;
+        }
         return flads;
     }
     public boolean CheckEmailId() {
 
-
+fladss=true;
             student_mail=stud_mail.getText().toString();
             call = apiService.checkEamilId(student_mail);
             final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     LinearLayout ll;
     TabLayout tabLayout;
     String title;
+    RelativeLayout rel;
     ViewPager viewPager;
     PagerAdapter pagerAdapter;
     private Toolbar mtoolbar;
@@ -75,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentManager = getSupportFragmentManager();
         main_act_context = getApplicationContext();
         mtoolbar = (Toolbar) findViewById(R.id.toolbar);
+        rel=(RelativeLayout)findViewById(R.id.relfab);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         setSupportActionBar(mtoolbar);
 
@@ -93,7 +97,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         floatingActionButton1 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
         floatingActionButton3 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
+        materialDesignFAM.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
+            @Override
+            public void onMenuToggle(boolean opened) {
 
+                if(opened)
+                {
+                    rel.setBackgroundColor(getResources().getColor(R.color.fabback));
+                }
+                else
+                {
+                    rel.setBackgroundColor(0);
+                }
+            }
+        });
        floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
               /*  fragmentManager = getSupportFragmentManager();

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
 
     <LinearLayout
         android:id="@+id/reg_individual"
@@ -126,12 +127,15 @@
 
 
 
-
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/stud_other_college"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:singleLine="true"
             android:hint="Enter your college name" />
 
@@ -141,7 +145,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your student Id" />
-
+</FrameLayout>
         <android.support.design.widget.TextInputEditText
             android:id="@+id/stud_mob_no"
             android:layout_width="match_parent"
@@ -200,14 +204,6 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/individual_submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/colorPrimary"
-            android:gravity="center"
-            android:padding="3dp"
-            android:text="Submit" />
     </LinearLayout>
-</LinearLayout>
+
+</ScrollView>

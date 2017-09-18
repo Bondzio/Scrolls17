@@ -11,6 +11,7 @@ import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
 
 import in.silive.scrolls16.Fragments.MemberRegTwo;
 import in.silive.scrolls16.Fragments.MemberRegister;
+import in.silive.scrolls16.Fragments.MemberRegisterOne;
 import in.silive.scrolls16.Fragments.TeamRegister;
 
 /**
@@ -32,8 +33,10 @@ public class MyStepperAdapter extends AbstractFragmentStepAdapter {
             break;
             case 1:fragment= new MemberRegister();
             break;
-            case 2:fragment= new MemberRegTwo();
+            case 2:fragment= new MemberRegisterOne();
             break;
+            case 3:fragment= new MemberRegTwo();
+                break;
 
         }
         return (Step) fragment;
@@ -41,6 +44,6 @@ public class MyStepperAdapter extends AbstractFragmentStepAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }

@@ -169,7 +169,8 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
 
     @Nullable
     @Override
-    public VerificationError verifyStep() {
+    public VerificationError verifyStep()
+    {
         return null;
     }
 
