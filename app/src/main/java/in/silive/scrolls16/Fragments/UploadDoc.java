@@ -12,7 +12,6 @@ import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,11 +23,11 @@ import android.widget.TextView;
 
 import com.nononsenseapps.filepicker.FilePickerActivity;
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileInputStream;
 
 import in.silive.scrolls16.Activities.MyPickerActivity;
 import in.silive.scrolls16.Activities.SecondActivity;
@@ -37,12 +36,15 @@ import in.silive.scrolls16.Network.ApiClient;
 import in.silive.scrolls16.Network.CheckConnectivity;
 import in.silive.scrolls16.Network.FetchData;
 import in.silive.scrolls16.Network.RetrofitApiInterface;
+import in.silive.scrolls16.Network.ServiceGenerator;
 import in.silive.scrolls16.R;
 import in.silive.scrolls16.Util.Config;
-import in.silive.scrolls16.Util.Dialogs;
 import in.silive.scrolls16.Util.Keyboard;
-import in.silive.scrolls16.models.CheckStudentNoExsist;
 import in.silive.scrolls16.models.LoginSucess;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -67,7 +69,7 @@ public class UploadDoc extends Fragment {
     private String topicName;
     private String domainName;
     TextView tvTopic,tvTeamID,tvDomain;
-    private RetrofitApiInterface apiService;
+    private RetrofitApiInterface apiService,service;
     private SharedPreferences sharedPreferences ;
     SharedPreferences.Editor editor;
     private String token;
@@ -90,6 +92,8 @@ public class UploadDoc extends Fragment {
         sharedPreferences = in.silive.scrolls16.application.Scrolls.getInstance().sharedPrefs;
         apiService =
                 ApiClient.getClient().create(RetrofitApiInterface.class);
+         service =
+                ServiceGenerator.createService(RetrofitApiInterface.class);
         user_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,11 +140,11 @@ public class UploadDoc extends Fragment {
 
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(final int requestCode, int resultCode, Intent data) {
         if (requestCode == FILE_CODE && resultCode == Activity.RESULT_OK) {
             try {
                 Log.d("Scrolls", "File " + data.getData().getPath());
-                JSONObject jsonObject = new JSONObject();
+                /*JSONObject jsonObject = new JSONObject();
                 File file = new File(data.getData().getPath());
                 FileInputStream fileInputStream = new FileInputStream(file);
                 byte[] bytes = new byte[(int) file.length()];
@@ -153,15 +157,59 @@ public class UploadDoc extends Fragment {
                     return;
                 }
 
-                jsonObject.put("uploadfile", Base64.encodeToString(bytes,Base64.DEFAULT));
+                jsonObject.put("file", Base64.encodeToString(bytes,Base64.DEFAULT));*/
+                String tokenf=sharedPreferences.getString(Config.Token,"");
                 if (CheckConnectivity.isNetConnected(getContext())) {
-                    Dialogs.showUploadDialog(getContext(), jsonObject.toString(), file.getName(),token, new Dialogs.UploadListener() {
+                    File file = new File(data.getData().getPath());;
+
+                    // create RequestBody instance from file
+                   /* RequestBody requestFile =
+                            RequestBody.create(
+                                    MediaType.parse("text"),
+                                    file
+                            );*/
+
+                    // MultipartBody.Part is used to send also the actual file name
+                    RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+                    MultipartBody.Part multipartBody =MultipartBody.Part.createFormData("file",file.getName(),requestFile);
+
+                    // add another part within the multipart request
+                    String descriptionString = "file";
+                    RequestBody description =
+                            RequestBody.create(
+                                    MultipartBody.FORM, descriptionString);
+
+                    // finally, execute the request
+                    final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
+                    Call<ResponseBody> call = apiService.upload(tokenf, multipartBody);
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call,
+                                               Response<ResponseBody> response) {
+
+                            loading.dismiss();
+                           if(response.code()==200) {
+                               Log.d("Upload", "success");
+                           }
+                           else
+                           {
+                               Log.d("Upload",Integer.toString(response.code()));
+                           }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Log.d("Upload error:", t.getMessage());
+                        }
+                    });
+                    /*Dialogs.showUploadDialog(getContext(), jsonObject.toString(), file.getName(),token, new Dialogs.UploadListener() {
                         @Override
                         public void onUploadSuccessful() {
                             v.findViewById(R.id.tvSynopsis).setVisibility(View.VISIBLE);
                             v.findViewById(R.id.btnSelect).setVisibility(View.GONE);
                         }
-                    });
+                    });*/
                 }
 
                //     Snackbar.make(v,"No internet connection.",Snackbar.LENGTH_SHORT).show();
@@ -212,6 +260,7 @@ public class UploadDoc extends Fragment {
                             Log.d("debugg",token);
                             editor = sharedPreferences.edit();
                             editor.putString(Config.Token, token);
+                            editor.commit();
                          //   getSynopsisAvail();
                             v.findViewById(R.id.llForm).setVisibility(View.GONE);
                             v.findViewById(R.id.llUpload).setVisibility(View.VISIBLE);

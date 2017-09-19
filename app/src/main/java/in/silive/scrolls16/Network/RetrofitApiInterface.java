@@ -1,13 +1,9 @@
 package in.silive.scrolls16.Network;
 
-import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.ResponseBody;
-
-import org.json.JSONObject;
 
 import java.util.List;
 
-import in.silive.scrolls16.Util.Config;
 import in.silive.scrolls16.models.CheckStudentNoExsist;
 import in.silive.scrolls16.models.CollegeModel;
 import in.silive.scrolls16.models.DomainModel;
@@ -17,15 +13,17 @@ import in.silive.scrolls16.models.RegisterModel;
 import in.silive.scrolls16.models.RegisterSucess;
 import in.silive.scrolls16.models.SelfRegister;
 import in.silive.scrolls16.models.TopicModel;
-import in.silive.scrolls16.models.Topics;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -66,4 +64,9 @@ Call<CheckStudentNoExsist>  checkStudentNo(@Field(value = "student_no") String S
     @FormUrlEncoded
     @POST("api/fcmregister")
     Call<LoginSucess>  Fcm(@Field(value = "fcmtoken") String token);
+    @Multipart
+    @POST("api/fileentry/add")
+    Call<okhttp3.ResponseBody> upload(@Query("token") String token,
+                                      @Part MultipartBody.Part file
+    );
 }
