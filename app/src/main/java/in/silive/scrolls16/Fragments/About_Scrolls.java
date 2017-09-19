@@ -19,6 +19,7 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import in.silive.scrolls16.Adapters.DomainsAdapter;
@@ -35,7 +36,7 @@ RecyclerView rvDomains;
     String[]  domains;
     DomainsAdapter adapter;
     private WebView web_view;
-    LinearLayout rl;
+    ImageView rl;
     CollapsingToolbarLayout collapsingToolbarLayout;
     AppBarLayout appBarLayout;
     static About_Scrolls fragment;
@@ -64,7 +65,12 @@ RecyclerView rvDomains;
         if (rootView==null) {
             rootView = inflater.inflate(R.layout.fragment_about_scrolls, container, false);
             web_view = (WebView) rootView.findViewById(R.id.about_scrolls_web_view);
-            rl=(LinearLayout)rootView.findViewById(R.id.sprite);
+            rl=(ImageView)rootView.findViewById(R.id.sprite);
+            rl.setImageResource(R.drawable.animback);
+
+            AnimationDrawable imgAnimation = (AnimationDrawable) rl.getDrawable();
+            imgAnimation.setOneShot(false);
+            imgAnimation.start();
             final WebSettings webSettings = web_view.getSettings();
             webSettings.setJavaScriptEnabled(true);
             web_view.setWebViewClient(new myWebClient());
@@ -83,7 +89,7 @@ RecyclerView rvDomains;
                     web_view.invalidate();
                 }
             });
-            startWaterAnimation();
+            //startWaterAnimation();
         }
         return rootView;
     }

@@ -48,7 +48,7 @@ public class Config {
     public static String GET = "GET";
     public static String POST = "POST";
     public static String BASE_URL = "http://www.akgec-scrolls.com/api/public/";
-    public static String UPLOAD_DOC = BASE_URL + "api/Teams/UploadFile";
+    public static String UPLOAD_DOC ="http://e3070815.ngrok.io/api/fileentry/add";
     public static String GET_COURSES = BASE_URL + "api/Domains/GetCourses";
     public static String CREATE_COLLEGE = BASE_URL + "api/Colleges/CreateCollege";
     public static String GET_COLLEGES = BASE_URL + "api/Colleges/GetColleges";

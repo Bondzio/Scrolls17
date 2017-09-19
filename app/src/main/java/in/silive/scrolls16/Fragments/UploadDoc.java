@@ -163,11 +163,11 @@ public class UploadDoc extends Fragment {
                         }
                     });
                 }
-                else
-                    Snackbar.make(v,"No internet connection.",Snackbar.LENGTH_SHORT).show();
+
+               //     Snackbar.make(v,"No internet connection.",Snackbar.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();
-                Snackbar.make(v, "Something went wrong.", Snackbar.LENGTH_SHORT).show();
+//                Snackbar.make(v, "Something went wrong.", Snackbar.LENGTH_SHORT).show();
             }
         }
 
@@ -212,7 +212,7 @@ public class UploadDoc extends Fragment {
                             Log.d("debugg",token);
                             editor = sharedPreferences.edit();
                             editor.putString(Config.Token, token);
-                            getSynopsisAvail();
+                         //   getSynopsisAvail();
                             v.findViewById(R.id.llForm).setVisibility(View.GONE);
                             v.findViewById(R.id.llUpload).setVisibility(View.VISIBLE);
 

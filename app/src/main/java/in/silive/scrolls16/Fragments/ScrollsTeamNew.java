@@ -47,10 +47,7 @@ public class ScrollsTeamNew extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.scrollsteam, container, false);
-        webView = (WebView) view.findViewById(R.id.web_view);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setPluginState(WebSettings.PluginState.ON);
-        webView.loadUrl("file:///android_asset/lett.html");
+
 
 
         //rvDomains.setLayoutManager(layoutManager);

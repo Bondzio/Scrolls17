@@ -9,6 +9,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -91,8 +92,16 @@ public class Splash extends AppCompatActivity {
         mWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
         mWebView.loadUrl("file:///android_asset/landingpage.html");*/
         final WebSettings webSettings = web_view.getSettings();
-
+        web_view.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+        web_view.clearCache(true);
         webSettings.setJavaScriptEnabled(true);
+        web_view.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        if (Build.VERSION.SDK_INT >= 19) {
+            web_view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        }
+        else {
+            web_view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
         web_view.setWebViewClient(new myWebClient());
         web_view.setOnTouchListener(new View.OnTouchListener() {
             @Override

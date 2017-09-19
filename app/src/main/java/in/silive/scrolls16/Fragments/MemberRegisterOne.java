@@ -1,11 +1,16 @@
 package in.silive.scrolls16.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +28,11 @@ import com.stepstone.stepper.BlockingStep;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
+import in.silive.scrolls16.Activities.MainActivity;
 import in.silive.scrolls16.Network.ApiClient;
 import in.silive.scrolls16.Network.RetrofitApiInterface;
 import in.silive.scrolls16.R;
@@ -32,6 +40,9 @@ import in.silive.scrolls16.Util.Config;
 import in.silive.scrolls16.Util.Validator;
 import in.silive.scrolls16.application.*;
 import in.silive.scrolls16.models.CheckStudentNoExsist;
+import in.silive.scrolls16.models.Member;
+import in.silive.scrolls16.models.RegisterModel;
+import in.silive.scrolls16.models.RegisterSucess;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,7 +52,7 @@ import retrofit2.Response;
  */
 public class MemberRegisterOne extends Fragment implements BlockingStep {
 
-    public static String student_name, student_college_name, student_id, student_mob_no, student_mail, student_course;
+    public static String student_name, student_college_name, student_id="", student_mob_no, student_mail, student_course;
     public static boolean student_accommodation = false;
 
     private ProgressDialog progressDialog;
@@ -142,6 +153,26 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
         stud_yearvalue = stud_year.getSelectedItem().toString();
         apiService =
                 ApiClient.getClient().create(RetrofitApiInterface.class);
+        if(stud_id.getVisibility()==View.VISIBLE)
+        {
+            stud_id.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if(!hasFocus) {
+                        boolean studentNo= CheckStudentNo();
+                    }
+                }
+            });
+        }
+        stud_mail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus)
+                {
+                    boolean email=CheckEmailId();
+                }
+            }
+        });
         return reg_view;
     }
 
@@ -149,8 +180,20 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
     @Override
     public void onNextClicked(StepperLayout.OnNextClickedCallback callback) {
         saveData();
-        if (checkValidation()&&CheckStudentNo()&&CheckEmailId()) {
-            callback.goToNextStep();
+        boolean validation = checkValidation();
+
+        if (!validation) {
+            Snackbar.make(reg_view,"Check Details",Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+        else {
+            if(sharedPreferences.getString(Config.NO_OF_MEMBERS,"").equals("2"))
+            {
+                apiCall();
+            }
+            else {
+                callback.goToNextStep();
+            }
         }
     }
 
@@ -233,11 +276,104 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
         editor.putString(Config.COURSE11, stud_coursevalue);
         editor.putString(Config.StudentYear11, stud_yearvalue);
         editor.putString(Config.CoLLEGENAME11, stud_collegevalue);
-        if (student_id != null) {
+
             editor.putString(Config.STUDENTID11, student_id);
-        }
+
         editor.commit();
 
+    }
+    private void apiCall() {
+        String name1=sharedPreferences.getString(Config.Member1Name,"");
+        String email1=sharedPreferences.getString(Config.STUDENTMAIL,"");
+        String course1=sharedPreferences.getString(Config.COURSE,"");
+        String year1=sharedPreferences.getString(Config.StudentYear,"");
+        String college1=sharedPreferences.getString(Config.CoLLEGENAME,"");
+        String studentno1=sharedPreferences.getString(Config.STUDENTID,"");
+        String phone1=sharedPreferences.getString(Config.STUDENTMOBNO,"");
+        String accomodation1=sharedPreferences.getString(Config.ACCOMODATION1,"");
+        String name2=sharedPreferences.getString(Config.Member11Name,"");
+        String email2=sharedPreferences.getString(Config.STUDENTMAIL11,"");
+        String course2=sharedPreferences.getString(Config.COURSE11,"");
+        String year2=sharedPreferences.getString(Config.StudentYear11,"");
+        String college2=sharedPreferences.getString(Config.CoLLEGENAME11,"");
+        String studentno2=sharedPreferences.getString(Config.STUDENTID11,"");
+        String phone2=sharedPreferences.getString(Config.STUDENTMOBNO11,"");
+        String accomodation2=sharedPreferences.getString(Config.ACCOMODATION11,"");
+
+        String teamname=sharedPreferences.getString(Config.TEAMNAME,"");
+        String domainid=sharedPreferences.getString(Config.domain_id,"");
+        String topicid=sharedPreferences.getString(Config.topicid,"");
+        String pass=sharedPreferences.getString(Config.password,"");
+        String noofmem=sharedPreferences.getString(Config.NO_OF_MEMBERS,"");
+
+        Member m=new Member(name1,email1,course1,year1,college1,studentno1,phone1,accomodation1,"1");
+        Member m1=new Member(name2,email2,course2,year2,college2,studentno2,phone2,accomodation2,"0");
+     //   Member m2=new Member(name3,email3,course3,year3,college3,studentno3,phone3,accomodation3,"0");
+
+        List<Member> members=new ArrayList<>();
+
+        members.add(m);
+        members.add(m1);
+       // members.add(m2);
+        RegisterModel registerModel=new RegisterModel(teamname,domainid,topicid,pass,noofmem,members);
+
+        final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
+
+
+        Call<RegisterSucess> userCall = apiService.register(registerModel);
+        Log.d("debugg",members.get(0).getName());
+        userCall.enqueue(new Callback<RegisterSucess>() {
+
+            @Override
+            public void onResponse(Call<RegisterSucess> call, Response<RegisterSucess> response) {
+                if(response.code()==200)
+                {
+                    Toast.makeText(getActivity(),"Successfull",Toast.LENGTH_LONG).show();
+                    showDialog(response.body().getData());
+                }
+                else
+                {
+                    Log.d("debugg",response.toString());
+                    Log.d("debugg",call.request().body().toString());
+                }
+                loading.dismiss();
+
+            }
+
+            @Override
+            public void onFailure(Call<RegisterSucess> call, Throwable t) {
+                Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
+                Log.d("debugg",t.toString());
+                loading.dismiss();
+            }
+        });
+    }
+    public void showDialog(String message)
+    {
+        final AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(getActivity());
+        }
+        builder.setTitle("Registration SuccessFull")
+                .setMessage("Your SCROLLS REGISTRATION ID IS"+message)
+                .setPositiveButton("EXIT", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        // continue with delete
+                        Intent i=new Intent(getActivity(), MainActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i);
+                        getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+                        getActivity().finish();
+                    }
+                })
+
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     public boolean checkValidation() {
@@ -264,6 +400,14 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
             stud_mail.setError("Invalid mail");
             flags = false;
         }
+        if(stud_mail.getError()!=null)
+        {
+            flags=false;
+        }
+        if(stud_id.getError()!=null)
+        {
+            flags=false;
+        }
         student_mob_no = stud_mob_no.getText().toString();
         if (!Pattern.matches("^([0]|\\+91)?\\d{10}", student_mob_no)) {
 
@@ -274,9 +418,9 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
         return flags;
 
     }
-    boolean flads=true;
+    boolean flads;
     public boolean CheckStudentNo() {
-
+        flads=true;
         if (stud_id.getVisibility() == View.VISIBLE) {
             student_id=stud_id.getText().toString();
             call = apiService.checkStudentNo(student_id);
@@ -302,11 +446,16 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
                 }
             });
         }
+        else
+
+        {
+            flads=true;
+        }
         return flads;
     }
     public boolean CheckEmailId() {
 
-
+        fladss=true;
         student_mail=stud_mail.getText().toString();
         call = apiService.checkEamilId(student_mail);
         final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);

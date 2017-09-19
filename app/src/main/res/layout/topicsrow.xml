@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline17"
-        app:layout_constraintGuide_percent="0.8"
+        app:layout_constraintGuide_percent="1"
         android:orientation="horizontal"
         tools:layout_editor_absoluteY="180dp"
         tools:layout_editor_absoluteX="0dp" />
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline18"
-        app:layout_constraintGuide_percent="0.05"
+        app:layout_constraintGuide_percent="0"
         android:orientation="vertical"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="0dp" />
@@ -37,23 +37,89 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline19"
-        app:layout_constraintGuide_percent="0.95"
+        app:layout_constraintGuide_percent="1"
         android:orientation="vertical"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="592dp" />
 
-        <ImageView
+
+        <android.support.constraint.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/computerscience"
-            android:id="@+id/imgtopics"
+
+
             app:layout_constraintLeft_toLeftOf="@+id/guideline18"
             app:layout_constraintRight_toLeftOf="@+id/guideline19"
             app:layout_constraintTop_toTopOf="@+id/guideline15"
             app:layout_constraintBottom_toTopOf="@+id/guideline17"
 
-            />
+            >
+            <android.support.constraint.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline151"
+                app:layout_constraintGuide_percent="0.0"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="0dp" />
 
+            <android.support.constraint.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline171"
+                app:layout_constraintGuide_percent="1"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteY="180dp"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <android.support.constraint.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline181"
+                app:layout_constraintGuide_percent="0"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="0dp" />
+            <android.support.constraint.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline182"
+                app:layout_constraintGuide_percent="0.7"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <android.support.constraint.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline191"
+                app:layout_constraintGuide_percent="1"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="592dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/topicsinfo"
+                android:text="COMPUTER SCIENCE AND ENGINNERING"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintLeft_toLeftOf="@+id/guideline181"
+                app:layout_constraintRight_toLeftOf="@+id/guideline182"
+                app:layout_constraintTop_toTopOf="@+id/guideline151"
+                app:layout_constraintBottom_toTopOf="@+id/guideline171"/>
+            <WebView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/web_view"
+                app:layout_constraintLeft_toLeftOf="@+id/guideline182"
+                app:layout_constraintRight_toLeftOf="@+id/guideline191"
+                app:layout_constraintTop_toTopOf="@+id/guideline151"
+                app:layout_constraintBottom_toTopOf="@+id/guideline171"
+                >
+
+            </WebView>
+</android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
 
 

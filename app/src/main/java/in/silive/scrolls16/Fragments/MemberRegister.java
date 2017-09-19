@@ -48,7 +48,7 @@ import retrofit2.Response;
 
 public class MemberRegister extends Fragment implements BlockingStep {
 
-    public static String student_name, student_college_name, student_id, student_mob_no, student_mail, student_course;
+    public static String student_name, student_college_name, student_id="", student_mob_no, student_mail, student_course;
     public static boolean student_accommodation = false;
 
     private ProgressDialog progressDialog;
@@ -273,9 +273,9 @@ public class MemberRegister extends Fragment implements BlockingStep {
         editor.putString(Config.COURSE, stud_coursevalue);
         editor.putString(Config.StudentYear, stud_yearvalue);
         editor.putString(Config.CoLLEGENAME, stud_collegevalue);
-        if (student_id != null) {
+
             editor.putString(Config.STUDENTID, student_id);
-        }
+
         editor.commit();
 
     }

@@ -14,7 +14,7 @@
         android:descendantFocusability="blocksDescendants"
 
         android:orientation="vertical">
-        <LinearLayout
+        <ImageView
             android:id="@+id/sprite"
             android:layout_width="match_parent"
             android:layout_height="300dp"

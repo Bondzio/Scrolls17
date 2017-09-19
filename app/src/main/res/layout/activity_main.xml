@@ -105,13 +105,13 @@
                     android:id="@+id/material_design_floating_action_menu_item1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/register"
+                    android:src="@drawable/registerhh"
                     fab:fab_colorNormal="#E5E5E5"
 
                     fab:fab_label="Register"
 
                     fab:fab_colorPressed="@color/colorPrimary"
-                    fab:fab_size="normal" />
+                    fab:fab_size="mini" />
 
                 <com.github.clans.fab.FloatingActionButton
                     android:id="@+id/material_design_floating_action_menu_item2"
@@ -119,19 +119,19 @@
                     android:layout_height="wrap_content"
                     fab:fab_colorNormal="#E5E5E5"
                     fab:fab_label="Login"
-                    android:src="@drawable/login"
+                    android:src="@drawable/loginhh"
                     fab:fab_colorPressed="@color/colorPrimary"
-                    fab:fab_size="normal" />
+                    fab:fab_size="mini" />
 
                 <com.github.clans.fab.FloatingActionButton
                     android:id="@+id/material_design_floating_action_menu_item3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/downloadsynopsis"
+                    android:src="@drawable/downloadsynopsisss"
                     fab:fab_colorPressed="@color/colorPrimary"
                     fab:fab_label="Download"
                     fab:fab_colorNormal="#E5E5E5"
-                    fab:fab_size="normal" />
+                    fab:fab_size="mini" />
             </com.github.clans.fab.FloatingActionMenu>
         </RelativeLayout>
 

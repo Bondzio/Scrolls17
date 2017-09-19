@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ImageView;
 
 import in.silive.scrolls16.Fragments.About_Scrolls;
 import in.silive.scrolls16.Fragments.QueryUs;
@@ -27,12 +28,14 @@ Toolbar toolbar;
     Bundle bundle;
     String title;
     WebView webView;
+    private ImageView imagehead;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
+        imagehead=(ImageView)findViewById(R.id.imageHead);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -44,25 +47,33 @@ Toolbar toolbar;
 
                     case Config.KEY_Topics:
                         showFragment(new TopicsFragment(), title);
+                        imagehead.setImageResource(R.drawable.topics);
                         break;
                     case Config.KEY_SCROLLSRULE:
                         showFragment(new Rules(),title);
+                        imagehead.setImageResource(R.drawable.rulesandregulations);
                         break;
                     case Config.KEY_REACHUS:
                         showFragment(new ReachUs(),title);
+                        imagehead.setImageResource(R.drawable.reachus);
                         break;
                     case Config.KEY_ImpDates:
                         showFragment(new ScheduleFragment(),title);
+                        imagehead.setImageResource(R.drawable.schedule);
                         break;
                     case Config.KEY_QUERY:
                         showFragment(new QueryUs(),title);
+                        imagehead.setImageResource(R.drawable.queryus);
+
                         break;
 
                     case Config.KEY_SCROLLSTEAM:
                         showFragment(new ScrollsTeamNew(),title);
+                        imagehead.setImageResource(R.drawable.scrollsteam);
                         break;
                     case Config.KEY_SCROLLSDeveloper:
                         showFragment(new ScrollsDeveloperNew(),title);
+                        imagehead.setImageResource(R.drawable.developerteam);
                         break;
 
                 }

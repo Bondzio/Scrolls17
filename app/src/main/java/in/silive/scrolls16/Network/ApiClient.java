@@ -15,7 +15,7 @@ public class ApiClient {
     public static Retrofit getClient() {
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl("http://www.akgec-scrolls.com/api/public/")
                     .addConverterFactory(new NullOnEmptyConverterFactory())
                     .addConverterFactory(GsonConverterFactory.create())
 

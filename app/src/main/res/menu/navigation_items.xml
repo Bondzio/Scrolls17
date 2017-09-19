@@ -6,22 +6,22 @@
         <item
             android:id="@+id/topics"
             android:checked="false"
-            android:icon="@drawable/ic_topic"
+            android:icon="@drawable/topicsicon"
             android:title="Topic" />
 
         <item
             android:id="@+id/rules"
-            android:icon="@drawable/ic_topic"
+            android:icon="@drawable/rules"
             android:checked="false"
             android:title="SCROLLS RULES" />
         <item
             android:id="@+id/reachus"
-            android:icon="@drawable/ic_topic"
+            android:icon="@drawable/rechusic"
             android:checked="false"
             android:title="REACH US" />
         <item
             android:id="@+id/importantdates"
-            android:icon="@drawable/ic_topic"
+            android:icon="@drawable/scheduleicon"
             android:checked="false"
             android:title="IMPORTANT DATES" />
         <item
@@ -49,12 +49,7 @@
             android:icon="@drawable/ic_topic"
             android:checked="false"
             android:title="Query Us" />
-        <item
-            android:id="@+id/footer_spacer_2"
-            android:checkable="false"
-            android:enabled="false"
-            android:orderInCategory="200"
-            android:title="" />
+
 
     </group>
 </menu>

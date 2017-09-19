@@ -44,8 +44,8 @@ public class AboutUsListAdapterNew extends RecyclerView.Adapter<RecyclerView.Vie
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ((AboutUsListAdapterNew.ViewHolder)holder).member_pic.setImageResource(pic[position]);
         ((AboutUsListAdapterNew.ViewHolder)holder).member_name.setText(names[position]);
-        ((AboutUsListAdapterNew.ViewHolder)holder).member_desig.setText(designation[position]);
-        if (designation[position].matches("^-?\\d+$")) {
+      //  ((AboutUsListAdapterNew.ViewHolder)holder).member_desig.setText(designation[position]);
+        /*if (designation[position].matches("^-?\\d+$")) {
             ((AboutUsListAdapterNew.ViewHolder)holder).member_desig.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -65,10 +65,10 @@ public class AboutUsListAdapterNew extends RecyclerView.Adapter<RecyclerView.Vie
                     }
                     context.startActivity(intent);
                 }
-            });
+            });*/
         }
 
-    }
+
 
     @Override
     public int getItemCount() {
@@ -83,7 +83,7 @@ public class AboutUsListAdapterNew extends RecyclerView.Adapter<RecyclerView.Vie
             super(sview);
             member_pic = (ImageView) sview.findViewById(R.id.member_pic);
             member_name = (TextView) sview.findViewById(R.id.member_name);
-            member_desig = (TextView) sview.findViewById(R.id.member_desig);
+           // member_desig = (TextView) sview.findViewById(R.id.member_desig);
 
         }
     }

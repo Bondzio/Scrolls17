@@ -261,7 +261,7 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             id_domain= domainsIDList.get(i);
                             loadTopics(id_domain);
-                            Toast.makeText(getActivity(), Integer.toString(id_domain), Toast.LENGTH_LONG).show();
+                   //         Toast.makeText(getActivity(), Integer.toString(id_domain), Toast.LENGTH_LONG).show();
                         }
 
                         @Override
@@ -329,7 +329,7 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
                             loading.dismiss();
 
                             //Log.d("debugg",Integer.toString(topicsList1.size()));
-                            Toast.makeText(getContext(), Integer.toString(topicsList.size()), Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getContext(), Integer.toString(topicsList.size()), Toast.LENGTH_LONG).show();
                             topicsAdapter = new SpinnerAdapter(getContext(), topicsList);
                             team_topic.setAdapter(topicsAdapter);
                             team_topic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -412,9 +412,9 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
          team_confirmPassword.setError("Password Do not match");
          flag=false;
      }
-     if(team_password.getText().toString().length()==0)
+     if(team_password.getText().toString().length()==0&&team_password.getText().toString().length()>=6)
      {
-         team_password.setError("Fill password");
+         team_password.setError("Invalid Password");
          flag=false;
      }
      return flag;
