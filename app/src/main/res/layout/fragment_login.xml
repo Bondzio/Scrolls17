@@ -11,122 +11,194 @@
         android:layout_height="wrap_content"
         android:id="@+id/guideline35"
         app:layout_constraintGuide_percent="0.1"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        card_view:layout_editor_absoluteY="0dp"
+        card_view:layout_editor_absoluteX="60dp" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline36"
         app:layout_constraintGuide_percent="0.9"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        card_view:layout_editor_absoluteY="0dp"
+        card_view:layout_editor_absoluteX="541dp" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline37"
         app:layout_constraintGuide_percent="0.1"
-        android:orientation="horizontal" />
+        android:orientation="horizontal"
+        card_view:layout_editor_absoluteY="85dp"
+        card_view:layout_editor_absoluteX="0dp" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline38"
-        app:layout_constraintGuide_percent="0.9"
-        android:orientation="horizontal" />
+        app:layout_constraintGuide_percent="0.76"
+        android:orientation="horizontal"
+        card_view:layout_editor_absoluteY="646dp"
+        card_view:layout_editor_absoluteX="0dp" />
+
     <android.support.v7.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:elevation="3dp"
+        android:hardwareAccelerated="true"
         app:cardCornerRadius="4dp"
         app:cardElevation="3dp"
-        android:elevation="3dp"
-        card_view:cardUseCompatPadding="true"
-        android:hardwareAccelerated = "true"
+        app:layout_constraintBottom_toTopOf="@+id/guideline38"
 
-        app:layout_constraintLeft_toLeftOf="@id/guideline35"
-        app:layout_constraintRight_toLeftOf="@id/guideline36"
-        app:layout_constraintTop_toTopOf="@id/guideline37"
-        app:layout_constraintBottom_toTopOf="@id/guideline38">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline35"
+        app:layout_constraintRight_toLeftOf="@+id/guideline36"
+        app:layout_constraintTop_toTopOf="@+id/guideline37"
+        app:layout_constraintVertical_bias="1.0"
+        card_view:cardUseCompatPadding="true">
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="9"
+            >
+            <android.support.constraint.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline10"
+                app:layout_constraintGuide_percent="0.0"
+                android:orientation="vertical"
+              />
+
+            <android.support.constraint.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline12"
+                app:layout_constraintGuide_percent="1.0"
+                android:orientation="vertical"
+                 />
+
+            <android.support.constraint.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline13"
+                app:layout_constraintGuide_percent="0.15"
+                android:orientation="horizontal"
+                />
+            <android.support.constraint.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline16"
+                app:layout_constraintGuide_percent="0.85"
+                android:orientation="horizontal"
+                 />
 
 
         <LinearLayout
             android:id="@+id/llForm"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="@id/guideline13"
+            app:layout_constraintBottom_toTopOf="@id/guideline16"
+            app:layout_constraintLeft_toLeftOf="@id/guideline10"
+            app:layout_constraintRight_toLeftOf="@id/guideline12"
             android:orientation="vertical"
-            android:weightSum="10"
+            android:visibility="visible"
 
-            android:layout_margin="18dp"
-            android:visibility="visible">
+            card_view:layout_editor_absoluteY="8dp"
+            card_view:layout_editor_absoluteX="8dp">
 
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="Please login to upload a doc"
-            android:textColor="#000000"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="ENTER CREDENTIALS"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:textColor="#000000" />
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/login_team_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="center"
-            android:layout_margin="3dp"
-            android:hint="Team Id"
-            android:singleLine="true"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
 
-            android:textAppearance="@android:style/TextAppearance.Medium" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SCROLLS ID"
+                    android:layout_weight="1"
+                    android:textAppearance="@android:style/TextAppearance.Large" />
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/login_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="center"
-            android:layout_margin="3dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textAppearance="@android:style/TextAppearance.Medium" />
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/login_team_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="center"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:hint="Enter your Scrolls id"
+                    android:singleLine="true"
 
-        <Button
-            android:id="@+id/user_login"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="Login"
-            android:textAppearance="@android:style/TextAppearance.Small"  />
+                    android:textAppearance="@android:style/TextAppearance.Medium" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/user_register"
-            android:layout_margin="5dp"
-            android:text="Not registered yet"
-            android:textColor="#000000"
-            android:textSize="15sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
 
-        <Button
-            android:id="@+id/user_register"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_margin="3dp"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="Register"
-            android:textAppearance="@android:style/TextAppearance.Small"  />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="PASSWORD"
+                    android:textAppearance="@android:style/TextAppearance.Medium" />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/login_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="center"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:hint="Enter Password"
+                    android:inputType="textPassword"
+                    android:textAppearance="@android:style/TextAppearance.Medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/user_login"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Login"
+                    android:textAppearance="@android:style/TextAppearance.Small"
+                    android:textColor="@color/white" />
+            </LinearLayout>
         </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>
