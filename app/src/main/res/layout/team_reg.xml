@@ -5,20 +5,53 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline22"
+        app:layout_constraintGuide_percent="0"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
 
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline32"
+        app:layout_constraintGuide_percent="1"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline33"
+        app:layout_constraintGuide_percent="0"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline34"
+        app:layout_constraintGuide_percent="1"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
     <LinearLayout
         android:id="@+id/reg_team"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:padding="10dp"
         android:visibility="visible"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline34"
+        app:layout_constraintRight_toRightOf="@id/guideline32"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintLeft_toLeftOf="@id/guideline22"
+        app:layout_constraintTop_toTopOf="@id/guideline33">
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,7 +60,19 @@
             android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
 
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:text="Team Name"/>
         <android.support.design.widget.TextInputEditText
             android:id="@+id/team_name"
             android:layout_width="match_parent"
@@ -35,18 +80,21 @@
             android:layout_weight="1"
             android:singleLine="true"
             android:hint="Team name" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="3dp"
                 android:textStyle="bold"
+                android:gravity="center_vertical"
                 android:text="Select No of Members" />
 
             <LinearLayout
@@ -95,6 +143,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Domain"
+                android:gravity="center_vertical"
                 android:textStyle="bold" />
 
             <Spinner
@@ -121,6 +170,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Topic"
+                android:gravity="center_vertical"
                 android:textStyle="bold" />
 
             <Spinner
@@ -143,17 +193,18 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Password"
+                android:gravity="center_vertical"
                 android:textStyle="bold" />
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/team_password"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Enter password"
+                android:hint="6 characters or more "
                 android:inputType="textPassword" />
 
 
@@ -168,15 +219,16 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Password"
+                android:text="Confirm Password"
+                android:gravity="center_vertical"
                 android:textStyle="bold" />
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/team_password_confirm"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="Confirm password"
                 android:inputType="textPassword" />
@@ -185,51 +237,8 @@
         </LinearLayout>
 
 
-        <Button
-            android:id="@+id/submit_team_reg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/colorPrimary"
-            android:padding="3dp"
-            android:text="NEXT" />
-
     </LinearLayout>
 
-    <android.support.constraint.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/guideline22"
-        app:layout_constraintGuide_begin="20dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp" />
 
-    <android.support.constraint.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/guideline32"
-        app:layout_constraintGuide_begin="20dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <android.support.constraint.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/guideline33"
-        app:layout_constraintGuide_begin="20dp"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <android.support.constraint.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/guideline34"
-        app:layout_constraintGuide_begin="20dp"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline39"
+        app:layout_constraintGuide_percent="0.0"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline34"
+        app:layout_constraintGuide_percent="0.5"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="268dp"
+        tools:layout_editor_absoluteX="0dp" />
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline35"
+        app:layout_constraintGuide_percent="0.53"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="322dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline40"
+        app:layout_constraintGuide_percent="1.0"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="536dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline42"
+        app:layout_constraintGuide_percent="0.0"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline43"
+        app:layout_constraintGuide_percent="1.0"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="360dp" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline42"
+        app:layout_constraintTop_toTopOf="@+id/guideline39"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline34"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <android.support.constraint.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline391"
+                app:layout_constraintGuide_percent="0.0"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="0dp" />
+
+
+
+            <android.support.constraint.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline401"
+                app:layout_constraintGuide_percent="1.0"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteY="536dp"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <android.support.constraint.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline421"
+                app:layout_constraintGuide_percent="0.0"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <android.support.constraint.Guideline
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/guideline422"
+                app:layout_constraintGuide_percent="0.5"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <android.support.constraint.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline431"
+                app:layout_constraintGuide_percent="1.0"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="360dp" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/teamname"
+                app:layout_constraintLeft_toLeftOf="@+id/guideline421"
+                app:layout_constraintRight_toLeftOf="@id/guideline422"
+                app:layout_constraintTop_toTopOf="@id/guideline391"
+                app:layout_constraintBottom_toTopOf="@id/guideline401"
+                tools:layout_editor_absoluteY="64dp"
+                tools:layout_editor_absoluteX="8dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:text="TEAM"
+                android:gravity="center_vertical"
+                app:layout_constraintLeft_toLeftOf="@+id/guideline422"
+                app:layout_constraintRight_toLeftOf="@id/guideline431"
+                app:layout_constraintTop_toTopOf="@id/guideline391"
+                app:layout_constraintBottom_toTopOf="@id/guideline401"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:textColor="#000000"
+                tools:layout_editor_absoluteY="8dp"
+                tools:layout_editor_absoluteX="26dp" />
+
+        </android.support.constraint.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="TEAM MEMBERS"
+                android:gravity="center"
+
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:textColor="#000000"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MEMBER1"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+
+                    android:textColor="#000000"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MEMBER2"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="#000000"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MEMBER3"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="#000000"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@id/upload"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline42"
+        app:layout_constraintTop_toTopOf="@+id/guideline35"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline40">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:text="Please Click to Upload Files in pdf format"/>
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>

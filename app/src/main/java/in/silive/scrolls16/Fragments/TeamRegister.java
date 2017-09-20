@@ -138,15 +138,7 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
                 }
             }
         });
-        submit_team_reg = (Button) reg_view.findViewById(R.id.submit_team_reg);
-        submit_team_reg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Keyboard.close(getContext());
-                //getTeamData();
-            }
-        });
         apiService =
                 ApiClient.getClient().create(RetrofitApiInterface.class);
         team_domain = (Spinner) reg_view.findViewById(R.id.team_domain);
@@ -238,7 +230,8 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
 
     private void loadDomainList() {
         if (!CheckConnectivity.isNetConnected(getContext()))
-            Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
+            //Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"NO INTERNET CONNECTION",Toast.LENGTH_LONG).show();
         else {
             callDomain = apiService.getDomians();
             final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
