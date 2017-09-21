@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -54,7 +55,7 @@ public class DomainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
         // ((DomainsAdapter.ViewHolder) holder).tvDomain.setText(domains[position]);
-        ((DomainsAdapter.ViewHolder) holder).iv.setImageResource(context.getResources().getIdentifier(images[position], "drawable", context.getPackageName()));
+        ((DomainsAdapter.ViewHolder) holder).iv.setBackgroundResource(context.getResources().getIdentifier(images[position], "drawable", context.getPackageName()));
         ((DomainsAdapter.ViewHolder) holder).ll.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -108,13 +109,13 @@ public class DomainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvDomain;
         ConstraintLayout ll;
-        ImageView iv;
+        LinearLayout iv;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ll = (ConstraintLayout) itemView.findViewById(R.id.topicsback);
             //tvDomain = (TextView) itemView.findViewById(R.id.tvDomain);
-            iv = (ImageView)itemView.findViewById(R.id.imgtopics);
+            iv = (LinearLayout)itemView.findViewById(R.id.imgtopics);
         }
     }
    /* public class ParallaxVH extends RecyclerView.ViewHolder{

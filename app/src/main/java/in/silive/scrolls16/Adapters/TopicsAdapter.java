@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import in.silive.scrolls16.R;
@@ -17,11 +18,13 @@ import in.silive.scrolls16.R;
 public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder>{
     String[] topics;
     Context context;
+    Integer[]   images;
     private int lastPosition;
 
-    public TopicsAdapter(Context context, String[] topics) {
+    public TopicsAdapter(Context context, String[] topics,Integer[] images) {
         this.context = context;
         this.topics = topics;
+        this.images=images;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
         holder.tvTopic.setText(topics[position]);
         holder.itemView.setVisibility(View.INVISIBLE);
         holder.itemView.setVisibility(View.VISIBLE);
-        holder.tvNum.setText(""+(position+1)+".");
+        holder.tvNum.setImageResource(images[position]);
        /* new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -60,11 +63,12 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvTopic,tvNum;
+        TextView tvTopic;
+        ImageView tvNum;
         public ViewHolder(View itemView) {
             super(itemView);
             tvTopic = (TextView)itemView.findViewById(R.id.tv);
-            tvNum = (TextView)itemView.findViewById(R.id.tvNum);
+            tvNum = (ImageView)itemView.findViewById(R.id.tvNu);
         }
     }
 }

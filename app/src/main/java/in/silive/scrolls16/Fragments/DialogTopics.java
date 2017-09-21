@@ -17,9 +17,7 @@ import android.widget.TextView;
 import in.silive.scrolls16.Adapters.TopicsAdapter;
 import in.silive.scrolls16.R;
 
-/**
- * Created by AKG002 on 03-09-2016.
- */
+
 public class DialogTopics extends BottomSheetDialogFragment {
     RecyclerView rvTopics;
     String[] topics;
@@ -29,6 +27,8 @@ public class DialogTopics extends BottomSheetDialogFragment {
 TopicsAdapter adapter;
     LinearLayout ll;
     LinearLayout llFullScreen;
+    Integer picMembers [] = {R.drawable.one,R.drawable.two,R.drawable.three,R.drawable.four,R.drawable.five,R.drawable.six,R.drawable.seven,R.drawable.eight,
+            R.drawable.nine,R.drawable.ten,R.drawable.eleven,R.drawable.tweleve};
 
     public void setArgs(String title, String[] topics) {
         this.title = title;
@@ -63,17 +63,27 @@ TopicsAdapter adapter;
         rvTopics = (RecyclerView) view.findViewById(R.id.rvTopic);
         tvTitle = (TextView) view.findViewById(R.id.tvTitle);
         tvTitle.setText(title);
-        adapter = new TopicsAdapter(getActivity(), topics);
+        adapter = new TopicsAdapter(getActivity(), topics,picMembers);
         rvTopics.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rvTopics.setAdapter(adapter);
         ll = (LinearLayout) view.findViewById(R.id.ll);
         ivClose = (ImageView) view.findViewById(R.id.ivClose);
+        ivClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.container, new TopicsFragment())/*.addToBackStack(fragment.getClass().getName())*/;
+                fragmentTransaction.commit();
 
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
         getDialog().setOnKeyListener(new DialogInterface.OnKeyListener()
         {
             @Override
