@@ -40,6 +40,7 @@ import in.silive.scrolls16.Network.ServiceGenerator;
 import in.silive.scrolls16.R;
 import in.silive.scrolls16.Util.Config;
 import in.silive.scrolls16.Util.Keyboard;
+import in.silive.scrolls16.models.LoginModelF;
 import in.silive.scrolls16.models.LoginSucess;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -83,9 +84,9 @@ public class UploadDoc extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_upload_doc, container, false);
+        v = inflater.inflate(R.layout.fragment_login, container, false);
         context = getContext();
-        upload = (LinearLayout) v.findViewById(R.id.upload);
+      //  upload = (LinearLayout) v.findViewById(R.id.upload);
         login_team_id = (EditText) v.findViewById(R.id.login_team_id);
         login_password = (EditText) v.findViewById(R.id.login_password);
         user_login = (Button) v.findViewById(R.id.user_login);
@@ -101,7 +102,7 @@ public class UploadDoc extends Fragment {
                 getLoginData();
             }
         });
-        user_register = (Button) v.findViewById(R.id.user_register);
+        /*user_register = (Button) v.findViewById(R.id.user_register);
         user_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,7 +113,7 @@ public class UploadDoc extends Fragment {
                         startActivity(i);
 
             }
-        });
+        });*/
         btnSelect = (Button) v.findViewById(R.id.btnSelect);
         btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,16 +126,16 @@ public class UploadDoc extends Fragment {
                 startActivityForResult(i, FILE_CODE);
             }
         });
-        tvDomain = (TextView)v.findViewById(R.id.tvDomain);
-        tvTopic = (TextView)v.findViewById(R.id.tvTopic);
-        tvTeamID = (TextView)v.findViewById(R.id.tvTeamId);
-        if (TextUtils.isEmpty(domainName)) {
+        //tvDomain = (TextView)v.findViewById(R.id.tvDomain);
+        //tvTopic = (TextView)v.findViewById(R.id.tvTopic);
+       // tvTeamID = (TextView)v.findViewById(R.id.tvTeamId);
+      /*  if (TextUtils.isEmpty(domainName)) {
             v.findViewById(R.id.llForm).setVisibility(View.VISIBLE);
             v.findViewById(R.id.llUpload).setVisibility(View.GONE);
         } else {
             v.findViewById(R.id.llForm).setVisibility(View.GONE);
             v.findViewById(R.id.llUpload).setVisibility(View.VISIBLE);
-        }
+        }*/
         return v;
     }
 
@@ -236,13 +237,14 @@ public class UploadDoc extends Fragment {
             if (!CheckConnectivity.isNetConnected(getContext()))
                 Snackbar.make(v, "No internet connection.", Snackbar.LENGTH_SHORT).show();
             else {
-                Call<LoginSucess> call = apiService.Login(login_team_id.getText().toString(), login_password.getText().toString());
+                Call<LoginModelF> call = apiService.Login(login_team_id.getText().toString(), login_password.getText().toString());
                 final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
-                call.enqueue(new Callback<LoginSucess>() {
+                call.enqueue(new Callback<LoginModelF>() {
                     @Override
-                    public void onResponse(Call<LoginSucess> call, Response<LoginSucess> response) {
+                    public void onResponse(Call<LoginModelF> call, Response<LoginModelF> response) {
                         if (response.code() == 401) {
-
+                            login_team_id.setError("Invalid ID");
+                            login_password.setError("Invalid password");
                             android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(context)
                                     .setTitle("Error")
                                     .setMessage("Invalid Credentials")
@@ -255,15 +257,19 @@ public class UploadDoc extends Fragment {
                                     .setIcon(android.R.drawable.ic_dialog_alert);
                             dialog.show();
                         } else if (response.code() == 200) {
-                             tvTeamID.setText(team_id);
+                             //tvTeamID.setText(team_id);
                              token = response.body().getData().getToken();
+                            String TeamName=response.body().getData().getTeamname();
+                            String Member1Name=response.body().getData().getMember1name();
+                            String Member2Name=response.body().getData().getMember2name();
+                            String Member3Name=response.body().getData().getMember3name();
                             Log.d("debugg",token);
                             editor = sharedPreferences.edit();
                             editor.putString(Config.Token, token);
                             editor.commit();
                          //   getSynopsisAvail();
-                            v.findViewById(R.id.llForm).setVisibility(View.GONE);
-                            v.findViewById(R.id.llUpload).setVisibility(View.VISIBLE);
+                         //     v.findViewById(R.id.llForm).setVisibility(View.GONE);
+                           // v.findViewById(R.id.llUpload).setVisibility(View.VISIBLE);
 
                         }
                         loading.dismiss();
@@ -271,7 +277,7 @@ public class UploadDoc extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<LoginSucess> call, Throwable t) {
+                    public void onFailure(Call<LoginModelF> call, Throwable t) {
                         loading.dismiss();
                     }
                 });
@@ -282,55 +288,6 @@ public class UploadDoc extends Fragment {
 
     }
 
-    private void getSynopsisAvail() {
-        FetchData fetchData = new FetchData();
-        fetchData.setArgs(Config.GET_TEAM_DETAILS + team_id, new FetchDataListener() {
-            ProgressDialog progressDialog;
-            @Override
-            public void preExecute() {
-                progressDialog = new ProgressDialog(context);
-                progressDialog.setMessage("Loading");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
-            }
 
-            @Override
-            public void postExecute(String result, int id) throws JSONException {
-                if (progressDialog.isShowing())
-                    progressDialog.dismiss();
-                try {
-                    JSONObject team = new JSONObject(result);
-                        boolean synopsisAvail = team.getBoolean("SynopsisAvailable");
-                    v.findViewById(R.id.llForm).setVisibility(View.GONE);
-                    v.findViewById(R.id.llUpload).setVisibility(View.VISIBLE);
-                  if (!synopsisAvail) {
-                      v.findViewById(R.id.tvSynopsis).setVisibility(View.GONE);
-                      v.findViewById(R.id.btnSelect).setVisibility(View.VISIBLE);
-                  }else {
-                      v.findViewById(R.id.tvSynopsis).setVisibility(View.VISIBLE);
-                      v.findViewById(R.id.btnSelect).setVisibility(View.GONE);
-                  }
-                } catch (Exception e) {
-                    if (result.equalsIgnoreCase("null")) {
-                        android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(context)
-                                .setTitle("Error")
-                                .setMessage("Invalid Credentials")
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                })
-
-                                .setIcon(android.R.drawable.ic_dialog_alert);
-                        dialog.show();
-
-                    } else {
-                        Snackbar.make(v, "Something went wrong.", Snackbar.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
-        fetchData.execute();
-    }
 
 }

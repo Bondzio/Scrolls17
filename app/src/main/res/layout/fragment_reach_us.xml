@@ -81,7 +81,7 @@
         app:layout_constraintVertical_bias="0.0"
         app:layout_constraintRight_toLeftOf="@+id/guideline12"
         android:layout_weight="0"
-        android:background="@color/bggraynew"
+        android:background="@color/map"
         android:padding="5dp"
        android:layout_alignParentBottom="true">
         <android.support.constraint.Guideline

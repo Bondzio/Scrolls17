@@ -14,4 +14,5 @@
     <color name="bg_dark_gray">#212121</color>
     <color name="fabback">#D8000000</color>
     <color name="login">#375067</color>
+    <color name="map">#EBE8DE</color>
 </resources>

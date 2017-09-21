@@ -66,12 +66,12 @@ RecyclerView rvDomains;
         if (rootView==null) {
             rootView = inflater.inflate(R.layout.fragment_about_scrolls, container, false);
             web_view = (WebView) rootView.findViewById(R.id.about_scrolls_web_view);
-            rl=(ImageView)rootView.findViewById(R.id.sprite);
-            rl.setImageResource(R.drawable.animback);
+//            rl=(ImageView)rootView.findViewById(R.id.sprite);
+  //          rl.setImageResource(R.drawable.animback);
 
-            AnimationDrawable imgAnimation = (AnimationDrawable) rl.getDrawable();
-            imgAnimation.setOneShot(false);
-            imgAnimation.start();
+    //        AnimationDrawable imgAnimation = (AnimationDrawable) rl.getDrawable();
+      //      imgAnimation.setOneShot(false);
+        //    imgAnimation.start();
             final WebSettings webSettings = web_view.getSettings();
             webSettings.setJavaScriptEnabled(true);
             web_view.setWebViewClient(new myWebClient());

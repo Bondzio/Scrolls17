@@ -7,6 +7,7 @@ import java.util.List;
 import in.silive.scrolls16.models.CheckStudentNoExsist;
 import in.silive.scrolls16.models.CollegeModel;
 import in.silive.scrolls16.models.DomainModel;
+import in.silive.scrolls16.models.LoginModelF;
 import in.silive.scrolls16.models.LoginSucess;
 import in.silive.scrolls16.models.QueryModel;
 import in.silive.scrolls16.models.RegisterModel;
@@ -60,7 +61,7 @@ Call<CheckStudentNoExsist>  checkStudentNo(@Field(value = "student_no") String S
     Call<CheckStudentNoExsist>  checkEamilId(@Field(value = "email") String Email);
     @FormUrlEncoded
     @POST("api/login")
-    Call<LoginSucess>  Login(@Field(value = "teamid") String teamid,@Field(value = "password") String password);
+    Call<LoginModelF> Login(@Field(value = "teamid") String teamid,@Field(value = "password") String password);
     @FormUrlEncoded
     @POST("api/fcmregister")
     Call<LoginSucess>  Fcm(@Field(value = "fcmtoken") String token);
