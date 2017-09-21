@@ -186,10 +186,10 @@
             app:layout_constraintVertical_bias="1.0" />
 
     </android.support.constraint.ConstraintLayout>
-    <ImageView
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/poweredby"
+        android:background="@drawable/poweredby"
         app:layout_constraintRight_toLeftOf="@+id/guideline45"
         app:layout_constraintLeft_toLeftOf="@+id/guideline44"
         app:layout_constraintBottom_toTopOf="@+id/guideline50"

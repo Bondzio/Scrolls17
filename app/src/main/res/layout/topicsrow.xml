@@ -2,7 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
+    android:layout_height="70dp"
+
     android:id="@+id/topicsback"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
@@ -10,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline15"
-        app:layout_constraintGuide_percent="0.0"
+        app:layout_constraintGuide_percent="0"
         android:orientation="horizontal"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="0dp" />
@@ -19,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline17"
-        app:layout_constraintGuide_percent="0.8"
+        app:layout_constraintGuide_percent="1"
         android:orientation="horizontal"
         tools:layout_editor_absoluteY="180dp"
         tools:layout_editor_absoluteX="0dp" />
@@ -28,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline18"
-        app:layout_constraintGuide_percent="0.05"
+        app:layout_constraintGuide_percent="0"
         android:orientation="vertical"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="0dp" />
@@ -37,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline19"
-        app:layout_constraintGuide_percent="0.95"
+        app:layout_constraintGuide_percent="1"
         android:orientation="vertical"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="592dp" />
@@ -45,7 +46,7 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/computescience"
+
         android:id="@+id/imgtopics"
         app:layout_constraintLeft_toLeftOf="@+id/guideline18"
         app:layout_constraintRight_toLeftOf="@+id/guideline19"

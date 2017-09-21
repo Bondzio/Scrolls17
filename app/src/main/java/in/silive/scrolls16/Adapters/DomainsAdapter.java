@@ -54,7 +54,7 @@ public class DomainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
         // ((DomainsAdapter.ViewHolder) holder).tvDomain.setText(domains[position]);
-        //  ((DomainsAdapter.ViewHolder) holder).iv.setImageResource(context.getResources().getIdentifier(images[position], "drawable", context.getPackageName()));
+        ((DomainsAdapter.ViewHolder) holder).iv.setImageResource(context.getResources().getIdentifier(images[position], "drawable", context.getPackageName()));
         ((DomainsAdapter.ViewHolder) holder).ll.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -102,7 +102,7 @@ public class DomainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-        return domains.length;
+        return images.length;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
