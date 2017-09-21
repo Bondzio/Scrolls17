@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/guideline101"
-            app:layout_constraintGuide_percent="0.05"
+            app:layout_constraintGuide_percent="0.02"
             android:orientation="vertical"
             tools:layout_editor_absoluteY="56dp"
             tools:layout_editor_absoluteX="38dp" />
@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/guideline121"
-            app:layout_constraintGuide_percent="0.95"
+            app:layout_constraintGuide_percent="0.98"
             android:orientation="vertical"
             tools:layout_editor_absoluteY="56dp"
             tools:layout_editor_absoluteX="337dp" />
@@ -114,7 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/guideline161"
-            app:layout_constraintGuide_percent="0.95"
+            app:layout_constraintGuide_percent="0.98"
             android:orientation="horizontal"
             tools:layout_editor_absoluteY="240dp"
             tools:layout_editor_absoluteX="0dp" />
@@ -159,7 +159,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline1611"
-        app:layout_constraintGuide_percent="0.2"
+        app:layout_constraintGuide_percent="0.18"
         android:orientation="horizontal"
         tools:layout_editor_absoluteY="240dp"
         tools:layout_editor_absoluteX="0dp" />
@@ -167,7 +167,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline1612"
-        app:layout_constraintGuide_percent="0.55"
+        app:layout_constraintGuide_percent="0.61"
         android:orientation="horizontal"
         tools:layout_editor_absoluteY="240dp"
         tools:layout_editor_absoluteX="0dp" />
@@ -175,7 +175,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline1613"
-        app:layout_constraintGuide_percent="0.75"
+        app:layout_constraintGuide_percent="0.79"
         android:orientation="horizontal"
         tools:layout_editor_absoluteY="240dp"
         tools:layout_editor_absoluteX="0dp" />
