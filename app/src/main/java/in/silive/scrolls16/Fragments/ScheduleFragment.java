@@ -39,7 +39,7 @@ public class ScheduleFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.topics, container, false);
+        View view = inflater.inflate(R.layout.topicsnew, container, false);
         rvSchedule = (RecyclerView) view.findViewById(R.id.rvtopics);
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         dates = getContext().getResources().getStringArray(R.array.schedule_dates);
