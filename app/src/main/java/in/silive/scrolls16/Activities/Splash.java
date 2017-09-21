@@ -17,6 +17,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -49,18 +50,22 @@ public class Splash extends AppCompatActivity {
     private ParallaxLayerLayout parallaxLayout;
     private SensorTranslationUpdater sensorTranslationUpdater;
     private WebView web_view;
+    private WebView webView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
-        setContentView(R.layout.splashnew);
+        setContentView(R.layout.splashfinal);
         splash = (RelativeLayout) findViewById(R.id.splash);
         context = getApplicationContext();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //image = (ImageView) findViewById(R.id.image);
         text = (TextView) findViewById(R.id.text);
         WebView mWebView = null;
         web_view = (WebView) findViewById(R.id.web_view);
+        webView=(WebView)findViewById(R.id.webView);
       /*  mWebView.getSettings().setJavaScriptEnabled(true);
 
         mWebView.getSettings().setDomStorageEnabled(true);
@@ -118,6 +123,33 @@ public class Splash extends AppCompatActivity {
                 web_view.invalidate();
             }
         });
+        final WebSettings webSettingss = web_view.getSettings();
+        webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+        webView.clearCache(true);
+        webSettings.setJavaScriptEnabled(true);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        if (Build.VERSION.SDK_INT >= 19) {
+            webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        }
+        else {
+            webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+        webView.setWebViewClient(new myWebClient());
+        webView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                //Blank listener to disable long click text selection
+                return true;
+            }
+        });
+        webView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public void onPageFinished(final WebView view, final String url) {
+                super.onPageFinished(view, url);
+                webView.invalidate();
+            }
+        });
      //   parallaxLayout = (ParallaxLayerLayout)findViewById(R.id.parallaxLayer);
        // sensorTranslationUpdater = new SensorTranslationUpdater(this);
         //parallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
@@ -151,7 +183,11 @@ public class Splash extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-            web_view.loadUrl("file:///android_asset/landingpage.html");
+            web_view.loadUrl("file:///android_asset/test.svg");
+        web_view.setBackgroundColor(Color.TRANSPARENT);
+        web_view.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
+
+        webView.loadUrl("file:///android_asset/landingbg.svg");
            //sensorTranslationUpdater.registerSensorManager();
     }
 

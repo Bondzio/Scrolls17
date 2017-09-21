@@ -26,17 +26,17 @@
             android:title="IMPORTANT DATES" />
         <item
             android:id="@+id/scrollsweb"
-            android:icon="@drawable/ic_topic"
+            android:icon="@drawable/scrollswebsite"
             android:checked="false"
             android:title="VISIT SCROLLS WEBSITE" />
         <item
             android:id="@+id/scrollTeam"
-            android:icon="@drawable/ic_topic"
+            android:icon="@drawable/scrollsteamm"
             android:checked="false"
             android:title="Scrolls team" />
         <item
             android:id="@+id/scrollDeveloper"
-            android:icon="@drawable/ic_topic"
+            android:icon="@drawable/developerteamm"
             android:checked="false"
             android:title="Scrolls Developer" />
         <item
@@ -46,7 +46,7 @@
             android:title="VISIT silive.in" />
         <item
             android:id="@+id/query"
-            android:icon="@drawable/ic_topic"
+            android:icon="@drawable/help"
             android:checked="false"
             android:title="Query Us" />
 

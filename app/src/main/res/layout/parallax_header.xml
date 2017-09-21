@@ -10,7 +10,7 @@
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 android:id="@+id/pIVHeader"
-                android:src="@drawable/rules_header" />
+                android:src="@drawable/navigationbarf" />
 
 
 

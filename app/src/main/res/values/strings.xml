@@ -69,10 +69,10 @@
 
     <string-array  name="topic_img_array">
         <item>management</item>
-        <item>cs</item>
-        <item>ec</item>
-        <item>el</item>
-        <item>mech</item>
+        <item>computescience</item>
+        <item>electronics</item>
+        <item>electrical</item>
+        <item>mechanical</item>
         <item>civil</item>
     </string-array>
 
