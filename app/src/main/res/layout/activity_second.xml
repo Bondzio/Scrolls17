@@ -21,7 +21,12 @@
 
          <RelativeLayout
              android:layout_width="match_parent"
-             android:layout_height="match_parent">
+             android:layout_height="match_parent"
+             android:layout_marginLeft="75dp"
+             android:layout_marginTop="6dp"
+             android:layout_marginBottom="6dp"
+             android:id="@+id/imageHead"
+             android:background="@drawable/aboutscrolls">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,8 +36,8 @@
             android:layout_gravity="right|end"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/aboutscrolls"
-            android:id="@+id/imageHead"
+            android:visibility="gone"
+
             >
 
         </ImageView>

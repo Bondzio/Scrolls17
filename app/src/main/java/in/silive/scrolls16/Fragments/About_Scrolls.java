@@ -2,6 +2,7 @@ package in.silive.scrolls16.Fragments;
 
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -121,6 +122,8 @@ RecyclerView rvDomains;
     public void onResume() {
         super.onResume();
         web_view.loadUrl("file:///android_asset/about.html");
+        web_view.setBackgroundColor(Color.TRANSPARENT);
+        web_view.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
     }
 
     @Override
