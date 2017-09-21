@@ -9,7 +9,7 @@
     android:hardwareAccelerated = "true"
     android:layout_marginStart="12dp"
     android:layout_marginEnd="12dp"
-    android:layout_marginTop="7dp"
+    android:layout_marginTop="4dp"
     android:layout_marginBottom="2dp">
 
     <LinearLayout
