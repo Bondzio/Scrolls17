@@ -3,16 +3,11 @@
     <color name="colorPrimary">#fbc94a</color>
     <color name="colorPrimaryDark">#e1b442</color>
     <color name="colorAccent">#263238</color>
-    <color name="item_schedule_strip">#f7d919</color>
     <color name="white">#ffffff</color>
-    <color name="domain_bg">#acffffff</color>
-    <color name="topic_dialog">#f2f222</color>
     <color name="gray">#b1b1b1</color>
     <color name="bggraynew">#E5E5E5</color>
     <color name="bg_gray">#424242</color>
-    <color name="gray_trans">#91424242</color>
     <color name="bg_dark_gray">#212121</color>
     <color name="fabback">#D8000000</color>
-    <color name="login">#375067</color>
     <color name="map">#EBE8DE</color>
 </resources>

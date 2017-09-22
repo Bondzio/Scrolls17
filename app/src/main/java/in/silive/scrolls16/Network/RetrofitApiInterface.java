@@ -57,7 +57,7 @@ Call<DomainModel> getDomians();
     @POST("api/checkstudentalreadyexist")
 Call<CheckStudentNoExsist>  checkStudentNo(@Field(value = "student_no") String Student);
     @FormUrlEncoded
-    @POST("api/checkstudentalreadyexist")
+    @POST("api/checkemailalreadyexist")
     Call<CheckStudentNoExsist>  checkEamilId(@Field(value = "email") String Email);
     @FormUrlEncoded
     @POST("api/login")

@@ -46,7 +46,6 @@
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/guideline171"
         app:layout_constraintGuide_percent="0.53"
         android:orientation="horizontal" />
 
@@ -150,7 +149,6 @@
             android:text="Submit" />
     </LinearLayout>
     <ProgressBar
-        android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

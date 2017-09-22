@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="in.silive.scrolls16.Fragments.AboutUs"
-    android:id="@+id/main_content"
     android:fitsSystemWindows="true">
     <ScrollView
         android:layout_width="match_parent"
@@ -19,49 +18,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Patron"
-                android:id="@+id/one"
                 android:padding="8dp"
                 android:layout_margin="3dp"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Advisory Head"
-                android:id="@+id/two"
                 android:padding="8dp"
                 android:layout_margin="3dp"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Organising Head"
-                android:id="@+id/three"
                 android:padding="8dp"
                 android:layout_margin="3dp"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Technical Committee"
-                android:id="@+id/four"
                 android:padding="8dp"
                 android:layout_margin="3dp"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Student Coordinators"
-                android:id="@+id/five"
                 android:padding="8dp"
                 android:layout_margin="3dp"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Web Developers"
-                android:id="@+id/six"
                 android:padding="8dp"
                 android:layout_margin="3dp"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="App Developers"
-                android:id="@+id/seven"
                 android:padding="8dp"
                 android:layout_margin="3dp"/>
 

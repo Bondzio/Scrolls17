@@ -28,7 +28,6 @@
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/guideline46"
         app:layout_constraintGuide_percent="0.0"
         android:orientation="horizontal"
         tools:layout_editor_absoluteY="0dp"
@@ -70,7 +69,6 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <ImageView
-        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:srcCompat="@drawable/landingpagescrolls"
@@ -92,7 +90,6 @@
         <android.support.constraint.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/guideline441"
             app:layout_constraintGuide_percent="0.0"
             android:orientation="vertical"
             tools:layout_editor_absoluteY="56dp"
@@ -117,7 +114,6 @@
         <android.support.constraint.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/guideline451"
             app:layout_constraintGuide_percent="1.0"
             android:orientation="vertical"
             tools:layout_editor_absoluteY="56dp"
@@ -126,7 +122,6 @@
         <android.support.constraint.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/guideline461"
             app:layout_constraintGuide_percent="0.0"
             android:orientation="horizontal"
             tools:layout_editor_absoluteY="56dp"
@@ -134,7 +129,6 @@
         <android.support.constraint.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/guideline491"
             app:layout_constraintGuide_percent="1.0"
             android:orientation="horizontal"
             tools:layout_editor_absoluteY="324dp"

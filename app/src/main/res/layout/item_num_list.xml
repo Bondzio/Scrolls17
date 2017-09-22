@@ -31,7 +31,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/circle_primary"
                 android:gravity="center"
-android:id="@+id/tvNum"
                 android:text="1" />
         </LinearLayout>
         <TextView

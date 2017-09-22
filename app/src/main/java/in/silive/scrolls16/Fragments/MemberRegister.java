@@ -84,7 +84,6 @@ public class MemberRegister extends Fragment implements BlockingStep {
         sharedPreferences = Scrolls.getInstance().sharedPrefs;
         stud_other_college = (EditText) reg_view.findViewById(R.id.stud_other_college);
         stud_other_collegel = (LinearLayout) reg_view.findViewById(R.id.stud_other_collegel);
-        stud_other_college.setVisibility(View.GONE);
         stud_id = (EditText) reg_view.findViewById(R.id.stud_id);
         stud_idl = (LinearLayout) reg_view.findViewById(R.id.stud_idl);
         stud_mob_no = (EditText) reg_view.findViewById(R.id.stud_mob_no);

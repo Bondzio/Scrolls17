@@ -74,7 +74,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         // checking if auth token is saved or not
         /*if (authorization_token.equals(""))
             return;*/
-        call = apiService.Fcm(token);
+      /*  call = apiService.Fcm(token);
         if (CheckConnectivity.isNetConnected(getApplicationContext())) {
             final ProgressDialog loading = ProgressDialog.show(getApplicationContext(), "Fetching Data", "Please wait...", false, false);
             call.enqueue(new Callback<LoginSucess>() {
@@ -103,7 +103,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
             });
 
-        }
+        }*/
 
 
 

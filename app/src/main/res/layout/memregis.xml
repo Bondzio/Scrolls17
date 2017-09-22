@@ -234,7 +234,6 @@
                             android:text="YES" />
 
                         <RadioButton
-                            android:id="@+id/no"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#000000"

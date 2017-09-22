@@ -57,7 +57,7 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.splashfinal);
-        splash = (RelativeLayout) findViewById(R.id.splash);
+      //  splash = (RelativeLayout) findViewById(R.id.splash);
         context = getApplicationContext();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);

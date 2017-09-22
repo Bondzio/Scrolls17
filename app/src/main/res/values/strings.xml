@@ -2,33 +2,19 @@
     <string name="app_name">Scrolls</string>
     <string name="google_maps_key">AIzaSyBDofDBjIoBPX8UY3uH4uVLZ9VcoyKjd_k</string>
     <string name="could_not_connect">Could not connect to server.</string>
-<string name="html"><h4><b>“ </b>Logics will take you from A to B but imagination will take you everywhere.<b>”</b><br/>&#45; Albert Einstein</h4>
-        <p>A national level technical paper presentation contest that provides a pedestal to unleash the talent of budding technocrats, SCROLLS-2016 deals with the most thriving and progressive fields of technology and management, bringing Computing, Information Technology, Mechanical Engineering, Electrical Engineering, Electronics &amp; Communication Technologies and Civil Engineering along with major developmental leaps in management and leadership in its fold.
-        We believe that the real conflux to innovation and creativity is imagination, power to think beyond the stereotype and conventions. Keeping the above in mind, we at AKGEC organize an annual National Level Technical Paper Presentation event called SCROLLS (Student Creative Oratory Learning Skills) which aspires to amplify excellence in the sphere of technology and management to promote the technocrats and entrepreneurs of tomorrow. </p></string>
-    <string-array name="navigation_drawer_lables">
-        <item>About Scrolls</item>
-        <item>Rules</item>
-        <item>Schedule</item>
-        <item>Register</item>
-        <item>Upload A Doc</item>
-        <!--        <item>Query Us</item>-->
-        <item>Reach Us</item>
-        <!--  <item>Forgot Id</item>-->
-        <item>About Us</item>
-    </string-array>
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>
 
     <string-array name="schedule_dates">
-        <item>04/08/17</item>
-        <item>10/08/17</item>
-        <item>18/08/17</item>
+        <item>06/08/17</item>
+        <item>11/08/17</item>
         <item>21/08/17</item>
+        <item>27/08/17</item>
     </string-array>
     <string-array name="schedule_days">
-        <item>Tuesday</item>
-        <item>Monday</item>
-        <item>Tuesday</item>
+        <item>Friday</item>
+        <item>Wednesday</item>
+        <item>Saturday</item>
         <item>Friday</item>
     </string-array>
     <string-array name="schedule_labels">
@@ -47,6 +33,8 @@
         <item>MCA</item>
         <item>M.Tech</item>
         <item>PGDM</item>
+        <item>B.SC</item>
+        <item>BCA</item>
     </string-array>
 
     <string-array name="Year">
@@ -55,9 +43,6 @@
         <item>3</item>
         <item>4</item>
     </string-array>
-    <string name="about_scrolls">
-        A national level technical paper presentation contest that provides a pedestal to unleash the talent of budding technocrats, SCROLLS-2015 deals with the most thriving and progressive fields of technology and management, bringing computing, information technology, mechanical engineering, electrical engineering, and telecommunication technologies along with major developmental leaps in management and leadership in its fold. Here, clarity and knowledge transcends through discussions over vast and diversified topics. So here is a chance to work with imagination, insight and confidence to ensure the onset of the new dawn.
-    </string>
     <string-array name="domain_array">
         <item>Management Science</item>
         <item>Computer Science and Information Technology</item>
@@ -180,23 +165,11 @@ clean earth.</item>
 
     </string-array>
     <!--GCM -->
-    <string name="already_registered">Device is already registered on server.</string>
-    <string name="gcm_registered">From GCM: device successfully registered!</string>
-    <string name="gcm_unregistered">From GCM: device successfully unregistered!</string>
-    <string name="gcm_message">From GCM: you got message!</string>
-    <string name="gcm_error">From GCM: error (%1$s).</string>
-    <string name="gcm_recoverable_error">From GCM: recoverable error (%1$s).</string>
-    <string name="gcm_deleted">From GCM: server deleted %1$d pending messages!</string>
     <string name="server_registering">Trying (attempt %1$d/%2$d) to register device on Demo Server.</string>
     <string name="server_registered">From Demo Server: successfully added device!</string>
     <string name="server_unregistered">From Demo Server: successfully removed device!</string>
     <string name="server_register_error">Could not register device on Demo Server after %1$d attempts.</string>
     <string name="server_unregister_error">Could not unregister device on Demo Server (%1$s).</string>
-    <string name="options_register">Register</string>
-    <string name="options_unregister">Unregister</string>
-    <string name="options_clear">Clear</string>
-    <string name="options_exit">Exit</string>
-    <string name="gcm_DefaultSenderId">10000xyz</string>
 
     <string name="rules">The competition will be open to all bonafide students of Engineering and Management Colleges
         \nMaximum of 3 and minimum of 2 authors per paper.
@@ -206,35 +179,5 @@ clean earth.</item>
 \nThe paper to be typed in single space, double column format, using Times New Roman font &amp; font-size 12. Maximum number of pages to be 10 and the page should have no numbers. A margin of 1’’ all around to be left. A sample synopsis for reference is available on SCROLLS\'16 website.
 \nFirst page to include Title, Name(s) of authors, their college name, telephone numbers as well as email addresses. This information to be included with extended abstract also.
     </string>
-
-    <string-array name="Technical_Committee">
-        <item>Prof. P.K. Chopra  HOD,EC/EI,AKGEC</item>
-        <item>Prof. P.K. Sharda  HOD,AS-H,AKGEC</item>
-        <item>Prof. S.L. Kapoor  HOD,MCA,AKGEC</item>
-        <item>Prof. B.M. Kalra  HOD,CSE,AKGEC
-        </item>
-        <item>Prof. I.P. Sharma  HOD,ME,AKGEC</item>
-        <item>Prof. R.P. Saw  HOD,IT,AKGEC</item>
-        <item>Prof. B. Parashad  HOD,CIVIL,AKGEC</item>
-        <item>Prof. Bhupul Singh  HOD,EN,AKGEC</item>
-    </string-array>
-    <string-array name="Student_Coordinators">
-        <item>
-        </item>
-        <item></item>
-        <item></item>
-    </string-array>
-    <string-array name="Web_Developers">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-    </string-array>
-    <string-array name="App_Developers">
-        <item>        </item>
-        <item>        </item>
-        <item>        </item>
-        <item>        </item>
-    </string-array>
 
 </resources>

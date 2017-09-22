@@ -14,6 +14,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import in.silive.scrolls16.Adapters.AboutUsListAdapter;
+import in.silive.scrolls16.Adapters.AboutUsListAdapterCNew;
 import in.silive.scrolls16.Adapters.AboutUsListAdapterNew;
 import in.silive.scrolls16.Adapters.DomainsAdapter;
 import in.silive.scrolls16.R;
@@ -31,9 +32,9 @@ public class ScrollsTeamNew extends Fragment implements View.OnClickListener {
 
     static   TopicsFragment fragment;
     private String[] imagesArray;
-    String teamMembers [] = {"Prof. V.K. Parashar","Sandeep Gupta","Mayank Bahadur","Suhani Singh"};
-    String desigOfMembers [] = {"DSW, AKGEC","8802119708","8745982117","8908767865"};
-    Integer picMembers [] = {R.drawable.t,R.drawable.st1,R.drawable.st2,R.drawable.st3};
+    String teamMembers [] = {"Prof. V.K. Parashar","Disha Tripathi","Sidhant Kandpal","Pratyush Sharma"};
+    String desigOfMembers [] = {"DSW, AKGEC","CONVENOR","CONVENOR","CONVENOR"};
+    Integer picMembers [] = {R.drawable.t,R.drawable.disha,R.drawable.sidhant,R.drawable.pratyush};
     private RecyclerView scrolls_team;
     WebView webView;
 
@@ -46,7 +47,7 @@ public class ScrollsTeamNew extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.scrollsteam, container, false);
+        view =  inflater.inflate(R.layout.scrollsdeveloper, container, false);
 
 
 
@@ -55,7 +56,7 @@ public class ScrollsTeamNew extends Fragment implements View.OnClickListener {
         scrolls_team.setHasFixedSize(true);
         layoutManager = new GridLayoutManager(getContext(),2);
         scrolls_team.setLayoutManager(layoutManager);
-        AboutUsListAdapterNew aboutUsListAdapter = new AboutUsListAdapterNew(getContext(),teamMembers,desigOfMembers,picMembers);
+        AboutUsListAdapterCNew aboutUsListAdapter = new AboutUsListAdapterCNew(getContext(),teamMembers,desigOfMembers,picMembers);
         scrolls_team.setAdapter(aboutUsListAdapter);
         return view;
     }

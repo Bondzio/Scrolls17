@@ -60,6 +60,7 @@ public class LoginDashboard extends Fragment {
     private ImageView logout;
     TextView teamname,member1,member2,member3,filestatus;
     SharedPreferences sharedprefs;
+    String teamName,Member1,Member2,Member3;
     String token;
     private RetrofitApiInterface apiService,service;
     public static final int PERMISSIONS_REQUEST_CODE = 0;
@@ -78,9 +79,18 @@ public class LoginDashboard extends Fragment {
         member1=(TextView) v.findViewById(R.id.member1);
         member2=(TextView) v.findViewById(R.id.member2);
         member3=(TextView) v.findViewById(R.id.member3);
+        teamName=sharedprefs.getString(Config.LOGINT3,"");
+        Member1=sharedprefs.getString(Config.LOGINM1,"");
+        Member2=sharedprefs.getString(Config.LOGINM2,"");
+        Member3=sharedprefs.getString(Config.LOGINM3,"");
+        member1.setText(Member1);
+        member2.setText(Member2);
+        member3.setText(Member3);
         filestatus=(TextView) v.findViewById(R.id.filestatus);
+
         apiService =
                 ApiClient.getClient().create(RetrofitApiInterface.class);
+
         filestatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +102,7 @@ public class LoginDashboard extends Fragment {
                 startActivityForResult(i, FILE_CODE);
             }
         });
-        //checkStatus(token);
+        checkStatus(token);
         //imagehead.setVisibility(View.GONE);
        // imagedash.setVisibility(View.VISIBLE);
 

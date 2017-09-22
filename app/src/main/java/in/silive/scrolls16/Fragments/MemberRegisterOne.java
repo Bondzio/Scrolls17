@@ -332,7 +332,7 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
                     showDialog(response.body().getData());
                 }
                 else
-                {
+                {Toast.makeText(getActivity(),Integer.toString(response.code()),Toast.LENGTH_LONG).show();
                     Log.d("debugg",response.toString());
                     Log.d("debugg",call.request().body().toString());
                 }
