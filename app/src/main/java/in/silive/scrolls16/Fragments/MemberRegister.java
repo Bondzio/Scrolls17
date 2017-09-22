@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -65,12 +66,14 @@ public class MemberRegister extends Fragment implements BlockingStep {
     Call<CheckStudentNoExsist> call;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    private String flagacc;
+    private String flagacc="1";
     private String stud_collegevalue, stud_coursevalue, stud_yearvalue;
     boolean flags;
 
     private RetrofitApiInterface apiService;
     private boolean fladss;
+    private LinearLayout stud_other_collegel;
+    private LinearLayout stud_idl;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,8 +83,10 @@ public class MemberRegister extends Fragment implements BlockingStep {
         setRetainInstance(true);
         sharedPreferences = Scrolls.getInstance().sharedPrefs;
         stud_other_college = (EditText) reg_view.findViewById(R.id.stud_other_college);
+        stud_other_collegel = (LinearLayout) reg_view.findViewById(R.id.stud_other_collegel);
         stud_other_college.setVisibility(View.GONE);
         stud_id = (EditText) reg_view.findViewById(R.id.stud_id);
+        stud_idl = (LinearLayout) reg_view.findViewById(R.id.stud_idl);
         stud_mob_no = (EditText) reg_view.findViewById(R.id.stud_mob_no);
         stud_mail = (EditText) reg_view.findViewById(R.id.stud_mail);
         stud_accommodation = (RadioGroup) reg_view.findViewById(R.id.acommodation);
@@ -104,14 +109,14 @@ public class MemberRegister extends Fragment implements BlockingStep {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (!stud_college.getSelectedItem().equals("Ajay Kumar GARG ENGINEERING COLLEGE")) {
-                    stud_other_college.setVisibility(View.VISIBLE);
-                    stud_id.setVisibility(View.INVISIBLE);
+                    stud_other_collegel.setVisibility(View.VISIBLE);
+                    stud_idl.setVisibility(View.INVISIBLE);
                     stud_collegevalue = stud_other_college.getText().toString();
 
                 } else {
-                    stud_other_college.setVisibility(View.INVISIBLE);
-                    stud_id.setVisibility(View.VISIBLE);
-                    stud_collegevalue = stud_college.getSelectedItem().toString();
+                    stud_other_collegel.setVisibility(View.INVISIBLE);
+                    stud_idl.setVisibility(View.VISIBLE);
+                    stud_collegevalue = "akgec";
 
                 }
             }

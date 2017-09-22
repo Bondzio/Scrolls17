@@ -3,6 +3,7 @@ package in.silive.scrolls16.Activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 
 import com.stepstone.stepper.StepperLayout;
 
@@ -21,6 +22,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stepper);
         mStepperLayout = (StepperLayout) findViewById(R.id.stepperLayout);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mStepperLayout.setAdapter(new MyStepperAdapter(getSupportFragmentManager(), this));
     }
 }

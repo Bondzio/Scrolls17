@@ -119,7 +119,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
     Call<CheckStudentNoExsist> call;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    private String flagacc;
+    private String flagacc="1";
     private String stud_collegevalue, stud_coursevalue, stud_yearvalue;
     boolean flags;
 
@@ -165,7 +165,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
                 else
                 {    stud_other_college.setVisibility(View.INVISIBLE);
                     stud_id.setVisibility(View.VISIBLE);
-                    stud_collegevalue=stud_college.getSelectedItem().toString();
+                    stud_collegevalue="akgec";
 
                 }
             }

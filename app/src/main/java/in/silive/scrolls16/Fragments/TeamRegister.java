@@ -99,7 +99,7 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
     private Call<DomainModel> callDomain;
     private SharedPreferences sharedpreferences;
     private SharedPreferences.Editor editor;
-    String noOfMembers;
+    String noOfMembers="2";
     private EditText team_confirmPassword;
     private boolean flag;
 

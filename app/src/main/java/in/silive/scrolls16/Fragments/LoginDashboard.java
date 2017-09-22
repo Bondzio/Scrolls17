@@ -68,39 +68,45 @@ public class LoginDashboard extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.logindashboard, container, false);
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        imagehead=(RelativeLayout) getActivity().findViewById(R.id.imageHead);
-        logout=(ImageView) getActivity().findViewById(R.id.image);
+        //Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        //imagehead=(RelativeLayout) getActivity().findViewById(R.id.imageHead);
+       // logout=(ImageView) getActivity().findViewById(R.id.image);
         sharedprefs= in.silive.scrolls16.application.Scrolls.getInstance().sharedPrefs;
         token=sharedprefs.getString(Config.Token,"");
         imagedash=(LinearLayout) getActivity().findViewById(R.id.linear);
-        teamname=(TextView) getActivity().findViewById(R.id.team_name);
-        member1=(TextView) getActivity().findViewById(R.id.member1);
-        member2=(TextView) getActivity().findViewById(R.id.member2);
-        member3=(TextView) getActivity().findViewById(R.id.member3);
-        filestatus=(TextView) getActivity().findViewById(R.id.filestatus);
+        teamname=(TextView) v.findViewById(R.id.team_name);
+        member1=(TextView) v.findViewById(R.id.member1);
+        member2=(TextView) v.findViewById(R.id.member2);
+        member3=(TextView) v.findViewById(R.id.member3);
+        filestatus=(TextView) v.findViewById(R.id.filestatus);
+        apiService =
+                ApiClient.getClient().create(RetrofitApiInterface.class);
         filestatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkPermissionsAndOpenFilePicker();
+                Intent i = new Intent(getContext(), MyPickerActivity.class);
+                i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
+                i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false);
+                i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_FILE);
+                i.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
+                startActivityForResult(i, FILE_CODE);
             }
         });
-        checkStatus(token);
-        imagehead.setVisibility(View.GONE);
-        imagedash.setVisibility(View.VISIBLE);
-        apiService =
-                ApiClient.getClient().create(RetrofitApiInterface.class);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        //checkStatus(token);
+        //imagehead.setVisibility(View.GONE);
+       // imagedash.setVisibility(View.VISIBLE);
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(false);
-        logout.setOnClickListener(new View.OnClickListener() {
+        //((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+
+        //((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        //((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(false);
+        /*logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logout(token);
 
             }
-        });
+        });*/
 
         return v;
     }
@@ -131,7 +137,7 @@ public class LoginDashboard extends Fragment {
         });
     }
 
-    private void checkPermissionsAndOpenFilePicker() {
+    /*private void checkPermissionsAndOpenFilePicker() {
         String permission = Manifest.permission.READ_EXTERNAL_STORAGE;
 
         if (ContextCompat.checkSelfPermission(getContext(), permission) != PackageManager.PERMISSION_GRANTED) {
@@ -148,12 +154,12 @@ public class LoginDashboard extends Fragment {
             i.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
             startActivityForResult(i, FILE_CODE);
         }
-    }
+    }*/
     private void showError() {
         Toast.makeText(getContext(), "Allow external storage reading", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
+   /* @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -171,7 +177,7 @@ public class LoginDashboard extends Fragment {
                 }
             }
         }
-    }
+    }*/
     @Override
     public void onActivityResult(final int requestCode, int resultCode, Intent data) {
         if (requestCode == FILE_CODE && resultCode == Activity.RESULT_OK) {

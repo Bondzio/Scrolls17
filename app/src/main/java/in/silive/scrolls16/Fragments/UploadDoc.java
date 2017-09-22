@@ -32,6 +32,7 @@ import java.io.File;
 
 import in.silive.scrolls16.Activities.MyPickerActivity;
 import in.silive.scrolls16.Activities.SecondActivity;
+import in.silive.scrolls16.Activities.UploadActivity;
 import in.silive.scrolls16.Listeners.FetchDataListener;
 import in.silive.scrolls16.Network.ApiClient;
 import in.silive.scrolls16.Network.CheckConnectivity;
@@ -273,7 +274,8 @@ public class UploadDoc extends Fragment {
                             editor.putString(Config.LOGINT3, token);
 
                             editor.commit();
-                            showFragment(new LoginDashboard());
+                            Intent i=new Intent(getActivity(),UploadActivity.class);
+                            getActivity().startActivity(i);
 
                          //   getSynopsisAvail();
                          //     v.findViewById(R.id.llForm).setVisibility(View.GONE);

@@ -5,46 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="in.silive.scrolls16.Activities.SecondActivity">
-<android.support.design.widget.AppBarLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-
-        android:id="@+id/toolbar"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/white"
-        app:theme="@style/MainActivityToolbar"
-        app:titleTextColor="#FFFFFF"
-        >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="75dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="6dp"
-            android:id="@+id/imageHead"
-            android:background="@drawable/aboutscrolls">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/image"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:foregroundGravity="right"
-                android:layout_gravity="right|end"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:visibility="gone"
-
-                >
-
-            </ImageView>
-        </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
-</android.support.design.widget.AppBarLayout>
 <com.stepstone.stepper.StepperLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"

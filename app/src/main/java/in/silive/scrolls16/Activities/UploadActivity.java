@@ -5,54 +5,30 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.WindowManager;
-import android.webkit.WebView;
-import android.widget.RelativeLayout;
 
-import in.silive.scrolls16.Fragments.TopicsFragment;
-import in.silive.scrolls16.Fragments.UploadDoc;
+import in.silive.scrolls16.Fragments.LoginDashboard;
 import in.silive.scrolls16.R;
 
 /**
- * Created by root on 21/9/17.
+ * Created by root on 22/9/17.
  */
 
-public class LoginActivity extends AppCompatActivity {
-    Toolbar toolbar;
-    Bundle bundle;
-    String title;
-    WebView webView;
-    private RelativeLayout imagehead;
+public class UploadActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-
+        showFragment(new LoginDashboard());
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        showFragment(new UploadDoc(), title);
-
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home: finish();
-                return true;
-        }
-        return false;
-    }
-    public void showFragment(Fragment fragment, String title) {
+    public void showFragment(Fragment fragment) {
         if (fragment != null) {
             FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.container, fragment)/*.addToBackStack(fragment.getClass().getName())*/;
             fragmentTransaction.commit();
 
         }
-    }
-    public void setImagehead(Integer res)
-    {
-        imagehead.setBackgroundResource(res);
     }
 }
