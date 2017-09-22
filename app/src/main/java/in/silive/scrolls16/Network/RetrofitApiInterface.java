@@ -70,4 +70,8 @@ Call<CheckStudentNoExsist>  checkStudentNo(@Field(value = "student_no") String S
     Call<okhttp3.ResponseBody> upload(@Query("token") String token,
                                       @Part MultipartBody.Part file
     );
+    @GET("api/logout")
+    Call<ResponseBody>  logout(@Query("token") String token);
+    @GET("api/fileentryexist")
+    Call<ResponseBody>  fileUploadStatus(@Query("token") String token);
 }

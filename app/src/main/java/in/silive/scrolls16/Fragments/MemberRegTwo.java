@@ -128,7 +128,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        reg_view = inflater.inflate(R.layout.memreg, container, false);
+        reg_view = inflater.inflate(R.layout.memregis, container, false);
         stud_name = (EditText) reg_view.findViewById(R.id.stud_name);
         //initialize your UI
         sharedPreferences= in.silive.scrolls16.application.Scrolls.getInstance().sharedPrefs;

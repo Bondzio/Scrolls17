@@ -53,4 +53,8 @@ public class LoginActivity extends AppCompatActivity {
 
         }
     }
+    public void setImagehead(Integer res)
+    {
+        imagehead.setBackgroundResource(res);
+    }
 }

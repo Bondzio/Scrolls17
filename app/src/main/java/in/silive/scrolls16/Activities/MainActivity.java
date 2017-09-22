@@ -148,13 +148,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-
-                fragment = new UploadDoc();
-                fragmentTransaction.replace(R.id.fragment_container, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                Intent i=new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(i);
 
 
             }

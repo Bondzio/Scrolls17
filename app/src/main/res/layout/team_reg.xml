@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="@color/login"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <android.support.constraint.Guideline
@@ -57,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ENTER TEAM DETAILS"
+            android:textColor="#FFFFFF"
             android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"
             android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -72,12 +74,14 @@
             android:layout_weight="1.5"
             android:gravity="center_vertical"
             android:textStyle="bold"
+            android:textColor="#FFFFFF"
             android:text="Team Name"/>
         <android.support.design.widget.TextInputEditText
             android:id="@+id/team_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:textColorHint="#FFFFFF"
             android:singleLine="true"
             android:hint="Team name" />
         </LinearLayout>
@@ -94,6 +98,7 @@
                 android:layout_weight="1"
                 android:padding="3dp"
                 android:textStyle="bold"
+                android:textColor="#FFFFFF"
                 android:gravity="center_vertical"
                 android:text="Select No of Members" />
 
@@ -117,6 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:checked="true"
+                        android:textColor="#FFFFFF"
                         android:text="2 members" />
 
                     <RadioButton
@@ -124,6 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textColor="#FFFFFF"
                         android:text="3 members" />
 
                 </RadioGroup>
@@ -143,11 +150,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Domain"
+                android:textColor="#FFFFFF"
                 android:gravity="center_vertical"
                 android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/team_domain"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -170,6 +179,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Topic"
+                android:textColor="#FFFFFF"
                 android:gravity="center_vertical"
                 android:textStyle="bold" />
 
@@ -196,6 +206,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Password"
+                android:textColor="#FFFFFF"
                 android:gravity="center_vertical"
                 android:textStyle="bold" />
 
@@ -204,6 +215,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColorHint="#FFFFFF"
                 android:hint="6 characters or more "
                 android:inputType="textPassword" />
 
@@ -222,6 +234,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Confirm Password"
+                android:textColor="#FFFFFF"
                 android:gravity="center_vertical"
                 android:textStyle="bold" />
 
@@ -230,6 +243,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColorHint="#FFFFFF"
                 android:hint="Confirm password"
                 android:inputType="textPassword" />
 

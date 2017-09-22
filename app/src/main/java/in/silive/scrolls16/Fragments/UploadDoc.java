@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -114,7 +115,7 @@ public class UploadDoc extends Fragment {
 
             }
         });*/
-        btnSelect = (Button) v.findViewById(R.id.btnSelect);
+        /*btnSelect = (Button) v.findViewById(R.id.btnSelect);
         btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,7 +126,7 @@ public class UploadDoc extends Fragment {
                 i.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
                 startActivityForResult(i, FILE_CODE);
             }
-        });
+        });*/
         //tvDomain = (TextView)v.findViewById(R.id.tvDomain);
         //tvTopic = (TextView)v.findViewById(R.id.tvTopic);
        // tvTeamID = (TextView)v.findViewById(R.id.tvTeamId);
@@ -266,7 +267,14 @@ public class UploadDoc extends Fragment {
                             Log.d("debugg",token);
                             editor = sharedPreferences.edit();
                             editor.putString(Config.Token, token);
+                            editor.putString(Config.LOGINM1, token);
+                            editor.putString(Config.LOGINM2, token);
+                            editor.putString(Config.LOGINM3, token);
+                            editor.putString(Config.LOGINT3, token);
+
                             editor.commit();
+                            showFragment(new LoginDashboard());
+
                          //   getSynopsisAvail();
                          //     v.findViewById(R.id.llForm).setVisibility(View.GONE);
                            // v.findViewById(R.id.llUpload).setVisibility(View.VISIBLE);
@@ -286,6 +294,14 @@ public class UploadDoc extends Fragment {
             }
         }
 
+    }
+    public void showFragment(Fragment fragment) {
+        if (fragment != null) {
+            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.container, fragment)/*.addToBackStack(fragment.getClass().getName())*/;
+            fragmentTransaction.commit();
+
+        }
     }
 
 

@@ -88,4 +88,8 @@ public class Config {
     public static String StudentYear2 = "student2year";
     public static String CoLLEGENAME2 = "college2Name";
     public static String Token="token";
+    public static String LOGINM1="loginMember1";
+    public static String LOGINM2="loginMember2";
+    public static String LOGINM3="loginMember3";
+    public static String LOGINT3="TeamnameL";
 }

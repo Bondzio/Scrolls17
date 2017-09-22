@@ -12,43 +12,43 @@
         android:background="@color/login"
         android:padding="10dp"
         android:visibility="visible">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ENTER TEAMLEAD DETAILS"
-            android:layout_gravity="center"
-            android:textColor="#FFFFFF"
-            android:gravity="center_horizontal"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ENTER MEMBER DETAILS"
+                android:layout_gravity="center"
+                android:textColor="#FFFFFF"
+                android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="5dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="3dp"
-        android:textColor="#FFFFFF"
-        android:text="NAME"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/stud_name"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:textColorHint="#FFFFFF"
-            android:hint="Enter your name"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:singleLine="true"
-            android:inputType="textPersonName" />
-</LinearLayout>
+            android:orientation="vertical"
+            android:padding="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:textColor="#FFFFFF"
+                android:text="NAME"
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/stud_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:textColorHint="#FFFFFF"
+                android:hint="Enter your name"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:singleLine="true"
+                android:inputType="textPersonName" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,16 +61,16 @@
                 android:text="EMAIL"
                 android:textColor="#FFFFFF"
                 android:textAppearance="?android:attr/textAppearanceSmall"/>
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/stud_mail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:textColorHint="#FFFFFF"
-            android:hint="Enter your mail address"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:inputType="textEmailAddress" />
-            </LinearLayout>
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/stud_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColorHint="#FFFFFF"
+                android:hint="Enter your mail address"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:inputType="textEmailAddress" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -141,84 +141,84 @@
 
 
 
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/stud_other_college"
-        android:visibility="gone"
-        android:orientation="vertical"
-        android:padding="5dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="3dp"
-        android:text="COLLEGE"
-        android:textColor="#FFFFFF"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/stud_other_college"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="COLLEGE"
+                    android:textColor="#FFFFFF"
+                    android:textAppearance="?android:attr/textAppearanceSmall"/>
 
-        <android.support.design.widget.TextInputEditText
+                <android.support.design.widget.TextInputEditText
 
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    android:textColorHint="#FFFFFF"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:hint="Enter your college name" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/stud_id"
+
+                android:padding="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:text="STUDENT NO"
+                    android:textColor="#FFFFFF"
+                    android:textAppearance="?android:attr/textAppearanceSmall"/>
+                <android.support.design.widget.TextInputEditText
+                    android:singleLine="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#FFFFFF"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:hint="Enter your student Id" />
+            </LinearLayout>
+        </FrameLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:textColorHint="#FFFFFF"
-            android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:hint="Enter your college name" />
-</LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/stud_id"
-
-        android:padding="5dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="3dp"
-        android:text="STUDENT NO"
-        android:textColor="#FFFFFF"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
-        <android.support.design.widget.TextInputEditText
-            android:singleLine="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="#FFFFFF"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:hint="Enter your student Id" />
-    </LinearLayout>
-</FrameLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+            android:orientation="vertical"
 
 
-        android:padding="5dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="3dp"
-            android:text="Mobile No"
-            android:textColor="#FFFFFF"
-            android:textAppearance="?android:attr/textAppearanceSmall"/>
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/stud_mob_no"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your Mobile number"
-            android:inputType="phone"
-            android:textColorHint="#FFFFFF"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:singleLine="true"
-            android:maxLength="10" />
+            android:padding="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="Mobile No"
+                android:textColor="#FFFFFF"
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/stud_mob_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter your Mobile number"
+                android:inputType="phone"
+                android:textColorHint="#FFFFFF"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:singleLine="true"
+                android:maxLength="10" />
 
 
-</LinearLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
