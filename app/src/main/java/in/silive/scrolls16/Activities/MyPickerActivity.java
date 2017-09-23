@@ -36,6 +36,7 @@ public class MyPickerActivity extends  AbstractFilePickerActivity<File> {
             File file1 = new File(file.getPath());
             if (file1.isFile()&& file1.length()<=MAX_FILE_SIZE){
                 Intent i = new Intent();
+
                 i.setData(file);
                 setResult(Activity.RESULT_OK, i);
                 finish();
