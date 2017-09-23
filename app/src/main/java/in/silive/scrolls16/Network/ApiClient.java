@@ -21,7 +21,7 @@ public class ApiClient {
                     .connectTimeout(1000, TimeUnit.SECONDS)
                     .readTimeout(1000,TimeUnit.SECONDS).build();
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL).client(client)
+                    .baseUrl("http://0f8c793e.ngrok.io").client(client)
                     .addConverterFactory(new NullOnEmptyConverterFactory())
                     .addConverterFactory(GsonConverterFactory.create())
 

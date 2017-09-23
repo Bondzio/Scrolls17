@@ -14,6 +14,7 @@
     android:layout_height="match_parent"
     app:ms_activeStepColor="@color/colorPrimary"
     app:ms_completeButtonText="Submit"
+    app:ms_showBackButtonOnFirstStep="true"
     app:ms_stepperFeedbackType="content_progress|disabled_bottom_navigation"
     app:ms_stepperType="dots" />
     </android.support.design.widget.CoordinatorLayout>

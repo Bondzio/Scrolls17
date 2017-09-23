@@ -102,7 +102,7 @@ public class LoginDashboard extends Fragment {
                 startActivityForResult(i, FILE_CODE);
             }
         });
-        checkStatus(token);
+        //checkStatus(token);
         //imagehead.setVisibility(View.GONE);
        // imagedash.setVisibility(View.VISIBLE);
 
@@ -189,7 +189,9 @@ public class LoginDashboard extends Fragment {
         }
     }*/
     @Override
-    public void onActivityResult(final int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(final int requestCode, int resultCode, Intent data)
+    {
+        Log.d("debugg",Integer.toString(requestCode)+Integer.toString(requestCode));
         if (requestCode == FILE_CODE && resultCode == Activity.RESULT_OK) {
             try {
                 Log.d("Scrolls", "File " + data.getData().getPath());

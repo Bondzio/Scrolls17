@@ -74,7 +74,7 @@ public class MemberRegister extends Fragment implements BlockingStep {
     private boolean fladss;
     private LinearLayout stud_other_collegel;
     private LinearLayout stud_idl;
-
+    boolean m;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         reg_view = inflater.inflate(R.layout.memreg, container, false);
@@ -110,13 +110,14 @@ public class MemberRegister extends Fragment implements BlockingStep {
                 if (!stud_college.getSelectedItem().equals("Ajay Kumar GARG ENGINEERING COLLEGE")) {
                     stud_other_collegel.setVisibility(View.VISIBLE);
                     stud_idl.setVisibility(View.INVISIBLE);
-                    stud_collegevalue = stud_other_college.getText().toString();
+                    m=true;
+
 
                 } else {
                     stud_other_collegel.setVisibility(View.INVISIBLE);
                     stud_idl.setVisibility(View.VISIBLE);
                     stud_collegevalue = "akgec";
-
+                    m=false;
                 }
             }
 
@@ -125,7 +126,6 @@ public class MemberRegister extends Fragment implements BlockingStep {
 
             }
         });
-
 
         stud_course = (Spinner) reg_view.findViewById(R.id.stud_course);
         stud_course.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -151,6 +151,7 @@ public class MemberRegister extends Fragment implements BlockingStep {
 
             }
         });
+
         stud_coursevalue = stud_course.getSelectedItem().toString();
         stud_yearvalue = stud_year.getSelectedItem().toString();
         apiService =
@@ -239,6 +240,10 @@ public class MemberRegister extends Fragment implements BlockingStep {
             flag = 1;
             stud_name.setError("Invalid name");
         }
+        if(m==true) {
+            stud_collegevalue = stud_other_college.getText().toString();
+        }
+
 
         student_college_name = stud_other_college.getText().toString();
         if (stud_id.getVisibility() == View.VISIBLE) {
@@ -292,12 +297,22 @@ public class MemberRegister extends Fragment implements BlockingStep {
             stud_name.setError("Invalid name");
             flags = false;
         }
-        if (stud_id.getVisibility() == View.VISIBLE) {
+        if (stud_idl.getVisibility() == View.VISIBLE) {
             student_id = stud_id.getText().toString();
 
             if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE && !Pattern.matches("^\\d{7}[Dd]{0,1}$", student_id)) {
 
                 stud_id.setError("Invalid Id");
+                flags = false;
+            }
+
+        }
+        if (stud_other_collegel.getVisibility() == View.VISIBLE) {
+           String collegel = stud_other_college.getText().toString();
+
+            if (collegel.length() == 0  ) {
+
+                stud_other_college.setError("Invalid College Name");
                 flags = false;
             }
 
@@ -312,7 +327,7 @@ public class MemberRegister extends Fragment implements BlockingStep {
         {
             flags=false;
         }
-        if(stud_id.getError()!=null)
+        if(stud_id.getError()!=null&&stud_idl.getVisibility()==View.VISIBLE)
         {
             flags=false;
         }

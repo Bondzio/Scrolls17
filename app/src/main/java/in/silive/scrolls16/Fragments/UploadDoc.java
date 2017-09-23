@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nononsenseapps.filepicker.FilePickerActivity;
 
@@ -144,6 +145,7 @@ public class UploadDoc extends Fragment {
 
     @Override
     public void onActivityResult(final int requestCode, int resultCode, Intent data) {
+        Log.d("debugg",Integer.toString(requestCode)+Integer.toString(requestCode));
         if (requestCode == FILE_CODE && resultCode == Activity.RESULT_OK) {
             try {
                 Log.d("Scrolls", "File " + data.getData().getPath());

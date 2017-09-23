@@ -1,6 +1,7 @@
 package in.silive.scrolls16.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -34,6 +35,7 @@ import com.stepstone.stepper.VerificationError;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.silive.scrolls16.Activities.MainActivity;
 import in.silive.scrolls16.Adapters.SpinnerAdapter;
 import in.silive.scrolls16.Network.ApiClient;
 import in.silive.scrolls16.Network.CheckConnectivity;
@@ -99,7 +101,7 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
     private Call<DomainModel> callDomain;
     private SharedPreferences sharedpreferences;
     private SharedPreferences.Editor editor;
-    String noOfMembers="2";
+    String noOfMembers="3";
     private EditText team_confirmPassword;
     private boolean flag;
 
@@ -120,22 +122,19 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
 
                 if (i == R.id.three_members) {
                     noOfMembers="3";
-                    editor = sharedpreferences.edit();
-                    editor.putString(Config.NO_OF_MEMBERS, "3");
-                    editor.commit();
+
                  //   member_three.setVisibility(View.VISIBLE);
                   //  leader_member_three.setVisibility(View.VISIBLE);
                     // memberCount = 3;
                 } else {
                     noOfMembers="2";
-                    editor = sharedpreferences.edit();
-                    editor.putString(Config.NO_OF_MEMBERS, "2");
-                    editor.commit();
+
 
                     //member_three.setVisibility(View.GONE);
                     //leader_member_three.setVisibility(View.GONE);
                     //memberCount = 2;
                 }
+
             }
         });
 
@@ -224,6 +223,9 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
         editor.putString(Config.domain_id,domain_id);
         editor.putString(Config.topicid,topicid);
         editor.putString(Config.password,password);
+
+        editor.putString(Config.NO_OF_MEMBERS, no_of_member);
+
         editor.commit();
 
     }
@@ -375,7 +377,13 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
 
     @Override
     public void onBackClicked(StepperLayout.OnBackClickedCallback callback) {
+        Intent i=new Intent(getActivity(), MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+        getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
+        getActivity().finish();
     }
 
     @Nullable

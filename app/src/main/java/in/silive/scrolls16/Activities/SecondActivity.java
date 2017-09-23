@@ -1,5 +1,6 @@
 package in.silive.scrolls16.Activities;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -87,7 +88,7 @@ Toolbar toolbar;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 switch (item.getItemId()){
-    case android.R.id.home: finish();
+    case android.R.id.home: onBackPressed();
         return true;
 }
         return false;
@@ -101,4 +102,15 @@ switch (item.getItemId()){
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i=new Intent(this, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+        finish();
+    }
 }

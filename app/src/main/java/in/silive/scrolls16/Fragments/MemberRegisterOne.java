@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -74,6 +75,8 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
     boolean flags;
     private RetrofitApiInterface apiService;
     private boolean fladss;
+    boolean m;
+    private LinearLayout stud_other_collegel,stud_idl;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -82,7 +85,10 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
         //initialize your UI
         sharedPreferences = in.silive.scrolls16.application.Scrolls.getInstance().sharedPrefs;
         stud_other_college = (EditText) reg_view.findViewById(R.id.stud_other_college);
-        stud_other_college.setVisibility(View.GONE);
+        stud_other_collegel = (LinearLayout) reg_view.findViewById(R.id.stud_other_collegel);
+
+        stud_idl = (LinearLayout) reg_view.findViewById(R.id.stud_idl);
+        stud_other_collegel.setVisibility(View.GONE);
         stud_id = (EditText) reg_view.findViewById(R.id.stud_id);
         stud_mob_no = (EditText) reg_view.findViewById(R.id.stud_mob_no);
         stud_mail = (EditText) reg_view.findViewById(R.id.stud_mail);
@@ -106,14 +112,15 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (!stud_college.getSelectedItem().equals("Ajay Kumar GARG ENGINEERING COLLEGE")) {
-                    stud_other_college.setVisibility(View.VISIBLE);
-                    stud_id.setVisibility(View.INVISIBLE);
-                    stud_collegevalue = stud_other_college.getText().toString();
+                    stud_other_collegel.setVisibility(View.VISIBLE);
+                    stud_idl.setVisibility(View.INVISIBLE);
+                    m=true;
 
                 } else {
-                    stud_other_college.setVisibility(View.INVISIBLE);
-                    stud_id.setVisibility(View.VISIBLE);
+                    stud_other_collegel.setVisibility(View.INVISIBLE);
+                    stud_idl.setVisibility(View.VISIBLE);
                     stud_collegevalue = "akgec";
+                    m=false;
 
                 }
             }
@@ -238,6 +245,9 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
             flag = 1;
             stud_name.setError("Invalid name");
         }
+        if(m==true) {
+            stud_collegevalue = stud_other_college.getText().toString();
+        }
 
         student_college_name = stud_other_college.getText().toString();
         if (stud_id.getVisibility() == View.VISIBLE) {
@@ -352,12 +362,12 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
     {
         final AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Light_Dialog_Alert);
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }
         builder.setTitle("Registration SuccessFull")
-                .setMessage("Your SCROLLS REGISTRATION ID IS"+message)
+                .setMessage("Your SCROLLS REGISTRATION ID IS \t"+message)
                 .setPositiveButton("EXIT", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
@@ -390,6 +400,16 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
             if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE && !Pattern.matches("^\\d{7}[Dd]{0,1}$", student_id)) {
 
                 stud_id.setError("Invalid Id");
+                flags = false;
+            }
+
+        }
+        if (stud_other_collegel.getVisibility() == View.VISIBLE) {
+            String collegel = stud_other_college.getText().toString();
+
+            if (collegel.length() == 0  ) {
+
+                stud_other_college.setError("Invalid College Name");
                 flags = false;
             }
 
