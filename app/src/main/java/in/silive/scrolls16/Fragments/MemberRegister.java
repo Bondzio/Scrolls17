@@ -2,6 +2,7 @@ package in.silive.scrolls16.Fragments;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -23,6 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.stepstone.stepper.BlockingStep;
@@ -75,14 +77,21 @@ public class MemberRegister extends Fragment implements BlockingStep {
     private LinearLayout stud_other_collegel;
     private LinearLayout stud_idl;
     boolean m;
+    private Typeface typeface;
+    private TextView teamlead;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         reg_view = inflater.inflate(R.layout.memreg, container, false);
         stud_name = (EditText) reg_view.findViewById(R.id.stud_name);
         //initialize your UI
         setRetainInstance(true);
+        typeface = Typeface.createFromAsset(getActivity().getAssets(),"fonts/font.ttf");
+
         sharedPreferences = Scrolls.getInstance().sharedPrefs;
         stud_other_college = (EditText) reg_view.findViewById(R.id.stud_other_college);
+        teamlead=(TextView) reg_view.findViewById(R.id.teamlead);
+        teamlead.setTypeface(typeface);
         stud_other_collegel = (LinearLayout) reg_view.findViewById(R.id.stud_other_collegel);
         stud_id = (EditText) reg_view.findViewById(R.id.stud_id);
         stud_idl = (LinearLayout) reg_view.findViewById(R.id.stud_idl);

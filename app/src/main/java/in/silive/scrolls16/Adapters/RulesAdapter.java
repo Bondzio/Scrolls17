@@ -2,8 +2,11 @@ package in.silive.scrolls16.Adapters;
 
 import android.content.Context;
 import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -42,6 +45,18 @@ public class RulesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
              //Toast.makeText(context,Integer.toString(topics.length),Toast.LENGTH_LONG).show();
 
             ((RulesAdapter.ViewHolder) holder).tvTopic.setText(topics[position]);
+        ((ViewHolder) holder).back.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+
+                    ((ViewHolder) holder).line.setVisibility(View.VISIBLE);
+                    // Do what you want
+
+
+                return false;
+            }
+        });
 
           //  ((RulesAdapter.ViewHolder)holder).itemView.setVisibility(View.INVISIBLE);
 
@@ -70,9 +85,13 @@ public class RulesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvTopic;
         TextView tvNum;
+        CardView back;
+        View line;
         public ViewHolder(View itemView) {
             super(itemView);
             tvTopic = (TextView)itemView.findViewById(R.id.tv);
+            back=(CardView)itemView.findViewById(R.id.back);
+            line=(View)itemView.findViewById(R.id.line);
            // tvNum = (TextView)itemView.findViewById(R.id.tvNum);
         }
     }
