@@ -85,7 +85,7 @@ public class UploadActivity extends AppCompatActivity{
 
         apiService =
                 ApiClient.getClient().create(RetrofitApiInterface.class);
-        //checkStatus(token);
+        checkStatus(token);
         filestatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,19 +106,19 @@ public class UploadActivity extends AppCompatActivity{
 
         //((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         //((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(false);
-        /*logout.setOnClickListener(new View.OnClickListener() {
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logout(token);
 
             }
-        });*/
+        });
 
 
     }
 
     private void checkStatus(String token) {
-//        final ProgressDialog loading = ProgressDialog.show(getApplicationContext(), "Fetching Data", "Please wait...", false, false);
+        final ProgressDialog loading = ProgressDialog.show(this, "Fetching Data", "Please wait...", false, false);
         Call<CheckStudentNoExsist> call=apiService.fileUploadStatus(token);
         call.enqueue(new Callback<CheckStudentNoExsist>() {
             @Override
@@ -129,7 +129,7 @@ public class UploadActivity extends AppCompatActivity{
                    // loading.dismiss();
                 }
                 else if(response.code()==422)
-                {//loading.dismiss();
+                {loading.dismiss();
                     filestatus.setText("File Already Uploaded");
                     filestatus.setEnabled(false);
                     //Snackbar.make(v,"Check Your connection",Snackbar.LENGTH_SHORT).show();
@@ -138,7 +138,7 @@ public class UploadActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<CheckStudentNoExsist> call, Throwable t) {
-                //loading.dismiss();
+                loading.dismiss();
             }
         });
     }
@@ -229,7 +229,7 @@ public class UploadActivity extends AppCompatActivity{
                                     MultipartBody.FORM, descriptionString);
 
                     // finally, execute the request
-                    //final ProgressDialog loading = ProgressDialog.show(getApplicationContext(), "Fetching Data", "Please wait...", false, false);
+                    final ProgressDialog loading = ProgressDialog.show(this, "Fetching Data", "Please wait...", false, false);
                     Call<okhttp3.ResponseBody> call = apiService.upload(tokenf, multipartBody);
                     call.enqueue(new Callback<okhttp3.ResponseBody>() {
                         @Override
@@ -277,12 +277,12 @@ public class UploadActivity extends AppCompatActivity{
             public void onResponse(Call<LogoutSucess> call, Response<LogoutSucess> response) {
                 if(response.code()==200)
                 { Toast.makeText(getApplicationContext(),"sucess",Toast.LENGTH_LONG).show();
-                    //showDialog();
+                    showDialog();
                     loading.dismiss();
                 }
                 else
                 {loading.dismiss();
-                    //Snackbar.make(v,"Check Your connection",Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Check Your Internet Connection",Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -320,6 +320,11 @@ public class UploadActivity extends AppCompatActivity{
 
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        
     }
 }
 

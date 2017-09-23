@@ -157,20 +157,18 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
                 }
             }
         });
-        stud_college=(Spinner)reg_view.findViewById(R.id.stud_college);
         stud_college.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (!stud_college.getSelectedItem().equals("Ajay Kumar GARG ENGINEERING COLLEGE")) {
                     stud_other_collegel.setVisibility(View.VISIBLE);
                     stud_idl.setVisibility(View.INVISIBLE);
+                    m=true;
 
-                   m=true;
-                }
-                else
-                {    stud_other_collegel.setVisibility(View.INVISIBLE);
+                } else {
+                    stud_other_collegel.setVisibility(View.INVISIBLE);
                     stud_idl.setVisibility(View.VISIBLE);
-                    stud_collegevalue="akgec";
+                    stud_collegevalue = "akgec";
                     m=false;
 
                 }
