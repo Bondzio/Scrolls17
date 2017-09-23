@@ -18,10 +18,10 @@ public class ApiClient {
     public static Retrofit getClient() {
         if (retrofit==null) {
             OkHttpClient client = new OkHttpClient.Builder()
-                    .connectTimeout(1000, TimeUnit.SECONDS)
-                    .readTimeout(1000,TimeUnit.SECONDS).build();
+                    .connectTimeout(10000, TimeUnit.SECONDS)
+                    .readTimeout(10000,TimeUnit.SECONDS).build();
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://0f8c793e.ngrok.io").client(client)
+                    .baseUrl("http://akgec-scrolls.com/test/public/").client(client)
                     .addConverterFactory(new NullOnEmptyConverterFactory())
                     .addConverterFactory(GsonConverterFactory.create())
 

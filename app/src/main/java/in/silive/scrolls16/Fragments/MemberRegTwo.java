@@ -134,9 +134,10 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
         //initialize your UI
         sharedPreferences= in.silive.scrolls16.application.Scrolls.getInstance().sharedPrefs;
         stud_other_college = (EditText) reg_view.findViewById(R.id.stud_other_college);
-        stud_other_college.setVisibility(View.GONE);
-        stud_other_collegel = (LinearLayout) reg_view.findViewById(R.id.stud_other_collegel);
 
+        stud_other_collegel = (LinearLayout) reg_view.findViewById(R.id.stud_other_collegel);
+        apiService =
+                ApiClient.getClient().create(RetrofitApiInterface.class);
         stud_idl = (LinearLayout) reg_view.findViewById(R.id.stud_idl);
         stud_other_collegel.setVisibility(View.GONE);
         stud_id = (EditText) reg_view.findViewById(R.id.stud_id);
@@ -208,8 +209,27 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
         });
         stud_coursevalue=stud_course.getSelectedItem().toString();
         stud_yearvalue=stud_year.getSelectedItem().toString();
-        apiService =
-                ApiClient.getClient().create(RetrofitApiInterface.class);
+
+        if(stud_id.getVisibility()==View.VISIBLE)
+        {
+            stud_id.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if(!hasFocus) {
+                        boolean studentNo= CheckStudentNo();
+                    }
+                }
+            });
+        }
+        stud_mail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus)
+                {
+                    boolean email=CheckEmailId();
+                }
+            }
+        });
         return reg_view;
     }
 
@@ -276,39 +296,40 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
             members.add(m);
             members.add(m1);
             members.add(m2);
-            RegisterModel registerModel=new RegisterModel(teamname,domainid,topicid,pass,noofmem,members);
+        RegisterModel registerModel=new RegisterModel(teamname,domainid,topicid,pass,noofmem,members);
 
-            final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
+        final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
 
 
-            Call<RegisterSucess> userCall = apiService.register(registerModel);
-            Log.d("debugg",members.get(0).getName());
-           userCall.enqueue(new Callback<RegisterSucess>() {
+        Call<RegisterSucess> userCall = apiService.register(registerModel);
+        Log.d("debugg",members.get(0).getName());
+        userCall.enqueue(new Callback<RegisterSucess>() {
 
-               @Override
-               public void onResponse(Call<RegisterSucess> call, Response<RegisterSucess> response) {
-                   if(response.code()==200)
-                   {
+            @Override
+            public void onResponse(Call<RegisterSucess> call, Response<RegisterSucess> response) {
+                if(response.code()==200)
+                {
+                    //Toast.makeText(getActivity(),"Successfull",Toast.LENGTH_LONG).show();
+                    showDialog(response.body().getData());
+                }
+                else
+                {//Toast.makeText(getActivity(),Integer.toString(response.code()),Toast.LENGTH_LONG).show();
+                    Log.d("debugg",response.toString());
+                    Log.d("debugg",call.request().body().toString());
+                    Snackbar.make(reg_view,"some error occured",Snackbar.LENGTH_SHORT).show();
+                }
+                loading.dismiss();
 
-                       showDialog(response.body().getData());
-                   }
-                   else
-                   {Snackbar.make(reg_view,"some error occured",Snackbar.LENGTH_SHORT).show();
-                 Log.d("debugg",response.toString());
-                       Log.d("debugg",call.request().body().toString());
-                   }
-                   loading.dismiss();
+            }
 
-               }
-
-               @Override
-               public void onFailure(Call<RegisterSucess> call, Throwable t) {
-                //  Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
-                   Snackbar.make(reg_view,"some error occured",Snackbar.LENGTH_SHORT).show();
-                  Log.d("debugg",t.toString());
-                   loading.dismiss();
-               }
-           });
+            @Override
+            public void onFailure(Call<RegisterSucess> call, Throwable t) {
+                //Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
+                Snackbar.make(reg_view,"some error occured",Snackbar.LENGTH_SHORT).show();
+                Log.d("debugg",t.toString());
+                loading.dismiss();
+            }
+        });
         }
 
 
