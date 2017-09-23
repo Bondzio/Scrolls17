@@ -162,14 +162,14 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (!stud_college.getSelectedItem().equals("Ajay Kumar GARG ENGINEERING COLLEGE")) {
-                    stud_other_college.setVisibility(View.VISIBLE);
-                    stud_id.setVisibility(View.INVISIBLE);
+                    stud_other_collegel.setVisibility(View.VISIBLE);
+                    stud_idl.setVisibility(View.INVISIBLE);
 
                    m=true;
                 }
                 else
-                {    stud_other_college.setVisibility(View.INVISIBLE);
-                    stud_id.setVisibility(View.VISIBLE);
+                {    stud_other_collegel.setVisibility(View.INVISIBLE);
+                    stud_idl.setVisibility(View.VISIBLE);
                     stud_collegevalue="akgec";
                     m=false;
 
@@ -427,7 +427,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
             stud_name.setError("Invalid name");
             flags = false;
         }
-        if (stud_id.getVisibility() == View.VISIBLE) {
+        if (stud_idl.getVisibility() == View.VISIBLE) {
             student_id = stud_id.getText().toString();
 
             if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE && !Pattern.matches("^\\d{7}[Dd]{0,1}$", student_id)) {
@@ -457,7 +457,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
         {
             flags=false;
         }
-        if(stud_id.getError()!=null)
+        if(stud_id.getError()!=null&&stud_idl.getVisibility()==View.VISIBLE)
         {
             flags=false;
         }

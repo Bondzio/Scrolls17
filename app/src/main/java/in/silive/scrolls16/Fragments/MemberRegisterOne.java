@@ -396,7 +396,7 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
             stud_name.setError("Invalid name");
             flags = false;
         }
-        if (stud_id.getVisibility() == View.VISIBLE) {
+        if (stud_idl.getVisibility() == View.VISIBLE) {
             student_id = stud_id.getText().toString();
 
             if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE && !Pattern.matches("^\\d{7}[Dd]{0,1}$", student_id)) {
@@ -426,7 +426,7 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
         {
             flags=false;
         }
-        if(stud_id.getError()!=null)
+        if(stud_id.getError()!=null&&stud_idl.getVisibility()==View.VISIBLE)
         {
             flags=false;
         }
