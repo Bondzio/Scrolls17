@@ -7,28 +7,29 @@
             android:id="@+id/topics"
             android:checked="false"
             android:icon="@drawable/topicsicon"
-            android:title="Topic" />
-
-        <item
-            android:id="@+id/rules"
-            android:icon="@drawable/rules"
-            android:checked="false"
-            android:title="SCROLLS RULES" />
-        <item
-            android:id="@+id/reachus"
-            android:icon="@drawable/rechusic"
-            android:checked="false"
-            android:title="REACH US" />
+            android:title="Topics" />
         <item
             android:id="@+id/importantdates"
             android:icon="@drawable/scheduleicon"
             android:checked="false"
-            android:title="IMPORTANT DATES" />
+            android:title="Important Dates" />
+        <item
+            android:id="@+id/rules"
+            android:icon="@drawable/rules"
+            android:checked="false"
+            android:title="Scrolls Rules" />
+
         <item
             android:id="@+id/scrollsweb"
             android:icon="@drawable/scrollswebsite"
             android:checked="false"
-            android:title="VISIT SCROLLS WEBSITE" />
+            android:title="Visit Scrolls Website" />
+        <item
+            android:id="@+id/reachus"
+            android:icon="@drawable/rechusic"
+            android:checked="false"
+            android:title="Reach Us" />
+
         <item
             android:id="@+id/scrollTeam"
             android:icon="@drawable/scrollsteamm"
@@ -43,7 +44,7 @@
             android:id="@+id/scrollssi"
             android:icon="@drawable/silogo"
             android:checked="false"
-            android:title="VISIT silive.in" />
+            android:title="Visit silive.in" />
         <item
             android:id="@+id/query"
             android:icon="@drawable/help"

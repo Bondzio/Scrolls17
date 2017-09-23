@@ -157,6 +157,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
                 }
             }
         });
+        stud_college = (Spinner) reg_view.findViewById(R.id.stud_college);
         stud_college.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
