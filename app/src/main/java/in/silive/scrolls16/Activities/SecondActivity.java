@@ -1,6 +1,8 @@
 package in.silive.scrolls16.Activities;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -30,14 +32,14 @@ Toolbar toolbar;
     Bundle bundle;
     String title;
     WebView webView;
-    private RelativeLayout imagehead;
+    private ImageView imagehead;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
-        imagehead=(RelativeLayout)findViewById(R.id.imageHead);
+        imagehead=(ImageView)findViewById(R.id.image);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -49,33 +51,41 @@ Toolbar toolbar;
 
                     case Config.KEY_Topics:
                         showFragment(new TopicsFragment(), title);
-                        imagehead.setBackgroundResource(R.drawable.topics);
+                        imagehead.setImageResource(R.drawable.topics);
                         break;
                     case Config.KEY_SCROLLSRULE:
                         showFragment(new Rules(),title);
-                        imagehead.setBackgroundResource(R.drawable.rulesandregulations);
+                        imagehead.setImageResource(R.drawable.rulesandregulations);
                         break;
                     case Config.KEY_REACHUS:
                         showFragment(new ReachUs(),title);
-                        imagehead.setBackgroundResource(R.drawable.reachus);
+                        imagehead.setImageResource(R.drawable.reachus);
                         break;
                     case Config.KEY_ImpDates:
                         showFragment(new ScheduleFragment(),title);
-                        imagehead.setBackgroundResource(R.drawable.schedule);
+                        imagehead.setImageResource(R.drawable.schedule);
                         break;
                     case Config.KEY_QUERY:
-                        showFragment(new QueryUs(),title);
-                        imagehead.setBackgroundResource(R.drawable.queryus);
+
+
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                        emailIntent.setData(Uri.parse("mailto:akgec@gmail.com"));
+
+                        try {
+                            startActivity(emailIntent);
+                        } catch (ActivityNotFoundException e) {
+
+                        }
 
                         break;
 
                     case Config.KEY_SCROLLSTEAM:
                         showFragment(new ScrollsTeamNew(),title);
-                        imagehead.setBackgroundResource(R.drawable.scrollsteam);
+                        imagehead.setImageResource(R.drawable.scrollsteam);
                         break;
                     case Config.KEY_SCROLLSDeveloper:
                         showFragment(new ScrollsDeveloperNew(),title);
-                        imagehead.setBackgroundResource(R.drawable.developerteam);
+                        imagehead.setImageResource(R.drawable.developerteam);
                         break;
 
                 }

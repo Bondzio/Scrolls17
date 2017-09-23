@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -122,10 +123,10 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
     private String flagacc="1";
     private String stud_collegevalue, stud_coursevalue, stud_yearvalue;
     boolean flags;
-
+    private LinearLayout stud_other_collegel,stud_idl;
     private RetrofitApiInterface apiService;
     private boolean fladss;
-
+   boolean m;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         reg_view = inflater.inflate(R.layout.memregis, container, false);
@@ -134,6 +135,10 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
         sharedPreferences= in.silive.scrolls16.application.Scrolls.getInstance().sharedPrefs;
         stud_other_college = (EditText) reg_view.findViewById(R.id.stud_other_college);
         stud_other_college.setVisibility(View.GONE);
+        stud_other_collegel = (LinearLayout) reg_view.findViewById(R.id.stud_other_collegel);
+
+        stud_idl = (LinearLayout) reg_view.findViewById(R.id.stud_idl);
+        stud_other_collegel.setVisibility(View.GONE);
         stud_id = (EditText) reg_view.findViewById(R.id.stud_id);
         stud_mob_no = (EditText) reg_view.findViewById(R.id.stud_mob_no);
         stud_mail = (EditText) reg_view.findViewById(R.id.stud_mail);
@@ -159,13 +164,14 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
                 if (!stud_college.getSelectedItem().equals("Ajay Kumar GARG ENGINEERING COLLEGE")) {
                     stud_other_college.setVisibility(View.VISIBLE);
                     stud_id.setVisibility(View.INVISIBLE);
-                    stud_collegevalue=stud_other_college.getText().toString();
 
+                   m=true;
                 }
                 else
                 {    stud_other_college.setVisibility(View.INVISIBLE);
                     stud_id.setVisibility(View.VISIBLE);
                     stud_collegevalue="akgec";
+                    m=false;
 
                 }
             }
@@ -284,11 +290,11 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
                public void onResponse(Call<RegisterSucess> call, Response<RegisterSucess> response) {
                    if(response.code()==200)
                    {
-                       Toast.makeText(getActivity(),"Successfull",Toast.LENGTH_LONG).show();
+
                        showDialog(response.body().getData());
                    }
                    else
-                   {
+                   {Snackbar.make(reg_view,"some error occured",Snackbar.LENGTH_SHORT).show();
                  Log.d("debugg",response.toString());
                        Log.d("debugg",call.request().body().toString());
                    }
@@ -298,7 +304,8 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
 
                @Override
                public void onFailure(Call<RegisterSucess> call, Throwable t) {
-                  Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
+                //  Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
+                   Snackbar.make(reg_view,"some error occured",Snackbar.LENGTH_SHORT).show();
                   Log.d("debugg",t.toString());
                    loading.dismiss();
                }
@@ -334,13 +341,16 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
         Log.d("Scrolls", "getData called");
         flag = 0;
         student_name = stud_name.getText().toString();
-        if (student_name.length() == 0) {
+        if (student_name.length() == 0 && !Pattern.matches("^[A-Z][a-z]$", student_name)) {
             flag = 1;
             stud_name.setError("Invalid name");
         }
+        if(m==true) {
+            stud_collegevalue = stud_other_college.getText().toString();
+        }
 
         student_college_name = stud_other_college.getText().toString();
-        if(stud_id.getVisibility()==View.VISIBLE) {
+        if (stud_id.getVisibility() == View.VISIBLE) {
             student_id = stud_id.getText().toString();
 
             if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE && !Pattern.matches("^\\d{7}[Dd]{0,1}$", student_id)) {
@@ -355,7 +365,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
             stud_mail.setError("Invalid mail");
         }
         student_mob_no = stud_mob_no.getText().toString();
-        if (student_mob_no.length() != 10) {
+        if (!Pattern.matches("^([0]|\\+91)?\\d{10}", student_mob_no)) {
             flag = 1;
             stud_mob_no.setError("Invalid phone number");
         }
@@ -423,6 +433,16 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
             if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE && !Pattern.matches("^\\d{7}[Dd]{0,1}$", student_id)) {
 
                 stud_id.setError("Invalid Id");
+                flags = false;
+            }
+
+        }
+        if (stud_other_collegel.getVisibility() == View.VISIBLE) {
+            String collegel = stud_other_college.getText().toString();
+
+            if (collegel.length() == 0  ) {
+
+                stud_other_college.setError("Invalid College Name");
                 flags = false;
             }
 

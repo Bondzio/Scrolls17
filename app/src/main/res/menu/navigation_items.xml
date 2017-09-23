@@ -41,7 +41,7 @@
             android:title="Scrolls Developer" />
         <item
             android:id="@+id/scrollssi"
-            android:icon="@drawable/ic_topic"
+            android:icon="@drawable/silogo"
             android:checked="false"
             android:title="VISIT silive.in" />
         <item

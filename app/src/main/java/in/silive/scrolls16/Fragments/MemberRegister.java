@@ -359,12 +359,17 @@ public class MemberRegister extends Fragment implements BlockingStep {
                     {Log.d("debugg",response.body().getError());
                         flads=true;
                     }
+                    else
+                    {
+                        Snackbar.make(reg_view,"some error occured",Snackbar.LENGTH_SHORT).show();
+                    }
                     loading.dismiss();
 
                 }
 
                 @Override
                 public void onFailure(Call<CheckStudentNoExsist> call, Throwable t) {
+                    Snackbar.make(reg_view,"some error occured",Snackbar.LENGTH_SHORT).show();
                loading.dismiss();
                 }
             });

@@ -270,10 +270,10 @@ public class UploadDoc extends Fragment {
                             Log.d("debugg",token);
                             editor = sharedPreferences.edit();
                             editor.putString(Config.Token, token);
-                            editor.putString(Config.LOGINM1, token);
-                            editor.putString(Config.LOGINM2, token);
-                            editor.putString(Config.LOGINM3, token);
-                            editor.putString(Config.LOGINT3, token);
+                            editor.putString(Config.LOGINM1, Member1Name);
+                            editor.putString(Config.LOGINM2, Member2Name);
+                            editor.putString(Config.LOGINM3, Member3Name);
+                            editor.putString(Config.LOGINT3, TeamName);
 
                             editor.commit();
                             Intent i=new Intent(getActivity(),UploadActivity.class);

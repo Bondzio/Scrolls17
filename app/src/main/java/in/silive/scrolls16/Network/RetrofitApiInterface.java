@@ -9,6 +9,7 @@ import in.silive.scrolls16.models.CollegeModel;
 import in.silive.scrolls16.models.DomainModel;
 import in.silive.scrolls16.models.LoginModelF;
 import in.silive.scrolls16.models.LoginSucess;
+import in.silive.scrolls16.models.LogoutSucess;
 import in.silive.scrolls16.models.QueryModel;
 import in.silive.scrolls16.models.RegisterModel;
 import in.silive.scrolls16.models.RegisterSucess;
@@ -71,7 +72,7 @@ Call<CheckStudentNoExsist>  checkStudentNo(@Field(value = "student_no") String S
                                       @Part MultipartBody.Part file
     );
     @GET("api/logout")
-    Call<ResponseBody>  logout(@Query("token") String token);
+    Call<LogoutSucess> logout(@Query("token") String token);
     @GET("api/fileentryexist")
-    Call<ResponseBody>  fileUploadStatus(@Query("token") String token);
+    Call<CheckStudentNoExsist>  fileUploadStatus(@Query("token") String token);
 }

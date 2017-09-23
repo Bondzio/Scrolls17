@@ -338,13 +338,14 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
             public void onResponse(Call<RegisterSucess> call, Response<RegisterSucess> response) {
                 if(response.code()==200)
                 {
-                    Toast.makeText(getActivity(),"Successfull",Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(),"Successfull",Toast.LENGTH_LONG).show();
                     showDialog(response.body().getData());
                 }
                 else
-                {Toast.makeText(getActivity(),Integer.toString(response.code()),Toast.LENGTH_LONG).show();
+                {//Toast.makeText(getActivity(),Integer.toString(response.code()),Toast.LENGTH_LONG).show();
                     Log.d("debugg",response.toString());
                     Log.d("debugg",call.request().body().toString());
+                    Snackbar.make(reg_view,"some error occured",Snackbar.LENGTH_SHORT).show();
                 }
                 loading.dismiss();
 
@@ -352,7 +353,8 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
 
             @Override
             public void onFailure(Call<RegisterSucess> call, Throwable t) {
-                Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
+                Snackbar.make(reg_view,"some error occured",Snackbar.LENGTH_SHORT).show();
                 Log.d("debugg",t.toString());
                 loading.dismiss();
             }

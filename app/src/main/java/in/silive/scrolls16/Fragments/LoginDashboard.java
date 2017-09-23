@@ -42,6 +42,9 @@ import in.silive.scrolls16.Network.RetrofitApiInterface;
 import in.silive.scrolls16.R;
 import in.silive.scrolls16.Util.Config;
 import in.silive.scrolls16.application.*;
+import in.silive.scrolls16.models.CheckStudentNoExsist;
+import in.silive.scrolls16.models.LoginSucess;
+import in.silive.scrolls16.models.LogoutSucess;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -71,9 +74,10 @@ public class LoginDashboard extends Fragment {
         v = inflater.inflate(R.layout.logindashboard, container, false);
         //Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         //imagehead=(RelativeLayout) getActivity().findViewById(R.id.imageHead);
-       // logout=(ImageView) getActivity().findViewById(R.id.image);
+        logout=(ImageView) v.findViewById(R.id.image);
         sharedprefs= in.silive.scrolls16.application.Scrolls.getInstance().sharedPrefs;
         token=sharedprefs.getString(Config.Token,"");
+
         imagedash=(LinearLayout) getActivity().findViewById(R.id.linear);
         teamname=(TextView) v.findViewById(R.id.team_name);
         member1=(TextView) v.findViewById(R.id.member1);
@@ -86,11 +90,12 @@ public class LoginDashboard extends Fragment {
         member1.setText(Member1);
         member2.setText(Member2);
         member3.setText(Member3);
+        teamname.setText(teamName);
         filestatus=(TextView) v.findViewById(R.id.filestatus);
 
         apiService =
                 ApiClient.getClient().create(RetrofitApiInterface.class);
-
+        checkStatus(token);
         filestatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +104,7 @@ public class LoginDashboard extends Fragment {
                 i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false);
                 i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_FILE);
                 i.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
+
                 startActivityForResult(i, FILE_CODE);
             }
         });
@@ -110,23 +116,23 @@ public class LoginDashboard extends Fragment {
 
         //((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         //((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(false);
-        /*logout.setOnClickListener(new View.OnClickListener() {
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logout(token);
 
             }
-        });*/
+        });
 
         return v;
     }
 
     private void checkStatus(String token) {
         final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
-        Call<ResponseBody> call=apiService.fileUploadStatus(token);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<CheckStudentNoExsist> call=apiService.fileUploadStatus(token);
+        call.enqueue(new Callback<CheckStudentNoExsist>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<CheckStudentNoExsist> call, Response<CheckStudentNoExsist> response) {
                 if(response.code()==200)
                 {filestatus.setEnabled(true);
                    // checkPermission();
@@ -141,7 +147,7 @@ public class LoginDashboard extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<CheckStudentNoExsist> call, Throwable t) {
                 loading.dismiss();
             }
         });
@@ -195,6 +201,7 @@ public class LoginDashboard extends Fragment {
         if (requestCode == FILE_CODE && resultCode == Activity.RESULT_OK) {
             try {
                 Log.d("Scrolls", "File " + data.getData().getPath());
+
                 /*JSONObject jsonObject = new JSONObject();
                 File file = new File(data.getData().getPath());
                 FileInputStream fileInputStream = new FileInputStream(file);
@@ -274,10 +281,10 @@ public class LoginDashboard extends Fragment {
     }
     private void logout(String token) {
         final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
-        Call<ResponseBody> call=apiService.logout(token);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<LogoutSucess> call=apiService.logout(token);
+        call.enqueue(new Callback<LogoutSucess>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<LogoutSucess> call, Response<LogoutSucess> response) {
                 if(response.code()==200)
                 {
                     showDialog();
@@ -290,7 +297,7 @@ public class LoginDashboard extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<LogoutSucess> call, Throwable t) {
            loading.dismiss();
             }
         });
@@ -299,12 +306,12 @@ public class LoginDashboard extends Fragment {
     {
         final AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Light_Dialog_Alert);
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }
         builder.setTitle("Logout SuccessFully")
-                .setMessage("Exit")
+                .setMessage("Exit From Dashboard")
                 .setPositiveButton("EXIT", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         SharedPreferences.Editor editor = sharedprefs.edit();
