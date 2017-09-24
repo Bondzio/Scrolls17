@@ -47,6 +47,7 @@ RecyclerView rvDomains;
     private static final int COUNT_X = 4;
     private static final int COUNT_Y = 4;
     private static final int FRAME_DURATION = 400;
+    private WebView webView;
 
     public About_Scrolls() {
         // Required empty public constructor
@@ -66,6 +67,7 @@ RecyclerView rvDomains;
         if (rootView==null) {
             rootView = inflater.inflate(R.layout.fragment_about_scrolls, container, false);
             web_view = (WebView) rootView.findViewById(R.id.about_scrolls_web_view);
+            webView=(WebView)rootView.findViewById(R.id.webView);
 //            rl=(ImageView)rootView.findViewById(R.id.sprite);
   //          rl.setImageResource(R.drawable.animback);
 
@@ -92,6 +94,26 @@ RecyclerView rvDomains;
             });
             //startWaterAnimation();
         }
+        final WebSettings webSettings = web_view.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webView.setWebViewClient(new myWebClient());
+        webView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                //Blank listener to disable long click text selection
+                return true;
+            }
+        });
+        webView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public void onPageFinished(final WebView view, final String url) {
+                super.onPageFinished(view, url);
+                web_view.invalidate();
+            }
+        });
+        //startWaterAnimation();
+
         return rootView;
     }
      private void startWaterAnimation() {
@@ -124,6 +146,9 @@ RecyclerView rvDomains;
         web_view.loadUrl("file:///android_asset/about.html");
         web_view.setBackgroundColor(Color.TRANSPARENT);
         web_view.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
+        webView.loadUrl("file:///android_asset/scrollsabout.html");
+        webView.setBackgroundColor(Color.TRANSPARENT);
+        webView.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
     }
 
     @Override
