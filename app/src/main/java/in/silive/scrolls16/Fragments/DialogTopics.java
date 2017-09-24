@@ -24,17 +24,18 @@ public class DialogTopics extends BottomSheetDialogFragment {
     String title;
     TextView tvTitle;
     ImageView ivClose;
-TopicsAdapter adapter;
+    TopicsAdapter adapter;
     LinearLayout ll;
     LinearLayout llFullScreen;
-    Integer picMembers [] = {R.drawable.one,R.drawable.two,R.drawable.three,R.drawable.four,R.drawable.five,R.drawable.six,R.drawable.seven,R.drawable.eight,
-            R.drawable.nine,R.drawable.ten,R.drawable.eleven,R.drawable.tweleve};
+    Integer picMembers[] = {R.drawable.one, R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five, R.drawable.six, R.drawable.seven, R.drawable.eight,
+            R.drawable.nine, R.drawable.ten, R.drawable.eleven, R.drawable.tweleve};
 
     public void setArgs(String title, String[] topics) {
         this.title = title;
         this.topics = topics;
 
     }
+
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
 
         @Override
@@ -52,7 +53,6 @@ TopicsAdapter adapter;
     };
 
 
-
     @Override
     public void setupDialog(final Dialog dialog, int style) {
         super.setupDialog(dialog, style);
@@ -63,45 +63,23 @@ TopicsAdapter adapter;
         rvTopics = (RecyclerView) view.findViewById(R.id.rvTopic);
         tvTitle = (TextView) view.findViewById(R.id.tvTitle);
         tvTitle.setText(title);
-        adapter = new TopicsAdapter(getActivity(), topics,picMembers);
+        adapter = new TopicsAdapter(getActivity(), topics, picMembers);
         rvTopics.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rvTopics.setAdapter(adapter);
         ll = (LinearLayout) view.findViewById(R.id.ll);
-        ivClose = (ImageView) view.findViewById(R.id.ivClose);
-        ivClose.setOnClickListener(new View.OnClickListener() {
+        //ivClose = (ImageView) view.findViewById(R.id.ivClose);
+        /*ivClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.container, new TopicsFragment())/*.addToBackStack(fragment.getClass().getName())*/;
+                fragmentTransaction.replace(R.id.container, new TopicsFragment())/*.addToBackStack(fragment.getClass().getName());
                 fragmentTransaction.commit();
 
             }
-        });
+        });*/
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
 
-        getDialog().setOnKeyListener(new DialogInterface.OnKeyListener()
-        {
-            @Override
-            public boolean onKey(android.content.DialogInterface dialog,
-                                 int keyCode,android.view.KeyEvent event)
-            {
-                if ((keyCode ==  android.view.KeyEvent.KEYCODE_BACK))
-                {
-                    // To dismiss the fragment when the back-button is pressed.
-                    dismiss();
-                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.container, new TopicsFragment())/*.addToBackStack(fragment.getClass().getName())*/;
-                    fragmentTransaction.commit();
-                    return true;
-                }
-                // Otherwise, do nothing else
-                else return false;
-            }
-        });
     }
-}
+

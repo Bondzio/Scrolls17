@@ -63,37 +63,37 @@ public class DomainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 DialogTopics dialogTopics = new DialogTopics();
                 switch (position ) {
                     case 1:
-                        explosionField=ExplosionField.attach2Window(secondActivity);
-                        explosionField.explode(((DomainsAdapter.ViewHolder) holder).iv);
+                        //explosionField=ExplosionField.attach2Window(secondActivity);
+                        //explosionField.explode(((DomainsAdapter.ViewHolder) holder).iv);
                         dialogTopics.setArgs("Computer Science and Engineering", context.getResources().getStringArray(R.array.csit));
                         break;
                     case 2:
-                        explosionField=ExplosionField.attach2Window(secondActivity);
-                        explosionField.explode(((DomainsAdapter.ViewHolder) holder).iv);
+                        //explosionField=ExplosionField.attach2Window(secondActivity);
+                        //explosionField.explode(((DomainsAdapter.ViewHolder) holder).iv);
                         dialogTopics.setArgs("Electronics and Communication", context.getResources().getStringArray(R.array.ec));
                         break;
                     case 3:
-                        explosionField=ExplosionField.attach2Window(secondActivity);
-                        explosionField.explode(((DomainsAdapter.ViewHolder) holder).iv);
+                        //explosionField=ExplosionField.attach2Window(secondActivity);
+                        //explosionField.explode(((DomainsAdapter.ViewHolder) holder).iv);
                         dialogTopics.setArgs("Electrical and Electronics", context.getResources().getStringArray(R.array.el));
                         break;
                     case 0:
-                        explosionField=ExplosionField.attach2Window(secondActivity);
-                        explosionField.explode(((DomainsAdapter.ViewHolder) holder).iv);
+                        //explosionField=ExplosionField.attach2Window(secondActivity);
+                        //explosionField.explode(((DomainsAdapter.ViewHolder) holder).iv);
                         dialogTopics.setArgs("Management Science", context.getResources().getStringArray(R.array.ms));
                         break;
                     case 4:
-                        explosionField=ExplosionField.attach2Window(secondActivity);
-                        explosionField.explode(((DomainsAdapter.ViewHolder) holder).iv);
+                        //explosionField=ExplosionField.attach2Window(secondActivity);
+                        //explosionField.explode(((DomainsAdapter.ViewHolder) holder).iv);
                         dialogTopics.setArgs("Mechanical Engineering", context.getResources().getStringArray(R.array.me));
                         break;
                     case 5:
-                        explosionField=ExplosionField.attach2Window(secondActivity);
-                        explosionField.explode(((DomainsAdapter.ViewHolder) holder).iv);
+                        //explosionField=ExplosionField.attach2Window(secondActivity);
+                        //explosionField.explode(((DomainsAdapter.ViewHolder) holder).iv);
                         dialogTopics.setArgs("Civil Engineering", context.getResources().getStringArray(R.array.ce));
                         break;
                 }
-                dialogTopics.setCancelable(false);
+                dialogTopics.setCancelable(true);
                 dialogTopics.show(((AppCompatActivity) context).getSupportFragmentManager(), null);
 
             }

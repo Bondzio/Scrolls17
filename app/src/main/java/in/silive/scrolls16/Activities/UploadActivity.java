@@ -126,12 +126,13 @@ public class UploadActivity extends AppCompatActivity{
                 if(response.code()==200)
                 {filestatus.setEnabled(true);
                     // checkPermission();
-                   // loading.dismiss();
+                    loading.dismiss();
                 }
                 else if(response.code()==422)
                 {loading.dismiss();
                     filestatus.setText("File Already Uploaded");
                     filestatus.setEnabled(false);
+
                     //Snackbar.make(v,"Check Your connection",Snackbar.LENGTH_SHORT).show();
                 }
             }
@@ -236,13 +237,15 @@ public class UploadActivity extends AppCompatActivity{
                         public void onResponse(Call<okhttp3.ResponseBody> call,
                                                Response<okhttp3.ResponseBody> response) {
 
-                      //      loading.dismiss();
+
                             if(response.code()==200) {
                                 filestatus.setText("File Uploaded Successfully");
+                                loading.dismiss();
                             }
                             else
                             {    // Snackbar.make(v,"Check Your connection",Snackbar.LENGTH_SHORT).show();
                                 Log.d("Upload",Integer.toString(response.code()));
+                                loading.dismiss();
                             }
                         }
 
