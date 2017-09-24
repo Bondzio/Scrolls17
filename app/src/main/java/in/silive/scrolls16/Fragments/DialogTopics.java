@@ -2,6 +2,7 @@ package in.silive.scrolls16.Fragments;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
@@ -29,6 +30,7 @@ public class DialogTopics extends BottomSheetDialogFragment {
     LinearLayout llFullScreen;
     Integer picMembers[] = {R.drawable.one, R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five, R.drawable.six, R.drawable.seven, R.drawable.eight,
             R.drawable.nine, R.drawable.ten, R.drawable.eleven, R.drawable.tweleve};
+    private Typeface typeface;
 
     public void setArgs(String title, String[] topics) {
         this.title = title;
@@ -61,8 +63,10 @@ public class DialogTopics extends BottomSheetDialogFragment {
 
         llFullScreen = (LinearLayout) view.findViewById(R.id.llFullscreen);
         rvTopics = (RecyclerView) view.findViewById(R.id.rvTopic);
+        typeface = Typeface.createFromAsset(getActivity().getAssets(),"fonts/boldj.ttf");
         tvTitle = (TextView) view.findViewById(R.id.tvTitle);
         tvTitle.setText(title);
+        tvTitle.setTypeface(typeface);
         adapter = new TopicsAdapter(getActivity(), topics, picMembers);
         rvTopics.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rvTopics.setAdapter(adapter);

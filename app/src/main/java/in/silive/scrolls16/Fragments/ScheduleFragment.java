@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import in.silive.scrolls16.Activities.SecondActivity;
 import in.silive.scrolls16.Adapters.ScheduleAdapter;
 import in.silive.scrolls16.R;
 
@@ -21,7 +22,7 @@ public class ScheduleFragment extends Fragment  {
     ScheduleAdapter adapter;
     String dates[], labels[],days[];
     LinearLayoutManager linearLayoutManager;
-
+    SecondActivity secondActivity;
 
     static   ScheduleFragment fragment;
 
@@ -45,7 +46,7 @@ public class ScheduleFragment extends Fragment  {
         dates = getContext().getResources().getStringArray(R.array.schedule_dates);
         labels = getContext().getResources().getStringArray(R.array.schedule_labels);
         days = getContext().getResources().getStringArray(R.array.schedule_days);
-        adapter = new ScheduleAdapter(getContext(), dates, labels,days);
+        adapter = new ScheduleAdapter(getContext(), dates, labels,days,(SecondActivity)getActivity());
         rvSchedule.setLayoutManager(linearLayoutManager);
         rvSchedule.setAdapter(adapter);
         return view;

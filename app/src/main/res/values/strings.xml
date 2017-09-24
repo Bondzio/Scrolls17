@@ -6,10 +6,10 @@
     <string name="drawer_close">Close Drawer</string>
 
     <string-array name="schedule_dates">
-        <item>06/08/17</item>
-        <item>11/08/17</item>
-        <item>21/08/17</item>
-        <item>27/08/17</item>
+        <item>06<sup>th</sup> October</item>
+        <item>11<sup>th</sup> October</item>
+        <item>21<sup>st</sup> October</item>
+        <item>27<sup>th</sup> October</item>
     </string-array>
     <string-array name="schedule_days">
         <item>Friday</item>
