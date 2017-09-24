@@ -196,10 +196,11 @@
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/loginbutton"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="Login"
+
                     android:textAppearance="@android:style/TextAppearance.Small"
                     android:textColor="@color/white" />
             </LinearLayout>

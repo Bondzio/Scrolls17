@@ -273,7 +273,7 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
                 @Override
                 public void onFailure(Call<DomainModel> call, Throwable t) {
                     Log.d("debugg", t.toString());
-                    Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_LONG).show();
+                   Toast.makeText(getActivity(),"Check your Connection", Toast.LENGTH_LONG).show();
                     loading.dismiss();
                 }
             });
@@ -340,7 +340,7 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
                             });
                         }
                         else
-                        {
+                        {Snackbar.make(reg_view, "Error Occured", Snackbar.LENGTH_SHORT).show();
                             Log.d("unSuccess", new Gson().toJson(response.errorBody()));
                         }
                     }
@@ -348,6 +348,7 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
                     @Override
                     public void onFailure(Call<TopicModel> call, Throwable t) {
                     loading.dismiss();
+                        Snackbar.make(reg_view, "Error Ocurred", Snackbar.LENGTH_SHORT).show();
                     }
 
 

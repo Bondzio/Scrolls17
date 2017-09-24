@@ -86,12 +86,12 @@ public class MemberRegister extends Fragment implements BlockingStep {
         stud_name = (EditText) reg_view.findViewById(R.id.stud_name);
         //initialize your UI
         setRetainInstance(true);
-        typeface = Typeface.createFromAsset(getActivity().getAssets(),"fonts/font.ttf");
+      //  typeface = Typeface.createFromAsset(getActivity().getAssets(),"fonts/font.ttf");
 
         sharedPreferences = Scrolls.getInstance().sharedPrefs;
         stud_other_college = (EditText) reg_view.findViewById(R.id.stud_other_college);
         teamlead=(TextView) reg_view.findViewById(R.id.teamlead);
-        teamlead.setTypeface(typeface);
+       // teamlead.setTypeface(typeface);
         stud_other_collegel = (LinearLayout) reg_view.findViewById(R.id.stud_other_collegel);
         stud_id = (EditText) reg_view.findViewById(R.id.stud_id);
         stud_idl = (LinearLayout) reg_view.findViewById(R.id.stud_idl);

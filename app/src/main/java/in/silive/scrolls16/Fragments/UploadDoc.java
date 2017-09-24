@@ -247,6 +247,7 @@ public class UploadDoc extends Fragment {
                     @Override
                     public void onResponse(Call<LoginModelF> call, Response<LoginModelF> response) {
                         if (response.code() == 401) {
+
                             login_team_id.setError("Invalid ID");
                             login_password.setError("Invalid password");
                             android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(context)
@@ -290,6 +291,7 @@ public class UploadDoc extends Fragment {
 
                     @Override
                     public void onFailure(Call<LoginModelF> call, Throwable t) {
+                        Snackbar.make(v, "Error Occured", Snackbar.LENGTH_SHORT).show();
                         loading.dismiss();
                     }
                 });

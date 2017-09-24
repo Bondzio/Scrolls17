@@ -384,7 +384,7 @@ public class MemberRegisterOne extends Fragment implements BlockingStep {
                     }
                 })
 
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(R.drawable.scrollslogo)
                 .show();
     }
 

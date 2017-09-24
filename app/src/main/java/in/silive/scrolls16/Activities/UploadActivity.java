@@ -251,6 +251,7 @@ public class UploadActivity extends AppCompatActivity{
 
                         @Override
                         public void onFailure(Call<okhttp3.ResponseBody> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(),"Sone error Ocuured",Toast.LENGTH_LONG).show();
                             Log.d("Upload error:", t.getMessage());
                             //Snackbar.make(v,"Check Your connection",Snackbar.LENGTH_SHORT).show();
                         }
@@ -321,7 +322,7 @@ public class UploadActivity extends AppCompatActivity{
                     }
                 })
 
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(R.drawable.scrollslogo)
                 .show();
     }
 

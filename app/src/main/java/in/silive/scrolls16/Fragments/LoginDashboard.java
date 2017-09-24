@@ -148,6 +148,7 @@ public class LoginDashboard extends Fragment {
 
             @Override
             public void onFailure(Call<CheckStudentNoExsist> call, Throwable t) {
+               // Toast.makeText(getActivity(),"Error Ocuured Icon",Toast.LENGTH_LONG).show();
                 loading.dismiss();
             }
         });
