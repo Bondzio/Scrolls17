@@ -73,12 +73,12 @@ Toolbar toolbar;
                         break;
                     case Config.KEY_QUERY:
 
-
+                        showFragment(new About_Scrolls(),title);
                         Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
                         emailIntent.setData(Uri.parse("mailto:akgec@gmail.com"));
 
                         try {
-                            startActivity(emailIntent);
+                            startActivityForResult(emailIntent,1);
                         } catch (ActivityNotFoundException e) {
 
                         }
@@ -128,5 +128,20 @@ switch (item.getItemId()){
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1)
+        {Intent i=new Intent(this, MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+            finish();
+
+        }
     }
 }

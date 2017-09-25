@@ -380,6 +380,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 } else showRegOverDialog();
                 break;
             case R.id.query:
+
                 cal2.set(2018,9,22,0,0);
 
                 if (cal2.getTimeInMillis() > calendar.getTimeInMillis()) {
