@@ -56,7 +56,7 @@ Toolbar toolbar;
                         showFragment(new TopicsFragment(), title);
                         imagehead.setBackgroundResource(R.drawable.topics);
 
-                         params.leftMargin = 120;
+                         params.leftMargin = 140;
                         break;
                     case Config.KEY_SCROLLSRULE:
                         showFragment(new Rules(),title);
