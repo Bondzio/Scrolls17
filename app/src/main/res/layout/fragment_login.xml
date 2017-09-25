@@ -47,7 +47,7 @@
         android:layout_height="0dp"
         android:elevation="3dp"
 
-        app:cardElevation="3dp"
+        app:cardElevation="20dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline38"
         app:cardCornerRadius="8dp"
         android:layout_margin="8dp"
@@ -199,10 +199,10 @@
                     android:background="@drawable/loginbutton"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="Login"
+
 
                     android:textAppearance="@android:style/TextAppearance.Small"
-                    android:textColor="@color/white" />
+                     />
             </LinearLayout>
         </LinearLayout>
         </android.support.constraint.ConstraintLayout>

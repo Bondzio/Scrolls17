@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MarginLayoutParamsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -42,7 +44,7 @@ Toolbar toolbar;
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         imagehead=(RelativeLayout)findViewById(R.id.imageHead);
         setSupportActionBar(toolbar);
-
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) imagehead.getLayoutParams();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         if (getIntent().getExtras()!=null){
@@ -53,10 +55,13 @@ Toolbar toolbar;
                     case Config.KEY_Topics:
                         showFragment(new TopicsFragment(), title);
                         imagehead.setBackgroundResource(R.drawable.topics);
+
+                         params.leftMargin = 120;
                         break;
                     case Config.KEY_SCROLLSRULE:
                         showFragment(new Rules(),title);
                         imagehead.setBackgroundResource(R.drawable.rulesandregulations);
+                        params.leftMargin = 70;
                         break;
                     case Config.KEY_REACHUS:
                         showFragment(new ReachUs(),title);

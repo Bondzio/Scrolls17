@@ -47,7 +47,7 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         android:id="@+id/imgtopics"
-
+        android:background="@drawable/computescience"
         app:layout_constraintLeft_toLeftOf="@+id/guideline18"
         app:layout_constraintRight_toLeftOf="@+id/guideline19"
         app:layout_constraintTop_toTopOf="@+id/guideline15"
