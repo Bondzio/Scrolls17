@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="in.silive.scrolls16">
+    package="in.silive.scrolls17">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -17,21 +17,21 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <permission android:name="in.silive.scrolls16.permission.C2D_Message" />
+    <permission android:name="in.silive.scrolls17.permission.C2D_Message" />
     <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="in.silive.scrolls16.permission.C2D_Message" />
 
 
     <application
-        android:name=".application.Scrolls"
+        android:name="in.silive.scrolls17.application.Scrolls"
         android:allowBackup="true"
         android:icon="@drawable/scrollslogo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/ScrollsTheme">
         <activity
-            android:name="in.silive.scrolls16.Activities.Splash"
+            android:name="in.silive.scrolls17.activities.Splash"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,24 +40,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="in.silive.scrolls16.Activities.MainActivity"
+            android:name="in.silive.scrolls17.activities.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="in.silive.scrolls16.Activities.RegisterActivity"
+            android:name="in.silive.scrolls17.activities.RegisterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="in.silive.scrolls16.Activities.LoginActivity"
+            android:name="in.silive.scrolls17.activities.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="in.silive.scrolls16.Activities.UploadActivity"
+            android:name="in.silive.scrolls17.activities.UploadActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
-            android:name="in.silive.scrolls16.Activities.MyPickerActivity"
+            android:name="in.silive.scrolls17.activities.MyPickerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FilePickerTheme"
             android:windowSoftInputMode="adjustPan" />
@@ -66,20 +66,20 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <service android:name="in.silive.scrolls16.Services.GCMListener">
+        <service android:name="in.silive.scrolls17.services.GCMListener">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
 
         </service>
-        <service android:name="in.silive.scrolls16.Services.InstanceIDListener"
+        <service android:name="in.silive.scrolls17.services.InstanceIDListener"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
 
         </service>
-        <service android:name="in.silive.scrolls16.Services.RegisterGCM" />
+        <service android:name="in.silive.scrolls17.services.RegisterGCM" />
 
 
         <receiver
@@ -91,12 +91,12 @@
                 <category android:name="in.silive.scrolls" />
             </intent-filter>
         </receiver>
-        <service android:name=".Services.MyFirebaseMessagingService">
+        <service android:name="in.silive.scrolls17.services.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".Services.MyFirebaseInstanceIDService">
+        <service android:name="in.silive.scrolls17.services.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -104,7 +104,7 @@
 
 
         <activity
-            android:name="in.silive.scrolls16.Activities.SecondActivity"
+            android:name="in.silive.scrolls17.activities.SecondActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ScrollsTheme.Base"
             android:windowSoftInputMode="adjustPan|stateHidden" ></activity>

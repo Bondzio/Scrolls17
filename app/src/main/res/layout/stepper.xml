@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="in.silive.scrolls16.Activities.SecondActivity">
+    tools:context="in.silive.scrolls17.activities.SecondActivity">
 
 <com.stepstone.stepper.StepperLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

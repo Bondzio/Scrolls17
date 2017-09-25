@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="in.silive.scrolls16.Fragments.DialogNoNetConnection">
+    tools:context="in.silive.scrolls17.fragments.DialogNoNetConnection">
 
     <TextView
         android:layout_width="match_parent"
