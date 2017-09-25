@@ -34,6 +34,7 @@ import com.stepstone.stepper.VerificationError;
 import java.util.regex.Pattern;
 
 import in.silive.scrolls16.Network.ApiClient;
+import in.silive.scrolls16.Network.CheckConnectivity;
 import in.silive.scrolls16.Network.RetrofitApiInterface;
 import in.silive.scrolls16.R;
 import in.silive.scrolls16.Util.Config;
@@ -171,7 +172,12 @@ public class MemberRegister extends Fragment implements BlockingStep {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
                     if(!hasFocus) {
-                     boolean studentNo= CheckStudentNo();
+                        if (!CheckConnectivity.isNetConnected(getContext())) {
+                            Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
+                        }
+                        else {
+                            boolean studentNo = CheckStudentNo();
+                        }
                     }
                 }
             });
@@ -180,8 +186,12 @@ public class MemberRegister extends Fragment implements BlockingStep {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus)
-                {
-                  boolean email=CheckEmailId();
+                {if (!CheckConnectivity.isNetConnected(getContext())) {
+                    Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
+                }
+                else {
+                    boolean email = CheckEmailId();
+                }
                 }
             }
         });
@@ -404,7 +414,7 @@ fladss=true;
                         fladss=false;
                     }
                     else if(response.code()==200)
-                    {Log.d("debugg",response.body().getError());
+                    {//Log.d("debugg",response.body().getError());
                         fladss=true;
                     }
                     loading.dismiss();
@@ -413,6 +423,7 @@ fladss=true;
 
                 @Override
                 public void onFailure(Call<CheckStudentNoExsist> call, Throwable t) {
+                    Snackbar.make(reg_view,"some error occured",Snackbar.LENGTH_SHORT).show();
                     loading.dismiss();
                 }
             });

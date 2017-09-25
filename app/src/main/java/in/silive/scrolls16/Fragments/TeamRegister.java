@@ -232,8 +232,8 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
 
     private void loadDomainList() {
         if (!CheckConnectivity.isNetConnected(getContext()))
-            //Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
-            Toast.makeText(getActivity(),"NO INTERNET CONNECTION",Toast.LENGTH_LONG).show();
+            Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(),"NO INTERNET CONNECTION",Toast.LENGTH_LONG).show();
         else {
             callDomain = apiService.getDomians();
             final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
@@ -272,8 +272,9 @@ public class TeamRegister extends Fragment implements BlockingStep,TextWatcher {
 
                 @Override
                 public void onFailure(Call<DomainModel> call, Throwable t) {
-                    Log.d("debugg", t.toString());
-                   Toast.makeText(getActivity(),"Check your Connection", Toast.LENGTH_LONG).show();
+                    //Log.d("debugg", t.toString());
+                   //Toast.makeText(getActivity(),"Check your Connection", Toast.LENGTH_LONG).show();
+                    Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
                     loading.dismiss();
                 }
             });
