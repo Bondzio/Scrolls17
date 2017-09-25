@@ -51,9 +51,8 @@ import java.util.Calendar;
 
 import in.silive.scrolls16.Adapters.PagerAdapter;
 import in.silive.scrolls16.Fragments.About_Scrolls;
-import in.silive.scrolls16.Fragments.Register;
-import in.silive.scrolls16.Fragments.ScrollsDevelopers;
-import in.silive.scrolls16.Fragments.ScrollsTeam;
+
+
 import in.silive.scrolls16.Fragments.UploadDoc;
 import in.silive.scrolls16.Network.ApiClient;
 import in.silive.scrolls16.Network.CheckConnectivity;
@@ -156,11 +155,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         floatingActionButton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-              /*  Intent intent = new Intent(Intent.ACTION_VIEW);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
                 String url = Config.SAMPLE_DOC_URL;
                 intent.setData(Uri.parse(url));
-                startActivity(intent);*/
-                CopyAssets();
+                startActivity(intent);
+                //CopyAssets();
 
 
             }
@@ -324,36 +323,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Keyboard.close(this);
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        String url;
-        switch (item.getItemId()) {
-            case R.id.website:
-                url = Config.SCROLLS_WEBSITE;
-                i.setData(Uri.parse(url));
-                startActivity(i);
-                return true;
-            case R.id.scrollTeam:
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.CALL_PHONE},
-                            1234);
-                }
-                BottomSheetDialogFragment bottomSheetDialogFragmentTeam = new ScrollsTeam();
-                bottomSheetDialogFragmentTeam.show(fragmentManager, "Team");
-                return true;
-            case R.id.devTeam:
-                BottomSheetDialogFragment bottomSheetDialogFragment = new ScrollsDevelopers();
-                bottomSheetDialogFragment.show(fragmentManager, "Developers");
-                return true;
-            case R.id.silive:
-                url = Config.SILIVE_WEBSITE;
-                i.setData(Uri.parse(url));
-                startActivity(i);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        return false;
 
     }
 

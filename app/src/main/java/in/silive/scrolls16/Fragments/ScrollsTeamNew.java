@@ -34,7 +34,7 @@ public class ScrollsTeamNew extends Fragment implements View.OnClickListener {
     private String[] imagesArray;
     String teamMembers [] = {"Prof. V.K. Parashar","Disha Tripathi","Sidhant Kandpal","Pratyush Sharma"};
     String desigOfMembers [] = {"DSW, AKGEC","CONVENOR","CONVENOR","CONVENOR"};
-    Integer picMembers [] = {R.drawable.t,R.drawable.disha,R.drawable.sidhant,R.drawable.pratyush};
+    Integer picMembers [] = {R.drawable.parashar,R.drawable.disha,R.drawable.sidhant,R.drawable.pratyush};
     private RecyclerView scrolls_team;
     WebView webView;
 

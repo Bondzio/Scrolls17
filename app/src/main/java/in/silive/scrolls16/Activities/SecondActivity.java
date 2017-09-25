@@ -20,7 +20,7 @@ import android.widget.RelativeLayout;
 import in.silive.scrolls16.Fragments.About_Scrolls;
 import in.silive.scrolls16.Fragments.QueryUs;
 import in.silive.scrolls16.Fragments.ReachUs;
-import in.silive.scrolls16.Fragments.Register;
+
 import in.silive.scrolls16.Fragments.Rules;
 import in.silive.scrolls16.Fragments.ScheduleFragment;
 import in.silive.scrolls16.Fragments.ScrollsDeveloperNew;
@@ -56,12 +56,12 @@ Toolbar toolbar;
                         showFragment(new TopicsFragment(), title);
                         imagehead.setBackgroundResource(R.drawable.topics);
 
-                         params.leftMargin = 140;
+                         //params.leftMargin = 140;
                         break;
                     case Config.KEY_SCROLLSRULE:
                         showFragment(new Rules(),title);
                         imagehead.setBackgroundResource(R.drawable.rulesandregulations);
-                        params.leftMargin = 70;
+                        //params.leftMargin = 70;
                         break;
                     case Config.KEY_REACHUS:
                         showFragment(new ReachUs(),title);

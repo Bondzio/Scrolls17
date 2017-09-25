@@ -21,7 +21,7 @@ public class ApiClient {
                     .connectTimeout(10000, TimeUnit.SECONDS)
                     .readTimeout(10000,TimeUnit.SECONDS).build();
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://akgec-scrolls.com/test/public/").client(client)
+                    .baseUrl(BASE_URL).client(client)
                     .addConverterFactory(new NullOnEmptyConverterFactory())
                     .addConverterFactory(GsonConverterFactory.create())
 

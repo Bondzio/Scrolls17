@@ -18,13 +18,45 @@
         app:theme="@style/MainActivityToolbar"
         app:titleTextColor="#FFFFFF"
        >
+      <android.support.constraint.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="50dp">
+          <android.support.constraint.Guideline
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/guideline10"
+          app:layout_constraintGuide_percent="0.35"
+          android:orientation="vertical" />
 
+          <android.support.constraint.Guideline
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/guideline12"
+              app:layout_constraintGuide_percent="1"
+              android:orientation="vertical" />
+
+
+          <android.support.constraint.Guideline
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/guideline16"
+              app:layout_constraintGuide_percent="0.2"
+              android:orientation="horizontal" />
+
+          <android.support.constraint.Guideline
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/guideline14"
+              app:layout_constraintGuide_percent="0.8"
+              android:orientation="horizontal" />
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="90dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="20dp"
+            app:layout_constraintLeft_toLeftOf="@+id/guideline10"
+            app:layout_constraintRight_toRightOf="@+id/guideline12"
+            app:layout_constraintTop_toTopOf="@+id/guideline16"
+            app:layout_constraintBottom_toTopOf="@+id/guideline14"
+
             android:id="@+id/imageHead"
             android:background="@drawable/aboutcrolls">
         <ImageView
@@ -43,6 +75,7 @@
 
         </ImageView>
          </RelativeLayout>
+        </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.Toolbar>
 </android.support.design.widget.AppBarLayout>
     <android.support.design.widget.CoordinatorLayout

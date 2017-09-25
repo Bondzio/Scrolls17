@@ -81,17 +81,8 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     public void addIconsToTab(TabLayout tabLayout){
         for (int i=0;i<getCount();i++){
-            tabLayout.getTabAt(i).setIcon(getTabIcon(i));
+
         }
     }
-    public int getTabIcon(int pos){
-    switch (pos){
-        case 0: return R.drawable.ic_rules;
-        case 1: return R.drawable.ic_date;
-        case 2: return R.drawable.ic_about;
-        case 3: return R.drawable.ic_topic;
-        case 4: return R.drawable.ic_reach_us;
-    }
-        return 0;
-    }
+
 }
