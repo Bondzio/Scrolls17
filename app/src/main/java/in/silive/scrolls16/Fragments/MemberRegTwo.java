@@ -260,12 +260,10 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
             return;
         }
         else {
-            if (!CheckConnectivity.isNetConnected(getContext())) {
-                Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
-            }
-            else {
+
+
                 apiCall();
-            }
+
 
         }
 
@@ -314,38 +312,40 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
             members.add(m2);
         RegisterModel registerModel=new RegisterModel(teamname,domainid,topicid,pass,noofmem,members);
 
-        final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
+        if (!CheckConnectivity.isNetConnected(getContext())) {
+            Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
+        }
+        else {
+            final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
 
 
-        Call<RegisterSucess> userCall = apiService.register(registerModel);
-        Log.d("debugg",members.get(0).getName());
-        userCall.enqueue(new Callback<RegisterSucess>() {
+            Call<RegisterSucess> userCall = apiService.register(registerModel);
+            Log.d("debugg", members.get(0).getName());
+            userCall.enqueue(new Callback<RegisterSucess>() {
 
-            @Override
-            public void onResponse(Call<RegisterSucess> call, Response<RegisterSucess> response) {
-                if(response.code()==200)
-                {
-                    //Toast.makeText(getActivity(),"Successfull",Toast.LENGTH_LONG).show();
-                    showDialog(response.body().getData());
+                @Override
+                public void onResponse(Call<RegisterSucess> call, Response<RegisterSucess> response) {
+                    if (response.code() == 200) {
+                        //Toast.makeText(getActivity(),"Successfull",Toast.LENGTH_LONG).show();
+                        showDialog(response.body().getData());
+                    } else {//Toast.makeText(getActivity(),Integer.toString(response.code()),Toast.LENGTH_LONG).show();
+                        //      Log.d("debugg",response.toString());
+                        //     Log.d("debugg",call.request().body().toString());
+                        Snackbar.make(reg_view, "some error occured", Snackbar.LENGTH_SHORT).show();
+                    }
+                    loading.dismiss();
+
                 }
-                else
-                {//Toast.makeText(getActivity(),Integer.toString(response.code()),Toast.LENGTH_LONG).show();
-                    Log.d("debugg",response.toString());
-                    Log.d("debugg",call.request().body().toString());
-                    Snackbar.make(reg_view,"some error occured",Snackbar.LENGTH_SHORT).show();
+
+                @Override
+                public void onFailure(Call<RegisterSucess> call, Throwable t) {
+                    //Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
+                    Snackbar.make(reg_view, "some error occured", Snackbar.LENGTH_SHORT).show();
+                    //    Log.d("debugg",t.toString());
+                    loading.dismiss();
                 }
-                loading.dismiss();
-
-            }
-
-            @Override
-            public void onFailure(Call<RegisterSucess> call, Throwable t) {
-                //Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
-                Snackbar.make(reg_view,"some error occured",Snackbar.LENGTH_SHORT).show();
-                Log.d("debugg",t.toString());
-                loading.dismiss();
-            }
-        });
+            });
+        }
         }
 
 

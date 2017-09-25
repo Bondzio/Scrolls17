@@ -85,7 +85,13 @@ public class UploadActivity extends AppCompatActivity{
 
         apiService =
                 ApiClient.getClient().create(RetrofitApiInterface.class);
-        checkStatus(token);
+        if (CheckConnectivity.isNetConnected(getApplicationContext())) {
+            checkStatus(token);
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),"Check Your Internet Connection",Toast.LENGTH_SHORT).show();
+        }
         filestatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -243,7 +249,8 @@ public class UploadActivity extends AppCompatActivity{
                                 loading.dismiss();
                             }
                             else
-                            {    // Snackbar.make(v,"Check Your connection",Snackbar.LENGTH_SHORT).show();
+                            {    filestatus.setText("Failed to upload File");
+                                // Snackbar.make(v,"Check Your connection",Snackbar.LENGTH_SHORT).show();
                                 Log.d("Upload",Integer.toString(response.code()));
                                 loading.dismiss();
                             }
@@ -264,6 +271,10 @@ public class UploadActivity extends AppCompatActivity{
                         }
                     });*/
                 }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"No internet Connection",Toast.LENGTH_SHORT).show();
+                }
 
                 //     Snackbar.make(v,"No internet connection.",Snackbar.LENGTH_SHORT).show();
             } catch (Exception e) {
@@ -274,27 +285,33 @@ public class UploadActivity extends AppCompatActivity{
 
     }
     private void logout(String token) {
-        final ProgressDialog loading = ProgressDialog.show(getApplicationContext(), "Fetching Data", "Please wait...", false, false);
-        Call<LogoutSucess> call=apiService.logout(token);
-        call.enqueue(new Callback<LogoutSucess>() {
-            @Override
-            public void onResponse(Call<LogoutSucess> call, Response<LogoutSucess> response) {
-                if(response.code()==200)
-                { Toast.makeText(getApplicationContext(),"sucess",Toast.LENGTH_LONG).show();
-                    showDialog();
+        if (CheckConnectivity.isNetConnected(getApplicationContext())) {
+            final ProgressDialog loading = ProgressDialog.show(UploadActivity.this, "Fetching Data", "Please wait...", false, false);
+            Call<LogoutSucess> call = apiService.logout(token);
+            call.enqueue(new Callback<LogoutSucess>() {
+                @Override
+                public void onResponse(Call<LogoutSucess> call, Response<LogoutSucess> response) {
+                    if (response.code() == 200) {
+                        //Toast.makeText(getApplicationContext(), "sucess", Toast.LENGTH_LONG).show();
+                        showDialog();
+                        loading.dismiss();
+                    } else {
+                        loading.dismiss();
+                        Toast.makeText(getApplicationContext(), "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<LogoutSucess> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(),"No Internet Connection",Toast.LENGTH_SHORT).show();
                     loading.dismiss();
                 }
-                else
-                {loading.dismiss();
-                    Toast.makeText(getApplicationContext(),"Check Your Internet Connection",Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<LogoutSucess> call, Throwable t) {
-                loading.dismiss();
-            }
-        });
+            });
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),"No Internet Connection",Toast.LENGTH_SHORT).show();
+        }
     }
     public void showDialog()
     {

@@ -308,6 +308,8 @@ public class MemberRegister extends Fragment implements BlockingStep {
 
     }
 
+
+
     public boolean checkValidation() {
         flags = true;
         student_name = stud_name.getText().toString();
