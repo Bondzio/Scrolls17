@@ -5,6 +5,7 @@ package in.silive.scrolls17.fragments;
  */
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -84,6 +85,9 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
     private RetrofitApiInterface apiService;
     private boolean fladss;
    boolean m;
+     ProgressDialog loading;
+     Context context=getContext();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         reg_view = inflater.inflate(R.layout.memregis, container, false);
@@ -272,7 +276,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
             Snackbar.make(reg_view, "No internet connection.", Snackbar.LENGTH_SHORT).show();
         }
         else {
-            final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
+             loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
 
 
             Call<RegisterSucess> userCall = apiService.register(registerModel);
@@ -287,7 +291,8 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
                     } else {//Toast.makeText(getActivity(),Integer.toString(response.code()),Toast.LENGTH_LONG).show();
                         //      Log.d("debugg",response.toString());
                         //     Log.d("debugg",call.request().body().toString());
-                        Snackbar.make(reg_view, "some error occured", Snackbar.LENGTH_SHORT).show();
+                      //  Snackbar.make(reg_view, "some error occured", Snackbar.LENGTH_SHORT).show();
+                        showDialogf("sorry Some Error occured");
                     }
                     loading.dismiss();
 
@@ -295,8 +300,9 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
 
                 @Override
                 public void onFailure(Call<RegisterSucess> call, Throwable t) {
+                    showDialogf("sorry Some Error occured");
                     //Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
-                    Snackbar.make(reg_view, "some error occured", Snackbar.LENGTH_SHORT).show();
+                    //Snackbar.make(reg_view, "some error occured", Snackbar.LENGTH_SHORT).show();
                     //    Log.d("debugg",t.toString());
                     loading.dismiss();
                 }
@@ -388,23 +394,64 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
     {
         final AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+            builder = new AlertDialog.Builder(context, android.R.style.Theme_Material_Light_Dialog_Alert);
         } else {
-            builder = new AlertDialog.Builder(getActivity());
+            builder = new AlertDialog.Builder(context);
         }
         builder.setTitle("Registration SuccessFull")
-                .setMessage("Your SCROLLS REGISTRATION ID IS"+message)
+                .setMessage("Your SCROLLS REGISTRATION ID IS:-"+message)
                 .setPositiveButton("EXIT", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         // continue with delete
-                        Intent i=new Intent(getActivity(), MainActivity.class);
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i);
-                        getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        if(getActivity()!=null) {
+                            Intent i = new Intent(getActivity(), MainActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i);
+                            getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-                        getActivity().finish();
+                            getActivity().finish();
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                })
+
+                .setIcon(R.drawable.scrollslogo)
+                .show();
+
+
+    }
+    public void showDialogf(String message)
+    {
+        final AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(context, android.R.style.Theme_Material_Light_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(context);
+        }
+        builder.setTitle("Registration Failed")
+                .setMessage(message)
+                .setPositiveButton("EXIT", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        // continue with delete
+                        if (getActivity() != null) {
+                            Intent i = new Intent(getActivity(), MainActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i);
+                            getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+                            getActivity().finish();
+                        }
+                        else
+                        {
+
+                        }
                     }
                 })
 
@@ -422,7 +469,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
         if (stud_idl.getVisibility() == View.VISIBLE) {
             student_id = stud_id.getText().toString();
 
-            if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE && !Pattern.matches("^\\d{7}[Dd]{0,1}$", student_id)) {
+            if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE && !Pattern.matches("^[1][4-7]\\d{5}[Dd]{0,1}$", student_id)) {
 
                 stud_id.setError("Invalid Id");
                 flags = false;
@@ -454,7 +501,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
             flags=false;
         }
         student_mob_no = stud_mob_no.getText().toString();
-        if (!Pattern.matches("^([0]|\\+91)?\\d{10}", student_mob_no)) {
+        if (!Pattern.matches("^[7-9][0-9]{9}$", student_mob_no)) {
 
             stud_mob_no.setError("Invalid phone number");
             flags = false;
@@ -469,7 +516,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
         if (stud_id.getVisibility() == View.VISIBLE) {
             student_id=stud_id.getText().toString();
             call = apiService.checkStudentNo(student_id);
-            final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
+             loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
             call.enqueue(new Callback<CheckStudentNoExsist>() {
                 @Override
                 public void onResponse(Call<CheckStudentNoExsist> call, Response<CheckStudentNoExsist> response) {
@@ -504,7 +551,7 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
         fladss=true;
         student_mail=stud_mail.getText().toString();
         call = apiService.checkEamilId(student_mail);
-        final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
+         loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
         call.enqueue(new Callback<CheckStudentNoExsist>() {
             @Override
             public void onResponse(Call<CheckStudentNoExsist> call, Response<CheckStudentNoExsist> response) {
@@ -528,5 +575,27 @@ public class MemberRegTwo extends Fragment implements BlockingStep {
         });
 
         return fladss;
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        if ( loading!=null && loading.isShowing() ){
+            loading.dismiss();
+
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.context=getContext();
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if ( loading!=null && loading.isShowing() ){
+            loading.dismiss();
+        }
     }
 }

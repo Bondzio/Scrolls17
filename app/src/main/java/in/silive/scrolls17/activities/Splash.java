@@ -25,11 +25,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
-import com.schibsted.spain.parallaxlayerlayout.ParallaxLayerLayout;
-import com.schibsted.spain.parallaxlayerlayout.SensorTranslationUpdater;
+
 
 import in.silive.scrolls17.R;
-import in.silive.scrolls17.services.RegisterGCM;
+
 import in.silive.scrolls17.util.Config;
 import io.fabric.sdk.android.Fabric;
 
@@ -42,8 +41,7 @@ public class Splash extends AppCompatActivity {
     RelativeLayout splash;
     //ImageView image;
     TextView text;
-    private ParallaxLayerLayout parallaxLayout;
-    private SensorTranslationUpdater sensorTranslationUpdater;
+
     private WebView web_view;
     private WebView webView;
 
@@ -149,15 +147,7 @@ public class Splash extends AppCompatActivity {
        // sensorTranslationUpdater = new SensorTranslationUpdater(this);
         //parallaxLayout.setTranslationUpdater(sensorTranslationUpdater);
        // checkConnection();
-        checkGCM();
-    }
-
-    private void checkGCM() {
-        SharedPreferences sharedPreferences = getSharedPreferences(Config.SP_KEY,MODE_PRIVATE);
-        if (sharedPreferences.getBoolean(Config.GCM,true)){
-            Intent i = new Intent(this, RegisterGCM.class);
-            startService(i);
-        }
+ //       checkGCM();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -167,6 +157,7 @@ public class Splash extends AppCompatActivity {
             }
         }, 6000);
     }
+
 
     @Override
     protected void onStop() {

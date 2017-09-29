@@ -29,8 +29,8 @@ public class Config {
     public static final String STUDENTMOBNO = "mobileno1";
     public static final String COURSE = "stud1course";
     public static final String ACCOMODATION2 = "member1accomodation2";
-    public static final String STUDENTMAIL2 = "EmailStudent1";
-    public static final String STUDENTMOBNO2 = "mobileno2";
+    public static final String STUDENTMAIL2 = "EmailStudent2";
+    public static final String STUDENTMOBNO2 = "mobileno222";
     public static final String COURSE2 = "stud1course2";
     public static final String STUDENTID = "Student1id";
     public static final String STUDENTID2 = "Student1id2";

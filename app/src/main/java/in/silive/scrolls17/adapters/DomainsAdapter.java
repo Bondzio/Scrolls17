@@ -13,7 +13,7 @@ import android.widget.TextView;
 import in.silive.scrolls17.activities.SecondActivity;
 import in.silive.scrolls17.fragments.DialogTopics;
 import in.silive.scrolls17.R;
-import tyrantgit.explosionfield.ExplosionField;
+
 
 /**
  * Created by AKG002 on 03-09-2016.
@@ -23,7 +23,7 @@ public class DomainsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     Context context;
     String[] images;
     SecondActivity secondActivity;
-    ExplosionField explosionField;
+//    ExplosionField explosionField;
     public DomainsAdapter(Context context, String[] domains, String[] images, SecondActivity Activity) {
         this.context = context;
         this.domains = domains;

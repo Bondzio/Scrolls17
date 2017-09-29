@@ -2,9 +2,12 @@ package in.silive.scrolls17.fragments;
 
 import android.app.Dialog;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -25,6 +28,7 @@ public class DialogTopics extends BottomSheetDialogFragment {
     TopicsAdapter adapter;
     LinearLayout ll;
     LinearLayout llFullScreen;
+    NestedScrollView scrollView;
     Integer picMembers[] = {R.drawable.one, R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five, R.drawable.six, R.drawable.seven, R.drawable.eight,
             R.drawable.nine, R.drawable.ten, R.drawable.eleven, R.drawable.tweleve};
     private Typeface typeface;
@@ -35,6 +39,18 @@ public class DialogTopics extends BottomSheetDialogFragment {
 
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        scrollView.scrollTo(0,0);
+    }
+
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
 
         @Override
@@ -43,6 +59,8 @@ public class DialogTopics extends BottomSheetDialogFragment {
                 dismiss();
 
             }
+
+
 
         }
 
@@ -57,7 +75,7 @@ public class DialogTopics extends BottomSheetDialogFragment {
         super.setupDialog(dialog, style);
         View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_topic, null, false);
         dialog.setContentView(view);
-
+        scrollView=(NestedScrollView)view.findViewById(R.id.scroll);
         llFullScreen = (LinearLayout) view.findViewById(R.id.llFullscreen);
         rvTopics = (RecyclerView) view.findViewById(R.id.rvTopic);
         typeface = Typeface.createFromAsset(getActivity().getAssets(),"fonts/boldj.ttf");
@@ -67,6 +85,8 @@ public class DialogTopics extends BottomSheetDialogFragment {
         adapter = new TopicsAdapter(getActivity(), topics, picMembers);
         rvTopics.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rvTopics.setAdapter(adapter);
+        scrollView.smoothScrollTo(0,0);
+        //scrollView.scrollTo(scrollView.getTop(),scrollView.getTop());
         ll = (LinearLayout) view.findViewById(R.id.ll);
         //ivClose = (ImageView) view.findViewById(R.id.ivClose);
         /*ivClose.setOnClickListener(new View.OnClickListener() {

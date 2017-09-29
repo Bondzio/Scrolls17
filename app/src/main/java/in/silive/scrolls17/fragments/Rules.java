@@ -9,8 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.schibsted.spain.parallaxlayerlayout.ParallaxLayerLayout;
-import com.schibsted.spain.parallaxlayerlayout.SensorTranslationUpdater;
+
 
 import in.silive.scrolls17.adapters.RulesAdapter;
 import in.silive.scrolls17.R;
@@ -22,8 +21,8 @@ public class Rules extends Fragment {
 RecyclerView rv;
     RulesAdapter adapter;
   static   Rules fragment;
-    private SensorTranslationUpdater sensorTranslationUpdater;
-    private ParallaxLayerLayout parallaxLayout;
+    //private SensorTranslationUpdater sensorTranslationUpdater;
+    //private ParallaxLayerLayout parallaxLayout;
 
     public static Rules getInstance(){
         if (fragment == null)

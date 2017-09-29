@@ -67,7 +67,7 @@ public class MemberRegister extends Fragment implements BlockingStep {
     private String flagacc="1";
     private String stud_collegevalue, stud_coursevalue, stud_yearvalue;
     boolean flags;
-
+    ProgressDialog loading;
     private RetrofitApiInterface apiService;
     private boolean fladss;
     private LinearLayout stud_other_collegel;
@@ -316,7 +316,7 @@ public class MemberRegister extends Fragment implements BlockingStep {
         if (stud_idl.getVisibility() == View.VISIBLE) {
             student_id = stud_id.getText().toString();
 
-            if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE && !Pattern.matches("^\\d{7}[Dd]{0,1}$", student_id)) {
+            if (student_id.length() == 0 && stud_id.getVisibility() == View.VISIBLE && !Pattern.matches("^[1][4-7]\\d{5}[Dd]{0,1}$", student_id)) {
 
                 stud_id.setError("Invalid Id");
                 flags = false;
@@ -324,7 +324,7 @@ public class MemberRegister extends Fragment implements BlockingStep {
 
         }
         if (stud_other_collegel.getVisibility() == View.VISIBLE) {
-           String collegel = stud_other_college.getText().toString();
+            String collegel = stud_other_college.getText().toString();
 
             if (collegel.length() == 0  ) {
 
@@ -348,7 +348,7 @@ public class MemberRegister extends Fragment implements BlockingStep {
             flags=false;
         }
         student_mob_no = stud_mob_no.getText().toString();
-        if (!Pattern.matches("^([0]|\\+91)?\\d{10}", student_mob_no)) {
+        if (!Pattern.matches("^[7-9][0-9]{9}$", student_mob_no)) {
 
             stud_mob_no.setError("Invalid phone number");
             flags = false;
@@ -363,7 +363,7 @@ public class MemberRegister extends Fragment implements BlockingStep {
         if (stud_id.getVisibility() == View.VISIBLE) {
             student_id=stud_id.getText().toString();
             call = apiService.checkStudentNo(student_id);
-            final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
+             loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
             call.enqueue(new Callback<CheckStudentNoExsist>() {
                 @Override
                 public void onResponse(Call<CheckStudentNoExsist> call, Response<CheckStudentNoExsist> response) {
@@ -402,7 +402,7 @@ public class MemberRegister extends Fragment implements BlockingStep {
 fladss=true;
             student_mail=stud_mail.getText().toString();
             call = apiService.checkEamilId(student_mail);
-            final ProgressDialog loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
+             loading = ProgressDialog.show(getContext(), "Fetching Data", "Please wait...", false, false);
             call.enqueue(new Callback<CheckStudentNoExsist>() {
                 @Override
                 public void onResponse(Call<CheckStudentNoExsist> call, Response<CheckStudentNoExsist> response) {
@@ -426,5 +426,12 @@ fladss=true;
             });
 
         return fladss;
+    }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if ( loading!=null && loading.isShowing() ){
+            loading.dismiss();
+        }
     }
 }

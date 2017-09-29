@@ -17,8 +17,8 @@ public class ApiClient {
     public static Retrofit getClient() {
         if (retrofit==null) {
             OkHttpClient client = new OkHttpClient.Builder()
-                    .connectTimeout(10000, TimeUnit.SECONDS)
-                    .readTimeout(10000,TimeUnit.SECONDS).build();
+                    .connectTimeout(100000, TimeUnit.SECONDS)
+                    .readTimeout(100000,TimeUnit.SECONDS).build();
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL).client(client)
                     .addConverterFactory(new NullOnEmptyConverterFactory())

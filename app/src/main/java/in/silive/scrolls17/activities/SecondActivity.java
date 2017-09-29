@@ -61,7 +61,7 @@ Toolbar toolbar;
                     case Config.KEY_SCROLLSRULE:
                         showFragment(new Rules(),title);
                         imagehead.setBackgroundResource(R.drawable.rulesandregulations);
-                        params.guidePercent = 0.15f; // 45% // range: 0 <-> 1
+                        params.guidePercent = 0.05f; // 45% // range: 0 <-> 1
                         guideLine.setLayoutParams(params);
                         //params.leftMargin = 70;
                         break;
@@ -94,6 +94,7 @@ Toolbar toolbar;
                         imagehead.setBackgroundResource(R.drawable.scrollsteam);
                         break;
                     case Config.KEY_SCROLLSDeveloper:
+                        params.guidePercent = 0.25f;
                         showFragment(new ScrollsDeveloperNew(),title);
                         imagehead.setBackgroundResource(R.drawable.developerteam);
                         break;

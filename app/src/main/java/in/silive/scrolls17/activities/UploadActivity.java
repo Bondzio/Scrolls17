@@ -232,7 +232,7 @@ public class UploadActivity extends AppCompatActivity{
                                     MultipartBody.FORM, descriptionString);
 
                     // finally, execute the request
-                    final ProgressDialog loading = ProgressDialog.show(this, "Fetching Data", "Please wait...", false, false);
+                    final ProgressDialog loading = ProgressDialog.show(this, "Uploading File", "Please wait...", false, false);
                     Call<okhttp3.ResponseBody> call = apiService.upload(tokenf, multipartBody);
                     call.enqueue(new Callback<okhttp3.ResponseBody>() {
                         @Override

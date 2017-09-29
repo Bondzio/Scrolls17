@@ -66,31 +66,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <service android:name="in.silive.scrolls17.services.GCMListener">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-            </intent-filter>
 
-        </service>
-        <service android:name="in.silive.scrolls17.services.InstanceIDListener"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID" />
-            </intent-filter>
-
-        </service>
-        <service android:name="in.silive.scrolls17.services.RegisterGCM" />
-
-
-        <receiver
-            android:name="com.google.android.gms.gcm.GcmReceiver"
-            android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="in.silive.scrolls" />
-            </intent-filter>
-        </receiver>
         <service android:name="in.silive.scrolls17.services.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

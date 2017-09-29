@@ -74,7 +74,7 @@
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:text="VK SHARMA"
         android:id="@+id/member_name"
         android:gravity="center_vertical"
@@ -85,7 +85,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline28"/>
     <TextView
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:text="CONVENOR"
         android:textStyle="bold"
         android:layout_marginLeft="4dp"
